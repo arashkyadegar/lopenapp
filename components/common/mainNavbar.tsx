@@ -80,7 +80,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-[#0E7346] text-white rounded hover:text-[#80BB01] md:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:text-blue-500"
+                  className="block py-2 px-3 transition-all duration-300 bg-[#0E7346] text-white  rounded hover:text-[#80BB01] md:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:text-blue-500"
                   aria-current="page"
                 >
                   صفحه اصلی
