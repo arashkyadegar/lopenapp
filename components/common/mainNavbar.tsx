@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function MainNavBar({ children }: PropsWithChildren) {
   return (
     <>
-      <div className="flex flex-row justify-between px-4 items-center    bg-white">
+      <div className="flex flex-row relative justify-between px-4 items-center    bg-white">
         <div className="flex flex-row gap-2">
           {/* user */}
           <div className="cursor-pointer flex flex-row-reverse relative pt-1">
@@ -75,7 +75,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             id="navbar-sticky"
           >
             <ul
-              className="flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-white md:space-x-8 rtl:space-x-reverse 
+              className="text-base  flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-white md:space-x-8 rtl:space-x-reverse 
             md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
             >
               <li className="border-[#FEEBB4] hover:border-[#FEEBB4] transition-all duration-300  border-b-2  pb-1">

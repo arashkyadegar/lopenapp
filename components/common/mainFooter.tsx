@@ -1,11 +1,12 @@
 // components/common/MainFooter.tsx
 import React, { PropsWithChildren } from "react";
 
-
-export default function MainFooter({ children }: PropsWithChildren)  {
+export default function MainFooter({ children }: PropsWithChildren) {
   return (
-      <div>
-          footer
+    <>
+      <div className="w-full">
+        <img src="Capture123.PNG" className="w-full" />
       </div>
+    </>
   );
-};
+}
