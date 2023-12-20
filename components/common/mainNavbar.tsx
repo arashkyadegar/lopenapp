@@ -8,7 +8,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
         <div className="flex flex-row gap-2">
           {/* user */}
           <div className="cursor-pointer flex flex-row-reverse relative pt-1">
-            <div className=" bg-red-400 w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute text-white">
+            <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute text-white">
               <a>1</a>
             </div>
             <svg
@@ -29,7 +29,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
           </div>
           {/* basket */}
           <div className=" cursor-pointer flex flex-row-reverse  relative  pt-1">
-            <div className=" bg-red-400 w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute text-white">
+            <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute text-white">
               <a>12</a>
             </div>
             <svg
@@ -66,7 +66,8 @@ export default function MainNavBar({ children }: PropsWithChildren) {
           </a>
         </div>
       </div>
-      <nav className="bg-[#0E7346] text-white dark:bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      {/* nvbar */}
+      <nav className="shadow-md shadow-gray-500 bg-[#0E7346] text-white dark:bg-gray-900  w-full z-20 top-0 start-0">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-end mx-auto p-4">
           {/* navbar-menu */}
           <div
@@ -77,10 +78,10 @@ export default function MainNavBar({ children }: PropsWithChildren) {
               className="flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-[#0E7346] md:space-x-8 rtl:space-x-reverse 
             md:flex-row md:mt-0 md:border-0 md:bg-[#0E7346] dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
             >
-              <li>
+              <li className="border-[#0E7346] hover:border-[#80BB01] transition-all duration-300  border-b-2  pb-1">
                 <a
                   href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-[#0E7346] text-white  rounded hover:text-[#80BB01] md:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:text-blue-500"
+                  className=" block py-2 px-3 transition-all ease-in duration-300 bg-[#0E7346] text-white  rounded hover:text-[#80BB01] md:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:text-blue-500"
                   aria-current="page"
                 >
                   صفحه اصلی
