@@ -4,11 +4,11 @@ import Link from "next/link";
 export default function MainNavBar({ children }: PropsWithChildren) {
   return (
     <>
-      <div className="flex flex-row justify-between px-4 items-center text-white  bg-[#0E7346] border border-[rgb(39,129,89)]">
+      <div className="flex flex-row justify-between px-4 items-center    bg-white">
         <div className="flex flex-row gap-2">
           {/* user */}
           <div className="cursor-pointer flex flex-row-reverse relative pt-1">
-            <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute text-white">
+            <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute  ">
               <a>1</a>
             </div>
             <svg
@@ -29,7 +29,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
           </div>
           {/* basket */}
           <div className=" cursor-pointer flex flex-row-reverse  relative  pt-1">
-            <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute text-white">
+            <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute  ">
               <a>12</a>
             </div>
             <svg
@@ -67,7 +67,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
         </div>
       </div>
       {/* nvbar */}
-      <nav className="shadow-md shadow-gray-500 bg-[#0E7346] text-white dark:bg-gray-900  w-full z-20 top-0 start-0">
+      <nav className=" bg-white   dark:bg-gray-900  w-full z-20 top-0 start-0">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-end mx-auto p-4">
           {/* navbar-menu */}
           <div
@@ -75,13 +75,13 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             id="navbar-sticky"
           >
             <ul
-              className="flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-[#0E7346] md:space-x-8 rtl:space-x-reverse 
-            md:flex-row md:mt-0 md:border-0 md:bg-[#0E7346] dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+              className="flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-white md:space-x-8 rtl:space-x-reverse 
+            md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
             >
-              <li className="border-[#0E7346] hover:border-[#80BB01] transition-all duration-300  border-b-2  pb-1">
+              <li className="border-[#FEEBB4] hover:border-[#FEEBB4] transition-all duration-300  border-b-2  pb-1">
                 <a
                   href="#"
-                  className=" block py-2 px-3 transition-all ease-in duration-300 bg-[#0E7346] text-white  rounded hover:text-[#80BB01] md:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:text-blue-500"
+                  className=" block py-2 px-3 transition-all ease-in duration-300 bg-white    rounded hover:text-[#EF5621] md:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:text-blue-500"
                   aria-current="page"
                 >
                   صفحه اصلی
@@ -90,7 +90,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-[#0E7346] text-white rounded hover:text-[#80BB01] md:hover:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   درباره ما
                 </a>
@@ -98,7 +98,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-[#0E7346] text-white rounded hover:text-[#80BB01]  md:hover:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621]  md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   خدمات
                 </a>
@@ -106,7 +106,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-[#0E7346] text-white rounded hover:text-[#80BB01] md:hover:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   بلاگ
                 </a>
@@ -114,7 +114,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-[#0E7346] text-white rounded hover:text-[#80BB01] md:hover:bg-transparent md:hover:text-[#80BB01] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   ارتباط با ما
                 </a>
@@ -127,7 +127,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             className="flex items-center space-x-3 "
           >
             <img src="Capturelogo.PNG" className="h-8" alt="Flowbite Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark: ">
               آبنبات لوپن
             </span>
           </a>
@@ -137,7 +137,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
-              className="inline-flex transition-all duration-300 items-center ml-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:text-[#80BB01] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex transition-all duration-300 items-center ml-2 w-10 h-10 justify-center text-sm   rounded-lg md:hidden hover:text-[#80BB01] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-sticky"
               aria-expanded="false"
             >
