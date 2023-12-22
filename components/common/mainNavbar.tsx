@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function MainNavBar({ children }: PropsWithChildren) {
   return (
     <>
-      <div className="flex flex-row relative justify-between px-4 items-center    bg-white">
+      <div className="flex flex-row-reverse relative justify-between px-4 items-center    bg-[#FFB534]">
         <div className="flex flex-row gap-2">
           {/* user */}
           <div className="cursor-pointer flex flex-row-reverse relative pt-1">
@@ -67,71 +67,8 @@ export default function MainNavBar({ children }: PropsWithChildren) {
         </div>
       </div>
       {/* nvbar */}
-      <nav className=" bg-white   dark:bg-gray-900  w-full z-20 top-0 start-0">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-end mx-auto p-4">
-          {/* navbar-menu */}
-          <div
-            className="justify-start   order-3 md:order-none w-full md:flex md:w-auto md:mr-10 mr-0"
-            id="navbar-sticky"
-          >
-            <ul
-              className="text-base  flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-white md:space-x-8 rtl:space-x-reverse 
-            md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-            >
-              <li className="border-[#FEEBB4] hover:border-[#FEEBB4] transition-all duration-300  border-b-2  pb-1">
-                <a
-                  href="#"
-                  className=" block py-2 px-3 transition-all ease-in duration-300 bg-white    rounded hover:text-[#EF5621] md:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:text-blue-500"
-                  aria-current="page"
-                >
-                  صفحه اصلی
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  درباره ما
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621]  md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  خدمات
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  بلاگ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300 bg-white   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  ارتباط با ما
-                </a>
-              </li>
-            </ul>
-          </div>
-          {/* lopen-logo */}
-          <a
-            href="https://flowbite.com/"
-            className="flex items-center space-x-3 "
-          >
-            <img src="Capturelogo.PNG" className="h-8" alt="Flowbite Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark: ">
-              آبنبات لوپن
-            </span>
-          </a>
-
+      <nav className=" bg-[#FFB534]   dark:bg-gray-900  w-full z-20 top-0 start-0">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-start mx-auto p-4">
           {/* hambergur-button */}
           <div className="flex space-x-3 md:space-x-0">
             <button
@@ -158,6 +95,68 @@ export default function MainNavBar({ children }: PropsWithChildren) {
                 />
               </svg>
             </button>
+          </div>
+          {/* lopen-logo */}
+          <a
+            href="https://flowbite.com/"
+            className="flex items-center space-x-3 "
+          >
+            <img src="Capturelogo.PNG" className="h-8" alt="Flowbite Logo" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark: ">
+              آبنبات لوپن
+            </span>
+          </a>
+          {/* navbar-menu */}
+          <div
+            className="justify-start   order-3 md:order-none w-full md:flex md:w-auto md:mr-10 mr-0"
+            id="navbar-sticky"
+          >
+            <ul
+              className="text-base  flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-[#FFB534] md:space-x-8 rtl:space-x-reverse 
+            md:flex-row-reverse md:mt-0 md:border-0 md:bg-[#FFB534] dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+            >
+              <li className="border-[#FEEBB4] hover:border-[#FEEBB4] transition-all duration-300  border-b-2  pb-1">
+                <a
+                  href="#"
+                  className=" block py-2 px-3 transition-all ease-in duration-300    rounded hover:text-[#EF5621] md:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:text-blue-500"
+                  aria-current="page"
+                >
+                  صفحه اصلی
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  درباره ما
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621]  md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  خدمات
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  بلاگ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  ارتباط با ما
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

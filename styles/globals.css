@@ -14,6 +14,7 @@
 body {
   background-color: #F3F4F8;
   color:#515151;
+  direction: rtl;
 
 }
 @media (prefers-color-scheme: dark) {
