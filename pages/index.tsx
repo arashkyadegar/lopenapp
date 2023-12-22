@@ -20,16 +20,16 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <>
-      <div className="sm:grid-cols-4 grid grid-cols-1 p-5 gap-6 group">
+      <div className="sm:grid-cols-4 grid grid-cols-1 p-5 gap-0  sm:gap-6 group">
         {/* <a className="bg-red-400  w-44 h-44 absolute z-10 hidden group-hover:flex transition-all duration-500 ">
           this is me
         </a> */}
 
-        {/* swiper-top */}
-        <div className="flex order-2 sm:order-1 flex-row justify-center sm:flex-col   my-auto w-full gap-4 h-fit ">
+
+        <div className="flex order-2 sm:order-1 flex-row  sm:flex-col   my-auto w-full gap-4 h-fit justify-between">
           {/* free delivery */}
 
-          <div className="  bg-white     flex flex-col sm:flex-row   justify-center sm:justify-end  shadow-md shadow-gray-500  p-2  items-center">
+          <div className="  bg-white grow    flex flex-col sm:flex-row-reverse   justify-center sm:justify-end  shadow-md shadow-gray-500  p-2  items-center">
             <a className="text-sm ">ارسال رایگان</a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ export default function Home() {
             </svg>
           </div>
           {/* safe payment */}
-          <div className="bg-white    flex flex-col sm:flex-row  justify-center sm:justify-end  shadow-md shadow-gray-500  p-2  items-center ">
+          <div className="bg-white    flex flex-col sm:flex-row-reverse   justify-center sm:justify-end  shadow-md shadow-gray-500  p-2  items-center ">
             <a className="text-sm">پرداخت امن</a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ export default function Home() {
           </div>
 
           {/* full time backup */}
-          <div className="bg-white    flex flex-col sm:flex-row   justify-center sm:justify-end  shadow-md shadow-gray-500  p-2  items-center">
+          <div className="bg-white  grow  flex flex-col sm:flex-row-reverse    justify-center sm:justify-end  shadow-md shadow-gray-500  p-2  items-center">
             <a className="text-sm ">پشتیبانی شبانه روزی</a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,8 @@ export default function Home() {
             </svg>
           </div>
         </div>
-        <div className="w-full order-1 sm:order-2 col-span-3 relative ">
+                {/* swiper-top */}
+        <div className="w-full order-1 mb-4 sm:order-2 col-span-3 relative ">
           <Swiper
             className="h-72 shadow-md shadow-gray-500 "
             modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}

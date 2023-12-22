@@ -35,10 +35,11 @@ background-color: gray;
 filter: blur(1px);
 -webkit-filter: blur(1px);
 }
-
-.swiper-button-next{
+*/
+/* .swiper-button-next{
   width: 50px !important;
 height:60px !important;
   background-color: gray;
+  text-color:red;
 
-} */
+}  */

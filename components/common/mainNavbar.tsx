@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function MainNavBar({ children }: PropsWithChildren) {
   return (
     <>
-      <div className="flex flex-row-reverse relative justify-between px-4 items-center    bg-[#FFB534]">
+      <div className="flex border border-[#F3F4F8] bg-white flex-row-reverse relative justify-between px-4 items-center ">
         <div className="flex flex-row gap-2">
           {/* user */}
           <div className="cursor-pointer flex flex-row-reverse relative pt-1">
@@ -67,7 +67,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
         </div>
       </div>
       {/* nvbar */}
-      <nav className=" bg-[#FFB534]   dark:bg-gray-900  w-full z-20 top-0 start-0">
+      <nav className="  bg-[#F3F4F8] dark:bg-gray-900  w-full z-20 top-0 start-0">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-start mx-auto p-4">
           {/* hambergur-button */}
           <div className="flex space-x-3 md:space-x-0">
@@ -102,7 +102,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             className="flex items-center space-x-3 "
           >
             <img src="Capturelogo.PNG" className="h-8" alt="Flowbite Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark: ">
+            <span className="self-center text-2xl text-gray-600 font-semibold whitespace-nowrap dark: ">
               آبنبات لوپن
             </span>
           </a>
@@ -112,8 +112,8 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             id="navbar-sticky"
           >
             <ul
-              className="text-base  flex flex-col text-right  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  bg-[#FFB534] md:space-x-8 rtl:space-x-reverse 
-            md:flex-row-reverse md:mt-0 md:border-0 md:bg-[#FFB534] dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+              className="text-base  flex flex-col text-right  text-gray-600  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse 
+            md:flex-row-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
             >
               <li className="border-[#FEEBB4] hover:border-[#FEEBB4] transition-all duration-300  border-b-2  pb-1">
                 <a
