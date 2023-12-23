@@ -1,10 +1,12 @@
 // components/common/MainNavBar.tsx
 import React, { PropsWithChildren, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+
 export default function MainNavBar({ children }: PropsWithChildren) {
   return (
     <>
-      <div className="flex border border-[#F3F4F8] bg-white flex-row-reverse relative justify-between px-4 items-center ">
+      <div className="flex border border-[#F3F4F8] bg-[#F3F4F8]  flex-row-reverse relative justify-between px-4 items-center ">
         <div className="flex flex-row gap-2">
           {/* user */}
           <div className="cursor-pointer flex flex-row-reverse relative pt-1">
@@ -67,7 +69,7 @@ export default function MainNavBar({ children }: PropsWithChildren) {
         </div>
       </div>
       {/* nvbar */}
-      <nav className="  bg-[#F3F4F8] dark:bg-gray-900  w-full z-20 top-0 start-0">
+      <nav className=" bg-white  dark:bg-gray-900  w-full z-20 top-0 start-0 shadow-md shadow-gray-500 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-start mx-auto p-4">
           {/* hambergur-button */}
           <div className="flex space-x-3 md:space-x-0">
@@ -101,7 +103,13 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             href="https://flowbite.com/"
             className="flex items-center space-x-3 "
           >
-            <img src="Capturelogo.PNG" className="h-8" alt="Flowbite Logo" />
+            <Image
+              src="/Capturelogo.PNG"
+              width={500}
+              height={500}
+              className="h-8 w-10"
+              alt="lopen Logo"
+            />
             <span className="self-center text-2xl text-gray-600 font-semibold whitespace-nowrap dark: ">
               آبنبات لوپن
             </span>
@@ -112,49 +120,36 @@ export default function MainNavBar({ children }: PropsWithChildren) {
             id="navbar-sticky"
           >
             <ul
-              className="text-base  flex flex-col text-right  text-gray-600  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse 
-            md:flex-row-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+              className="text-base gap-2  flex flex-col text-right  text-gray-600  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse 
+            md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
             >
-              <li className="border-[#FEEBB4] hover:border-[#FEEBB4] transition-all duration-300  border-b-2  pb-1">
-                <a
-                  href="#"
-                  className=" block py-2 px-3 transition-all ease-in duration-300    rounded hover:text-[#EF5621] md:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:text-blue-500"
-                  aria-current="page"
+              <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
+                <Link
+                  href={{
+                    pathname: `/`,
+                  }}
                 >
                   صفحه اصلی
-                </a>
+                </Link>
               </li>
+
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
+                <Link
+                  href={{
+                    pathname: `/about`,
+                  }}
                 >
                   درباره ما
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621]  md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  خدمات
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  بلاگ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 transition-all duration-300   rounded hover:text-[#EF5621] md:hover:bg-transparent md:hover:text-[#EF5621] md:p-0 md:dark:hover:text-blue-500 dark:  dark:hover:bg-gray-700 dark:hover:  md:dark:hover:bg-transparent dark:border-gray-700"
+                <Link
+                  href={{
+                    pathname: `/contactus`,
+                  }}
                 >
                   ارتباط با ما
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
