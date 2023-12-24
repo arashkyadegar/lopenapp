@@ -151,6 +151,15 @@ export default function MainNavBar({ children }: PropsWithChildren) {
                   ارتباط با ما
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={{
+                    pathname: `/singleproduct`,
+                  }}
+                >
+                  محصول
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
