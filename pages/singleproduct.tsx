@@ -15,9 +15,8 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 export default function SingleProduct() {
   return (
-    <>
-      <div className="container p-4">
-        <div className="flex flex-col  justify-center w-full gap-4">
+      <div className="container px-4">
+        <div className="flex flex-col w-full">
           <div className="flex flex-col justify-between w-4/4  gap-4 py-4  my-4 bg-white shadow-md shadow-gray-500 ">
             <div className="px-2">
               <a className=" flex text-2xl border-b p-4 border-gray-400">
@@ -268,7 +267,7 @@ export default function SingleProduct() {
             </div>
             {/* users comments  */}
 
-            <div className="p-4 mx-4 bg-white    shadow-md shadow-gray-300 my-4 ">
+            <div className="p-4 mx-4 bg-white    shadow-md shadow-gray-300 mb-4 ">
               <div className="flex flex-row border-b-4 mb-4 px-2 py-1 border-[#EF5621] text-right font-bold">
                 <div className="">
                   <a> نظرات کاربران</a>
@@ -343,10 +342,7 @@ export default function SingleProduct() {
             </div>
           </div>
         </div>
-
-        <div></div>
       </div>
-    </>
   );
 }
 SingleProduct.Layout = "Main";
