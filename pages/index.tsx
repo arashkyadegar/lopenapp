@@ -87,7 +87,7 @@ export default function Home() {
           </div>
         </div>
         {/* swiper-top */}
-        <div className="w-full order-1 mb-4 sm:order-2 col-span-3 relative ">
+        <div className="w-full order-1  sm:order-2 col-span-3 relative ">
           <Swiper
             className=" shadow-md shadow-gray-500 "
             modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -133,7 +133,7 @@ export default function Home() {
       </div>
 
       {/* most new products */}
-      <div className="p-4 mx-4 bg-white    shadow-md shadow-gray-300 my-4 ">
+      <div className="p-4 mx-4 bg-white    shadow-md shadow-gray-300 mb-4 ">
         <div className="flex flex-row border-b-4 mb-4 px-2 py-1 border-[#EF5621] text-right font-bold">
           <div className="">
             <a>تازه ترین ها</a>
