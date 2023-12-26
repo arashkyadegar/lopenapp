@@ -49,120 +49,130 @@ export default function MainNavBar({ children }: PropsWithChildren) {
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
               />
             </svg>
-
           </div>
           <div className="absolute z-40 bg-white w-11/12  sm:w-5/12 left-5 top-10  shadow-md shadow-gray-500">
-              <div className=" grid w-full grid-cols-7 gap-2 font-bold text-xs border items-center justify-between border-gray-300 p-2">
-                {/* grids title row */}
-                <div className="col-span-1 text-center">
-                  <a>#</a>
-                </div>
-                <div className="col-span-1 text-center">
-                  <a>تصویر</a>
-                </div>
-                <div className="col-span-2 text-right">
-                  <a>محصول</a>
-                </div>
-                <div className="col-span-1 text-center">
-                  <a>تعداد</a>
-                </div>
-                <div className="col-span-1  text-left">
-                  <a>تخفیف</a>
-                </div>
-                <div className="col-span-1  text-center">
-                  <a>قیمت</a>
-                </div>
+            <div className=" grid w-full grid-cols-7 gap-2 font-bold text-xs border items-center justify-between border-gray-300 p-2">
+              {/* grids title row */}
+              <div className="col-span-1 text-center">
+                <a>#</a>
               </div>
-              <div className=" grid w-full grid-cols-7 gap-2 text-xs border items-center justify-between border-gray-300 p-2">
-                {/* grids body */}
-                <div className="col-span-1 text-center ">
-                  <a>1</a>
-                </div>
-                <div className="col-span-1 ">
-                  <a>
-                    <Image
-                      src="/images1.jpg"
-                      width={500}
-                      height={500}
-                      className=" w-6 h-6 mx-auto"
-                      alt="user avator"
-                    />
-                  </a>
-                </div>
-                <div className="col-span-2 ">
-                  <a>ابنبات هلدار</a>
-                </div>
-                <div className="col-span-1 text-center">
-                  <a>1</a>
-                </div>
-                <div className="col-span-1 text-left">
-                  <a className=" text-red-400">1000</a>
-                </div>
-                <div className="col-span-1 text-center">
-                  <a>2000</a>
-                </div>
-
-                <div className="col-span-1  text-center ">
-                  <a>1</a>
-                </div>
-                <div className="col-span-1">
-                  <a>
-                    <Image
-                      src="/images3.jpg"
-                      width={500}
-                      height={500}
-                      className=" w-6 h-6  mx-auto"
-                      alt="user avator"
-                    />
-                  </a>
-                </div>
-                <div className="col-span-2">
-                  <a>ابنبات هلدار</a>
-                </div>
-                <div className="col-span-1  text-center">
-                  <a>2</a>
-                </div>
-                <div className="col-span-1 text-left">
-                  <a className=" text-red-400 ">500</a>
-                </div>
-                <div className="col-span-1 text-center">
-                  <a>4500</a>
-                </div>
-
-                <div className="col-span-1  text-center">
-                  <a>1</a>
-                </div>
-                <div className="col-span-1">
-                  <a>
-                    <Image
-                      src="/images2.jpg"
-                      width={500}
-                      height={500}
-                      className=" w-6 h-6  mx-auto"
-                      alt="user avator"
-                    />
-                  </a>
-                </div>
-                <div className="col-span-2">
-                  <a>ابنبات هلدار</a>
-                </div>
-                <div className="col-span-1  text-center">
-                  <a>4</a>
-                </div>
-                <div className="col-span-1 text-left">
-                  <a className=" text-red-400 ">3000</a>
-                </div>
-                <div className="col-span-1  text-center ">
-                  <a>2500</a>
-                </div>
-                <div className="col-span-1 col-start-6  ">
-                  <a>قیمت کل</a>
-                </div>
-                <div className="col-span-1 text-center">
-                  <a>10000</a>
-                </div>
+              <div className="col-span-1 text-center">
+                <a>تصویر</a>
+              </div>
+              <div className="col-span-2 text-right">
+                <a>محصول</a>
+              </div>
+              <div className="col-span-1 text-center">
+                <a>تعداد</a>
+              </div>
+              <div className="col-span-1  text-left">
+                <a>تخفیف</a>
+              </div>
+              <div className="col-span-1  text-center">
+                <a>قیمت</a>
               </div>
             </div>
+            <div className=" grid w-full grid-cols-7 gap-2 text-xs border items-center justify-between border-gray-300 p-2">
+              {/* grids body */}
+              <div className="col-span-1 text-center ">
+                <a>1</a>
+              </div>
+              <div className="col-span-1 ">
+                <a>
+                  <Image
+                    src="/images1.jpg"
+                    width={500}
+                    height={500}
+                    className=" w-6 h-6 mx-auto"
+                    alt="user avator"
+                  />
+                </a>
+              </div>
+              <div className="col-span-2 ">
+                <a>ابنبات هلدار</a>
+              </div>
+              <div className="col-span-1 text-center">
+                <a>1</a>
+              </div>
+              <div className="col-span-1 text-left">
+                <a className=" text-red-400">1000</a>
+              </div>
+              <div className="col-span-1 text-center">
+                <a>2000</a>
+              </div>
+
+              <div className="col-span-1  text-center ">
+                <a>1</a>
+              </div>
+              <div className="col-span-1">
+                <a>
+                  <Image
+                    src="/images3.jpg"
+                    width={500}
+                    height={500}
+                    className=" w-6 h-6  mx-auto"
+                    alt="user avator"
+                  />
+                </a>
+              </div>
+              <div className="col-span-2">
+                <a>ابنبات هلدار</a>
+              </div>
+              <div className="col-span-1  text-center">
+                <a>2</a>
+              </div>
+              <div className="col-span-1 text-left">
+                <a className=" text-red-400 ">500</a>
+              </div>
+              <div className="col-span-1 text-center">
+                <a>4500</a>
+              </div>
+
+              <div className="col-span-1  text-center">
+                <a>1</a>
+              </div>
+              <div className="col-span-1">
+                <a>
+                  <Image
+                    src="/images2.jpg"
+                    width={500}
+                    height={500}
+                    className=" w-6 h-6  mx-auto"
+                    alt="user avator"
+                  />
+                </a>
+              </div>
+              <div className="col-span-2">
+                <a>ابنبات هلدار</a>
+              </div>
+              <div className="col-span-1  text-center">
+                <a>4</a>
+              </div>
+              <div className="col-span-1 text-left">
+                <a className=" text-red-400 ">3000</a>
+              </div>
+              <div className="col-span-1  text-center ">
+                <a>2500</a>
+              </div>
+
+              <div className="col-span-1   ">
+                <a href="" className="underline">
+                  سبد خرید
+                </a>
+              </div>
+              <div className="col-span-2  ">
+                <a href="" className="underline">
+                  تسویه حساب
+                </a>
+              </div>
+              <div className="col-span-1   col-start-6">
+                <a>قیمت کل</a>
+              </div>
+              <div className="col-span-1 text-center">
+                <a>10000</a>
+              </div>
+            </div>
+          </div>
         </div>
         {/* language select */}
         <div className="text-xs">
@@ -245,7 +255,14 @@ export default function MainNavBar({ children }: PropsWithChildren) {
                   صفحه اصلی
                 </Link>
               </li>
-
+              <li>
+                <Link
+                  href={{
+                    pathname: `/checkout`,
+                  }}
+                >
+فاکتور                </Link>
+              </li>
               <li>
                 <Link
                   href={{
