@@ -50,10 +50,10 @@ export default function About() {
             </div>
             <div className="flex flex-row mx-auto w-3/4  gap-4 pt-2  border-t  border-gray-400">
               <div className=" flex flex-col p-2 bg-white">
-                <video className="w-4/4 mx-auto" controls>
+                {/* <video className="w-4/4 mx-auto" controls>
                   <source src="/flowbite.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
-                </video>
+                </video> */}
                 <div className="text-center   p-4">
                   <a className="font-bold">لورم ایپسوم متن ساختگی با</a>
                   <p className="text-justify text-sm mt-2">
