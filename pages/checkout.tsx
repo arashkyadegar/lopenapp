@@ -1,9 +1,10 @@
 import myAppContext from "@/components/context/context";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import statesJson from "../utility/states.json";
 import citiesJson from "../utility/citys.json";
-import { CityEntity, StateEntity } from "@/models/entities";
+import { CityEntity, FactorForm, StateEntity } from "@/models/entities";
+import validator from "validator";
 export default function Checkout() {
   const stateList: Array<StateEntity> = statesJson;
   const cityList: Array<CityEntity> = citiesJson;
@@ -13,6 +14,7 @@ export default function Checkout() {
   const { statesUlToggle, setStatesUlToggle } = React.useContext(myAppContext);
   const [states, setStates] = React.useState(statesJson);
 
+  const [factorForm, setFactorForm] = useState(new FactorForm());
   function stateTextKeyUp(event: any): void {
     const node = event.target as HTMLInputElement;
     const stateName = node.value;
@@ -49,7 +51,116 @@ export default function Checkout() {
   function cityUlToggle(): void {
     setCitiesUlToggle(!citiesUlToggle);
   }
+  // form-validation-start
+  function fillFNameText(event: any) {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      setFactorForm({
+        ...factorForm,
+        fNameError: "لطفا نام خود را وارد کنید",
+        formIsValid: false,
+      });
+    } else {
+      setFactorForm({
+        ...factorForm,
+        fNameError: "",
+        fName: text,
+        formIsValid: true,
+      });
+    }
+  }
 
+  function fillLNameText(event: any) {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      setFactorForm({
+        ...factorForm,
+        lNameError: "لطفا نام خانوادگی خود را وارد کنید",
+        formIsValid: false,
+      });
+    } else {
+      setFactorForm({
+        ...factorForm,
+        lNameError: "",
+        lName: text,
+        formIsValid: true,
+      });
+    }
+  }
+
+  function fillMobileText(event: any) {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      setFactorForm({
+        ...factorForm,
+        mobileError: "لطفا موبایل خود را وارد کنید",
+        formIsValid: false,
+      });
+    } else {
+      setFactorForm({
+        ...factorForm,
+        mobileError: "",
+        mobile: text,
+        formIsValid: true,
+      });
+    }
+  }
+
+  function fillPhoneText(event: any) {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      setFactorForm({
+        ...factorForm,
+        phoneError: "لطفا تلفن خود را وارد کنید",
+        formIsValid: false,
+      });
+    } else {
+      setFactorForm({
+        ...factorForm,
+        phoneError: "",
+        phone: text,
+        formIsValid: true,
+      });
+    }
+  }
+
+  function fillAddressText(event: any) {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      setFactorForm({
+        ...factorForm,
+        addressError: "لطفا آدرس خود را وارد کنید",
+        formIsValid: false,
+      });
+    } else {
+      setFactorForm({
+        ...factorForm,
+        addressError: "",
+        address: text,
+        formIsValid: true,
+      });
+    }
+  }
+
+  function fillPostCodeText(event: any) {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      setFactorForm({
+        ...factorForm,
+        postCodeError: "لطفا کد پستی خود را وارد کنید",
+        formIsValid: false,
+      });
+    } else {
+      setFactorForm({
+        ...factorForm,
+        postCodeError: "",
+        postCode: text,
+        formIsValid: true,
+      });
+    }
+  }
+
+  // form-validation-end
   return (
     <>
       <div className="container p-4">
@@ -61,10 +172,10 @@ export default function Checkout() {
               </a>
             </div>
             <div className="flex flex-row ">
-              <div className="flex flex-col border border-red-400 w-1/2">
+              <div className="flex flex-col border border-red-400 w-2/3">
                 <div className=" col-span-5 sm:col-span-3">
                   <form className="max-w-md mx-auto rtl">
-                    <div className="flex flex-col sm:flex-row sm:items-center  gap-2 m-2">
+                    <div className="flex flex-col  gap-2 m-2">
                       <label
                         htmlFor="text_fName"
                         className="w-20 text-sm font-bold"
@@ -75,11 +186,15 @@ export default function Checkout() {
                         type="text"
                         name="text_fName"
                         id="fName"
-                        className="p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+                        onChange={fillFNameText}
+                        className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                         placeholder="نام"
                       />
+                      <p className="text-red-400 text-xs">
+                        {factorForm.fNameError}
+                      </p>
                     </div>
-                    <div className="flex flex-col sm:flex-row  sm:items-center  gap-2  m-2 ">
+                    <div className="flex flex-col  gap-2  m-2 ">
                       <label
                         htmlFor="text_lName"
                         className="w-20 text-sm  font-bold"
@@ -90,12 +205,16 @@ export default function Checkout() {
                         type="text"
                         name="text_lName"
                         id="lName"
+                        onChange={fillLNameText}
                         className="p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                         placeholder="نام خانوادگی"
                       />
+                      <p className="text-red-400 text-xs">
+                        {factorForm.lNameError}
+                      </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row  sm:items-center  gap-2  m-2 ">
+                    <div className="flex flex-col  gap-2  m-2 ">
                       <label
                         htmlFor="text_mobile"
                         className="w-20 text-sm  font-bold"
@@ -106,12 +225,16 @@ export default function Checkout() {
                         type="text"
                         name="text_mobile"
                         id="mobile"
+                        onChange={fillMobileText}
                         className="p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                         placeholder="موبایل"
                       />
+                      <p className="text-red-400 text-xs">
+                        {factorForm.mobileError}
+                      </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row  sm:items-center  gap-2  m-2 ">
+                    <div className="flex flex-col  gap-2  m-2 ">
                       <label
                         htmlFor="text_phone"
                         className="w-20 text-sm  font-bold"
@@ -122,12 +245,16 @@ export default function Checkout() {
                         type="text"
                         name="text_phone"
                         id="phone"
+                        onChange={fillPhoneText}
                         className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                         placeholder="تلفن"
                       />
+                      <p className="text-red-400 text-xs">
+                        {factorForm.phoneError}
+                      </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row   gap-2  m-2  ">
+                    <div className="flex flex-col   gap-2  m-2  ">
                       <label
                         htmlFor="text_address"
                         className="w-20 text-sm  font-bold"
@@ -137,11 +264,15 @@ export default function Checkout() {
                       <textarea
                         name="text_address"
                         id="address"
+                        onChange={fillAddressText}
                         className="grow p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                         placeholder="آدرس"
                       ></textarea>
+                      <p className="text-red-400 text-xs">
+                        {factorForm.addressError}
+                      </p>
                     </div>
-                    <div className="flex flex-col sm:flex-row    gap-2  m-2  ">
+                    <div className="flex flex-col   gap-2  m-2  ">
                       <label
                         htmlFor="text_state"
                         className="w-20 text-sm  font-bold"
@@ -149,7 +280,7 @@ export default function Checkout() {
                         استان
                       </label>
 
-                      <div className="flex flex-col sm:w-1/2">
+                      <div className="flex flex-col w-1/2">
                         <div className="flex flex-row w-full items-center relative">
                           <div className="h-9 w-full p-1 outline-none   border border-gray-300  bg-[#F9FAFB]">
                             <svg
@@ -201,9 +332,12 @@ export default function Checkout() {
                           </li> */}
                           </ul>
                         )}
+                        <p className="text-red-400 text-xs">
+                          {factorForm.stateError}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row    gap-2  m-2  ">
+                    <div className="flex flex-col  gap-2  m-2  ">
                       <label
                         htmlFor="text_city"
                         className="w-20 text-sm  font-bold"
@@ -211,7 +345,7 @@ export default function Checkout() {
                         شهر
                       </label>
 
-                      <div className="flex flex-col  sm:w-1/2">
+                      <div className="flex flex-col  w-1/2">
                         <div className="flex flex-row items-center relative">
                           <div className="h-9 w-full p-1 outline-none   border border-gray-300  bg-[#F9FAFB]">
                             <svg
@@ -250,9 +384,12 @@ export default function Checkout() {
                             ))}
                           </ul>
                         )}
+                        <p className="text-red-400 text-xs">
+                          {factorForm.cityError}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row  sm:items-center  gap-2  m-2 ">
+                    <div className="flex flex-col  gap-2  m-2 ">
                       <label
                         htmlFor="text_postalCode"
                         className="w-20 text-sm  font-bold"
@@ -263,9 +400,28 @@ export default function Checkout() {
                         type="text"
                         name="text_postalCode"
                         id="postalCode"
+                        onChange={fillPostCodeText}
                         className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                         placeholder="کد پستی"
                       />
+                      <p className="text-red-400 text-xs">
+                        {factorForm.postCodeError}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col    gap-2  m-2  ">
+                      <label
+                        htmlFor="text_info"
+                        className="w-20 text-sm  font-bold"
+                      >
+                        توضیحات
+                      </label>
+                      <textarea
+                        name="text_info"
+                        id="info"
+                        className="grow p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+                        placeholder="توضیحات"
+                      ></textarea>
                     </div>
                     <button
                       type="submit"
@@ -276,8 +432,13 @@ export default function Checkout() {
                   </form>
                 </div>
               </div>
-              <div className="flex flex-col border border-blue-400 w-1/2">
-                2
+              <div className="flex flex-col border border-blue-400 w-1/3">
+                <div className="px-2">
+                  <a className=" flex text-2xl border-b p-4 border-gray-400">
+                    خرید شما
+                  </a>
+                </div>
+                <div></div>
               </div>
             </div>
           </div>
