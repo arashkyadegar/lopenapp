@@ -4,7 +4,7 @@ import type { AppProps } from "next/app";
 import myAppContext from "@/components/context/context";
 import { useContext, useState } from "react";
 
-import { CityEntity, StateEntity } from "@/models/entities";
+import { CityEntity, FactorForm, StateEntity } from "@/models/entities";
 export default function App({ Component, pageProps }: AppProps) {
   const stateList: Array<StateEntity> = [];
   const cityList: Array<CityEntity> = [];
@@ -14,9 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const [citiesUlToggle, setCitiesUlToggle] = useState(false);
   const [statesUlToggle, setStatesUlToggle] = useState(false);
+
+  const [factorForm, setFactorForm] = useState(new FactorForm());
   return (
     <myAppContext.Provider
       value={{
+        factorForm,
+        setFactorForm,
         states,
         setStates,
         cities,
