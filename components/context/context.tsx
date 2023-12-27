@@ -1,6 +1,10 @@
 import { createContext, useContext, useState } from "react";
 import { CityEntity, FactorForm, StateEntity } from "../../models/entities";
 const myAppContext = createContext({
+  navbarToggle: false,
+  setNavbarToggle: (navbarToggle: boolean) => {},
+  smallBasketToggle: false,
+  setSmallBasketToggle: (smallBasketToggle: boolean) => {},
   cities: Array<CityEntity>(),
   setCities: (cities: any[]) => {},
   states: Array<StateEntity>(),
