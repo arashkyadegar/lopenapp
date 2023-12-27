@@ -15,10 +15,16 @@ export default function App({ Component, pageProps }: AppProps) {
   const [citiesUlToggle, setCitiesUlToggle] = useState(false);
   const [statesUlToggle, setStatesUlToggle] = useState(false);
 
+  const [smallBasketToggle, setSmallBasketToggle] = useState(false);
+  const [navbarToggle, setNavbarToggle] = useState(false);
   const [factorForm, setFactorForm] = useState(new FactorForm());
   return (
     <myAppContext.Provider
       value={{
+        navbarToggle,
+        setNavbarToggle,
+        smallBasketToggle,
+        setSmallBasketToggle,
         factorForm,
         setFactorForm,
         states,
