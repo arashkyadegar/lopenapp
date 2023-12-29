@@ -7,7 +7,25 @@ export class CityEntity {
   name: string = "";
   stateId: string = "";
 }
-
+export class ProductEntity {
+  _id: string = "";
+  name: string = "";
+  weight: string = "";
+  size: string = "";
+  HealthId: string = "";
+  type: string = "";
+  components: string = "";
+  desc: string = "";
+  score: number = 0;
+  price: number = 0;
+  display: boolean = true;
+  isAvailable: boolean = true;
+  tags: string[] = [];
+  image: string = "";
+  images: string[] = [];
+  userId: string = "";
+  date!: Date;
+}
 export class FactorEntity {
   id: string = "";
   fName: string = "";
@@ -34,5 +52,6 @@ export class FactorForm extends FactorEntity {
 module.exports = {
   StateEntity,
   CityEntity,
-  FactorForm
+  FactorForm,
+  ProductEntity
 };
