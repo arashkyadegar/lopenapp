@@ -7,20 +7,22 @@ import myAppContext from "@/components/context/context";
 import { useMediaQuery } from "react-responsive";
 export default function MainNavBar({ children }: PropsWithChildren) {
   const isBigScreen = useMediaQuery({ query: "(min-width: 640px)" });
-
   const { smallBasketToggle, setSmallBasketToggle } =
     React.useContext(myAppContext);
   const { navbarToggle, setNavbarToggle } = React.useContext(myAppContext);
+
+  if (isBigScreen) {
+    setNavbarToggle(true);
+  }
+
   function toggleSmallBasket() {
     setSmallBasketToggle(!smallBasketToggle);
   }
 
-  function toggleNavbar() {
+  const toggleNavbar = () => {
     setNavbarToggle(!navbarToggle);
-  }
-  if (isBigScreen) {
-    setNavbarToggle(true);
-  }
+  };
+
   return (
     <>
       <div className="flex border border-[#F3F4F8] bg-[#F3F4F8]  flex-row-reverse relative justify-between px-4 items-center ">
@@ -95,9 +97,9 @@ export default function MainNavBar({ children }: PropsWithChildren) {
           {/* hambergur-button */}
           <div className="flex space-x-3 md:space-x-0">
             <button
-              onClick={() => {
-                toggleNavbar();
-              }}
+              onClick={() => 
+                toggleNavbar()
+              }
               data-collapse-toggle="navbar-sticky"
               type="button"
               className="inline-flex transition-all duration-300 items-center ml-2 w-10 h-10 justify-center text-sm   rounded-lg md:hidden hover:text-[#80BB01] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
