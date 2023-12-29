@@ -7,6 +7,7 @@ export class CityEntity {
   name: string = "";
   stateId: string = "";
 }
+
 export class ProductEntity {
   _id: string = "";
   name: string = "";
