@@ -13,7 +13,7 @@ export class ProductEntity {
   name: string = "";
   weight: string = "";
   size: string = "";
-  HealthId: string = "";
+  healthId: string = "";
   type: string = "";
   components: string = "";
   desc: string = "";
