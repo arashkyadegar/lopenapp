@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import Image from "next/image";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,9 +19,15 @@ import CommentComponent from "@/components/comment";
 import CommentAddComponent from "@/components/comment_add";
 import { getNewPrice } from "@/utility/discount";
 import ScoreComponent from "./score";
+import { factorAdded } from "@/redux/store/factor";
+import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
+import { selectedProductUpdated } from "@/redux/store/selectedProduct";
 export default function ProductComponent({ props }: any) {
+  const dispatch = useAppDispatch();
+  const selectedProductState = useAppSelector(
+    (state) => state.entities.selectedProduct
+  );
   const product = JSON.parse(props.product)[0];
-  console.log(product);
   let discount = 0;
   let newPrice = 0;
   if (product.discounts != undefined) {
@@ -29,6 +35,55 @@ export default function ProductComponent({ props }: any) {
     newPrice = getNewPrice(product.price, discount);
     //newPrice = product.price - (discount / 100) * product.price;
   }
+
+  function addProductToFactor(): void {
+    dispatch(factorAdded(1));
+  }
+  function changeProductImage(event: any) {
+    const imgSrc = event.target.src;
+    dispatch(
+      selectedProductUpdated({
+        ...selectedProductState.data,
+        image: imgSrc,
+      })
+    );
+  }
+
+  function changeProductCount(event: any) {
+    const value = event.target.value;
+    dispatch(
+      selectedProductUpdated({
+        ...selectedProductState.data,
+        count: value,
+      })
+    );
+  }
+  useEffect(() => {
+
+    dispatch(
+      selectedProductUpdated({
+        _id: product._id,
+        name: product.name,
+        weight: product.weight,
+        size: product.size,
+        healthId: product.healthId,
+        type: product.type,
+        components: product.components,
+        desc: product.desc,
+        score: product.score,
+        price: product.price,
+        display: product.display,
+        isAvailable: product.isAvailable,
+        tags: product.tags,
+        image: product.image,
+        images: product.images,
+        userId: "",
+        date: "",
+      })
+    );
+    // }
+    //dispatch(commentsRecieved(comments));
+  }, []);
   return (
     <div className="container px-4">
       <div className="flex flex-col w-full">
@@ -52,7 +107,7 @@ export default function ProductComponent({ props }: any) {
                     <div>
                       <a href="#" className=" w-full h-full aspect-auto">
                         <Image
-                          src={product.image}
+                          src={selectedProductState.data.image}
                           width={800}
                           height={800}
                           className=" hover:scale-110 w-fit h-full aspect-auto transition duration-500 cursor-pointer"
@@ -83,43 +138,20 @@ export default function ProductComponent({ props }: any) {
                     onNavigationNext={() => {}}
                     onNavigationPrev={() => {}}
                   >
-                    <SwiperSlide className="cursor-pointer border hover:border-[#FFB534] transition duration-200">
-                      <Image
-                        src="/images1.jpg"
-                        width={500}
-                        height={500}
-                        className=" mx-auto  h-full  aspect-square "
-                        alt="user avator"
-                      />
-                    </SwiperSlide>
-
-                    <SwiperSlide className="cursor-pointer border hover:border-[#FFB534] transition duration-200">
-                      <Image
-                        src="/images2.jpg"
-                        width={500}
-                        height={500}
-                        className=" mx-auto  h-full  aspect-square "
-                        alt="user avator"
-                      />
-                    </SwiperSlide>
-                    <SwiperSlide className="cursor-pointer border hover:border-[#FFB534] transition duration-200">
-                      <Image
-                        src="/images3.jpg"
-                        width={500}
-                        height={500}
-                        className=" mx-auto  h-full  aspect-square "
-                        alt="user avator"
-                      />
-                    </SwiperSlide>
-                    <SwiperSlide className="cursor-pointer border hover:border-[#FFB534] transition duration-200">
-                      <Image
-                        src="/images4.jpg"
-                        width={500}
-                        height={500}
-                        className=" mx-auto  h-full  aspect-square "
-                        alt="user avator"
-                      />
-                    </SwiperSlide>
+                    {product.images.map((image: any) => (
+                      <SwiperSlide
+                        onClick={changeProductImage}
+                        className="cursor-pointer border hover:border-[#FFB534] transition duration-200"
+                      >
+                        <Image
+                          src={image}
+                          width={500}
+                          height={500}
+                          className=" mx-auto  h-full"
+                          alt="user avator"
+                        />
+                      </SwiperSlide>
+                    ))}
                   </Swiper>
                 </div>
               </div>
@@ -127,10 +159,11 @@ export default function ProductComponent({ props }: any) {
               <div>
                 <div className="px-5 pb-5 ">
                   <div className="flex flex-col gap-2 mb-2">
-                    <a href="#">
-                      <h5 className="text-base  text-right font-semibold tracking-tight dark:text-white">
-                        <a>{product.name}</a>
-                      </h5>
+                    <a
+                      href="#"
+                      className="text-base  text-right font-semibold tracking-tight dark:text-white"
+                    >
+                      {product.name}
                     </a>
                     <div className="flex flex-col  border-b pb-4 border-gray-300 gap-4  w-full justify-between  ">
                       <div className="flex flex-row ">
@@ -166,6 +199,7 @@ export default function ProductComponent({ props }: any) {
                       <div className=" flex flex-row gap-2 items-center">
                         <div>
                           <input
+                            onChange={changeProductCount}
                             type="number"
                             min="1"
                             defaultValue={1}
@@ -176,7 +210,10 @@ export default function ProductComponent({ props }: any) {
                             required
                           />
                         </div>
-                        <div className=" flex flex-row w-1/2 items-center justify-right bg-slate-300 px-3 py-2  cursor-pointer hover:text-white  hover:bg-[#80BB01] transition-all duration-300">
+                        <div
+                          onClick={addProductToFactor}
+                          className=" flex flex-row w-1/2 items-center justify-right bg-slate-300 px-3 py-2  cursor-pointer hover:text-white  hover:bg-[#80BB01] transition-all duration-300"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
