@@ -24,7 +24,7 @@ export const selectedProductSlice = createSlice({
       images: "",
       userId: "",
       date: "",
-      count:""
+      count:"1"
     },
     isLoading: false,
     lastFetch: null,
