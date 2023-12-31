@@ -50,9 +50,22 @@ export class FactorForm extends FactorEntity {
   cityError: string = "";
   postCodeError: string = "";
 }
+
+export class FactorDetailEntity {
+  _id: string = "";
+  factorId: string = "";
+  productId: string = "";
+  unitPrice: number = 0;
+  discount: number = 0;
+  count: number = 1;
+  prices: number = 0;
+  date!: Date;
+}
+
 module.exports = {
   StateEntity,
   CityEntity,
   FactorForm,
-  ProductEntity
+  ProductEntity,
+  FactorDetailEntity
 };
