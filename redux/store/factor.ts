@@ -27,13 +27,16 @@ export const factorSlice = createSlice({
       state.list = action.payload;
       state.lastFetch = Date.now();
     },
-    factorAdded: (state: any, action: PayloadAction<number>) => {
-     state.list.push(action.payload);
+    factorAdded: (state: any, action: PayloadAction<any>) => {
+      //  state.list =[];
+      state.list.push(action.payload);
+    },
+    factorReAdded: (state: any, action: PayloadAction<any>) => {
+      //  state.list =[];
+      state.list = action.payload;
     },
   },
 });
 
-
-
-export const { factorAdded } = factorSlice.actions;
+export const { factorAdded, factorReAdded } = factorSlice.actions;
 export default factorSlice.reducer;
