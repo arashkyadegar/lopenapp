@@ -19,25 +19,61 @@ import CommentComponent from "@/components/comment";
 import CommentAddComponent from "@/components/comment_add";
 import { getNewPrice } from "@/utility/discount";
 import ScoreComponent from "./score";
-import { factorAdded } from "@/redux/store/factor";
+import { factorAdded, factorReAdded } from "@/redux/store/factor";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { selectedProductUpdated } from "@/redux/store/selectedProduct";
+import { produce } from "immer";
+
 export default function ProductComponent({ props }: any) {
   const dispatch = useAppDispatch();
   const selectedProductState = useAppSelector(
     (state) => state.entities.selectedProduct
   );
+  const factorState = useAppSelector((state) => state.entities.factor);
   const product = JSON.parse(props.product)[0];
   let discount = 0;
   let newPrice = 0;
-  if (product.discounts != undefined) {
+  if (product.discounts.value != undefined) {
     discount = product.discounts.value;
     newPrice = getNewPrice(product.price, discount);
     //newPrice = product.price - (discount / 100) * product.price;
   }
 
   function addProductToFactor(): void {
-    dispatch(factorAdded(1));
+    const factorItem = {
+      _id: "",
+      factorId: "",
+      productId: product._id,
+      unitPrice: product.price,
+      discount: discount,
+      count: selectedProductState.data.count,
+      prices: product.price * parseInt(selectedProductState.data.count),
+      date: "",
+    };
+
+    //calculate discoutn if there is one
+    if (discount != 0) {
+      factorItem.prices = newPrice * parseInt(factorItem.count);
+    } else {
+      factorItem.prices = factorItem.unitPrice * parseInt(factorItem.count);
+    }
+    
+    //if item is reselected we should update the count
+    let obj = factorState.list.find((x: any) => x.productId == product._id);
+    if (obj) {
+      const nextState = produce(factorState, (draftState) => {
+        const item = draftState.list.map((i: any) => {
+          if (i.productId == product._id) {
+            let old_count = selectedProductState.data.count;
+            let count = i.count;
+            i.count = parseInt(count) + parseInt(old_count);
+          }
+        });
+      });
+      dispatch(factorReAdded(nextState.list));
+    } else {
+      dispatch(factorAdded(factorItem));
+    }
   }
   function changeProductImage(event: any) {
     const imgSrc = event.target.src;
@@ -59,7 +95,6 @@ export default function ProductComponent({ props }: any) {
     );
   }
   useEffect(() => {
-
     dispatch(
       selectedProductUpdated({
         _id: product._id,
@@ -79,6 +114,7 @@ export default function ProductComponent({ props }: any) {
         images: product.images,
         userId: "",
         date: "",
+        count: "1",
       })
     );
     // }
