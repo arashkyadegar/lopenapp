@@ -5,7 +5,7 @@ import React from "react";
 export default function CheckoutGridComponent({ props }: any) {
   return (
     <>
-      {" "}
+ 
       <div className="grid mx-2 grid-cols-6 items-center divide divide-gray-200">
         <div className="flex  items-center justify-center col-span-1 h-16 border border-gray-200 text-center">
           <a>تصویر</a>

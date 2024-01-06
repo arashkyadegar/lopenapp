@@ -4,8 +4,8 @@ import type { AppProps } from "next/app";
 import myAppContext from "@/components/context/context";
 import { ReactElement, ReactNode, useContext, useState } from "react";
 
-import { CityEntity, FactorForm, StateEntity } from "@/models/entities";
-import { initialState } from "@/redux/store/posts";
+import { AddProductForm, CityEntity, FactorForm, StateEntity } from "@/models/entities";
+import { initialState } from "@/redux/store/product";
 import { wrapperForPersistStore, wrapperForStore } from "@/redux/store/store";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
@@ -84,12 +84,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [smallBasketToggle, setSmallBasketToggle] = useState(false);
   const [navbarToggle, setNavbarToggle] = useState(false);
   const [factorForm, setFactorForm] = useState(new FactorForm());
+  const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   const { store } = wrapperForPersistStore.useWrappedStore(initialState);
   let persistor = persistStore(store);
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <myAppContext.Provider
       value={{
+        addProductForm,
+        setAddProductForm,
         navbarToggle,
         setNavbarToggle,
         smallBasketToggle,

@@ -27,6 +27,25 @@ export class ProductEntity {
   userId: string = "";
   date!: Date;
 }
+
+export class AddProductForm extends ProductEntity {
+  nameError: string = "";
+  weightError: string = "";
+  sizeError: string = "";
+  healthIdError: string = "";
+  typeError: string = "";
+  componentsError: string = "";
+  descError: string = "";
+  scoreError: string = "";
+  priceError: string = "";
+  displayError: string = "";
+  isAvailableError: string = "";
+  tagsError: string = "";
+  imageError: string = "";
+  imagesError: string = "";
+  userIdError: string = "";
+  formIsValid: boolean = false;
+}
 export class FactorEntity {
   id: string = "";
   fName: string = "";
@@ -67,5 +86,6 @@ module.exports = {
   CityEntity,
   FactorForm,
   ProductEntity,
-  FactorDetailEntity
+  FactorDetailEntity,
+  AddProductForm
 };
