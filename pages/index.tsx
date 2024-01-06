@@ -5,6 +5,8 @@ import ProductCardComponent from "@/components/product_card";
 import AdsDoubleComponent from "@/components/ads_double";
 import TriplexTopButtonsComponent from "@/components/triplexـ_top_bottons";
 import IndexComponent from "@/components";
+import { ReactElement } from "react";
+import MainLayout from "@/components/common/mainLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,4 +23,6 @@ export async function getStaticProps() {
   return { props: { products } };
 }
 
-Home.Layout = "Main";
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
+};

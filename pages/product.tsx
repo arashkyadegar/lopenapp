@@ -1,4 +1,6 @@
+import MainLayout from "@/components/common/mainLayout";
 import ProductComponent from "@/components/product";
+import { ReactElement } from "react";
 
 export default function Product(rslt: any) {
   return <ProductComponent props={rslt} />;
@@ -12,4 +14,6 @@ export async function getServerSideProps(context: any) {
   const product = JSON.stringify(repo);
   return { props: { product } };
 }
-Product.Layout = "Main";
+Product.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
+};

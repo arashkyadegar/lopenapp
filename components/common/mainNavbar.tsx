@@ -180,6 +180,15 @@ export default function MainNavBar({ children }: PropsWithChildren) {
                 <li>
                   <Link
                     href={{
+                      pathname: `/admin/dashboard/main`,
+                    }}
+                  >
+                     admin
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={{
                       pathname: `/contactus`,
                     }}
                   >

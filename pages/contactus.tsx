@@ -1,3 +1,6 @@
+import MainLayout from "@/components/common/mainLayout";
+import { ReactElement } from "react";
+
 export default function Contactus() {
   return (
     <>
@@ -149,4 +152,7 @@ export default function Contactus() {
     </>
   );
 }
-Contactus.Layout = "Main";
+Contactus.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
+};
+

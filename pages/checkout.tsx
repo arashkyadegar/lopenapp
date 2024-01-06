@@ -1,8 +1,9 @@
 import myAppContext from "@/components/context/context";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import CheckoutFormComponent from "@/components/checkout_form";
 import CheckoutGridComponent from "@/components/checkout_grid";
+import MainLayout from "@/components/common/mainLayout";
 export default function Checkout() {
   // form-validation-end
   return (
@@ -33,4 +34,7 @@ export default function Checkout() {
   );
 }
 
-Checkout.Layout = "Main";
+
+Checkout.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
+};

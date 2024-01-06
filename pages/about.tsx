@@ -1,4 +1,6 @@
+import MainLayout from "@/components/common/mainLayout";
 import Image from "next/image";
+import { ReactElement } from "react";
 export default function About() {
   return (
     <>
@@ -76,4 +78,7 @@ export default function About() {
   );
 }
 
-About.Layout = "Main";
+
+About.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
+};
