@@ -7,7 +7,7 @@ export default function Product(rslt: any) {
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/wbproducts/${id}`);
+  const res = await fetch(`${baseURL}/api/wbproducts/${id}`);
   const repo = await res.json();
   const product = JSON.stringify(repo);
   return { props: { product } };

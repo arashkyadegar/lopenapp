@@ -23,6 +23,7 @@ import { factorAdded, factorReAdded } from "@/redux/store/factor";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { selectedProductUpdated } from "@/redux/store/selectedProduct";
 import { produce } from "immer";
+import { getDefaultImageAvator } from "@/utility/imageUtility";
 
 export default function ProductComponent({ props }: any) {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ export default function ProductComponent({ props }: any) {
   const product = JSON.parse(props.product)[0];
   let discount = 0;
   let newPrice = 0;
+
   if (product.discounts.value != undefined) {
     discount = product.discounts.value;
     newPrice = getNewPrice(product.price, discount);
@@ -57,7 +59,7 @@ export default function ProductComponent({ props }: any) {
     } else {
       factorItem.prices = factorItem.unitPrice * parseInt(factorItem.count);
     }
-    
+
     //if item is reselected we should update the count
     let obj = factorState.list.find((x: any) => x.productId == product._id);
     if (obj) {
@@ -75,11 +77,12 @@ export default function ProductComponent({ props }: any) {
       dispatch(factorAdded(factorItem));
     }
   }
+
   function changeProductImage(event: any) {
-    const imgSrc = event.target.src;
+    const imgSrc = event.target.id;
     dispatch(
       selectedProductUpdated({
-        ...selectedProductState.data,
+        ...selectedProductState,
         image: imgSrc,
       })
     );
@@ -110,7 +113,7 @@ export default function ProductComponent({ props }: any) {
         display: product.display,
         isAvailable: product.isAvailable,
         tags: product.tags,
-        image: product.image,
+        image: product.images[0],
         images: product.images,
         userId: "",
         date: "",
@@ -141,15 +144,15 @@ export default function ProductComponent({ props }: any) {
                   )}
                   <div className="flex mb-2 h-72  overflow-hidden mt-6 justify-center">
                     <div>
-                      <a href="#" className=" w-full h-full aspect-auto">
-                        <Image
-                          src={selectedProductState.data.image}
-                          width={800}
-                          height={800}
-                          className=" hover:scale-110 w-fit h-full aspect-auto transition duration-500 cursor-pointer"
-                          alt="product image"
-                        />
-                      </a>
+                      <Image
+                        src={getDefaultImageAvator(
+                          selectedProductState.data.image
+                        )}
+                        width={800}
+                        height={800}
+                        className=" hover:scale-110 w-fit h-full aspect-auto transition duration-500 cursor-pointer"
+                        alt="product image"
+                      />
                     </div>
                   </div>
                 </div>
@@ -158,7 +161,7 @@ export default function ProductComponent({ props }: any) {
                   <Swiper
                     className=""
                     modules={[
-                      Navigation,
+                      // Navigation,
                       Pagination,
                       Scrollbar,
                       A11y,
@@ -171,16 +174,17 @@ export default function ProductComponent({ props }: any) {
                     //    navigation={true}
                     onSlideChange={() => console.log("slide change")}
                     onSwiper={(swiper) => console.log(swiper)}
-                    onNavigationNext={() => {}}
-                    onNavigationPrev={() => {}}
+                    // onNavigationNext={() => {}}
+                    // onNavigationPrev={() => {}}
                   >
                     {product.images.map((image: any) => (
                       <SwiperSlide
                         onClick={changeProductImage}
                         className="cursor-pointer border hover:border-[#FFB534] transition duration-200"
                       >
-                        <Image
-                          src={image}
+                        <img
+                          id={image}
+                          src={getDefaultImageAvator(image)}
                           width={500}
                           height={500}
                           className=" mx-auto  h-full"

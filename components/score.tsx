@@ -7,6 +7,7 @@ import GoldenStarComponent from "./golden_star";
 import GrayStarComponent from "./gray_star";
 export default function ScoreComponent({ props }: any) {
   const score = props;
+
   const goldScore = createGoldenStars(score);
   const grayScore = createGrayStars(5 - Math.round(score));
   function createGoldenStars(n: number) {

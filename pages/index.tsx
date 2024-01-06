@@ -15,7 +15,7 @@ export default function Home(rslt: any) {
 // This gets called on every request
 export async function getStaticProps() {
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/wbproducts`);
+  const res = await fetch(`${baseURL}/api/wbproducts`);
   const repo = await res.json();
   const products = JSON.stringify(repo);
   return { props: { products } };

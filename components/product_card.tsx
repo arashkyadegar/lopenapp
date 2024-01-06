@@ -5,6 +5,7 @@ import React from "react";
 import Link from "next/link";
 import ScoreComponent from "./score";
 import { getNewPrice } from "@/utility/discount";
+import { getDefaultImageAvator } from "@/utility/imageUtility";
 export default function ProductCardComponent({ props }: any) {
   const product = props;
   console.log(product);
@@ -29,7 +30,7 @@ export default function ProductCardComponent({ props }: any) {
           <div>
             <a href="#" className=" w-full h-full">
               <Image
-                src={product.image}
+                src={getDefaultImageAvator(product.images[0])}
                 width={500}
                 height={500}
                 className=" hover:scale-110 w-fit aspect-auto transition duration-500 cursor-pointer"
