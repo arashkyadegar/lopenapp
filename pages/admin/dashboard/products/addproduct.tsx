@@ -1,17 +1,28 @@
 import Image from "next/image";
 import { ReactElement, useState } from "react";
 import AdminLayout from "../adminLayout";
-import { AddProductForm } from "@/models/entities";
+import { AddProductForm, ProductEntity } from "@/models/entities";
 import validator from "validator";
 import { useAppDispatch } from "@/redux/store/hooks";
 import { submitAddProductAction } from "@/redux/store/product";
+import { FileService } from "@/services/fileService";
 export default function Addproduct() {
+
   const dispatch = useAppDispatch();
   const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   async function submitAddProduct(event: any): Promise<void> {
     event.preventDefault();
-    if (addProductForm.formIsValid) {
-      const product = {
+    if (true) {
+      // const files = addProductForm.files;
+      // formdata.append("files", files);
+
+      //date
+      const uploader = new FileService();
+      const formdata = new FormData();
+      const file = addProductForm.files;
+      formdata.set("file", file);
+
+      const x = {
         _id: "",
         name: addProductForm.name,
         weight: addProductForm.weight,
@@ -26,12 +37,32 @@ export default function Addproduct() {
         isAvailable: addProductForm.isAvailable,
         tags: addProductForm.tags,
         image: addProductForm.image,
-        images: ["22", "33", "44"],
-        userId: addProductForm.userId,
-        date: "",
+        images: "",
+        userId: "",
       };
-      console.log(product);
-      dispatch(submitAddProductAction(product));
+
+      uploader
+        .upload(formdata)
+        .then((response: any) => {
+          const filename = JSON.parse(response).files;
+          x.images = filename;
+          dispatch(submitAddProductAction(x));
+        })
+        .catch((err) => {
+          console.log("eeee");
+          // toast.error(err.message, {
+          //   position: "top-right",
+          //   autoClose: 5000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "light",
+          // });
+        });
+
+      // console.log(formdata);
     }
   }
   function fillPrdctName(event: any): void {
@@ -137,7 +168,7 @@ export default function Addproduct() {
 
   function fillPrdctIsAvailable(event: any): void {
     let text: boolean = event.target.value;
-console.log(text);
+    console.log(text);
     setAddProductForm({
       ...addProductForm,
       isAvailableError: "",
@@ -200,6 +231,14 @@ console.log(text);
       });
     }
   }
+  function fillPrdctFile(event: any): void {
+    const fileInput = event.target.files[0];
+    // console.log(fileInput.value);
+    setAddProductForm({
+      ...addProductForm,
+      files: fileInput,
+    });
+  }
   return (
     <>
       <div className="container p-4">
@@ -214,7 +253,7 @@ console.log(text);
                 </div>
 
                 <div>
-                  <div className="w-1/2 mx-auto">
+                  <form className="w-1/2 mx-auto">
                     <div className="flex flex-col gap-2 m-2">
                       <input
                         id="files"
@@ -222,6 +261,7 @@ console.log(text);
                         type="file"
                         accept=".png,.jpg"
                         multiple
+                        onChange={fillPrdctFile}
                       />
                     </div>
                     <div className="flex flex-col gap-2 m-2">
@@ -430,7 +470,7 @@ console.log(text);
                         ثبت تغییرات
                       </button>
                     </div>
-                  </div>
+                  </form>
                   <div className=" flex flex-col">
                     <img src="" />
                     <img src="" />

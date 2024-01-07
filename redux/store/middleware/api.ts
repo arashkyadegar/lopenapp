@@ -10,12 +10,13 @@ const api =
     next(action);
     const baseURL = process.env.NEXT_PUBLIC_BASEURL;
     const { url, method, onSuccess, onError, body, headers } = action.payload;
-    console.log(action.headers);
+
     const requestOptions = {
       method: method,
       headers: headers,
       body: body,
     };
+    console.log(action.headers);
     try {
       const response = await fetch(baseURL + url, requestOptions);
       console.log(response.status);
