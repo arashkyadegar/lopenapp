@@ -8,7 +8,7 @@ import {
 const myAppContext = createContext({
   addProductForm: {
     _id: "",
-    name: "",
+    name: '',
     weight: "",
     size: "",
     healthId: "",

@@ -1,5 +1,5 @@
-export class FileService {
-     baseUrl: string = `${process.env.NEXT_PUBLIC_BASEURL}/api/uploads/`;
+export class ProductService {
+     baseUrl: string = `${process.env.NEXT_PUBLIC_BASEURL}/api/products/`;
      async upload(formdata: any): Promise<any> {
        const requestOptions = {
          method: "POST",

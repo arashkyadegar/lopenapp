@@ -1,27 +1,44 @@
 import Image from "next/image";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
 import { AddProductForm, ProductEntity } from "@/models/entities";
 import validator from "validator";
 import { useAppDispatch } from "@/redux/store/hooks";
 import { submitAddProductAction } from "@/redux/store/product";
 import { FileService } from "@/services/fileService";
+import { ProductService } from "@/services/productService";
 export default function Addproduct() {
-
+  const formdata = new FormData();
   const dispatch = useAppDispatch();
   const [addProductForm, setAddProductForm] = useState(new AddProductForm());
+  useEffect(() => {
+    formClear();
+  }, []);
+  function formClear() {
+    formdata.delete("files");
+    setAddProductForm({
+      ...addProductForm,
+      _id: "",
+      name: " ",
+      weight: " ",
+      size: " ",
+      healthId: " ",
+      type: "1",
+      components: "",
+      desc: "",
+      score: 0,
+      price: 0,
+      display: false,
+      isAvailable: false,
+      tags: [],
+      image: "",
+      images: [],
+      userId: "",
+    });
+  }
   async function submitAddProduct(event: any): Promise<void> {
-    event.preventDefault();
+    // event.preventDefault();
     if (true) {
-      // const files = addProductForm.files;
-      // formdata.append("files", files);
-
-      //date
-      const uploader = new FileService();
-      const formdata = new FormData();
-      const file = addProductForm.files;
-      formdata.set("file", file);
-
       const x = {
         _id: "",
         name: addProductForm.name,
@@ -37,32 +54,10 @@ export default function Addproduct() {
         isAvailable: addProductForm.isAvailable,
         tags: addProductForm.tags,
         image: addProductForm.image,
-        images: "",
+        images: addProductForm.files,
         userId: "",
       };
-
-      uploader
-        .upload(formdata)
-        .then((response: any) => {
-          const filename = JSON.parse(response).files;
-          x.images = filename;
-          dispatch(submitAddProductAction(x));
-        })
-        .catch((err) => {
-          console.log("eeee");
-          // toast.error(err.message, {
-          //   position: "top-right",
-          //   autoClose: 5000,
-          //   hideProgressBar: false,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "light",
-          // });
-        });
-
-      // console.log(formdata);
+      dispatch(submitAddProductAction(x));
     }
   }
   function fillPrdctName(event: any): void {
@@ -231,12 +226,17 @@ export default function Addproduct() {
       });
     }
   }
-  function fillPrdctFile(event: any): void {
-    const fileInput = event.target.files[0];
-    // console.log(fileInput.value);
+  async function fillPrdctFile(event: any): Promise<void> {
+    formdata.append("files", event.target.files[0]);
+    formdata.append("files", event.target.files[1]);
+    formdata.append("files", event.target.files[2]);
+    const uploader = new FileService();
+    const result = await uploader.upload(formdata);
+
     setAddProductForm({
       ...addProductForm,
-      files: fileInput,
+      tagsError: "",
+      files: JSON.parse(result).files,
     });
   }
   return (
@@ -251,19 +251,22 @@ export default function Addproduct() {
                     ثبت اطلاعات محصول
                   </a>
                 </div>
-
+                {addProductForm.files.map((image: any) => (
+                  <p>{image}</p>
+                ))}
                 <div>
-                  <form className="w-1/2 mx-auto">
-                    <div className="flex flex-col gap-2 m-2">
-                      <input
-                        id="files"
-                        name="files"
-                        type="file"
-                        accept=".png,.jpg"
-                        multiple
-                        onChange={fillPrdctFile}
-                      />
-                    </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <input
+                      id="files"
+                      name="files"
+                      type="file"
+                      accept=".png,.jpg"
+                      multiple
+                      onChange={fillPrdctFile}
+               
+                    />
+                  </div>
+                  <div className="w-1/2 mx-auto">
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="_id" className="w-20 text-sm font-bold">
                         کد محصول
@@ -274,7 +277,7 @@ export default function Addproduct() {
                         id="_id"
                         className="p-1 border
             border-gray-300 bg-[#F9FAFB]"
-                        placeholder="کد محصول"
+                   
                       />
                     </div>
 
@@ -288,8 +291,9 @@ export default function Addproduct() {
                         id="name"
                         className="p-1 border
             border-gray-300 bg-[#F9FAFB]"
-                        placeholder="نام"
+                       
                         onChange={fillPrdctName}
+                        value={addProductForm.name}
                       />
                       <p className="text-red-400 text-xs">
                         {addProductForm.nameError}
@@ -308,7 +312,8 @@ export default function Addproduct() {
                         name="weight"
                         id="weight"
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        placeholder="وزن محصول"
+               
+                        value={addProductForm.weight}
                         onChange={fillPrdctWeight}
                       />
                       <p className="text-red-400 text-xs">
@@ -325,7 +330,8 @@ export default function Addproduct() {
                         name="size"
                         id="size"
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        placeholder="سایز"
+              
+                        value={addProductForm.size}
                         onChange={fillPrdctSize}
                       />
                       <p className="text-red-400 text-xs">
@@ -345,7 +351,8 @@ export default function Addproduct() {
                         name="healthId"
                         id="healthId"
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        placeholder="شماره سلامت"
+                
+                        value={addProductForm.healthId}
                         onChange={fillPrdctHealthId}
                       />
                       <p className="text-red-400 text-xs">
@@ -362,8 +369,9 @@ export default function Addproduct() {
                         name="price"
                         id="price"
                         className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        placeholder="قیمت"
+                  
                         onChange={fillPrdctPrice}
+                        value={addProductForm.price}
                       />
                       <p className="text-red-400 text-xs">
                         {addProductForm.priceError}
@@ -382,7 +390,7 @@ export default function Addproduct() {
                         name="display"
                         id="display"
                         className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        aria-placeholder="نمایش"
+                        
                         onSelect={fillPrdctDisplay}
                       >
                         <option value="true">نمایش</option>
@@ -420,8 +428,9 @@ export default function Addproduct() {
                         id="components"
                         rows={4}
                         className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        placeholder="ترکیبات"
+                   
                         onChange={fillPrdctComponents}
+                        value={addProductForm.components}
                       ></textarea>
                       <p className="text-red-400 text-xs">
                         {addProductForm.componentsError}
@@ -437,11 +446,12 @@ export default function Addproduct() {
                         id="desc"
                         rows={4}
                         className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        placeholder="توضیحات"
+                 
                         onChange={fillPrdctDesc}
+                        value={addProductForm.desc}
                       ></textarea>
                       <p className="text-red-400 text-xs">
-                        {addProductForm.descError}
+                        {addProductForm.desc}
                       </p>
                     </div>
 
@@ -453,8 +463,10 @@ export default function Addproduct() {
                         name="tags"
                         id="tags"
                         className="grow p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        placeholder=" برچسب ها"
+           
                         onChange={fillPrdctTags}
+                        value={addProductForm.tags}
+
                       ></textarea>
                       <p className="text-red-400 text-xs">
                         {addProductForm.tagsError}
@@ -463,14 +475,22 @@ export default function Addproduct() {
 
                     <div className="flex justify-end p-2">
                       <button
-                        type="submit"
+                        type="button"
                         onClick={submitAddProduct}
                         className="text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         ثبت تغییرات
                       </button>
+
+                      <button
+                        type="button"
+                        onClick={formClear}
+                        className="text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                         clear
+                      </button>
                     </div>
-                  </form>
+                  </div>
                   <div className=" flex flex-col">
                     <img src="" />
                     <img src="" />

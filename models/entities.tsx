@@ -23,7 +23,7 @@ export class ProductEntity {
   isAvailable: boolean = true;
   tags: string[] = [];
   image: string = "";
-  files:any;
+  files:string[]=[];
   images: string[] = [];
   userId: string = "";
   date!: Date;
