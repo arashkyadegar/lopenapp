@@ -11,6 +11,8 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { NextPage } from "next";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 // export default function App({ Component, pageProps }: AppProps) {
 //   const stateList: Array<StateEntity> = [];
 //   const cityList: Array<CityEntity> = [];
@@ -112,6 +114,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           {getLayout(<Component {...pageProps} />)}
+          <ToastContainer />
         </PersistGate>
       </Provider>
     </myAppContext.Provider>

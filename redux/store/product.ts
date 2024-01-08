@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
+import { useState } from "react";
+import { AddProductForm } from "@/models/entities";
 //import { AuthToken } from "@/utility/readToken";
 
 //Action types
@@ -21,9 +23,12 @@ export const productSlice = createSlice({
     lastFetch: null,
   },
   reducers: {
-    productAdded: (state: any, action: PayloadAction<number>) => {
+    productAdded: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
+    },
+    productFaild: (state: any, action: PayloadAction<any>) => {
+
     },
   },
 });
@@ -33,7 +38,8 @@ export const productSlice = createSlice({
 export const submitAddProductAction = (product: any) =>
   apiCallBegan({
     url: "/api/products/",
-    onSuccess: "product/productAdded",
+    onSuccess: "productForm/productFormCleard",
+    onError:"products/productFaild",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -43,3 +49,5 @@ export const submitAddProductAction = (product: any) =>
 
 export const { productAdded } = productSlice.actions;
 export default productSlice.reducer;
+
+

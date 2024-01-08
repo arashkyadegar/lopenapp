@@ -19,7 +19,7 @@ const myAppContext = createContext({
     price: 0,
     display: false,
     isAvailable: false,
-    tags: Array<any>(),
+    tags: "",
     image: "",
     images: Array<any>(),
     files:Array<any>(),

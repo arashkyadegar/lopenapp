@@ -19,23 +19,29 @@ const api =
     console.log(action.headers);
     try {
       const response = await fetch(baseURL + url, requestOptions);
-      console.log(response.status);
+      const result = await response.text();
       switch (response.status) {
         case ResponseStatus.OK: {
-          const comments = await response.json();
-          // General
-          dispatch(actions.apiCallSucceeded(comments));
-          // specified
-          dispatch({ type: onSuccess, payload: comments });
+          const x = JSON.parse(result);
+          console.log(x);
+          ///const comments = await response.json();
+          // // General
+          // dispatch(actions.apiCallSucceeded(comments));
+          // // specified
+          dispatch({ type: onSuccess, payload: x });
           ToastSuccess();
+          return('OK')
           break;
         }
         case ResponseStatus.BAD_REQUEST: {
-          ToastFail();
+          dispatch({ type: onError });
+          ToastFail(result);
+          return('BAD')
           break;
         }
         case ResponseStatus.NOT_FOUND: {
           ToastFail("مورد درخواستی یافت نشد");
+          return('ME')
           break;
         }
       }

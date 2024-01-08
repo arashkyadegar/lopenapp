@@ -3,241 +3,435 @@ import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
 import { AddProductForm, ProductEntity } from "@/models/entities";
 import validator from "validator";
-import { useAppDispatch } from "@/redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { submitAddProductAction } from "@/redux/store/product";
 import { FileService } from "@/services/fileService";
 import { ProductService } from "@/services/productService";
+import { ToastFail, ToastInfo, ToastSuccess } from "@/utility/tostify";
+import { ToastContainer, toast } from "react-toastify";
+import {
+  productFormCleard,
+  productFormFilled,
+  setFormComponents,
+  setFormDesc,
+  setFormDisplay,
+  setFormFiles,
+  setFormHealthId,
+  setFormIsAvailable,
+  setFormName,
+  setFormPrice,
+  setFormSize,
+  setFormTags,
+  setFormWeight,
+} from "@/redux/store/productForm";
 export default function Addproduct() {
   const formdata = new FormData();
   const dispatch = useAppDispatch();
+  const productFormState = useAppSelector(
+    (state) => state.entities.productForm
+  );
   const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   useEffect(() => {
     formClear();
   }, []);
   function formClear() {
     formdata.delete("files");
-    setAddProductForm({
-      ...addProductForm,
-      _id: "",
-      name: " ",
-      weight: " ",
-      size: " ",
-      healthId: " ",
-      type: "1",
-      components: "",
-      desc: "",
-      score: 0,
-      price: 0,
-      display: false,
-      isAvailable: false,
-      tags: [],
-      image: "",
-      images: [],
-      userId: "",
-    });
+    dispatch(productFormCleard());
+    // setAddProductForm({
+    //   ...addProductForm,
+    //   _id: "",
+    //   name: " ",
+    //   weight: " ",
+    //   size: " ",
+    //   healthId: " ",
+    //   type: "1",
+    //   components: "",
+    //   desc: "",
+    //   score: 0,
+    //   price: 0,
+    //   display: false,
+    //   isAvailable: false,
+    //   tags: "",
+    //   image: "",
+    //   images: [],
+    //   userId: "",
+    //   files: [],
+    // });
   }
   async function submitAddProduct(event: any): Promise<void> {
     // event.preventDefault();
+
     if (true) {
       const x = {
         _id: "",
-        name: addProductForm.name,
-        weight: addProductForm.weight,
-        size: addProductForm.size,
-        healthId: addProductForm.healthId,
+        name: productFormState.data.name,
+        weight: productFormState.data.weight,
+        size: productFormState.data.size,
+        healthId: productFormState.data.healthId,
         type: "1",
-        components: addProductForm.components,
-        desc: addProductForm.desc,
+        components: productFormState.data.components,
+        desc: productFormState.data.desc,
         score: 0,
-        price: addProductForm.price,
-        display: addProductForm.display,
-        isAvailable: addProductForm.isAvailable,
-        tags: addProductForm.tags,
-        image: addProductForm.image,
-        images: addProductForm.files,
+        price: productFormState.data.price,
+        display: productFormState.data.display,
+        isAvailable: productFormState.data.isAvailable,
+        tags: productFormState.data.tags.trim().split(","),
+        image: productFormState.data.image,
+        images: productFormState.data.files,
         userId: "",
       };
-      dispatch(submitAddProductAction(x));
+      try {
+        dispatch(submitAddProductAction(x));
+      } catch (err) {
+        console.log("rrrr");
+      }
     }
   }
   function fillPrdctName(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
+      dispatch(
+        setFormName({
+          nameError: "لطفا نام محصول را وارد کنید",
+          formIsValid: false,
+          name: text,
+        })
+      );
+      // dispatch(
+      //   productFormFilled({
+      //     nameError: "لطفا نام محصول را وارد کنید",
+      //     formIsValid: false,
+      //     name: text,
+      //   })
+      // );
       setAddProductForm({
         ...addProductForm,
         nameError: "لطفا نام محصول را وارد کنید",
         formIsValid: false,
+        name: text,
       });
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        nameError: "",
-        name: text,
-        formIsValid: true,
-      });
+      dispatch(
+        setFormName({
+          nameError: "",
+          name: text,
+          formIsValid: true,
+        })
+      );
+
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   nameError: "",
+      //   name: text,
+      //   formIsValid: true,
+      // });
     }
   }
 
   function fillPrdctWeight(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setAddProductForm({
-        ...addProductForm,
-        weightError: "لطفا وزن محصول را وارد کنید",
-        formIsValid: false,
-      });
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   weightError: "لطفا وزن محصول را وارد کنید",
+      //   formIsValid: false,
+      //   weight: text,
+      // });
+      dispatch(
+        setFormWeight({
+          weightError: "لطفا نام محصول را وارد کنید",
+          formIsValid: false,
+          weight: text,
+        })
+      );
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        weightError: "",
-        weight: text,
-        formIsValid: true,
-      });
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   weightError: "",
+      //   weight: text,
+      //   formIsValid: true,
+      // });
+      dispatch(
+        setFormWeight({
+          weightError: "",
+          weight: text,
+          formIsValid: true,
+        })
+      );
     }
   }
 
   function fillPrdctSize(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setAddProductForm({
-        ...addProductForm,
-        sizeError: "لطفا سایز محصول را وارد کنید",
-        formIsValid: false,
-      });
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   sizeError: "لطفا سایز محصول را وارد کنید",
+      //   formIsValid: false,
+      //   size: text,
+      // });
+
+      dispatch(
+        setFormSize({
+          sizeError: "لطفا سایز محصول را وارد کنید",
+          formIsValid: false,
+          size: text,
+        })
+      );
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        sizeError: "",
-        size: text,
-        formIsValid: true,
-      });
+      dispatch(
+        setFormSize({
+          sizeError: "",
+          size: text,
+          formIsValid: true,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   sizeError: "",
+      //   size: text,
+      //   formIsValid: true,
+      // });
     }
   }
 
   function fillPrdctHealthId(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setAddProductForm({
-        ...addProductForm,
-        healthIdError: "لطفا شناسه بهداشت  را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        setFormHealthId({
+          healthIdError: "لطفا شناسه بهداشت  را وارد کنید",
+          formIsValid: false,
+          healthId: text,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   healthIdError: "لطفا شناسه بهداشت  را وارد کنید",
+      //   formIsValid: false,
+      //   healthId: text,
+      // });
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        healthIdError: "",
-        healthId: text,
-        formIsValid: true,
-      });
+      dispatch(
+        setFormHealthId({
+          healthIdError: "",
+          healthId: text,
+          formIsValid: true,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   healthIdError: "",
+      //   healthId: text,
+      //   formIsValid: true,
+      // });
     }
   }
 
   function fillPrdctPrice(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setAddProductForm({
-        ...addProductForm,
-        priceError: "لطفا   قیمت محصول را وارد کنید",
-        formIsValid: false,
-      });
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   priceError: "لطفا   قیمت محصول را وارد کنید",
+      //   formIsValid: false,
+      //   price: parseInt(text),
+      // });
+      dispatch(
+        setFormPrice({
+          priceError: "لطفا   قیمت محصول را وارد کنید",
+          formIsValid: false,
+          price: parseInt(text),
+        })
+      );
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        priceError: "",
-        price: parseInt(text),
-        formIsValid: true,
-      });
+      dispatch(
+        setFormPrice({
+          priceError: "",
+          price: parseInt(text),
+          formIsValid: true,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   priceError: "",
+      //   price: parseInt(text),
+      //   formIsValid: true,
+      // });
     }
   }
 
   function fillPrdctDisplay(event: any): void {
     let text: boolean = event.target.value;
-
-    setAddProductForm({
-      ...addProductForm,
-      displayError: "",
-      display: text,
-      formIsValid: true,
-    });
+    dispatch(
+      setFormDisplay({
+        displayError: "",
+        display: text,
+        formIsValid: true,
+      })
+    );
+    // setAddProductForm({
+    //   ...addProductForm,
+    //   displayError: "",
+    //   display: text,
+    //   formIsValid: true,
+    // });
   }
 
   function fillPrdctIsAvailable(event: any): void {
     let text: boolean = event.target.value;
     console.log(text);
-    setAddProductForm({
-      ...addProductForm,
-      isAvailableError: "",
-      isAvailable: text,
-      formIsValid: true,
-    });
+
+    dispatch(
+      setFormIsAvailable({
+        isAvailableError: "",
+        isAvailable: text,
+        formIsValid: true,
+      })
+    );
+    // setAddProductForm({
+    //   ...addProductForm,
+    //   isAvailableError: "",
+    //   isAvailable: text,
+    //   formIsValid: true,
+    // });
   }
 
   function fillPrdctComponents(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setAddProductForm({
-        ...addProductForm,
-        componentsError: "لطفا ترکیبات محصول را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        setFormComponents({
+          componentsError: "لطفا ترکیبات محصول را وارد کنید",
+          formIsValid: false,
+          components: text,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   componentsError: "لطفا ترکیبات محصول را وارد کنید",
+      //   formIsValid: false,
+      //   components: text,
+      // });
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        componentsError: "",
-        components: text,
-        formIsValid: true,
-      });
+      dispatch(
+        setFormComponents({
+          componentsError: "",
+          components: text,
+          formIsValid: true,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   componentsError: "",
+      //   components: text,
+      //   formIsValid: true,
+      // });
     }
   }
 
   function fillPrdctDesc(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setAddProductForm({
-        ...addProductForm,
-        descError: "لطفا توضیحات محصول را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        setFormDesc({
+          descError: "لطفا توضیحات محصول را وارد کنید",
+          formIsValid: false,
+          desc: text,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   descError: "لطفا توضیحات محصول را وارد کنید",
+      //   formIsValid: false,
+      //   desc: text,
+      // });
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        descError: "",
-        desc: text,
-        formIsValid: true,
-      });
+      dispatch(
+        setFormDesc({
+          descError: "",
+          desc: text,
+          formIsValid: true,
+        })
+      );
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   descError: "",
+      //   desc: text,
+      //   formIsValid: true,
+      // });
     }
   }
 
   function fillPrdctTags(event: any): void {
     let text: string = validator.escape(event.target.value);
-    let tags = text.trim().split(",");
     if (validator.isEmpty(text)) {
-      setAddProductForm({
-        ...addProductForm,
-        tagsError: "لطفا برچسبهای محصول را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        setFormTags({
+          tagsError: "لطفا برچسبهای محصول را وارد کنید",
+          formIsValid: false,
+          tags: text,
+        })
+      );
+
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   tagsError: "لطفا برچسبهای محصول را وارد کنید",
+      //   formIsValid: false,
+      //   tags: text,
+      // });
+    } else {
+      dispatch(
+        setFormTags({
+          tagsError: "",
+          tags: text,
+          formIsValid: true,
+        })
+      );
+
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   tagsError: "",
+      //   tags: text,
+      //   formIsValid: true,
+      // });
+    }
+    // text.trim().split(",")
+  }
+  async function fillPrdctFile(event: any): Promise<void> {
+    let count = event.target.files.length;
+    if (count === 3) {
+      formdata.append("files", event.target.files[0]);
+      formdata.append("files", event.target.files[1]);
+      formdata.append("files", event.target.files[2]);
+      const uploader = new FileService();
+      try {
+        const result = await uploader.upload(formdata);
+
+        dispatch(
+          setFormFiles({
+            imagesError: "",
+            files: JSON.parse(result).files,
+            formIsValid: true,
+          })
+        );
+        // setAddProductForm({
+        //   ...addProductForm,
+        //   imagesError: "",
+        //   files: JSON.parse(result).files,
+        //   formIsValid: true,
+        // });
+        ToastSuccess();
+      } catch (err) {
+        ToastFail();
+      }
     } else {
       setAddProductForm({
         ...addProductForm,
-        tagsError: "",
-        tags: tags,
-        formIsValid: true,
+        imagesError: "حداقل ۳ تصویر را باید انتخاب کنید",
+        formIsValid: false,
       });
     }
-  }
-  async function fillPrdctFile(event: any): Promise<void> {
-    formdata.append("files", event.target.files[0]);
-    formdata.append("files", event.target.files[1]);
-    formdata.append("files", event.target.files[2]);
-    const uploader = new FileService();
-    const result = await uploader.upload(formdata);
-
-    setAddProductForm({
-      ...addProductForm,
-      tagsError: "",
-      files: JSON.parse(result).files,
-    });
   }
   return (
     <>
@@ -251,22 +445,25 @@ export default function Addproduct() {
                     ثبت اطلاعات محصول
                   </a>
                 </div>
-                {addProductForm.files.map((image: any) => (
-                  <p>{image}</p>
-                ))}
+
                 <div>
-                  <div className="flex flex-col gap-2 m-2">
-                    <input
-                      id="files"
-                      name="files"
-                      type="file"
-                      accept=".png,.jpg"
-                      multiple
-                      onChange={fillPrdctFile}
-               
-                    />
-                  </div>
                   <div className="w-1/2 mx-auto">
+                    <div className="flex flex-col gap-2 m-2">
+                      <input
+                        id="files"
+                        name="files"
+                        type="file"
+                        accept=".png,.jpg"
+                        multiple
+                        onChange={fillPrdctFile}
+                      />
+                      {productFormState.data.files.map((image: any) => (
+                        <p>{image}</p>
+                      ))}
+                      <p className="text-red-400 text-xs">
+                        {productFormState.data.imagesError}
+                      </p>
+                    </div>
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="_id" className="w-20 text-sm font-bold">
                         کد محصول
@@ -277,7 +474,6 @@ export default function Addproduct() {
                         id="_id"
                         className="p-1 border
             border-gray-300 bg-[#F9FAFB]"
-                   
                       />
                     </div>
 
@@ -291,12 +487,11 @@ export default function Addproduct() {
                         id="name"
                         className="p-1 border
             border-gray-300 bg-[#F9FAFB]"
-                       
                         onChange={fillPrdctName}
-                        value={addProductForm.name}
+                        value={productFormState.data.name}
                       />
                       <p className="text-red-400 text-xs">
-                        {addProductForm.nameError}
+                        {productFormState.data.nameError}
                       </p>
                     </div>
 
@@ -312,12 +507,11 @@ export default function Addproduct() {
                         name="weight"
                         id="weight"
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
-               
-                        value={addProductForm.weight}
                         onChange={fillPrdctWeight}
+                        value={productFormState.data.weight}
                       />
                       <p className="text-red-400 text-xs">
-                        {addProductForm.weightError}
+                        {productFormState.data.weightError}
                       </p>
                     </div>
 
@@ -330,12 +524,12 @@ export default function Addproduct() {
                         name="size"
                         id="size"
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
-              
-                        value={addProductForm.size}
                         onChange={fillPrdctSize}
+                        value={productFormState.data.size}
+
                       />
                       <p className="text-red-400 text-xs">
-                        {addProductForm.sizeError}
+                        {productFormState.data.sizeError}
                       </p>
                     </div>
 
@@ -351,12 +545,12 @@ export default function Addproduct() {
                         name="healthId"
                         id="healthId"
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                
-                        value={addProductForm.healthId}
                         onChange={fillPrdctHealthId}
+                        value={productFormState.data.healthId}
+              
                       />
                       <p className="text-red-400 text-xs">
-                        {addProductForm.healthIdError}
+                        {productFormState.data.healthIdError}
                       </p>
                     </div>
 
@@ -369,12 +563,11 @@ export default function Addproduct() {
                         name="price"
                         id="price"
                         className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                  
                         onChange={fillPrdctPrice}
-                        value={addProductForm.price}
+                        value={productFormState.data.price}
                       />
                       <p className="text-red-400 text-xs">
-                        {addProductForm.priceError}
+                        {productFormState.data.priceError}
                       </p>
                     </div>
 
@@ -390,7 +583,6 @@ export default function Addproduct() {
                         name="display"
                         id="display"
                         className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        
                         onSelect={fillPrdctDisplay}
                       >
                         <option value="true">نمایش</option>
@@ -428,12 +620,11 @@ export default function Addproduct() {
                         id="components"
                         rows={4}
                         className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                   
                         onChange={fillPrdctComponents}
-                        value={addProductForm.components}
+                        value={productFormState.data.components}
                       ></textarea>
                       <p className="text-red-400 text-xs">
-                        {addProductForm.componentsError}
+                        {productFormState.data.componentsError}
                       </p>
                     </div>
 
@@ -446,12 +637,11 @@ export default function Addproduct() {
                         id="desc"
                         rows={4}
                         className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                 
                         onChange={fillPrdctDesc}
-                        value={addProductForm.desc}
+                        value={productFormState.data.desc}
                       ></textarea>
                       <p className="text-red-400 text-xs">
-                        {addProductForm.desc}
+                        {productFormState.data.descError}
                       </p>
                     </div>
 
@@ -463,13 +653,11 @@ export default function Addproduct() {
                         name="tags"
                         id="tags"
                         className="grow p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-           
                         onChange={fillPrdctTags}
-                        value={addProductForm.tags}
-
+                        value={productFormState.data.tags}
                       ></textarea>
                       <p className="text-red-400 text-xs">
-                        {addProductForm.tagsError}
+                        {productFormState.data.tagsError}
                       </p>
                     </div>
 
@@ -487,7 +675,7 @@ export default function Addproduct() {
                         onClick={formClear}
                         className="text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
-                         clear
+                        clear
                       </button>
                     </div>
                   </div>

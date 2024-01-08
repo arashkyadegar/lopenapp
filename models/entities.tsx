@@ -21,7 +21,7 @@ export class ProductEntity {
   price: number = 0;
   display: boolean = true;
   isAvailable: boolean = true;
-  tags: string[] = [];
+  tags:string="";
   image: string = "";
   files:string[]=[];
   images: string[] = [];
