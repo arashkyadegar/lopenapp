@@ -24,6 +24,7 @@ import {
   setFormTags,
   setFormWeight,
 } from "@/redux/store/productForm";
+import { getDefaultImageAvator } from "@/utility/imageUtility";
 export default function Addproduct() {
   const formdata = new FormData();
   const dispatch = useAppDispatch();
@@ -104,12 +105,6 @@ export default function Addproduct() {
       //     name: text,
       //   })
       // );
-      setAddProductForm({
-        ...addProductForm,
-        nameError: "لطفا نام محصول را وارد کنید",
-        formIsValid: false,
-        name: text,
-      });
     } else {
       dispatch(
         setFormName({
@@ -262,11 +257,12 @@ export default function Addproduct() {
   }
 
   function fillPrdctDisplay(event: any): void {
-    let text: boolean = event.target.value;
+    const text = event.target.value;
+    const isTrueSet = text === "true";
     dispatch(
       setFormDisplay({
         displayError: "",
-        display: text,
+        display: isTrueSet,
         formIsValid: true,
       })
     );
@@ -279,22 +275,21 @@ export default function Addproduct() {
   }
 
   function fillPrdctIsAvailable(event: any): void {
-    let text: boolean = event.target.value;
-    console.log(text);
-
+    const text = event.target.value;
+    const isTrueSet = text === "true";
     dispatch(
       setFormIsAvailable({
         isAvailableError: "",
-        isAvailable: text,
+        isAvailable: isTrueSet,
         formIsValid: true,
       })
     );
-    // setAddProductForm({
-    //   ...addProductForm,
-    //   isAvailableError: "",
-    //   isAvailable: text,
-    //   formIsValid: true,
-    // });
+    // // setAddProductForm({
+    // //   ...addProductForm,
+    // //   isAvailableError: "",
+    // //   isAvailable: text,
+    // //   formIsValid: true,
+    // // });
   }
 
   function fillPrdctComponents(event: any): void {
@@ -426,11 +421,11 @@ export default function Addproduct() {
         ToastFail();
       }
     } else {
-      setAddProductForm({
-        ...addProductForm,
-        imagesError: "حداقل ۳ تصویر را باید انتخاب کنید",
-        formIsValid: false,
-      });
+      // setAddProductForm({
+      //   ...addProductForm,
+      //   imagesError: "حداقل ۳ تصویر را باید انتخاب کنید",
+      //   formIsValid: false,
+      // });
     }
   }
   return (
@@ -457,9 +452,24 @@ export default function Addproduct() {
                         multiple
                         onChange={fillPrdctFile}
                       />
-                      {productFormState.data.files.map((image: any) => (
-                        <p>{image}</p>
-                      ))}
+                      {productFormState.data.files !== undefined && (
+                        <>
+                          {productFormState.data.files.map((image: any) => (
+                            <p>{image}</p>
+                          ))}
+                        </>
+                      )}
+                      {/* {productFormState.data.files !== undefined && (
+                        <>
+                          {productFormState.data.files.map((image: any) => (
+                            <img
+                              className="w-10 h-10"
+                              src={getDefaultImageAvator(image)}
+                            />
+                          ))}
+                        </>
+                      )} */}
+
                       <p className="text-red-400 text-xs">
                         {productFormState.data.imagesError}
                       </p>
@@ -526,7 +536,6 @@ export default function Addproduct() {
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
                         onChange={fillPrdctSize}
                         value={productFormState.data.size}
-
                       />
                       <p className="text-red-400 text-xs">
                         {productFormState.data.sizeError}
@@ -547,7 +556,6 @@ export default function Addproduct() {
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
                         onChange={fillPrdctHealthId}
                         value={productFormState.data.healthId}
-              
                       />
                       <p className="text-red-400 text-xs">
                         {productFormState.data.healthIdError}
@@ -583,7 +591,7 @@ export default function Addproduct() {
                         name="display"
                         id="display"
                         className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onSelect={fillPrdctDisplay}
+                        onChange={fillPrdctDisplay}
                       >
                         <option value="true">نمایش</option>
                         <option value="false">پنهان</option>
@@ -665,17 +673,9 @@ export default function Addproduct() {
                       <button
                         type="button"
                         onClick={submitAddProduct}
-                        className="text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
-                        ثبت تغییرات
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={formClear}
-                        className="text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      >
-                        clear
+                        ثبت محصول
                       </button>
                     </div>
                   </div>

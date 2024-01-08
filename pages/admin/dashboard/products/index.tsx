@@ -2,6 +2,8 @@ import Image from "next/image";
 import { ReactElement } from "react";
 import AdminLayout from "../adminLayout";
 import Link from "next/link";
+import { submitDeleteProductAction } from "@/redux/store/product";
+import { useAppDispatch } from "@/redux/store/hooks";
 
 // This gets called on every request
 export async function getStaticProps() {
@@ -14,7 +16,15 @@ export async function getStaticProps() {
 
 export default function Products(rslt: any) {
   const products = JSON.parse(rslt.products);
-  console.log(products);
+  const dispatch = useAppDispatch();
+
+  function submitDeleteProduct(id:any) {
+    if (confirm("Press a button!")) {
+      dispatch(submitDeleteProductAction(id));
+    } else {
+      console.log("canceled");
+    }
+  }
   return (
     <>
       <div className="container p-4">
@@ -120,7 +130,10 @@ export default function Products(rslt: any) {
                       </svg>
                     </Link>
 
-                    <a className="hover:text-red-500">
+                    <a
+                      onClick={() => submitDeleteProduct(product._id)}
+                      className="hover:text-red-500"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

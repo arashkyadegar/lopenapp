@@ -27,19 +27,40 @@ export const productSlice = createSlice({
       state.data = action.payload;
       state.lastFetch = Date.now();
     },
-    productFaild: (state: any, action: PayloadAction<any>) => {
-
-    },
+    productFaild: (state: any, action: PayloadAction<any>) => {},
   },
 });
 
 // action creator
+export const submitDeleteProductAction = (id: any) =>
+  apiCallBegan({
+    url: "/api/products/" + id,
+    onSuccess: "products/productFaild",
+    onError: "products/productFaild",
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
+
+export const submitEditProductAction = (product: any) =>
+  apiCallBegan({
+    url: "/api/products/" + product._id,
+    onSuccess: "products/productFaild",
+    onError: "products/productFaild",
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
 
 export const submitAddProductAction = (product: any) =>
   apiCallBegan({
     url: "/api/products/",
     onSuccess: "productForm/productFormCleard",
-    onError:"products/productFaild",
+    onError: "products/productFaild",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,5 +70,3 @@ export const submitAddProductAction = (product: any) =>
 
 export const { productAdded } = productSlice.actions;
 export default productSlice.reducer;
-
-
