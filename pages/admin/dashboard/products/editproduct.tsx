@@ -11,6 +11,7 @@ import {
   setFormDisplay,
   setFormFiles,
   setFormHealthId,
+  setFormImages,
   setFormIsAvailable,
   setFormName,
   setFormPrice,
@@ -79,7 +80,7 @@ export default function Editproduct(rslt: any) {
         isAvailable: productFormState.data.isAvailable,
         tags: productFormState.data.tags.trim().split(","),
         image: productFormState.data.image,
-        images: productFormState.data.files,
+        images: productFormState.data.images,
         files: [],
         userId: "",
       };
@@ -404,11 +405,10 @@ export default function Editproduct(rslt: any) {
       const uploader = new FileService();
       try {
         const result = await uploader.upload(formdata);
-
         dispatch(
-          setFormFiles({
+          setFormImages({
             imagesError: "",
-            files: JSON.parse(result).files,
+            images: JSON.parse(result).files,
             formIsValid: true,
           })
         );
@@ -455,15 +455,15 @@ export default function Editproduct(rslt: any) {
                         onChange={fillPrdctFile}
                       />
 
-                      {productFormState.data.files !== undefined && (
-                        <>
-                          {productFormState.data.files.map((image: any) => (
+                      {productFormState.data.images !== undefined && (
+                        <div className="flex flex-row gap-2 m-2">
+                          {productFormState.data.images.map((image: any) => (
                             <img
                               className="w-10 h-10"
                               src={getDefaultImageAvator(image)}
                             />
                           ))}
-                        </>
+                        </div>
                       )}
                       {/* <>
                         <div>
