@@ -4,24 +4,26 @@ import AdminLayout from "../adminLayout";
 import Link from "next/link";
 import { submitDeleteProductAction } from "@/redux/store/product";
 import { useAppDispatch } from "@/redux/store/hooks";
+import { submitDeleteDiscountAction } from "@/redux/store/discount";
 
 // This gets called on every request
 export async function getStaticProps() {
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/products`);
+  const res = await fetch(`${baseURL}/api/discounts`);
   const repo = await res.json();
-  const products = JSON.stringify(repo);
-  return { props: { products } };
+  const discounts = JSON.stringify(repo);
+  return { props: { discounts } };
 }
 
-export default function Products(rslt: any) {
-  const products = JSON.parse(rslt.products);
+export default function Discounts(rslt: any) {
+  const discounts = JSON.parse(rslt.discounts);
+  console.log(discounts);
   const dispatch = useAppDispatch();
 
-  function submitDeleteProduct(id:any) {
-    if (confirm("قصد حذف محصول را دارید ؟ ")) {
-      dispatch(submitDeleteProductAction(id));
-    } 
+  function submitDeleteDiscount(id:any) {
+    if (confirm("قصد حذف تخفیف را دارید ؟ ")) {
+       dispatch(submitDeleteDiscountAction(id));
+    }
   }
   return (
     <>
@@ -30,7 +32,7 @@ export default function Products(rslt: any) {
           <div className="flex flex-col justify-between w-4/4  gap-4   mb-4 bg-white shadow-md shadow-gray-500 ">
             <div className="px-2">
               <a className=" flex text-2xl border-b p-1 border-gray-400">
-                products
+                لیست تخفیفات
               </a>
             </div>
             <div>
@@ -38,10 +40,10 @@ export default function Products(rslt: any) {
                 <li>
                   <Link
                     href={{
-                      pathname: `/admin/dashboard/products/addproduct`,
+                      pathname: `/admin/dashboard/discounts/adddiscount`,
                     }}
                   >
-                    ثبت محصول
+                    ثبت تخفیف
                   </Link>
                 </li>
                 <li>
@@ -56,31 +58,37 @@ export default function Products(rslt: any) {
                 </li>
               </ul>
             </div>
-            <div className="grid  grid-cols-6 items-center divide divide-gray-200">
-              <div className="flex  items-center justify-center col-span-2  border border-gray-200 text-center">
+            <div className="grid  grid-cols-5 items-center divide divide-gray-200">
+              <div className="flex  items-center justify-center col-span-1  border border-gray-200 text-center">
                 <a>کد</a>
               </div>
-              <div className="flex  items-center justify-center col-span-2 border text-center">
-                <a>نام محصول</a>
+              <div className="flex  items-center justify-center col-span-1 border text-center">
+                <a> عنوان تخفیف</a>
               </div>
               <div className="flex  items-center justify-center border  text-center">
-                <a>قیمت </a>
+                <a>نام محصول </a>
+              </div>
+              <div className="flex  items-center justify-center border  text-center">
+                <a>میزان </a>
               </div>
 
               <div className="flex  items-center justify-center border  text-center">
-                <a>عملیات </a>
+                <a>عملیات</a>
               </div>
 
-              {products.map((product: any) => (
+              {discounts.map((discount: any) => (
                 <>
-                  <div className="border flex col-span-2 p-2 justify-center items-center">
-                    <a className="text-xs">{product._id}</a>
+                  <div className="border flex col-span-1 p-2 justify-center items-center">
+                    <a className="text-xs">{discount._id}</a>
                   </div>
-                  <div className="border flex col-span-2 p-1 justify-center items-center">
-                    <a>{product.name}</a>
+                  <div className="border flex col-span-1 p-1 justify-center items-center">
+                    <a>{discount.title}</a>
+                  </div>
+                  <div className="border flex col-span-1 p-1 justify-center items-center">
+                    <a>{discount.product.name}</a>
                   </div>
                   <div className="border flex col-span-1 p-1  justify-center items-center">
-                    <a>{product.price}</a>
+                    <a>{discount.value}</a>
                   </div>
 
                   <div className="border flex col-span-1 p-1 justify-center items-center">
@@ -108,8 +116,8 @@ export default function Products(rslt: any) {
                     {/* edit button */}
                     <Link
                       href={{
-                        pathname: `/admin/dashboard/products/editproduct`,
-                        query: { id: product._id },
+                        pathname: `/admin/dashboard/discounts/editdiscount`,
+                        query: { id: discount._id },
                       }}
                     >
                       <svg
@@ -129,7 +137,7 @@ export default function Products(rslt: any) {
                     </Link>
 
                     <a
-                      onClick={() => submitDeleteProduct(product._id)}
+                      onClick={() => submitDeleteDiscount(discount._id)}
                       className="hover:text-red-500"
                     >
                       <svg
@@ -159,6 +167,6 @@ export default function Products(rslt: any) {
   );
 }
 
-Products.getLayout = function getLayout(page: ReactElement) {
+Discounts.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };

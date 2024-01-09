@@ -21,14 +21,23 @@ export class ProductEntity {
   price: number = 0;
   display: boolean = true;
   isAvailable: boolean = true;
-  tags:string="";
+  tags: string = "";
   image: string = "";
-  files:string[]=[];
+  files: string[] = [];
   images: string[] = [];
   userId: string = "";
   date!: Date;
 }
-
+export class DiscountEntity {
+  _id: string = "";
+  sDate: string = "";
+  eDate: string = "";
+  title: string = "";
+  type: number = 0;
+  value: number = 0;
+  productId: string = "";
+  date!: Date;
+}
 export class AddProductForm extends ProductEntity {
   nameError: string = "";
   weightError: string = "";
@@ -45,6 +54,15 @@ export class AddProductForm extends ProductEntity {
   imageError: string = "";
   imagesError: string = "";
   userIdError: string = "";
+  formIsValid: boolean = false;
+}
+
+export class AddDiscountForm extends DiscountEntity {
+  sDateError: string = "";
+  eDateError: string = "";
+  titleError: string = "";
+  valueError: string = "";
+  productIdError: string = "";
   formIsValid: boolean = false;
 }
 export class FactorEntity {
@@ -88,5 +106,7 @@ module.exports = {
   FactorForm,
   ProductEntity,
   FactorDetailEntity,
-  AddProductForm
+  AddProductForm,
+  DiscountEntity,
+  AddDiscountForm,
 };

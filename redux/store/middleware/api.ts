@@ -30,18 +30,23 @@ const api =
           // // specified
           dispatch({ type: onSuccess, payload: x });
           ToastSuccess();
-          return('OK')
+
           break;
         }
         case ResponseStatus.BAD_REQUEST: {
           dispatch({ type: onError });
           ToastFail(result);
-          return('BAD')
+
           break;
         }
         case ResponseStatus.NOT_FOUND: {
           ToastFail("مورد درخواستی یافت نشد");
-          return('ME')
+
+          break;
+        }
+        case ResponseStatus.TRYING_TO_ADD_A_DUPLICATE: {
+          ToastFail("خطای ثبت دوباره");
+
           break;
         }
       }
