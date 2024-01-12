@@ -4,15 +4,21 @@ import type { AppProps } from "next/app";
 import myAppContext from "@/components/context/context";
 import { ReactElement, ReactNode, useContext, useState } from "react";
 
-import { AddProductForm, CityEntity, FactorForm, StateEntity } from "@/models/entities";
+import {
+  AddProductForm,
+  CityEntity,
+  FactorForm,
+  FaqEntity,
+  StateEntity,
+} from "@/models/entities";
 import { initialState } from "@/redux/store/product";
 import { wrapperForPersistStore, wrapperForStore } from "@/redux/store/store";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { NextPage } from "next";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 // export default function App({ Component, pageProps }: AppProps) {
 //   const stateList: Array<StateEntity> = [];
 //   const cityList: Array<CityEntity> = [];
@@ -73,18 +79,16 @@ type AppPropsWithLayout = AppProps & {
 // }
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available
-
-  const stateList: Array<StateEntity> = [];
-  const cityList: Array<CityEntity> = [];
-
-  const [states, setStates] = useState(stateList);
-  const [cities, setCities] = useState(cityList);
+  const [states, setStates] = useState(Array<StateEntity>());
+  const [cities, setCities] = useState(Array<CityEntity>());
 
   const [citiesUlToggle, setCitiesUlToggle] = useState(false);
   const [statesUlToggle, setStatesUlToggle] = useState(false);
+  const [faqs, setFaqs] = useState(Array<FaqEntity>());
 
   const [smallBasketToggle, setSmallBasketToggle] = useState(false);
   const [navbarToggle, setNavbarToggle] = useState(false);
+  const [faqItemToggle, setFaqItemToggle] = useState(false);
   const [factorForm, setFactorForm] = useState(new FactorForm());
   const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   const { store } = wrapperForPersistStore.useWrappedStore(initialState);
@@ -93,6 +97,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <myAppContext.Provider
       value={{
+        faqItemToggle,
+        setFaqItemToggle,
         addProductForm,
         setAddProductForm,
         navbarToggle,

@@ -24,14 +24,14 @@ import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { selectedProductUpdated } from "@/redux/store/selectedProduct";
 import { produce } from "immer";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
+import { productFormFilled, setFormCount, setFormImage } from "@/redux/store/productForm";
 
 export default function ProductComponent({ props }: any) {
   const dispatch = useAppDispatch();
-  const selectedProductState = useAppSelector(
-    (state) => state.entities.selectedProduct
-  );
+  const productForm = useAppSelector((state) => state.entities.productForm);
   const factorState = useAppSelector((state) => state.entities.factor);
   const product = JSON.parse(props.product)[0];
+
   let discount = 0;
   let newPrice = 0;
 
@@ -46,11 +46,12 @@ export default function ProductComponent({ props }: any) {
       _id: "",
       factorId: "",
       productId: product._id,
+      productName:product.name,
       unitPrice: product.price,
       discount: discount,
-      count: selectedProductState.data.count,
-      prices: product.price * parseInt(selectedProductState.data.count),
-      date: "",
+      count: productForm.data.count,
+      prices: product.price * parseInt(productForm.data.count),
+      date: Date.now(),
     };
 
     //calculate discoutn if there is one
@@ -66,7 +67,7 @@ export default function ProductComponent({ props }: any) {
       const nextState = produce(factorState, (draftState) => {
         const item = draftState.list.map((i: any) => {
           if (i.productId == product._id) {
-            let old_count = selectedProductState.data.count;
+            let old_count = productForm.data.count;
             let count = i.count;
             i.count = parseInt(count) + parseInt(old_count);
           }
@@ -81,9 +82,10 @@ export default function ProductComponent({ props }: any) {
   function changeProductImage(event: any) {
     const imgSrc = event.target.id;
     dispatch(
-      selectedProductUpdated({
-        ...selectedProductState,
+      setFormImage({
+        imageError: "",
         image: imgSrc,
+        formIsValid: true,
       })
     );
   }
@@ -91,15 +93,14 @@ export default function ProductComponent({ props }: any) {
   function changeProductCount(event: any) {
     const value = event.target.value;
     dispatch(
-      selectedProductUpdated({
-        ...selectedProductState.data,
+      setFormCount({
         count: value,
       })
     );
   }
   useEffect(() => {
     dispatch(
-      selectedProductUpdated({
+      productFormFilled({
         _id: product._id,
         name: product.name,
         weight: product.weight,
@@ -145,9 +146,7 @@ export default function ProductComponent({ props }: any) {
                   <div className="flex mb-2 h-72  overflow-hidden mt-6 justify-center">
                     <div>
                       <Image
-                        src={getDefaultImageAvator(
-                          selectedProductState.data.image
-                        )}
+                        src={getDefaultImageAvator(productForm.data.image)}
                         width={800}
                         height={800}
                         className=" hover:scale-110 w-fit h-full aspect-auto transition duration-500 cursor-pointer"
@@ -239,15 +238,14 @@ export default function ProductComponent({ props }: any) {
                       <div className=" flex flex-row gap-2 items-center">
                         <div>
                           <input
-                            onChange={changeProductCount}
                             type="number"
                             min="1"
-                            defaultValue={1}
                             name="floating_email"
                             id="floating_email"
                             className="p-1 w-10 h-9 outline-none border border-gray-400"
                             placeholder=" "
-                            required
+                            onChange={changeProductCount}
+                            defaultValue={1}
                           />
                         </div>
                         <div
@@ -306,8 +304,13 @@ export default function ProductComponent({ props }: any) {
                       <div className="col-span-2 p-1">
                         <a>ترکیبات :</a>
                       </div>
-                      <div className="col-span-3  border-b border-gray-200">
+                      <div className="col-span-3  border-b border-gray-200 py-1">
                         <a>{product.components}</a>
+                      </div>
+                      <div className="col-span-5 flex flex-row gap-4 p-1">
+                      {product.tags.map((item: any) => (
+                          <a className="border-gray-200 border p-2 rounded-xl">#{item}</a>
+                      ))}
                       </div>
                     </div>
                   </div>

@@ -5,7 +5,7 @@ import CheckoutFormComponent from "@/components/checkout_form";
 import CheckoutGridComponent from "@/components/checkout_grid";
 import MainLayout from "@/components/common/mainLayout";
 export default function Checkout() {
-  // form-validation-end
+
   return (
     <>
       <div className="container p-4">
@@ -23,7 +23,7 @@ export default function Checkout() {
                     خرید شما
                   </a>
                 </div>
-                <CheckoutGridComponent />
+                <CheckoutGridComponent  />
                 <CheckoutFormComponent />
               </div>
             </div>

@@ -8,6 +8,7 @@ import discountFormReducer from "./discountForm";
 import userReducer from "./user";
 import selectedProductReducer from "./selectedProduct";
 import factorReducer from "./factor";
+import faqsReducer from "./faqs";
 
 export default combineReducers({
   product: productReducer,
@@ -15,5 +16,5 @@ export default combineReducers({
   productForm: productFormReducer,
   discountForm: discountFormReducer,
   factor: factorReducer,
-  selectedProduct: selectedProductReducer,
+  faqs: faqsReducer
 });

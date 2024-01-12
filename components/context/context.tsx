@@ -3,6 +3,7 @@ import {
   AddProductForm,
   CityEntity,
   FactorForm,
+  FaqEntity,
   StateEntity,
 } from "../../models/entities";
 const myAppContext = createContext({
@@ -43,6 +44,8 @@ const myAppContext = createContext({
     formIsValid: false,
   },
   setAddProductForm: (addProductForm: AddProductForm) => {},
+  faqItemToggle:false,
+  setFaqItemToggle:(faqItemToggle:boolean) =>{},
   navbarToggle: false,
   setNavbarToggle: (navbarToggle: boolean) => {},
   smallBasketToggle: false,

@@ -50,6 +50,7 @@ export const productFormSlice = createSlice({
       imageError: "",
       imagesError: "",
       userIdError: "",
+      count:"1",
       formIsValid: false,
     },
     isLoading: false,
@@ -98,6 +99,10 @@ export const productFormSlice = createSlice({
     productFormFilled: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
+    },
+    setFormCount: (state: any, action: PayloadAction<any>) => {
+      state.data.count = action.payload.count;
+
     },
     setFormName: (state: any, action: PayloadAction<any>) => {
       state.data.name = action.payload.name;
@@ -149,6 +154,11 @@ export const productFormSlice = createSlice({
       state.data.tagsError = action.payload.tagsError;
       state.data.formIsValid = action.payload.formIsValid;
     },
+    setFormImage: (state: any, action: PayloadAction<any>) => {
+      state.data.image = action.payload.image;
+      state.data.imageError = action.payload.imageError;
+      state.data.formIsValid = action.payload.formIsValid;
+    },
     setFormImages: (state: any, action: PayloadAction<any>) => {
       state.data.images = action.payload.images;
       state.data.imagesError = action.payload.imagesError;
@@ -169,6 +179,7 @@ export const {
   setFormName,
   setFormTags,
   setFormImages,
+  setFormImage,
   setFormFiles,
   setFormWeight,
   setFormSize,
@@ -177,6 +188,7 @@ export const {
   setFormDesc,
   setFormPrice,
   setFormDisplay,
+  setFormCount,
   setFormIsAvailable,
 } = productFormSlice.actions;
 export default productFormSlice.reducer;

@@ -100,6 +100,16 @@ export class FactorDetailEntity {
   date!: Date;
 }
 
+export class FaqEntity {
+  _id: string = "";
+  groupId: number = 0;
+  question: string = "";
+  answer: string = "";
+  display: boolean = true;
+  priority: number = 0;
+  date!: Date;
+}
+
 module.exports = {
   StateEntity,
   CityEntity,
@@ -109,4 +119,5 @@ module.exports = {
   AddProductForm,
   DiscountEntity,
   AddDiscountForm,
+  FaqEntity
 };

@@ -28,11 +28,11 @@ export const factorSlice = createSlice({
       state.lastFetch = Date.now();
     },
     factorAdded: (state: any, action: PayloadAction<any>) => {
-      //  state.list =[];
+     // state.list =[];
       state.list.push(action.payload);
     },
     factorReAdded: (state: any, action: PayloadAction<any>) => {
-      //  state.list =[];
+      // state.list =[];
       state.list = action.payload;
     },
   },

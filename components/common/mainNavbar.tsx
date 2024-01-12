@@ -165,7 +165,17 @@ export default function MainNavBar({ children }: PropsWithChildren) {
                       pathname: `/checkout`,
                     }}
                   >
-                    فاکتور{" "}
+                    فاکتور
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href={{
+                      pathname: `/faqs`,
+                    }}
+                  >
+                    سوالات متداول
                   </Link>
                 </li>
                 <li>
