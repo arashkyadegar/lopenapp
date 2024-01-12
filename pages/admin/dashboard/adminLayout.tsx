@@ -28,6 +28,15 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               لیست تخفیف ها
             </Link>
           </li>
+          <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
+            <Link
+              href={{
+                pathname: `/admin/dashboard/faqs`,
+              }}
+            >
+               سوالات متداول
+            </Link>
+          </li>
           <li>
             <Link
               href={{
