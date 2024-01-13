@@ -1,10 +1,173 @@
 import MainLayout from "@/components/common/mainLayout";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
+import { faqFormCleard, setFormAnswer, setFormQuestion } from "@/redux/store/faqForm";
+import validator from "validator";
 
 export default function AddFaq() {
-  return <>this is faqs AddFaq</>;
+  const dispatch = useAppDispatch();
+  const faqFormState = useAppSelector((state) => state.entities.faqForm);
+  function submitAddFaq(event: any): void {
+    throw new Error("Function not implemented.");
+  }
+  useEffect(() => {
+    formClear();
+  }, []);
+  function formClear() {
+    dispatch(faqFormCleard());
+  }
+
+  function fillFaqQuestion(event: any): void {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      dispatch(
+        setFormQuestion({
+          questionError: "لطفا  متن سوال را وارد کنید",
+          formIsValid: false,
+          question: text,
+        })
+      );
+    } else {
+      dispatch(
+        setFormQuestion({
+          questionError: "",
+          question: text,
+          formIsValid: true,
+        })
+      );
+    }
+  }
+
+  function fillFaqAnswer(event: any): void {
+    let text: string = validator.escape(event.target.value);
+    if (validator.isEmpty(text)) {
+      dispatch(
+        setFormAnswer({
+          answerError: "لطفا  متن پاسخ را وارد کنید",
+          formIsValid: false,
+          answer: text,
+        })
+      );
+    } else {
+      dispatch(
+        setFormAnswer({
+          answerError: "",
+          answer: text,
+          formIsValid: true,
+        })
+      );
+    }
+  }
+  function fillFaqpPriority(event: any):void {
+    let text: string = validator.escape(event.target.value);
+    dispatch(
+      setFormAnswer({
+        priorityError: "",
+        formIsValid: false,
+        priority: text,
+      })
+    );
+  }
+  return (
+    <>
+      <div className="container p-4">
+        <div className="flex flex-col  w-full mx-auto aspect-video gap-4">
+          <div className="flex flex-col justify-between w-4/4  gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
+            <div className="px-2">
+              <main className="p-4">
+                <div className="px-2 ">
+                  <a className=" flex text-2xl border-b p-4 border-gray-400">
+                    ثبت اطلاعات سوالات متداول
+                  </a>
+                </div>
+
+                <div>
+                  <div className="w-1/2 mx-auto">
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="question"
+                        className="w-20 text-sm font-bold"
+                      >
+                        متن سوال
+                      </label>
+                      <input
+                        type="text"
+                        name="question"
+                        id="question"
+                        className="p-1 border
+            border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillFaqQuestion}
+                        value={faqFormState.data.question}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {faqFormState.data.questionError}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-2 mx-2 sm:mt-2">
+                      <label
+                        htmlFor="answer"
+                        className="w-20 text-sm font-bold"
+                      >
+                        متن پاسخ
+                      </label>
+                      <textarea
+                        name="answer"
+                        id="answer"
+                        rows={4}
+                        className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillFaqAnswer}
+                        value={faqFormState.data.answer}
+                      ></textarea>
+                      <p className="text-red-400 text-xs">
+                        {faqFormState.data.answerError}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="priority"
+                        className="w-20 text-sm font-bold"
+                      >
+                        اولویت نمایش
+                      </label>
+                      <input
+                        type="number"
+                        defaultValue={1}
+                        name="priority"
+                        id="priority"
+                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillFaqpPriority}
+                        value={faqFormState.data.priority}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {faqFormState.data.priorityError}
+                      </p>
+                    </div>
+
+                    <div className="flex justify-end p-2">
+                      <button
+                        type="button"
+                        onClick={submitAddFaq}
+                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        ثبت محصول
+                      </button>
+                    </div>
+                  </div>
+                  <div className=" flex flex-col">
+                    <img src="" />
+                    <img src="" />
+                  </div>
+                </div>
+              </main>
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </>
+  );
 }
-AddFaq.getLayout = function EditFaq(page: ReactElement) {
+AddFaq.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };

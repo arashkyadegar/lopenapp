@@ -36,10 +36,21 @@ export const faqsSlice = createSlice({
     faqsFaild: (state: any, action: PayloadAction<any>) => {},
   },
 });
-export const fetchFaqs = (id: any) =>
+// export const fetchFaqs = (id: any) =>
+//   apiCallBegan({
+//     url: "/api/wbfaqs/",
+//     onSuccess: "faqs/faqsRecieved",
+//     onError: "faqs/faqsFaild",
+//     method: "DELETE",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     //body: JSON.stringify(product),
+//   });
+  export const submitDeleteFaqAction = (id: any) =>
   apiCallBegan({
-    url: "/api/wbfaqs/",
-    onSuccess: "faqs/faqsRecieved",
+    url: "/api/faqs/" + id,
+    onSuccess: "faqs/faqsFaild",
     onError: "faqs/faqsFaild",
     method: "DELETE",
     headers: {
@@ -48,5 +59,28 @@ export const fetchFaqs = (id: any) =>
     //body: JSON.stringify(product),
   });
 
+export const submitEditFaqAction = (product: any) =>
+  apiCallBegan({
+    url: "/api/faqs/" + product._id,
+    onSuccess: "faqs/faqsFaild",
+    onError: "faqs/faqsFaild",
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
+
+export const submitAddFaqAction = (product: any) =>
+  apiCallBegan({
+    url: "/api/faqs/",
+    onSuccess: "faqForm/faqFormFilled",
+    onError: "faqs/faqsFaild",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
 export const { faqsRecieved, faqsToggled } = faqsSlice.actions;
 export default faqsSlice.reducer;
