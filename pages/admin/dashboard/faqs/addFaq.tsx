@@ -2,14 +2,39 @@ import MainLayout from "@/components/common/mainLayout";
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { faqFormCleard, setFormAnswer, setFormQuestion } from "@/redux/store/faqForm";
+import {
+  faqFormCleard,
+  setFormAnswer,
+  setFormPriority,
+  setFormQuestion,
+} from "@/redux/store/faqForm";
 import validator from "validator";
+import { submitAddFaqAction } from "@/redux/store/faqs";
+import { ToastFail } from "@/utility/tostify";
 
 export default function AddFaq() {
   const dispatch = useAppDispatch();
   const faqFormState = useAppSelector((state) => state.entities.faqForm);
   function submitAddFaq(event: any): void {
-    throw new Error("Function not implemented.");
+    if (faqFormState.data.formIsValid) {
+      const x = {
+        _id: "",
+        groupId: 0,
+        question: faqFormState.data.question,
+        answer: faqFormState.data.answer,
+        display: true,
+        priority: faqFormState.data.priority,
+        date: "",
+      };
+      //console.log(x);
+      try {
+        dispatch(submitAddFaqAction(x));
+      } catch (err) {
+        console.log("rrrr");
+      }
+    }else{
+      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید")
+    }
   }
   useEffect(() => {
     formClear();
@@ -59,13 +84,13 @@ export default function AddFaq() {
       );
     }
   }
-  function fillFaqpPriority(event: any):void {
-    let text: string = validator.escape(event.target.value);
+  function fillFaqpPriority(event: any): void {
+    let value = validator.escape(event.target.value);
     dispatch(
-      setFormAnswer({
+      setFormPriority({
         priorityError: "",
-        formIsValid: false,
-        priority: text,
+        formIsValid: true,
+        priority: value,
       })
     );
   }
@@ -132,16 +157,13 @@ export default function AddFaq() {
                       </label>
                       <input
                         type="number"
-                        defaultValue={1}
+                        min="1"
                         name="priority"
                         id="priority"
                         className="p-1 border border-gray-300 bg-[#F9FAFB]"
                         onChange={fillFaqpPriority}
-                        value={faqFormState.data.priority}
+                        defaultValue={0}
                       />
-                      <p className="text-red-400 text-xs">
-                        {faqFormState.data.priorityError}
-                      </p>
                     </div>
 
                     <div className="flex justify-end p-2">

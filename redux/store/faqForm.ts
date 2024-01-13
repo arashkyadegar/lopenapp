@@ -27,6 +27,7 @@ export const faqFormSlice = createSlice({
       questionError: "",
       answerError: "",
       priorityError: "",
+      formIsValid: false,
     },
     isLoading: false,
     lastFetch: null,
@@ -48,7 +49,6 @@ export const faqFormSlice = createSlice({
       state.data = action.payload;
       state.lastFetch = Date.now();
     },
-
     setFormQuestion: (state: any, action: PayloadAction<any>) => {
       state.data.question = action.payload.question;
       state.data.questionError = action.payload.questionError;

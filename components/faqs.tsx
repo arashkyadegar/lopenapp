@@ -29,7 +29,9 @@ export default function FaqsComponent({ props }: any) {
     });
     dispatch(faqsRecieved(nextShapes));
   }
-
+  useEffect(() => {
+    dispatch(faqsRecieved(faqs));
+  }, []);
   return (
     <>
       <div className="container p-4 ">
@@ -51,10 +53,7 @@ export default function FaqsComponent({ props }: any) {
                 </p>
               </div>
               {faqsState.list.map((item: any) => (
-                <ul
-                  className=" border my-1 border-[#80BB01]"
-                  key={item._id}
-                >
+                <ul className=" border my-1 border-[#80BB01]" key={item._id}>
                   <li
                     onClick={toggleFaqsList}
                     x-id={item._id}

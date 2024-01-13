@@ -44,8 +44,7 @@ export default function EditDiscount(rslt: any) {
   }
   async function submitAddDiscount(event: any): Promise<void> {
     // event.preventDefault();
-
-    if (true) {
+    if (discountFormState.data.formIsValid) {
       const x = {
         _id: "",
         sDate: discountFormState.data.sDate,
@@ -60,6 +59,8 @@ export default function EditDiscount(rslt: any) {
       } catch (err) {
         console.log("rrrr");
       }
+    } else {
+      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     }
   }
   function fillDiscountValue(event: any): void {
@@ -104,9 +105,6 @@ export default function EditDiscount(rslt: any) {
     }
   }
 
-
-
-  
   function fillDiscountSDate(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
@@ -127,7 +125,6 @@ export default function EditDiscount(rslt: any) {
       );
     }
   }
-
 
   function fillDiscountEDate(event: any): void {
     let text: string = validator.escape(event.target.value);
@@ -150,8 +147,6 @@ export default function EditDiscount(rslt: any) {
     }
   }
 
-
-
   function fillDiscountProductId(event: any): void {
     const text = event.target.value;
 
@@ -163,8 +158,6 @@ export default function EditDiscount(rslt: any) {
       })
     );
   }
-
-
 
   return (
     <>
@@ -233,7 +226,6 @@ export default function EditDiscount(rslt: any) {
                       </p>
                     </div>
 
-
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="eDate" className="w-20 text-sm font-bold">
                         تاریخ پایان
@@ -270,8 +262,6 @@ export default function EditDiscount(rslt: any) {
                         ))}
                       </select>
                     </div>
-
-          
 
                     <div className="flex justify-end p-2">
                       <button

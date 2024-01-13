@@ -46,7 +46,7 @@ export default function AddDiscount(rslt: any) {
   async function submitAddDiscount(event: any): Promise<void> {
     // event.preventDefault();
 
-    if (true) {
+    if (discountFormState.data.formIsValid) {
       const x = {
         _id: "",
         sDate: discountFormState.data.sDate,
@@ -61,6 +61,8 @@ export default function AddDiscount(rslt: any) {
       } catch (err) {
         console.log("rrrr");
       }
+    } else {
+      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     }
   }
   function fillDiscountValue(event: any): void {

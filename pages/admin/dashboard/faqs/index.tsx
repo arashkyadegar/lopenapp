@@ -47,7 +47,7 @@ export default function Faqs(rslt: any) {
               </ul>
             </div>
             <div className="grid  grid-cols-6 items-center divide divide-gray-200">
-              <div className="flex  items-center justify-center col-span-2  border border-gray-200 text-center">
+              <div className="flex  items-center justify-center col-span-1  border border-gray-200 text-center">
                 <a>کد</a>
               </div>
               <div className="flex  items-center justify-center col-span-2 border text-center">
@@ -56,21 +56,26 @@ export default function Faqs(rslt: any) {
               <div className="flex  items-center justify-center border  text-center">
                 <a>پاسخ </a>
               </div>
-
+              <div className="flex  items-center justify-center border  text-center">
+                <a>الویت نمایش </a>
+              </div>
               <div className="flex  items-center justify-center border  text-center">
                 <a>عملیات </a>
               </div>
 
               {faqs.map((faq: any) => (
                 <>
-                  <div className="border flex col-span-2 p-2 justify-center items-center">
+                  <div className="border flex col-span-1 p-2 justify-start items-center">
                     <a className="text-xs">{faq._id}</a>
                   </div>
-                  <div className="border flex col-span-2 p-1 justify-center items-center">
-                    <a>{faq.question}</a>
+                  <div className="border   flex col-span-2 p-1 justify-start items-center">
+                    <a className=" line-clamp-1"> {faq.question}</a>
                   </div>
-                  <div className="border flex col-span-1 p-1  justify-center items-center">
-                    <a>{faq.answer}</a>
+                  <div className="border line-clamp-1 flex col-span-1 p-1  justify-start  items-center">
+                    <a className=" line-clamp-1">{faq.answer}</a>
+                  </div>
+                  <div className=" border line-clamp-1 flex col-span-1 p-1  justify-center  items-center">
+                    <a className=" line-clamp-1">{faq.priority}</a>
                   </div>
 
                   <div className="border flex col-span-1 p-1 justify-center items-center">

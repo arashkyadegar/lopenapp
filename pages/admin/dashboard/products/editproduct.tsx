@@ -64,7 +64,7 @@ export default function Editproduct(rslt: any) {
   async function submitEditProduct(event: any): Promise<void> {
     // event.preventDefault();
 
-    if (true) {
+    if (productFormState.data.formIsValid) {
       const x = {
         _id: productFormState.data._id,
         name: productFormState.data.name,
@@ -89,6 +89,8 @@ export default function Editproduct(rslt: any) {
       } catch (err) {
         console.log("rrrr");
       }
+    } else {
+      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     }
   }
   function fillPrdctName(event: any): void {

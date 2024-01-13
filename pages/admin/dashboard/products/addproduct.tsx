@@ -63,7 +63,7 @@ export default function Addproduct() {
   async function submitAddProduct(event: any): Promise<void> {
     // event.preventDefault();
 
-    if (true) {
+    if (productFormState.data.formIsValid) {
       const x = {
         _id: "",
         name: productFormState.data.name,
@@ -87,6 +87,8 @@ export default function Addproduct() {
       } catch (err) {
         console.log("rrrr");
       }
+    } else {
+      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     }
   }
   function fillPrdctName(event: any): void {
