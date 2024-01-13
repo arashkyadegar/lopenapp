@@ -22,7 +22,7 @@ export default function AddFaq() {
         groupId: 0,
         question: faqFormState.data.question,
         answer: faqFormState.data.answer,
-        display: true,
+        display: false,
         priority: faqFormState.data.priority,
         date: "",
       };
