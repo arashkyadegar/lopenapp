@@ -19,7 +19,7 @@ export const productFormSlice = createSlice({
     data: {
       _id: "",
       name: "",
-      weight: "",
+      weight: 0,
       size: "",
       healthId: "",
       type: "",
@@ -61,7 +61,7 @@ export const productFormSlice = createSlice({
       state.data = {
         _id: "",
         name: "",
-        weight: "",
+        weight: 0,
         size: "",
         healthId: "",
         type: "",

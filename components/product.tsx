@@ -69,7 +69,13 @@ export default function ProductComponent({ props }: any) {
           if (i.productId == product._id) {
             let old_count = productForm.data.count;
             let count = i.count;
+
             i.count = parseInt(count) + parseInt(old_count);
+            if (i.discount != 0) {
+              i.prices = newPrice * parseInt(i.count);
+            } else {
+              i.prices = i.unitPrice * parseInt(i.count);
+            }
           }
         });
       });

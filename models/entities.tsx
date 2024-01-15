@@ -11,7 +11,7 @@ export class CityEntity {
 export class ProductEntity {
   _id: string = "";
   name: string = "";
-  weight: string = "";
+  weight: number = 0;
   size: string = "";
   healthId: string = "";
   type: string = "";

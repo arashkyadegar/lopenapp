@@ -1,25 +1,19 @@
 import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
-import { AddProductForm, ProductEntity } from "@/models/entities";
 import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { submitAddProductAction } from "@/redux/store/product";
-import { FileService } from "@/services/fileService";
-import { ProductService } from "@/services/productService";
-import { ToastFail, ToastInfo, ToastSuccess } from "@/utility/tostify";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastFail} from "@/utility/tostify";
+import { submitAddDiscountAction } from "@/redux/store/discount";
 import {
   discountFormCleard,
-  discountFormFilled,
   setFormSDate,
   setFormEDate,
   setFormTitle,
   setFormValue,
   setFormProductId,
 } from "@/redux/store/discountForm";
-import { getDefaultImageAvator } from "@/utility/imageUtility";
-import { submitAddDiscountAction } from "@/redux/store/discount";
+
 // This gets called on every request
 export async function getStaticProps() {
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
@@ -75,6 +69,14 @@ export default function AddDiscount(rslt: any) {
           value: text,
         })
       );
+    } else if (!validator.matches(text, /^[0-9]+$/)) {
+      dispatch(
+        setFormValue({
+          valueError: "لطفا  میزان تخفیف را به عدد وارد کنید",
+          formIsValid: false,
+          value: text,
+        })
+      );
     } else {
       dispatch(
         setFormValue({
@@ -108,7 +110,7 @@ export default function AddDiscount(rslt: any) {
   }
 
   function fillDiscountSDate(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormSDate({
@@ -129,7 +131,7 @@ export default function AddDiscount(rslt: any) {
   }
 
   function fillDiscountEDate(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormEDate({

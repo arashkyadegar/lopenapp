@@ -1,14 +1,10 @@
-import Image from "next/image";
+
 import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
-import { AddProductForm, ProductEntity } from "@/models/entities";
 import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { submitAddProductAction } from "@/redux/store/product";
-import { FileService } from "@/services/fileService";
-import { ProductService } from "@/services/productService";
-import { ToastFail, ToastInfo, ToastSuccess } from "@/utility/tostify";
-import { ToastContainer, toast } from "react-toastify";
+
+import { ToastFail } from "@/utility/tostify";
 import {
   discountFormCleard,
   discountFormFilled,
@@ -18,35 +14,48 @@ import {
   setFormValue,
   setFormProductId,
 } from "@/redux/store/discountForm";
-import { getDefaultImageAvator } from "@/utility/imageUtility";
-import { submitAddDiscountAction } from "@/redux/store/discount";
+import { submitEditDiscoutAction } from "@/redux/store/discount";
 // This gets called on every request
-export async function getStaticProps() {
+export async function getServerSideProps(context: any) {
+  const { id } = context.query;
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+  const discount_res = await fetch(`${baseURL}/api/discounts/${id}`);
+  const discount_repo = await discount_res.json();
+  const discount = JSON.stringify(discount_repo);
+
   const res = await fetch(`${baseURL}/api/products`);
   const repo = await res.json();
   const products = JSON.stringify(repo);
-  return { props: { products } };
+  return { props: { products: products, discount: discount } };
 }
 export default function EditDiscount(rslt: any) {
   const formdata = new FormData();
   const dispatch = useAppDispatch();
   const products = JSON.parse(rslt.products);
+  const discount = JSON.parse(rslt.discount)[0];
   const discountFormState = useAppSelector(
     (state) => state.entities.discountForm
   );
 
-  useEffect(() => {
-    formClear();
-  }, []);
   function formClear() {
     dispatch(discountFormCleard());
   }
-  async function submitAddDiscount(event: any): Promise<void> {
+
+  function fillProductsdrpdwn(prdct: any) {
+    console.log(`${prdct._id} == ${discountFormState.data.productId}`);
+    if (prdct._id === discountFormState.data.productId)
+      return (
+        <option value={prdct._id} selected>
+          {prdct.name}
+        </option>
+      );
+    return <option value={prdct._id}>{prdct.name}</option>;
+  }
+  async function submitEditDiscount(event: any): Promise<void> {
     // event.preventDefault();
     if (discountFormState.data.formIsValid) {
       const x = {
-        _id: "",
+        _id: discountFormState.data._id,
         sDate: discountFormState.data.sDate,
         eDate: discountFormState.data.eDate,
         title: discountFormState.data.title,
@@ -55,7 +64,7 @@ export default function EditDiscount(rslt: any) {
         productId: discountFormState.data.productId,
       };
       try {
-        dispatch(submitAddDiscountAction(x));
+        dispatch(submitEditDiscoutAction(x));
       } catch (err) {
         console.log("rrrr");
       }
@@ -69,6 +78,14 @@ export default function EditDiscount(rslt: any) {
       dispatch(
         setFormValue({
           valueError: "لطفا  میزان تخفیف را وارد کنید",
+          formIsValid: false,
+          value: text,
+        })
+      );
+    } else if (!validator.matches(text, /^[0-9]+$/)) {
+      dispatch(
+        setFormValue({
+          valueError: "لطفا  میزان تخفیف را به عدد وارد کنید",
           formIsValid: false,
           value: text,
         })
@@ -106,13 +123,21 @@ export default function EditDiscount(rslt: any) {
   }
 
   function fillDiscountSDate(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormSDate({
           sDateError: "لطفا تاریخ شروع را وارد کنید",
           formIsValid: false,
-          eDate: text,
+          sDate: text,
+        })
+      );
+    }else if (!validator.matches(text, /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)) {
+      dispatch(
+        setFormSDate({
+          sDateError: "لطفا تاریخ شروع را بصورت yyyy-mm-dd وارد کنید",
+          formIsValid: false,
+          sDate: text,
         })
       );
     } else {
@@ -158,6 +183,9 @@ export default function EditDiscount(rslt: any) {
       })
     );
   }
+  useEffect(() => {
+    dispatch(discountFormFilled(discount));
+  }, []);
 
   return (
     <>
@@ -168,7 +196,7 @@ export default function EditDiscount(rslt: any) {
               <main className="p-4">
                 <div className="px-2 ">
                   <a className=" flex text-2xl border-b p-4 border-gray-400">
-                    ثبت اطلاعات تخفیف
+                    ویرایش اطلاعات تخفیف
                   </a>
                 </div>
 
@@ -205,7 +233,7 @@ export default function EditDiscount(rslt: any) {
                         value={discountFormState.data.value}
                       />
                       <p className="text-red-400 text-xs">
-                        {discountFormState.data.value}
+                        {discountFormState.data.valueError}
                       </p>
                     </div>
 
@@ -256,17 +284,18 @@ export default function EditDiscount(rslt: any) {
                         id="productId"
                         className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
                         onChange={fillDiscountProductId}
+                        value={discountFormState.data.productId}
                       >
-                        {products.array.map((image: any) => (
-                          <option value={image._id} />
-                        ))}
+                        {products.map((prdct: any) =>
+                          fillProductsdrpdwn(prdct)
+                        )}
                       </select>
                     </div>
 
                     <div className="flex justify-end p-2">
                       <button
                         type="button"
-                        onClick={submitAddDiscount}
+                        onClick={submitEditDiscount}
                         className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         ثبت محصول

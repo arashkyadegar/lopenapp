@@ -129,26 +129,22 @@ export default function Addproduct() {
   function fillPrdctWeight(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   weightError: "لطفا وزن محصول را وارد کنید",
-      //   formIsValid: false,
-      //   weight: text,
-      // });
       dispatch(
         setFormWeight({
-          weightError: "لطفا نام محصول را وارد کنید",
+          weightError: "لطفا وزن محصول را وارد کنید",
+          formIsValid: false,
+          weight: text,
+        })
+      );
+    } else if (!validator.matches(text, /^[0-9]+$/)) {
+      dispatch(
+        setFormWeight({
+          weightError: "لطفا وزن محصول را به عدد وارد کنید",
           formIsValid: false,
           weight: text,
         })
       );
     } else {
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   weightError: "",
-      //   weight: text,
-      //   formIsValid: true,
-      // });
       dispatch(
         setFormWeight({
           weightError: "",
@@ -227,35 +223,31 @@ export default function Addproduct() {
   }
 
   function fillPrdctPrice(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text : string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   priceError: "لطفا   قیمت محصول را وارد کنید",
-      //   formIsValid: false,
-      //   price: parseInt(text),
-      // });
       dispatch(
         setFormPrice({
-          priceError: "لطفا   قیمت محصول را وارد کنید",
+          priceError: "لطفا قیمت محصول را وارد کنید",
           formIsValid: false,
-          price: parseInt(text),
+          price: text,
+        })
+      );
+    } else if (!validator.matches(text, /^[0-9]+$/)) {
+      dispatch(
+        setFormPrice({
+          priceError: "لطفا قیمت محصول را به عدد وارد کنید",
+          formIsValid: false,
+          price: text,
         })
       );
     } else {
       dispatch(
         setFormPrice({
           priceError: "",
-          price: parseInt(text),
+          price: text,
           formIsValid: true,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   priceError: "",
-      //   price: parseInt(text),
-      //   formIsValid: true,
-      // });
     }
   }
 
@@ -516,7 +508,7 @@ export default function Addproduct() {
                         htmlFor="weight"
                         className="w-20 text-sm font-bold"
                       >
-                        وزن
+                        وزن (گرم)
                       </label>
                       <input
                         type="text"

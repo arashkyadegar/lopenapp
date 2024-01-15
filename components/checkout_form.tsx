@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function CheckoutFormComponent({ props }: any) {
   const stateList: Array<StateEntity> = statesJson;
   const cityList: Array<CityEntity> = citiesJson;
-
+  let stateId = "0";
   const { cities, setCities } = React.useContext(myAppContext);
   const { citiesUlToggle, setCitiesUlToggle } = React.useContext(myAppContext);
   const { statesUlToggle, setStatesUlToggle } = React.useContext(myAppContext);
@@ -26,8 +26,15 @@ export default function CheckoutFormComponent({ props }: any) {
 
   function stateChange(event: any): void {
     const node = event.target as HTMLInputElement;
-    const stateId = node.value;
+    stateId = node.value;
+    const stateName = node.innerHTML;
     let filtered = cityList.filter((city) => city.stateId == stateId);
+
+    setFactorForm({
+      ...factorForm,
+      state: stateName,
+    });
+    // state
     setCities(filtered);
     stateUlToggle();
   }
@@ -35,15 +42,23 @@ export default function CheckoutFormComponent({ props }: any) {
   function cityChange(event: any): void {
     const node = event.target as HTMLElement;
     const city = node.innerHTML;
-    //alert(city);
+    setFactorForm({
+      ...factorForm,
+      city: city,
+    });
     cityUlToggle();
   }
 
   function cityTextKeyUp(event: any): void {
     const node = event.target as HTMLInputElement;
     const cityName = node.value;
-    const filtered = cities.filter((city) => city.name.match(cityName));
-    setCities(filtered);
+    const base = cities;
+    if (cityName.trim() != "") {
+      const filtered = cities.filter((city) => city.name.match(cityName));
+      setCities(filtered);
+    } else {
+      setCities(base);
+    }
   }
 
   function stateUlToggle(): void {
@@ -245,10 +260,13 @@ export default function CheckoutFormComponent({ props }: any) {
                 <label htmlFor="text_state" className="w-20 text-sm  font-bold">
                   استان
                 </label>
-
                 <div className="flex flex-col mb-3">
                   <div className="flex flex-row w-full items-center relative">
-                    <div className="h-8 w-full  p-2 outline-none   border border-gray-300  bg-[#F9FAFB]">
+                    <div className="h-8 w-full   outline-none   border border-gray-300  bg-[#F9FAFB]">
+                      <input
+                        value={factorForm.state}
+                        className="bg-transparent outline-none "
+                      />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -310,7 +328,11 @@ export default function CheckoutFormComponent({ props }: any) {
 
                 <div className="flex flex-col  mb-3 ">
                   <div className="flex flex-row items-center relative">
-                    <div className="h-8 w-full p-2 outline-none   border border-gray-300  bg-[#F9FAFB]">
+                    <div className="h-8 w-full  outline-none   border border-gray-300  bg-[#F9FAFB]">
+                      <input
+                        value={factorForm.city}
+                        className="bg-transparent outline-none "
+                      />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -329,7 +351,7 @@ export default function CheckoutFormComponent({ props }: any) {
                     </div>
                   </div>
                   {citiesUlToggle && (
-                    <ul className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]">
+                    <ul className="h-40 overflow-y-auto p-1 outline-none   border border-gray-300  bg-[#F9FAFB]">
                       <li>
                         <input
                           type="text"

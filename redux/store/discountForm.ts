@@ -39,8 +39,8 @@ export const discountFormSlice = createSlice({
     discountFormCleard: (state: any) => {
       state.data = {
         _id: "",
-        sDate: {},
-        eDate: {},
+        sDate: "",
+        eDate: "",
         title: "",
         type: 0,
         value: 0,

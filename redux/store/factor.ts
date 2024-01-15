@@ -38,5 +38,5 @@ export const factorSlice = createSlice({
   },
 });
 
-export const { factorAdded, factorReAdded } = factorSlice.actions;
+export const { factorAdded, factorReAdded,factorsRecieved } = factorSlice.actions;
 export default factorSlice.reducer;
