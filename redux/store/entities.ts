@@ -7,6 +7,7 @@ import discountFormReducer from "./discountForm";
 import faqFormReducer from "./faqForm";
 import factorReducer from "./factor";
 import faqsReducer from "./faqs";
+import userReducer from "./user";
 
 export default combineReducers({
   product: productReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   factor: factorReducer,
   faqs: faqsReducer,
   faqForm: faqFormReducer,
+  user: userReducer,
 });

@@ -4,18 +4,33 @@ import AdminLayout from "../adminLayout";
 import { useAppDispatch } from "@/redux/store/hooks";
 import { submitDeleteFaqAction } from "@/redux/store/faqs";
 import Link from "next/link";
-
+import Custom401 from "@/pages/401";
+import qs from "querystring";
 // This gets called on every request
-export async function getServerSideProps() {
+export async function getServerSideProps(context: any) {
+  const { req } = context;
+  const { cookies } = req;
+  console.log("cookies", cookies.cookieName);
+
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/faqs`);
-  const repo = await res.json();
+  const response = await fetch(`${baseURL}/api/faqs`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Authorization: cookies.cookieName
+    }
+  });
+
+  const repo = await response.json();
   const faqs = JSON.stringify(repo);
-  return { props: { faqs } };
+  const errorCode = response.ok ? false : response.status;
+
+  return { props: { errorCode, faqs } };
 }
 
 export default function Faqs(rslt: any) {
   const faqs = JSON.parse(rslt.faqs);
+  const errorCode = JSON.parse(rslt.errorCode);
   const dispatch = useAppDispatch();
 
   function submitDeleteFaq(id: any) {
@@ -23,6 +38,11 @@ export default function Faqs(rslt: any) {
       dispatch(submitDeleteFaqAction(id));
     }
   }
+
+  if (errorCode) {
+    return <Custom401 />;
+  }
+
   return (
     <>
       <div className="container p-4">

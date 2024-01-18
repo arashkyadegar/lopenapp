@@ -56,17 +56,18 @@ export const submitSignupAction = (user: any) =>
     ),
   });
   
-export const submitSigninAction = (name: any, password: any, remember: any) =>
+export const submitSigninAction = (email: any, password: any, remember: any) =>
   apiCallBegan({
-    url: "/auth/login/",
+    url: "/api/auth/login1/",
     method: "POST",
+    credentials:"include",
     headers: {
       "Content-Type": "application/json",
     },
     onSuccess: "user/userRecieved",
     onError: "api/apiCallFailed",
     body: JSON.stringify({
-      name: name,
+      email: email,
       password: password,
       remember: remember,
     }),

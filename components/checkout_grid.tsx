@@ -10,9 +10,7 @@ export default function CheckoutGridComponent({ props }: any) {
   function fillFactorGridCount(event: any): void {
     const value = event.target.value;
     const productId = event.target.getAttribute("x-productId");
-
     let obj = factorState.list.find((x: any) => x.productId == productId);
-
     if (obj != undefined) {
       let price = obj["unitPrice"];
       let newPrice = 0;

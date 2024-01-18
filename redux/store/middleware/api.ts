@@ -16,14 +16,15 @@ const api =
       headers: headers,
       body: body,
     };
-    console.log(action.headers);
+
     try {
       const response = await fetch(baseURL + url, requestOptions);
+
       const result = await response.text();
       switch (response.status) {
         case ResponseStatus.OK: {
           const x = JSON.parse(result);
-          console.log(x);
+
           ///const comments = await response.json();
           // // General
           // dispatch(actions.apiCallSucceeded(comments));

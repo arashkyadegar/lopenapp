@@ -109,7 +109,17 @@ export class FaqEntity {
   priority: number = 0;
   date!: Date;
 }
+export class ILoginFields {
 
+}
+
+export class LoginForm {
+  email: string = "";
+  password: string = "";
+  emailError: string = "";
+  passwordError: string = "";
+  formIsValid: boolean = false;
+}
 module.exports = {
   StateEntity,
   CityEntity,
@@ -119,5 +129,6 @@ module.exports = {
   AddProductForm,
   DiscountEntity,
   AddDiscountForm,
-  FaqEntity
+  FaqEntity,
+  LoginForm
 };

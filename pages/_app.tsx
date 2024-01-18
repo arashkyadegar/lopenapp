@@ -9,6 +9,7 @@ import {
   CityEntity,
   FactorForm,
   FaqEntity,
+  LoginForm,
   StateEntity,
 } from "@/models/entities";
 import { initialState } from "@/redux/store/product";
@@ -90,6 +91,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [navbarToggle, setNavbarToggle] = useState(false);
   const [faqItemToggle, setFaqItemToggle] = useState(false);
   const [factorForm, setFactorForm] = useState(new FactorForm());
+  const [loginForm, setLoginForm] = useState(new LoginForm());
   const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   const { store } = wrapperForPersistStore.useWrappedStore(initialState);
   let persistor = persistStore(store);
@@ -97,6 +99,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <myAppContext.Provider
       value={{
+        loginForm,
+        setLoginForm,
         faqItemToggle,
         setFaqItemToggle,
         addProductForm,

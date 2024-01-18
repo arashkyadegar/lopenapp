@@ -4,6 +4,7 @@ import {
   CityEntity,
   FactorForm,
   FaqEntity,
+  LoginForm,
   StateEntity,
 } from "../../models/entities";
 const myAppContext = createContext({
@@ -70,6 +71,14 @@ const myAppContext = createContext({
     postCodeError: "",
   },
   setFactorForm: (commentForm: FactorForm) => {},
+  loginForm: {
+    email: "",
+    password: "",
+    emailError: "",
+    passwordError: "",
+    formIsValid: false,
+  },
+  setLoginForm: (loginForm: LoginForm) => {},
 });
 
 export default myAppContext;
