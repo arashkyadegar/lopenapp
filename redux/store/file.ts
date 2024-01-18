@@ -24,6 +24,7 @@ export const submitUploadAction =(formdata: any) =>
   apiCallBegan({
     url: "/uploads/",
     method: "POST",
+    credentials:"include",
     header: "",
     onSuccess: "file/fileUploaded",
     body: formdata,

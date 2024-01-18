@@ -58,7 +58,7 @@ export const submitSignupAction = (user: any) =>
   
 export const submitSigninAction = (email: any, password: any, remember: any) =>
   apiCallBegan({
-    url: "/api/auth/login1/",
+    url: "/api/auth/login/",
     method: "POST",
     credentials:"include",
     headers: {

@@ -55,6 +55,7 @@ export const submitSendLikeAction = (userId: any, postId: any) =>
   apiCallBegan({
     url: "/likes/",
     method: "POST",
+    credentials:"include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -70,6 +71,7 @@ export const submitDeleteLikeAction = (userId: any, postId: any) =>
   apiCallBegan({
     url: "/likes/",
     method: "DELETE",
+    credentials:"include",
     headers: {
       "Content-Type": "application/json",
     },

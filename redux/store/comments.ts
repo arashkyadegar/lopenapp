@@ -54,6 +54,7 @@ export const getVisibleComments = createSelector(
 // action creators
 export const submitSendCommentAction = (postId: any,comment: any) => apiCallBegan({
   url: "/comments/" + postId,
+  credentials:"include",
   method: "POST",
   onSuccess: "",
   body: JSON.stringify(comment)
@@ -61,6 +62,7 @@ export const submitSendCommentAction = (postId: any,comment: any) => apiCallBega
 
 export const loadCommentsAction =  (postId: any) => apiCallBegan ({
   url: "/comments/" + postId,
+  credentials:"include",
   method: "GET",
   onSuccess: "comments/commentsRecieved",
 });

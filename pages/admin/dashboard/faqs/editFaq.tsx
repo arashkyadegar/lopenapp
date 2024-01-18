@@ -208,8 +208,18 @@ export default function EditFaq(rslt: any) {
 // This gets called on every request
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
+  const { req } = context;
+  const { cookies } = req;
+  console.log("cookies", cookies.cookieName);
+
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/faqs/${id}`);
+  const res = await fetch(`${baseURL}/api/faqs/${id}`,{
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Authorization: cookies.cookieName
+    }
+  });
   const repo = await res.json();
   const faq = JSON.stringify(repo);
   return { props: { faq } };

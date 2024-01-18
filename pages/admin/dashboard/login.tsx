@@ -15,23 +15,23 @@ export default function Login({ props }: any) {
     const email = "admin";
     const password = "admin";
     const remember = "true";
-    const baseUrl = `${process.env.NEXT_PUBLIC_BASEURL}/api/auth/login/`;
-    const res = await fetch(baseUrl, {
-      method: "POST",
-      credentials:"include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        remember: remember,
-      })
-    });
+    // const baseUrl = `${process.env.NEXT_PUBLIC_BASEURL}/api/auth/login/`;
+    // const res = await fetch(baseUrl, {
+    //   method: "POST",
+    //   credentials:"include",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email: email,
+    //     password: password,
+    //     remember: remember,
+    //   })
+    // });
 
     // const result = await res.text();
     //console.log(result);
-    // dispatch(submitSigninAction(email, password, remember));
+     dispatch(submitSigninAction(email, password, remember));
     // const loginService = new LoginService();
     // loginService
     //   .login(email, password, remember)

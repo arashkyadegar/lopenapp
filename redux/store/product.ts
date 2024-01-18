@@ -49,6 +49,7 @@ export const submitEditProductAction = (product: any) =>
     url: "/api/products/" + product._id,
     onSuccess: "products/productFaild",
     onError: "products/productFaild",
+    credentials:"include",
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -49,6 +49,7 @@ export const submitEditDiscoutAction = (product: any) =>
     url: "/api/discounts/" + product._id,
     onSuccess: "discount/discountFaild",
     onError: "discount/discountFaild",
+    credentials:"include",
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -61,6 +62,7 @@ export const submitAddDiscountAction = (product: any) =>
     url: "/api/discounts/",
     onSuccess: "discountForm/discountFormCleard",
     onError: "discount/discountFaild",
+    credentials:"include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",

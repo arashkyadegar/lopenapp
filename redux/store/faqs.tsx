@@ -64,6 +64,7 @@ export const submitEditFaqAction = (product: any) =>
     url: "/api/faqs/" + product._id,
     onSuccess: "faqs/faqsFaild",
     onError: "faqs/faqsFaild",
+    credentials:"include",
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -76,6 +77,7 @@ export const submitAddFaqAction = (product: any) =>
     url: "/api/faqs/",
     onSuccess: "faqForm/faqFormFilled",
     onError: "faqs/faqsFaild",
+    credentials:"include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
