@@ -10,27 +10,35 @@ import qs from "querystring";
 export async function getServerSideProps(context: any) {
   const { req } = context;
   const { cookies } = req;
-  console.log("cookies", cookies.cookieName);
+  console.log("cookies.alonefighterx", cookies.alonefighterx);
 
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
   const response = await fetch(`${baseURL}/api/faqs`, {
     method: "GET",
     credentials: "include",
     headers: {
-      Authorization: cookies.cookieName
+      authorization: cookies.alonefighterx
     }
   });
 
+ 
+  if (response.status == 401) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
+      }
+    }
+  }
+  //const errorCode = response.ok ? false : response.status;
   const repo = await response.json();
   const faqs = JSON.stringify(repo);
-  const errorCode = response.ok ? false : response.status;
-
-  return { props: { errorCode, faqs } };
+  return { props: { faqs } };
 }
 
 export default function Faqs(rslt: any) {
   const faqs = JSON.parse(rslt.faqs);
-  const errorCode = JSON.parse(rslt.errorCode);
+  //const errorCode = JSON.parse(rslt.errorCode);
   const dispatch = useAppDispatch();
 
   function submitDeleteFaq(id: any) {
@@ -38,11 +46,6 @@ export default function Faqs(rslt: any) {
       dispatch(submitDeleteFaqAction(id));
     }
   }
-
-  if (errorCode) {
-    return <Custom401 />;
-  }
-
   return (
     <>
       <div className="container p-4">

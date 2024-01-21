@@ -24,6 +24,7 @@ export const faqsSlice = createSlice({
     lastFetch: null,
   },
   reducers: {
+    
     faqsRecieved: (state: any, action: PayloadAction<any>) => {
       state.list = action.payload;
       state.lastFetch = Date.now();
@@ -75,7 +76,7 @@ export const submitEditFaqAction = (product: any) =>
 export const submitAddFaqAction = (product: any) =>
   apiCallBegan({
     url: "/api/faqs/",
-    onSuccess: "faqForm/faqFormFilled",
+    onSuccess: "faqForm/faqFormCleard",
     onError: "faqs/faqsFaild",
     credentials:"include",
     method: "POST",

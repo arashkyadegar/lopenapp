@@ -9,12 +9,14 @@ const api =
     if (action.type !== actions.apiCallBegan.type) return next(action);
     next(action);
     const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-    const { url, method, onSuccess, onError, body, headers } = action.payload;
+    const { url, method, onSuccess, onError, body, headers, credentials } =
+      action.payload;
 
     const requestOptions = {
       method: method,
       headers: headers,
       body: body,
+      credentials: credentials,
     };
 
     try {
@@ -24,11 +26,6 @@ const api =
       switch (response.status) {
         case ResponseStatus.OK: {
           const x = JSON.parse(result);
-
-          ///const comments = await response.json();
-          // // General
-          // dispatch(actions.apiCallSucceeded(comments));
-          // // specified
           dispatch({ type: onSuccess, payload: x });
           ToastSuccess();
 
@@ -37,6 +34,11 @@ const api =
         case ResponseStatus.BAD_REQUEST: {
           dispatch({ type: onError });
           ToastFail(result);
+
+          break;
+        }
+        case ResponseStatus.UNAUTHORIZED: {
+          ToastFail("لطفا لاگین کنید");
 
           break;
         }

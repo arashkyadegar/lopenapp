@@ -7,10 +7,28 @@ import { useAppDispatch } from "@/redux/store/hooks";
 import { submitDeleteDiscountAction } from "@/redux/store/discount";
 
 // This gets called on every request
-export async function getStaticProps() {
+export async function getServerSideProps(context: any) {
+  const { req } = context;
+  const { cookies } = req;
+
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/discounts`);
-  const repo = await res.json();
+  const response = await fetch(`${baseURL}/api/discounts`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      authorization: cookies.alonefighterx,
+    },
+  });
+
+  if (response.status == 401) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
+      }
+    }
+  }
+  const repo = await response.json();
   const discounts = JSON.stringify(repo);
   return { props: { discounts } };
 }
@@ -20,9 +38,9 @@ export default function Discounts(rslt: any) {
   console.log(discounts);
   const dispatch = useAppDispatch();
 
-  function submitDeleteDiscount(id:any) {
+  function submitDeleteDiscount(id: any) {
     if (confirm("قصد حذف تخفیف را دارید ؟ ")) {
-       dispatch(submitDeleteDiscountAction(id));
+      dispatch(submitDeleteDiscountAction(id));
     }
   }
   return (

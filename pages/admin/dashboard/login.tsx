@@ -32,31 +32,6 @@ export default function Login({ props }: any) {
     // const result = await res.text();
     //console.log(result);
      dispatch(submitSigninAction(email, password, remember));
-    // const loginService = new LoginService();
-    // loginService
-    //   .login(email, password, remember)
-    //   .then((rslt) => {
-    //     const value = JSON.parse(rslt);
-    //     switch (value.status) {
-    //       case 200: {
-
-    //         ToastSuccess("شما با موفقیت لاگین کردید");
-    //         break;
-    //       }
-    //       case 400: {
-    //         ToastFail("کلمه عبور اشتباه میباشد");
-    //         break;
-    //       }
-    //       case 404: {
-    //         ToastInfo("نام کاربری موجود نمیباشد");
-    //         break;
-    //       }
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     ToastFail();
-    //   });
-    // }
   }
   function fillLoginPassword(event: any) {
     let text: string = validator.escape(event.target.value);

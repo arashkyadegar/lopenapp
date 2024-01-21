@@ -39,3 +39,16 @@ export const ToastFail = (message = "خطا در انجام عملیات!") => {
     theme: "light",
   });
 };
+
+export const ToastAuthFail = (message = " لطفا لاگین کنید!") => {
+  toast.error(`${ResponseStatus.UNAUTHORIZED} : ${message}`, {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+};

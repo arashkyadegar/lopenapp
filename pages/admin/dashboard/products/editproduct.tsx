@@ -22,9 +22,10 @@ import {
 import validator from "validator";
 import { submitEditProductAction } from "@/redux/store/product";
 import { FileService } from "@/services/fileService";
-import { ToastFail, ToastSuccess } from "@/utility/tostify";
+import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 import { ProductEntity } from "@/models/entities";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
+import { ResponseStatus } from "@/utility/responseStatus";
 export default function Editproduct(rslt: any) {
   let product = JSON.parse(rslt.product)[0];
   const formdata = new FormData();
@@ -157,7 +158,6 @@ export default function Editproduct(rslt: any) {
     }
   }
 
-
   function fillPrdctSize(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
@@ -226,7 +226,7 @@ export default function Editproduct(rslt: any) {
   }
 
   function fillPrdctPrice(event: any): void {
-    let text : string = validator.escape(event.target.value);
+    let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
       dispatch(
         setFormPrice({
@@ -397,33 +397,101 @@ export default function Editproduct(rslt: any) {
       formdata.append("files", event.target.files[1]);
       formdata.append("files", event.target.files[2]);
       const uploader = new FileService();
-      try {
-        const result = await uploader.upload(formdata);
-        dispatch(
-          setFormImages({
-            imagesError: "",
-            images: JSON.parse(result).files,
-            formIsValid: true,
-          })
-        );
-        // setAddProductForm({
-        //   ...addProductForm,
-        //   imagesError: "",
-        //   files: JSON.parse(result).files,
-        //   formIsValid: true,
-        // });
-        ToastSuccess();
-      } catch (err) {
-        ToastFail();
+      // try {
+      const response = await uploader.upload(formdata);
+      switch (response.status) {
+        case ResponseStatus.OK: {
+          const repo = await response.json()
+          dispatch(
+            setFormImages({
+              imagesError: "",
+              images: repo.files,
+              formIsValid: true,
+            })
+          );
+          ToastSuccess();
+          break;
+        }
+        case ResponseStatus.BAD_REQUEST: {
+          ToastFail();
+          break;
+        }
+        case ResponseStatus.UNAUTHORIZED: {
+          ToastAuthFail();
+        }
       }
-    } else {
+
+      //   if (response.status != 200) {
+      //     console.log("errr1");
+      //     console.log(response.status);
+      //     ToastFail();
+      //   } else {
+      //     dispatch(
+      //       setFormImages({
+      //         imagesError: "",
+      //         images: JSON.parse(response).files,
+      //         formIsValid: true,
+      //       })
+      //     );
+      //     // setAddProductForm({
+      //     //   ...addProductForm,
+      //     //   imagesError: "",
+      //     //   files: JSON.parse(result).files,
+      //     //   formIsValid: true,
+      //     // });
+      //     ToastSuccess();
+      //   }
+      // } catch (err) {
+      //   console.log("errr2");
+      //   //ToastFail();
+      // }
+      // } else {
       // setAddProductForm({
       //   ...addProductForm,
       //   imagesError: "حداقل ۳ تصویر را باید انتخاب کنید",
       //   formIsValid: false,
       // });
+      // }
     }
   }
+
+
+
+
+  // async function fillPrdctFile(event: any): Promise<void> {
+  //   let count = event.target.files.length;
+  //   if (count === 3) {
+  //     formdata.append("files", event.target.files[0]);
+  //     formdata.append("files", event.target.files[1]);
+  //     formdata.append("files", event.target.files[2]);
+  //     const uploader = new FileService();
+  //     try {
+  //       const result = await uploader.upload(formdata);
+  //       dispatch(
+  //         setFormImages({
+  //           imagesError: "",
+  //           images: JSON.parse(result).files,
+  //           formIsValid: true,
+  //         })
+  //       );
+  //       // setAddProductForm({
+  //       //   ...addProductForm,
+  //       //   imagesError: "",
+  //       //   files: JSON.parse(result).files,
+  //       //   formIsValid: true,
+  //       // });
+  //       ToastSuccess();
+  //     } catch (err) {
+  //       ToastFail();
+  //     }
+  //   } else {
+  //     // setAddProductForm({
+  //     //   ...addProductForm,
+  //     //   imagesError: "حداقل ۳ تصویر را باید انتخاب کنید",
+  //     //   formIsValid: false,
+  //     // });
+  //   }
+  // }
   return (
     <>
       <div className="container p-4">
@@ -697,9 +765,25 @@ export default function Editproduct(rslt: any) {
 // This gets called on every request
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
+  const { req } = context;
+  const { cookies } = req;
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/products/${id}`);
-  const repo = await res.json();
+  const response = await fetch(`${baseURL}/api/products/${id}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Authorization: cookies.alonefighterx,
+    },
+  });
+  const repo = await response.json();
+  if (response.status == 401) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
+      }
+    }
+  }
   const product = JSON.stringify(repo);
   return { props: { product } };
 }

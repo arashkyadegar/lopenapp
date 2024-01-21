@@ -3,7 +3,7 @@ import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
 import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { ToastFail} from "@/utility/tostify";
+import { ToastFail } from "@/utility/tostify";
 import { submitAddDiscountAction } from "@/redux/store/discount";
 import {
   discountFormCleard,
@@ -15,10 +15,21 @@ import {
 } from "@/redux/store/discountForm";
 
 // This gets called on every request
-export async function getStaticProps() {
+export async function getServerSideProps(context: any) {
+  const { req } = context;
+  const { cookies } = req;
+
+
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/products`);
-  const repo = await res.json();
+  const response = await fetch(`${baseURL}/api/products`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Authorization: cookies.alonefighterx,
+    },
+  });
+
+  const repo = await response.json();
   const products = JSON.stringify(repo);
   return { props: { products } };
 }
@@ -273,7 +284,7 @@ export default function AddDiscount(rslt: any) {
                         onClick={submitAddDiscount}
                         className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
-                        ثبت محصول
+                        ثبت تخفیف
                       </button>
                     </div>
                   </div>

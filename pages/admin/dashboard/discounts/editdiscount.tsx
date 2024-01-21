@@ -1,4 +1,3 @@
-
 import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
 import validator from "validator";
@@ -18,11 +17,28 @@ import { submitEditDiscoutAction } from "@/redux/store/discount";
 // This gets called on every request
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const discount_res = await fetch(`${baseURL}/api/discounts/${id}`);
-  const discount_repo = await discount_res.json();
-  const discount = JSON.stringify(discount_repo);
+  const { req } = context;
+  const { cookies } = req;
 
+  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+  const discount_response = await fetch(`${baseURL}/api/discounts/${id}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Authorization: cookies.alonefighterx,
+    },
+  });
+  const discount_repo = await discount_response.json();
+  if (discount_response.status == 401) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
+      },
+    };
+  }
+
+  const discount = JSON.stringify(discount_repo);
   const res = await fetch(`${baseURL}/api/products`);
   const repo = await res.json();
   const products = JSON.stringify(repo);
@@ -132,7 +148,12 @@ export default function EditDiscount(rslt: any) {
           sDate: text,
         })
       );
-    }else if (!validator.matches(text, /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)) {
+    } else if (
+      !validator.matches(
+        text,
+        /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/
+      )
+    ) {
       dispatch(
         setFormSDate({
           sDateError: "لطفا تاریخ شروع را بصورت yyyy-mm-dd وارد کنید",
@@ -298,7 +319,7 @@ export default function EditDiscount(rslt: any) {
                         onClick={submitEditDiscount}
                         className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
-                        ثبت محصول
+                        ثبت تغییرات
                       </button>
                     </div>
                   </div>

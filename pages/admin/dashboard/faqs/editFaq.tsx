@@ -3,6 +3,7 @@ import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
+  faqFormCleard,
   faqFormFilled,
   setFormAnswer,
   setFormPriority,
@@ -11,11 +12,16 @@ import {
 import validator from "validator";
 import { submitEditFaqAction } from "@/redux/store/faqs";
 import { ToastFail } from "@/utility/tostify";
+import { FaqEntity } from "@/models/entities";
+import { ResponseRedirect } from "@/utility/responseStatus";
 
 export default function EditFaq(rslt: any) {
-  let faq = JSON.parse(rslt.faq)[0];
   const dispatch = useAppDispatch();
+  let faq = JSON.parse(rslt.faq)[0];
+  console.log("xxxxxxxxxxxxxxxxxxxxx");
+  console.log(faq);
   const faqFormState = useAppSelector((state) => state.entities.faqForm);
+
   useEffect(() => {
     dispatch(faqFormFilled(faq));
   }, []);
@@ -210,19 +216,25 @@ export async function getServerSideProps(context: any) {
   const { id } = context.query;
   const { req } = context;
   const { cookies } = req;
-  console.log("cookies", cookies.cookieName);
-
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/faqs/${id}`,{
+  const response = await fetch(`${baseURL}/api/faqs/${id}`, {
     method: "GET",
     credentials: "include",
     headers: {
-      Authorization: cookies.cookieName
-    }
+      Authorization: cookies.alonefighterx,
+    },
   });
-  const repo = await res.json();
+  const repo = await response.json();
+  if (response.status == 401) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
+      }
+    }
+  }
   const faq = JSON.stringify(repo);
-  return { props: { faq } };
+   return { props: { faq } };
 }
 EditFaq.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;

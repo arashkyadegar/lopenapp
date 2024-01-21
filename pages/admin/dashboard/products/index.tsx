@@ -6,9 +6,17 @@ import { submitDeleteProductAction } from "@/redux/store/product";
 import { useAppDispatch } from "@/redux/store/hooks";
 
 // This gets called on every request
-export async function getStaticProps() {
+export async function getServerSideProps(context: any) {
+  const { req } = context;
+  const { cookies } = req;
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/products`);
+  const res = await fetch(`${baseURL}/api/products`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      authorization: cookies.alonefighterx,
+    },
+  });
   const repo = await res.json();
   const products = JSON.stringify(repo);
   return { props: { products } };
@@ -18,10 +26,10 @@ export default function Products(rslt: any) {
   const products = JSON.parse(rslt.products);
   const dispatch = useAppDispatch();
 
-  function submitDeleteProduct(id:any) {
+  function submitDeleteProduct(id: any) {
     if (confirm("قصد حذف محصول را دارید ؟ ")) {
       dispatch(submitDeleteProductAction(id));
-    } 
+    }
   }
   return (
     <>
