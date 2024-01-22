@@ -20,6 +20,7 @@ const api =
     };
 
     try {
+      console.log(baseURL + url)
       const response = await fetch(baseURL + url, requestOptions);
 
       const result = await response.text();

@@ -37,15 +37,17 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                سوالات متداول
             </Link>
           </li>
-          <li>
+
+          <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
             <Link
               href={{
-                pathname: `/admin/dashboard/products/addproduct`,
+                pathname: `/admin/dashboard/siteinfo/editsiteInfo`,
               }}
             >
-            محصول جدید
+              تنظیمات سایت
             </Link>
           </li>
+
           <li>
             <Link
               href={{

@@ -109,9 +109,7 @@ export class FaqEntity {
   priority: number = 0;
   date!: Date;
 }
-export class ILoginFields {
-
-}
+export class ILoginFields {}
 
 export class LoginForm {
   email: string = "";
@@ -120,7 +118,69 @@ export class LoginForm {
   passwordError: string = "";
   formIsValid: boolean = false;
 }
+
+export class SiteInfoEntity {
+  _id: string = "1";
+  address1: string = "";
+  address2: string = "";
+  tel1: string = "";
+  tel2: string = "";
+
+  mobile1: string = "";
+  mobile2: string = "";
+
+  email1: string = "";
+  email2: string = "";
+
+  twitter: string = "";
+  googlePlus: string = "";
+  instagram: string = "";
+  linkedin: string = "";
+  whatsapp: string = "";
+  skype: string = "";
+
+  headerImages: string[] = [];
+
+  logo1: string = "";
+  logo2: string = "";
+
+  footerImage1: string = "";
+  footerImage2: string = "";
+  headerTitle: string = "";
+  footerDescription: string = "";
+  copyRightText: string = "";
+  copyRightYear: string = "";
+  languageId: string = "";
+}
+export class SiteinfoForm extends SiteInfoEntity {
+  address1Error: string = "";
+  address2Error: string = "";
+  tel1Error: string = "";
+  tel2Error: string = "";
+  mobile1Error: string = "";
+  mobile2Error: string = "";
+  email1Error: string = "";
+  email2Error: string = "";
+  twitterError: string = "";
+  googlePlusError: string = "";
+  instagramError: string = "";
+  linkedinError: string = "";
+  whatsappError: string = "";
+  skypeError: string = "";
+  headerImagesError: string[] = [];
+  logo1Error: string = "";
+  logo2Error: string = "";
+  footerImage1Error: string = "";
+  footerImage2Error: string = "";
+  headerTitleError: string = "";
+  footerDescriptionError: string = "";
+  copyRightTextError: string = "";
+  copyRightYearError: string = "";
+  languageIdError: string = "";
+  formIsValidError: boolean = false;
+}
 module.exports = {
+  SiteInfoEntity,
   StateEntity,
   CityEntity,
   FactorForm,
@@ -130,5 +190,5 @@ module.exports = {
   DiscountEntity,
   AddDiscountForm,
   FaqEntity,
-  LoginForm
+  LoginForm,
 };

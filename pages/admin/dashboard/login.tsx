@@ -4,8 +4,9 @@ import { LoginService } from "@/services/loginService";
 import { ToastFail, ToastInfo, ToastSuccess } from "@/utility/tostify";
 import { useAppDispatch, useAppSelector } from "../../../redux/store/hooks";
 import Link from "next/link";
-import React from "react";
+import React, { ReactElement } from "react";
 import validator from "validator";
+import AdminLayout from "./adminLayout";
 export default function Login({ props }: any) {
   const { loginForm, setLoginForm } = React.useContext(myAppContext);
   const dispatch = useAppDispatch();
@@ -128,3 +129,7 @@ export default function Login({ props }: any) {
     </div>
   );
 }
+
+Login.getLayout = function getLayout(page: ReactElement) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

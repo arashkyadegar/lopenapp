@@ -4,12 +4,14 @@ import productReducer from "./product";
 import discountReducer from "./discount";
 import productFormReducer from "./productForm";
 import discountFormReducer from "./discountForm";
+import siteInfoFormReducer from "./siteInfoForm";
 import faqFormReducer from "./faqForm";
 import factorReducer from "./factor";
 import faqsReducer from "./faqs";
 import userReducer from "./user";
 
 export default combineReducers({
+  siteInfoForm: siteInfoFormReducer,
   product: productReducer,
   discount: discountReducer,
   productForm: productFormReducer,
