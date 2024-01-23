@@ -7,11 +7,9 @@ import SliderComponent from "./slider";
 import ProductCardComponent from "./product_card";
 import AdsDoubleComponent from "./ads_double";
 export default function IndexComponent({ props }: any) {
-  //   const { createPostModal, setCreatePostModal } =
-  //     React.useContext(myAppContext);
   const products = JSON.parse(props.products);
-  //   const { user } = useAppSelector((state) => state.entities);
-  //console.log(products);
+  const siteinfo = JSON.parse(props.siteinfo)[0];
+
   useEffect(() => {}, []);
 
   return (
@@ -21,7 +19,7 @@ export default function IndexComponent({ props }: any) {
          this is me
        </a> */}
         <TriplexTopButtonsComponent />
-        <SliderComponent />
+        <SliderComponent props = {siteinfo.headerImages} />
       </div>
 
       {/* most new products */}
@@ -53,7 +51,7 @@ export default function IndexComponent({ props }: any) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-center grid-rows-1 gap-4">
-        {products.map((product: any) => (
+          {products.map((product: any) => (
             <ProductCardComponent key={product._id} props={product} />
           ))}
         </div>

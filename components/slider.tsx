@@ -15,50 +15,39 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import Image from "next/image";
 import React from "react";
+import { getDefaultImageAvator } from "@/utility/imageUtility";
 
 export default function SliderComponent({ props }: any) {
+  const images = props;
+
   return (
     <div className="w-full order-1  sm:order-2 col-span-3 relative ">
       <Swiper
-        className=" shadow-md shadow-gray-500 "
+        className=" shadow-md shadow-gray-500 w-full h-80"
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={20}
         slidesPerView={1}
         autoplay={true}
         loop={true}
         navigation={true}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => {}}
+        onSwiper={(swiper) => {}}
         onNavigationNext={() => {}}
         onNavigationPrev={() => {}}
       >
-        <SwiperSlide>
-          <Image
-            src="/slider (5).jpg"
-            width={500}
-            height={500}
-            className="w-full h-full aspect-auto"
-            alt="user avator"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/slider (6).jpg"
-            width={500}
-            height={500}
-            className="w-full  h-full  aspect-auto"
-            alt="user avator"
-          />
-        </SwiperSlide>
-        <SwiperSlide className="w-full h-full">
-          <Image
-            src="/slider (7).jpg"
-            width={500}
-            height={500}
-            className="w-full h-full   aspect-auto"
-            alt="user avator"
-          />
-        </SwiperSlide>
+        {images.map((image: any) => (
+                  <SwiperSlide key={image}>
+                  <Image
+                    src={getDefaultImageAvator(image)} 
+                    width={500}
+                    height={500}
+                    className="w-full h-full aspect-auto"
+                    alt="user avator"
+                  />
+                </SwiperSlide>
+
+        ))}
+
       </Swiper>
     </div>
   );

@@ -79,6 +79,7 @@ type AppPropsWithLayout = AppProps & {
 //   return getLayout(<Component {...pageProps} />)
 // }
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+
   // Use the layout defined at the page level, if available
   const [states, setStates] = useState(Array<StateEntity>());
   const [cities, setCities] = useState(Array<CityEntity>());
@@ -123,7 +124,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {getLayout(<Component {...pageProps} />)}
+          {getLayout(<Component {...pageProps}  />)}
           <ToastContainer />
         </PersistGate>
       </Provider>
@@ -131,6 +132,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   );
   // Use the layout defined at the page level, if available
 }
+
 App.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>;
 };

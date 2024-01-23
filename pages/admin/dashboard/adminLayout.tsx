@@ -4,13 +4,9 @@ import React, { PropsWithChildren } from "react";
 export default function AdminLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <div>
-        {" "}
-        <ul
-          className="text-base gap-2  flex flex-col text-right  text-gray-600  p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse 
-            md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-        >
-          <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
+      <div className=" mx-4 py-2">
+        <ul className="text-base gap-2 flex flex-row text-right">
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
             <Link
               href={{
                 pathname: `/admin/dashboard/products`,
@@ -19,7 +15,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               لیست محصولات
             </Link>
           </li>
-          <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
             <Link
               href={{
                 pathname: `/admin/dashboard/discounts`,
@@ -28,17 +24,17 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               لیست تخفیف ها
             </Link>
           </li>
-          <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 text-center   hover:bg-emerald-600   ml-4  transition-all duration-300">
             <Link
               href={{
                 pathname: `/admin/dashboard/faqs`,
               }}
             >
-               سوالات متداول
+              سوالات متداول
             </Link>
           </li>
 
-          <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400  hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
             <Link
               href={{
                 pathname: `/admin/dashboard/siteinfo/editsiteInfo`,
@@ -48,7 +44,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             </Link>
           </li>
 
-          <li>
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400  hover:bg-emerald-600 text-center  ml-4  transition-all duration-300">
             <Link
               href={{
                 pathname: `/about`,
@@ -57,16 +53,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               درباره ما
             </Link>
           </li>
-          <li>
-            <Link
-              href={{
-                pathname: `/admin/dashboard/main`,
-              }}
-            >
-              admin
-            </Link>
-          </li>
-          <li>
+
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400  hover:bg-emerald-600 text-center  ml-4  transition-all duration-300">
             <Link
               href={{
                 pathname: `/contactus`,
@@ -75,13 +63,13 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               ارتباط با ما
             </Link>
           </li>
-          <li>
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
             <Link
               href={{
-                pathname: `/singleproduct`,
+                pathname: `/admin/dashboard/login`,
               }}
             >
-              محصول
+              لاگین
             </Link>
           </li>
         </ul>

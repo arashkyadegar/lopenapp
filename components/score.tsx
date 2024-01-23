@@ -13,14 +13,14 @@ export default function ScoreComponent({ props }: any) {
   function createGoldenStars(n: number) {
     let result = [];
     for (let index = 0; index < n; index++) {
-      result.push(<GoldenStarComponent />);
+      result.push(<GoldenStarComponent key={index} />);
     }
     return result;
   }
   function createGrayStars(n: number) {
     let result = [];
     for (let index = 0; index < n; index++) {
-      result.push(<GrayStarComponent />);
+      result.push(<GrayStarComponent key={index} />);
     }
     return result;
   }

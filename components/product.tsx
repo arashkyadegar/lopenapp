@@ -24,7 +24,11 @@ import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { selectedProductUpdated } from "@/redux/store/selectedProduct";
 import { produce } from "immer";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
-import { productFormFilled, setFormCount, setFormImage } from "@/redux/store/productForm";
+import {
+  productFormFilled,
+  setFormCount,
+  setFormImage,
+} from "@/redux/store/productForm";
 
 export default function ProductComponent({ props }: any) {
   const dispatch = useAppDispatch();
@@ -46,7 +50,7 @@ export default function ProductComponent({ props }: any) {
       _id: "",
       factorId: "",
       productId: product._id,
-      productName:product.name,
+      productName: product.name,
       unitPrice: product.price,
       discount: discount,
       count: productForm.data.count,
@@ -177,17 +181,19 @@ export default function ProductComponent({ props }: any) {
                     autoplay={false}
                     loop={true}
                     //    navigation={true}
-                    onSlideChange={() => console.log("slide change")}
-                    onSwiper={(swiper) => console.log(swiper)}
+                    onSlideChange={() => {}}
+                    onSwiper={(swiper) => {}}
                     // onNavigationNext={() => {}}
                     // onNavigationPrev={() => {}}
                   >
                     {product.images.map((image: any) => (
                       <SwiperSlide
+                        key={image}
                         onClick={changeProductImage}
                         className="cursor-pointer border hover:border-[#FFB534] transition duration-200"
                       >
                         <img
+                          key={image}
                           id={image}
                           src={getDefaultImageAvator(image)}
                           width={500}
@@ -262,14 +268,14 @@ export default function ProductComponent({ props }: any) {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="currentColor"
                             data-slot="icon"
                             className="w-6 h-6"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                               d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
                             />
                           </svg>
@@ -314,9 +320,11 @@ export default function ProductComponent({ props }: any) {
                         <a>{product.components}</a>
                       </div>
                       <div className="col-span-5 flex flex-row gap-4 p-1">
-                      {product.tags.map((item: any) => (
-                          <a className="border-gray-200 border p-2 rounded-xl">#{item}</a>
-                      ))}
+                        {product.tags.map((item: any) => (
+                          <a key={item} className="border-gray-200 border p-2 rounded-xl">
+                            #{item}
+                          </a>
+                        ))}
                       </div>
                     </div>
                   </div>

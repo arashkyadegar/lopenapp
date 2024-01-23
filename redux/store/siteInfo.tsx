@@ -34,7 +34,7 @@ export const siteinfoFormSlice = createSlice({
 // action creator
 export const submitEditSiteinfoAction = (siteInfo: any) =>
   apiCallBegan({
-    url: "/api/siteinfosxxx/",
+    url: "/api/siteinfos/",
     onSuccess: "siteinfo/siteinfoAdded",
     onError: "siteinfo/siteinfoFaild",
     credentials:"include",

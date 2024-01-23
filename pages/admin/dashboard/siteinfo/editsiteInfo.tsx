@@ -7,7 +7,8 @@ import { FileService } from "@/services/fileService";
 import { ResponseStatus } from "@/utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
-import { submitEditSiteinfoAction } from "@/redux/store/siteinfo";
+import { submitEditSiteinfoAction } from "@/redux/store/siteInfo";
+
 
 export default function EditSiteInfo(rslt: any) {
   const formdata = new FormData();
@@ -45,7 +46,7 @@ export default function EditSiteInfo(rslt: any) {
         copyRightYear: siteInfoFormState.data.copyRightYear,
       };
       try {
-        console.log('vvv');
+        console.log("vvv");
         dispatch(submitEditSiteinfoAction(x));
       } catch (err) {
         console.log("rrrr");
@@ -193,12 +194,12 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillEmail2(event: any): void {
-    let text: string = validator.escape(event.target.value);
-    if (validator.isEmpty(text)) {
+    let text: string = event.target.value;
+    if (!validator.isEmail(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          email2Error: "لطفا ایمیل ۲ را وارد کنید",
+          email2Error: "لطفا ایمیل ۲ را درست وارد کنید",
           formIsValid: false,
           email2: text,
         })
@@ -216,12 +217,12 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillEmail1(event: any): void {
-    let text: string = validator.escape(event.target.value);
-    if (validator.isEmpty(text)) {
+    let text: string = event.target.value;
+    if (!validator.isEmail(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          email1Error: "لطفا ایمیل ۱ را وارد کنید",
+          email1Error: "لطفا ایمیل ۱ را درست وارد کنید",
           formIsValid: false,
           email1: text,
         })
@@ -240,7 +241,7 @@ export default function EditSiteInfo(rslt: any) {
 
   function fillMobile2(event: any): void {
     let text: string = validator.escape(event.target.value);
-    if (validator.isEmpty(text)) {
+    if (!validator.isNumeric(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
@@ -263,7 +264,7 @@ export default function EditSiteInfo(rslt: any) {
 
   function fillMobile1(event: any): void {
     let text: string = validator.escape(event.target.value);
-    if (validator.isEmpty(text)) {
+    if (!validator.isNumeric(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
@@ -286,7 +287,7 @@ export default function EditSiteInfo(rslt: any) {
 
   function fillTel2(event: any): void {
     let text: string = validator.escape(event.target.value);
-    if (validator.isEmpty(text)) {
+    if (!validator.isNumeric(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
@@ -308,8 +309,8 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillTel1(event: any): void {
-    let text: string = validator.escape(event.target.value);
-    if (validator.isEmpty(text)) {
+    let text: string = event.target.value;
+    if (!validator.isNumeric(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
