@@ -93,7 +93,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [faqItemToggle, setFaqItemToggle] = useState(false);
   const [factorForm, setFactorForm] = useState(new FactorForm());
   const [loginForm, setLoginForm] = useState(new LoginForm());
-  const [addProductForm, setAddProductForm] = useState(new AddProductForm());
+ // const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   const { store } = wrapperForPersistStore.useWrappedStore(initialState);
   let persistor = persistStore(store);
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -104,8 +104,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         setLoginForm,
         faqItemToggle,
         setFaqItemToggle,
-        addProductForm,
-        setAddProductForm,
+        // addProductForm,
+        // setAddProductForm,
         navbarToggle,
         setNavbarToggle,
         smallBasketToggle,

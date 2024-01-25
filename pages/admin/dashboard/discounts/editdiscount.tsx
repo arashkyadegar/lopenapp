@@ -61,11 +61,11 @@ export default function EditDiscount(rslt: any) {
     console.log(`${prdct._id} == ${discountFormState.data.productId}`);
     if (prdct._id === discountFormState.data.productId)
       return (
-        <option value={prdct._id} selected>
+        <option key={prdct._id} value={prdct._id} selected>
           {prdct.name}
         </option>
       );
-    return <option value={prdct._id}>{prdct.name}</option>;
+    return <option key={prdct._id} value={prdct._id}>{prdct.name}</option>;
   }
   async function submitEditDiscount(event: any): Promise<void> {
     // event.preventDefault();
@@ -206,7 +206,7 @@ export default function EditDiscount(rslt: any) {
   }
   useEffect(() => {
     dispatch(discountFormFilled(discount));
-  }, []);
+  }, [discount]);
 
   return (
     <>
@@ -324,8 +324,7 @@ export default function EditDiscount(rslt: any) {
                     </div>
                   </div>
                   <div className=" flex flex-col">
-                    <img src="" />
-                    <img src="" />
+ 
                   </div>
                 </div>
               </main>

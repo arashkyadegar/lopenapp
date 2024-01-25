@@ -31,7 +31,7 @@ export default function FaqsComponent({ props }: any) {
   }
   useEffect(() => {
     dispatch(faqsRecieved(faqs));
-  }, []);
+  }, [faqs]);
   return (
     <>
       <div className="container p-4 ">

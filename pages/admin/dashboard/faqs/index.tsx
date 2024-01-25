@@ -4,8 +4,7 @@ import AdminLayout from "../adminLayout";
 import { useAppDispatch } from "@/redux/store/hooks";
 import { submitDeleteFaqAction } from "@/redux/store/faqs";
 import Link from "next/link";
-import Custom401 from "@/pages/401";
-import qs from "querystring";
+
 // This gets called on every request
 export async function getServerSideProps(context: any) {
   const { req } = context;

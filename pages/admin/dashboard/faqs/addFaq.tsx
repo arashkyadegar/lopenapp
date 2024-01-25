@@ -1,5 +1,4 @@
-import MainLayout from "@/components/common/mainLayout";
-import { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
@@ -26,7 +25,7 @@ export default function AddFaq() {
         priority: faqFormState.data.priority,
         date: "",
       };
-      //console.log(x);
+
       try {
         dispatch(submitAddFaqAction(x));
       } catch (err) {
@@ -36,12 +35,8 @@ export default function AddFaq() {
       ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید")
     }
   }
-  useEffect(() => {
-    formClear();
-  }, []);
-  function formClear() {
-    dispatch(faqFormCleard());
-  }
+
+ 
 
   function fillFaqQuestion(event: any): void {
     let text: string = validator.escape(event.target.value);
@@ -176,10 +171,7 @@ export default function AddFaq() {
                       </button>
                     </div>
                   </div>
-                  <div className=" flex flex-col">
-                    <img src="" />
-                    <img src="" />
-                  </div>
+
                 </div>
               </main>
             </div>

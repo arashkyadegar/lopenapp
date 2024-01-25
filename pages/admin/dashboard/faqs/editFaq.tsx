@@ -1,9 +1,7 @@
-import MainLayout from "@/components/common/mainLayout";
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
-  faqFormCleard,
   faqFormFilled,
   setFormAnswer,
   setFormPriority,
@@ -12,22 +10,19 @@ import {
 import validator from "validator";
 import { submitEditFaqAction } from "@/redux/store/faqs";
 import { ToastFail } from "@/utility/tostify";
-import { FaqEntity } from "@/models/entities";
-import { ResponseRedirect } from "@/utility/responseStatus";
+
 
 export default function EditFaq(rslt: any) {
   const dispatch = useAppDispatch();
   let faq = JSON.parse(rslt.faq)[0];
-  console.log("xxxxxxxxxxxxxxxxxxxxx");
-  console.log(faq);
   const faqFormState = useAppSelector((state) => state.entities.faqForm);
 
   useEffect(() => {
     dispatch(faqFormFilled(faq));
-  }, []);
+  }, [faq]);
 
   async function submitEditFaq(event: any): Promise<void> {
-    // event.preventDefault();
+
     if (faqFormState.data.formIsValid) {
       const x = {
         _id: faqFormState.data._id,
@@ -197,10 +192,7 @@ export default function EditFaq(rslt: any) {
                       </button>
                     </div>
                   </div>
-                  <div className=" flex flex-col">
-                    <img src="" />
-                    <img src="" />
-                  </div>
+
                 </div>
               </main>
             </div>
@@ -211,7 +203,7 @@ export default function EditFaq(rslt: any) {
     </>
   );
 }
-// This gets called on every request
+
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
   const { req } = context;

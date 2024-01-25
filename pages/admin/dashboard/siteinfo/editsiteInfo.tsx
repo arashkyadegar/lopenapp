@@ -8,7 +8,7 @@ import { ResponseStatus } from "@/utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { submitEditSiteinfoAction } from "@/redux/store/siteInfo";
-
+import Image from "next/image";
 
 export default function EditSiteInfo(rslt: any) {
   const formdata = new FormData();
@@ -495,9 +495,13 @@ export default function EditSiteInfo(rslt: any) {
                         <div className="flex flex-row gap-2 m-2">
                           {siteInfoFormState.data.headerImages.map(
                             (image: any) => (
-                              <img
-                                className="w-10 h-10"
+                              <Image
+                                key={image}
                                 src={getDefaultImageAvator(image)}
+                                width={800}
+                                height={800}
+                                className="w-10 h-10"
+                                alt="headers images"
                               />
                             )
                           )}
@@ -519,11 +523,14 @@ export default function EditSiteInfo(rslt: any) {
 
                       {siteInfoFormState.data.logo1 !== undefined && (
                         <div className="flex flex-row gap-2 m-2">
-                          <img
-                            className="w-10 h-10"
+                          <Image
                             src={getDefaultImageAvator(
                               siteInfoFormState.data.logo1
                             )}
+                            width={800}
+                            height={800}
+                            className="w-10 h-10"
+                            alt="main logo"
                           />
                         </div>
                       )}
@@ -841,10 +848,7 @@ export default function EditSiteInfo(rslt: any) {
                       </button>
                     </div>
                   </div>
-                  <div className=" flex flex-col">
-                    <img src="" />
-                    <img src="" />
-                  </div>
+                  <div className=" flex flex-col"></div>
                 </div>
               </main>
             </div>

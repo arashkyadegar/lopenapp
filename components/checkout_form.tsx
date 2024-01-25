@@ -295,6 +295,7 @@ export default function CheckoutFormComponent({ props }: any) {
                       </li>
                       {states.map((element) => (
                         <li
+                          key={element.id}
                           onClick={stateChange}
                           value={element.id}
                           className="hover:bg-[#80BB01]  hover:text-white cursor-pointer"
@@ -361,6 +362,7 @@ export default function CheckoutFormComponent({ props }: any) {
                       </li>
                       {cities.map((element) => (
                         <li
+                          key={element.name}
                           onClick={cityChange}
                           className="hover:bg-[#80BB01]  hover:text-white cursor-pointer"
                         >

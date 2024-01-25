@@ -1,21 +1,22 @@
 import Image from "next/image";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
-import { AddProductForm, ProductEntity } from "@/models/entities";
 import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { submitAddProductAction } from "@/redux/store/product";
 import { FileService } from "@/services/fileService";
-import { ProductService } from "@/services/productService";
-import { ToastAuthFail, ToastFail, ToastInfo, ToastSuccess } from "@/utility/tostify";
-import { ToastContainer, toast } from "react-toastify";
+import {
+  ToastAuthFail,
+  ToastFail,
+  ToastInfo,
+  ToastSuccess,
+} from "@/utility/tostify";
+
 import {
   productFormCleard,
-  productFormFilled,
   setFormComponents,
   setFormDesc,
   setFormDisplay,
-  setFormFiles,
   setFormHealthId,
   setFormImages,
   setFormIsAvailable,
@@ -33,10 +34,10 @@ export default function Addproduct() {
   const productFormState = useAppSelector(
     (state) => state.entities.productForm
   );
-  const [addProductForm, setAddProductForm] = useState(new AddProductForm());
+
   useEffect(() => {
     formClear();
-  }, []);
+  });
   function formClear() {
     formdata.delete("files");
     dispatch(productFormCleard());
@@ -102,13 +103,6 @@ export default function Addproduct() {
           name: text,
         })
       );
-      // dispatch(
-      //   productFormFilled({
-      //     nameError: "لطفا نام محصول را وارد کنید",
-      //     formIsValid: false,
-      //     name: text,
-      //   })
-      // );
     } else {
       dispatch(
         setFormName({
@@ -117,13 +111,6 @@ export default function Addproduct() {
           formIsValid: true,
         })
       );
-
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   nameError: "",
-      //   name: text,
-      //   formIsValid: true,
-      // });
     }
   }
 
@@ -159,13 +146,6 @@ export default function Addproduct() {
   function fillPrdctSize(event: any): void {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   sizeError: "لطفا سایز محصول را وارد کنید",
-      //   formIsValid: false,
-      //   size: text,
-      // });
-
       dispatch(
         setFormSize({
           sizeError: "لطفا سایز محصول را وارد کنید",
@@ -181,12 +161,6 @@ export default function Addproduct() {
           formIsValid: true,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   sizeError: "",
-      //   size: text,
-      //   formIsValid: true,
-      // });
     }
   }
 
@@ -200,12 +174,6 @@ export default function Addproduct() {
           healthId: text,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   healthIdError: "لطفا شناسه بهداشت  را وارد کنید",
-      //   formIsValid: false,
-      //   healthId: text,
-      // });
     } else {
       dispatch(
         setFormHealthId({
@@ -214,12 +182,6 @@ export default function Addproduct() {
           formIsValid: true,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   healthIdError: "",
-      //   healthId: text,
-      //   formIsValid: true,
-      // });
     }
   }
 
@@ -262,12 +224,6 @@ export default function Addproduct() {
         formIsValid: true,
       })
     );
-    // setAddProductForm({
-    //   ...addProductForm,
-    //   displayError: "",
-    //   display: text,
-    //   formIsValid: true,
-    // });
   }
 
   function fillPrdctIsAvailable(event: any): void {
@@ -280,12 +236,6 @@ export default function Addproduct() {
         formIsValid: true,
       })
     );
-    // // setAddProductForm({
-    // //   ...addProductForm,
-    // //   isAvailableError: "",
-    // //   isAvailable: text,
-    // //   formIsValid: true,
-    // // });
   }
 
   function fillPrdctComponents(event: any): void {
@@ -298,12 +248,6 @@ export default function Addproduct() {
           components: text,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   componentsError: "لطفا ترکیبات محصول را وارد کنید",
-      //   formIsValid: false,
-      //   components: text,
-      // });
     } else {
       dispatch(
         setFormComponents({
@@ -312,12 +256,6 @@ export default function Addproduct() {
           formIsValid: true,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   componentsError: "",
-      //   components: text,
-      //   formIsValid: true,
-      // });
     }
   }
 
@@ -331,12 +269,6 @@ export default function Addproduct() {
           desc: text,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   descError: "لطفا توضیحات محصول را وارد کنید",
-      //   formIsValid: false,
-      //   desc: text,
-      // });
     } else {
       dispatch(
         setFormDesc({
@@ -345,12 +277,6 @@ export default function Addproduct() {
           formIsValid: true,
         })
       );
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   descError: "",
-      //   desc: text,
-      //   formIsValid: true,
-      // });
     }
   }
 
@@ -364,13 +290,6 @@ export default function Addproduct() {
           tags: text,
         })
       );
-
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   tagsError: "لطفا برچسبهای محصول را وارد کنید",
-      //   formIsValid: false,
-      //   tags: text,
-      // });
     } else {
       dispatch(
         setFormTags({
@@ -379,15 +298,7 @@ export default function Addproduct() {
           formIsValid: true,
         })
       );
-
-      // setAddProductForm({
-      //   ...addProductForm,
-      //   tagsError: "",
-      //   tags: text,
-      //   formIsValid: true,
-      // });
     }
-    // text.trim().split(",")
   }
   async function fillPrdctFile(event: any): Promise<void> {
     let count = event.target.files.length;
@@ -400,7 +311,7 @@ export default function Addproduct() {
       const response = await uploader.upload(formdata);
       switch (response.status) {
         case ResponseStatus.OK: {
-          const repo = await response.json()
+          const repo = await response.json();
           dispatch(
             setFormImages({
               imagesError: "",
@@ -465,7 +376,6 @@ export default function Addproduct() {
                     ثبت اطلاعات محصول
                   </a>
                 </div>
-
                 <div>
                   <div className="w-1/2 mx-auto">
                     <div className="flex flex-col gap-2 m-2">
@@ -480,24 +390,15 @@ export default function Addproduct() {
                       {productFormState.data.images !== undefined && (
                         <div className="flex flex-row gap-2 m-2">
                           {productFormState.data.images.map((image: any) => (
-                            <img
-                              className="w-10 h-10"
+                            <Image
+                              key={image}
                               src={getDefaultImageAvator(image)}
+                              className="w-10 h-10"
+                              alt="product image"
                             />
                           ))}
                         </div>
                       )}
-                      {/* {productFormState.data.files !== undefined && (
-                        <>
-                          {productFormState.data.files.map((image: any) => (
-                            <img
-                              className="w-10 h-10"
-                              src={getDefaultImageAvator(image)}
-                            />
-                          ))}
-                        </>
-                      )} */}
-
                       <p className="text-red-400 text-xs">
                         {productFormState.data.imagesError}
                       </p>
@@ -706,10 +607,6 @@ export default function Addproduct() {
                         ثبت محصول
                       </button>
                     </div>
-                  </div>
-                  <div className=" flex flex-col">
-                    <img src="" />
-                    <img src="" />
                   </div>
                 </div>
               </main>

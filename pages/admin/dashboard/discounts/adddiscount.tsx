@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
 import validator from "validator";
@@ -41,13 +41,6 @@ export default function AddDiscount(rslt: any) {
   const discountFormState = useAppSelector(
     (state) => state.entities.discountForm
   );
-
-  useEffect(() => {
-    formClear();
-  }, []);
-  function formClear() {
-    dispatch(discountFormCleard());
-  }
   async function submitAddDiscount(event: any): Promise<void> {
     // event.preventDefault();
 
@@ -273,7 +266,7 @@ export default function AddDiscount(rslt: any) {
                         onChange={fillDiscountProductId}
                       >
                         {products.map((prdct: any) => (
-                          <option value={prdct._id}>{prdct.name}</option>
+                          <option key={prdct._id} value={prdct._id}>{prdct.name}</option>
                         ))}
                       </select>
                     </div>
@@ -289,8 +282,7 @@ export default function AddDiscount(rslt: any) {
                     </div>
                   </div>
                   <div className=" flex flex-col">
-                    <img src="" />
-                    <img src="" />
+
                   </div>
                 </div>
               </main>

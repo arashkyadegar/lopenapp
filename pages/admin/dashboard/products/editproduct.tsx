@@ -37,7 +37,7 @@ export default function Editproduct(rslt: any) {
   );
   useEffect(() => {
     dispatch(productFormFilled(product));
-  }, []);
+  });
   function formClear() {
     formdata.delete("files");
     dispatch(productFormCleard());
@@ -520,23 +520,16 @@ export default function Editproduct(rslt: any) {
                       {productFormState.data.images !== undefined && (
                         <div className="flex flex-row gap-2 m-2">
                           {productFormState.data.images.map((image: any) => (
-                            <img
-                              className="w-10 h-10"
-                              src={getDefaultImageAvator(image)}
-                            />
+                            <Image
+                            key={image}
+                            src={getDefaultImageAvator(image)}
+                            className="w-10 h-10"
+                            alt="product image"
+                          />
                           ))}
                         </div>
                       )}
-                      {/* <>
-                        <div>
-                          {productFormState.data.images.map((image: any) => (
-                            <img
-                              className="w-10 h-10"
-                              src={getDefaultImageAvator(image)}
-                            />
-                          ))}
-                        </div>
-                      </> */}
+
                       <p className="text-red-400 text-xs">
                         {productFormState.data.imagesError}
                       </p>
@@ -748,10 +741,7 @@ export default function Editproduct(rslt: any) {
                       </button>
                     </div>
                   </div>
-                  <div className=" flex flex-col">
-                    <img src="" />
-                    <img src="" />
-                  </div>
+
                 </div>
               </main>
             </div>

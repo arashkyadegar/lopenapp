@@ -133,7 +133,7 @@ export default function ProductComponent({ props }: any) {
     );
     // }
     //dispatch(commentsRecieved(comments));
-  }, []);
+  });
   return (
     <div className="container px-4">
       <div className="flex flex-col w-full">
@@ -192,14 +192,13 @@ export default function ProductComponent({ props }: any) {
                         onClick={changeProductImage}
                         className="cursor-pointer border hover:border-[#FFB534] transition duration-200"
                       >
-                        <img
-                          key={image}
-                          id={image}
-                          src={getDefaultImageAvator(image)}
+                        <Image
+                          loader={() => getDefaultImageAvator(image)}
+                          src={image}
                           width={500}
                           height={500}
-                          className=" mx-auto  h-full"
                           alt="user avator"
+                          className=" mx-auto  h-full"
                         />
                       </SwiperSlide>
                     ))}
@@ -321,7 +320,10 @@ export default function ProductComponent({ props }: any) {
                       </div>
                       <div className="col-span-5 flex flex-row gap-4 p-1">
                         {product.tags.map((item: any) => (
-                          <a key={item} className="border-gray-200 border p-2 rounded-xl">
+                          <a
+                            key={item}
+                            className="border-gray-200 border p-2 rounded-xl"
+                          >
                             #{item}
                           </a>
                         ))}
