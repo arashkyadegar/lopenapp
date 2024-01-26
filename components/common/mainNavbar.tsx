@@ -1,6 +1,6 @@
 // components/common/MainNavBar.tsx
 import React, { PropsWithChildren, useState } from "react";
-import Image from "next/image";
+
 import Link from "next/link";
 import BasketSmallComponent from "../basket_smal";
 import myAppContext from "@/components/context/context";
@@ -128,7 +128,7 @@ export default function MainNavBar({ props }: any) {
             href="https://flowbite.com/"
             className="flex items-center space-x-3 "
           >
-            <Image
+            <img
               src="/logo.png"
               width={500}
               height={500}

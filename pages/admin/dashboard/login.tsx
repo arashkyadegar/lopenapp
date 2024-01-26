@@ -1,7 +1,5 @@
 import myAppContext from "@/components/context/context";
 import { submitSigninAction, userRecieved } from "@/redux/store/user";
-import { LoginService } from "@/services/loginService";
-import { ToastFail, ToastInfo, ToastSuccess } from "@/utility/tostify";
 import { useAppDispatch, useAppSelector } from "../../../redux/store/hooks";
 import Link from "next/link";
 import React, { ReactElement } from "react";
@@ -16,23 +14,8 @@ export default function Login({ props }: any) {
     const email = "admin";
     const password = "admin";
     const remember = "true";
-    // const baseUrl = `${process.env.NEXT_PUBLIC_BASEURL}/api/auth/login/`;
-    // const res = await fetch(baseUrl, {
-    //   method: "POST",
-    //   credentials:"include",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email: email,
-    //     password: password,
-    //     remember: remember,
-    //   })
-    // });
 
-    // const result = await res.text();
-    //console.log(result);
-     dispatch(submitSigninAction(email, password, remember));
+    dispatch(submitSigninAction(email, password, remember));
   }
   function fillLoginPassword(event: any) {
     let text: string = validator.escape(event.target.value);

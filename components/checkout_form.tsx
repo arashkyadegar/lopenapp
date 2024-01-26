@@ -5,7 +5,6 @@ import statesJson from "../utility/states.json";
 import citiesJson from "../utility/citys.json";
 import { CityEntity, FactorForm, StateEntity } from "@/models/entities";
 import validator from "validator";
-import Image from "next/image";
 
 export default function CheckoutFormComponent({ props }: any) {
   const stateList: Array<StateEntity> = statesJson;

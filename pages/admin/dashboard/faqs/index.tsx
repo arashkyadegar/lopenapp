@@ -1,4 +1,4 @@
-import MainLayout from "@/components/common/mainLayout";
+
 import { ReactElement } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch } from "@/redux/store/hooks";
@@ -37,7 +37,6 @@ export async function getServerSideProps(context: any) {
 
 export default function Faqs(rslt: any) {
   const faqs = JSON.parse(rslt.faqs);
-  //const errorCode = JSON.parse(rslt.errorCode);
   const dispatch = useAppDispatch();
 
   function submitDeleteFaq(id: any) {

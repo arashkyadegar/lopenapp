@@ -1,6 +1,4 @@
-import { PropsWithChildren, useEffect } from "react";
-import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -21,7 +19,6 @@ import { getNewPrice } from "@/utility/discount";
 import ScoreComponent from "./score";
 import { factorAdded, factorReAdded } from "@/redux/store/factor";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
-import { selectedProductUpdated } from "@/redux/store/selectedProduct";
 import { produce } from "immer";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import {
@@ -155,7 +152,7 @@ export default function ProductComponent({ props }: any) {
                   )}
                   <div className="flex mb-2 h-72  overflow-hidden mt-6 justify-center">
                     <div>
-                      <Image
+                      <img
                         src={getDefaultImageAvator(productForm.data.image)}
                         width={800}
                         height={800}
@@ -192,9 +189,8 @@ export default function ProductComponent({ props }: any) {
                         onClick={changeProductImage}
                         className="cursor-pointer border hover:border-[#FFB534] transition duration-200"
                       >
-                        <Image
-                          loader={() => getDefaultImageAvator(image)}
-                          src={image}
+                        <img
+                          src={getDefaultImageAvator(productForm.data.image)}
                           width={500}
                           height={500}
                           alt="user avator"
@@ -305,12 +301,6 @@ export default function ProductComponent({ props }: any) {
                         <a>{product.healthId}</a>
                       </div>
 
-                      {/* <div className="col-span-2   p-1">
-                        <a>نوع :</a>
-                      </div>
-                      <div className="col-span-3 border-b border-gray-200">
-                      <a>{product.healthId}</a>
-                      </div> */}
 
                       <div className="col-span-2 p-1">
                         <a>ترکیبات :</a>

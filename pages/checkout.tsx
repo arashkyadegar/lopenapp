@@ -1,5 +1,5 @@
 import myAppContext from "@/components/context/context";
-import Image from "next/image";
+
 import React, { ReactElement, useState } from "react";
 import CheckoutFormComponent from "@/components/checkout_form";
 import CheckoutGridComponent from "@/components/checkout_grid";

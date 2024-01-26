@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { Inter } from "next/font/google";
 import IndexComponent from "@/components";
 import { ReactElement } from "react";

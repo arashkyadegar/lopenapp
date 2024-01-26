@@ -2,7 +2,6 @@ import { ReactElement } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
-  faqFormCleard,
   setFormAnswer,
   setFormPriority,
   setFormQuestion,
@@ -19,8 +18,8 @@ export default function AddFaq() {
       const x = {
         _id: "",
         groupId: 0,
-        question: faqFormState.data.question,
-        answer: faqFormState.data.answer,
+        question: validator.escape(faqFormState.data.question),
+        answer: validator.escape(faqFormState.data.answer),
         display: false,
         priority: faqFormState.data.priority,
         date: "",
@@ -31,15 +30,13 @@ export default function AddFaq() {
       } catch (err) {
         console.log("rrrr");
       }
-    }else{
-      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید")
+    } else {
+      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     }
   }
 
- 
-
   function fillFaqQuestion(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormQuestion({
@@ -60,7 +57,7 @@ export default function AddFaq() {
   }
 
   function fillFaqAnswer(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormAnswer({
@@ -80,7 +77,7 @@ export default function AddFaq() {
     }
   }
   function fillFaqpPriority(event: any): void {
-    let value = validator.escape(event.target.value);
+    let value = event.target.value;
     dispatch(
       setFormPriority({
         priorityError: "",
@@ -171,7 +168,6 @@ export default function AddFaq() {
                       </button>
                     </div>
                   </div>
-
                 </div>
               </main>
             </div>

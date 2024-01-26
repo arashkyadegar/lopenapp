@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
-import Image from "next/image";
+
 import React from "react";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 
@@ -37,7 +37,7 @@ export default function SliderComponent({ props }: any) {
       >
         {images.map((image: any) => (
                   <SwiperSlide key={image}>
-                  <Image
+                  <img
                     src={getDefaultImageAvator(image)} 
                     width={500}
                     height={500}

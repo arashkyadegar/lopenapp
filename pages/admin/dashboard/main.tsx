@@ -1,8 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
-import AdminLayout from "./adminLayout";
-import { headers } from "next/headers";
-import { ReactElement } from "react";
+
 export default function Main() {
   return (
     <div className="  container m-4">

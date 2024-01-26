@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { ReactElement } from "react";
 import AdminLayout from "../adminLayout";
 import Link from "next/link";

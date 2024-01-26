@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import validator from "validator";
@@ -35,33 +34,7 @@ export default function Addproduct() {
     (state) => state.entities.productForm
   );
 
-  useEffect(() => {
-    formClear();
-  });
-  function formClear() {
-    formdata.delete("files");
-    dispatch(productFormCleard());
-    // setAddProductForm({
-    //   ...addProductForm,
-    //   _id: "",
-    //   name: " ",
-    //   weight: " ",
-    //   size: " ",
-    //   healthId: " ",
-    //   type: "1",
-    //   components: "",
-    //   desc: "",
-    //   score: 0,
-    //   price: 0,
-    //   display: false,
-    //   isAvailable: false,
-    //   tags: "",
-    //   image: "",
-    //   images: [],
-    //   userId: "",
-    //   files: [],
-    // });
-  }
+
   async function submitAddProduct(event: any): Promise<void> {
     // event.preventDefault();
 
@@ -390,7 +363,7 @@ export default function Addproduct() {
                       {productFormState.data.images !== undefined && (
                         <div className="flex flex-row gap-2 m-2">
                           {productFormState.data.images.map((image: any) => (
-                            <Image
+                            <img
                               key={image}
                               src={getDefaultImageAvator(image)}
                               className="w-10 h-10"
@@ -403,7 +376,7 @@ export default function Addproduct() {
                         {productFormState.data.imagesError}
                       </p>
                     </div>
-                    <div className="flex flex-col gap-2 m-2">
+                    {/* <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="_id" className="w-20 text-sm font-bold">
                         کد محصول
                       </label>
@@ -414,7 +387,7 @@ export default function Addproduct() {
                         className="p-1 border
             border-gray-300 bg-[#F9FAFB]"
                       />
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="name" className="w-20 text-sm font-bold">

@@ -1,7 +1,4 @@
-import myAppContext from "@/components/context/context";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
-import Image from "next/image";
 import TriplexTopButtonsComponent from "./triplexـ_top_bottons";
 import SliderComponent from "./slider";
 import ProductCardComponent from "./product_card";
@@ -19,7 +16,7 @@ export default function IndexComponent({ props }: any) {
          this is me
        </a> */}
         <TriplexTopButtonsComponent />
-        <SliderComponent props = {siteinfo.headerImages} />
+        <SliderComponent props={siteinfo.headerImages} />
       </div>
 
       {/* most new products */}

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { Comment } from "@/models/entities";
-// import { CommentForm } from "@/models/entities";
+
 import { createSelector } from "reselect";
 import { apiCallBegan } from "./api";
 

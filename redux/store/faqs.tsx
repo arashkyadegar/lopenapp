@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
-import { taintObjectReference } from "next/dist/server/app-render/entry-base";
-//import { AuthToken } from "@/utility/readToken";
 
-//Action types
 
 const REMOVE_POST = "REMOVE_FACTOR";
 

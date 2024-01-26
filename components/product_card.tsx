@@ -1,6 +1,3 @@
-import { PropsWithChildren } from "react";
-
-import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import ScoreComponent from "./score";
@@ -28,7 +25,7 @@ export default function ProductCardComponent({ props }: any) {
         <div className="flex mb-2 h-44  overflow-hidden mt-6 justify-center">
           <div>
             <a href="#" className=" w-full h-full">
-              <Image
+              <img
                 src={getDefaultImageAvator(product.images[0])}
                 width={500}
                 height={500}

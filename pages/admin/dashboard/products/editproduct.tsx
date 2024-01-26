@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 
@@ -520,7 +520,7 @@ export default function Editproduct(rslt: any) {
                       {productFormState.data.images !== undefined && (
                         <div className="flex flex-row gap-2 m-2">
                           {productFormState.data.images.map((image: any) => (
-                            <Image
+                            <img
                             key={image}
                             src={getDefaultImageAvator(image)}
                             className="w-10 h-10"

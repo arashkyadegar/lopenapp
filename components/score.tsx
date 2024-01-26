@@ -1,8 +1,5 @@
-import { PropsWithChildren } from "react";
 
-import Image from "next/image";
 import React from "react";
-import ProductCardComponent from "./product_card";
 import GoldenStarComponent from "./golden_star";
 import GrayStarComponent from "./gray_star";
 export default function ScoreComponent({ props }: any) {

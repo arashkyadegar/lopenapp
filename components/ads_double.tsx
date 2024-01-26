@@ -1,11 +1,8 @@
-import { PropsWithChildren } from "react";
-
-import Image from "next/image";
 import React from "react";
 export default function AdsDoubleComponent({ props }: any) {
   return (
     <>
-      <Image
+      <img
         src="/sugar.jpg"
         width={500}
         height={500}

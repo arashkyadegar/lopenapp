@@ -1,8 +1,7 @@
-import { PropsWithChildren, useEffect } from "react";
-
+import { useEffect } from "react";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { faqsRecieved, faqsToggled } from "@/redux/store/faqs";
+import { faqsRecieved } from "@/redux/store/faqs";
 
 export default function FaqsComponent({ props }: any) {
   const faqs = JSON.parse(props.faqs);
@@ -31,7 +30,7 @@ export default function FaqsComponent({ props }: any) {
   }
   useEffect(() => {
     dispatch(faqsRecieved(faqs));
-  }, [faqs]);
+  }, []);
   return (
     <>
       <div className="container p-4 ">

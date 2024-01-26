@@ -67,8 +67,7 @@ export default function MainFooter({ props }: any) {
 
           <div className="flex flex-row gap-4 px-4 justify-center">
             <div className="p-2 border border-gray-400">
-              <Image
-                loader={() => getDefaultImageAvator('icons8-instagram-16.png')}
+              <img 
                 src={'icons8-instagram-16.png'}
                 width={500}
                 height={500}
@@ -76,8 +75,8 @@ export default function MainFooter({ props }: any) {
               />
             </div>
             <div className="p-2 border border-gray-400">
-            <Image
-                loader={() => getDefaultImageAvator('icons8-twitter-16.png')}
+            <img 
+
                 src={'icons8-twitter-16.png'}
                 width={500}
                 height={500}
@@ -86,8 +85,8 @@ export default function MainFooter({ props }: any) {
      
             </div>
             <div className="p-1 border border-gray-400">
-            <Image
-                loader={() => getDefaultImageAvator('icons8-whatsapp-48.png')}
+            <img 
+
                 src={'icons8-whatsapp-48.png'}
                 width={500}
                 height={500}
@@ -96,8 +95,8 @@ export default function MainFooter({ props }: any) {
               {/* <img src="icons8-whatsapp-48.png" alt="" className="w-6 h-6" /> */}
             </div>
             <div className="p-2 border border-gray-400">
-            <Image
-                loader={() => getDefaultImageAvator('icons8-twitter-16.png')}
+            <img 
+
                 src={'icons8-twitter-16.png'}
                 width={500}
                 height={500}

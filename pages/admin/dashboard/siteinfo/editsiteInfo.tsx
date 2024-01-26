@@ -8,7 +8,7 @@ import { ResponseStatus } from "@/utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { submitEditSiteinfoAction } from "@/redux/store/siteInfo";
-import Image from "next/image";
+
 
 export default function EditSiteInfo(rslt: any) {
   const formdata = new FormData();
@@ -495,7 +495,7 @@ export default function EditSiteInfo(rslt: any) {
                         <div className="flex flex-row gap-2 m-2">
                           {siteInfoFormState.data.headerImages.map(
                             (image: any) => (
-                              <Image
+                              <img
                                 key={image}
                                 src={getDefaultImageAvator(image)}
                                 width={800}
@@ -523,7 +523,7 @@ export default function EditSiteInfo(rslt: any) {
 
                       {siteInfoFormState.data.logo1 !== undefined && (
                         <div className="flex flex-row gap-2 m-2">
-                          <Image
+                          <img
                             src={getDefaultImageAvator(
                               siteInfoFormState.data.logo1
                             )}

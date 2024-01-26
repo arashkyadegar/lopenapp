@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { ReactElement } from "react";
 import AdminLayout from "../adminLayout";
 import Link from "next/link";
-import { submitDeleteProductAction } from "@/redux/store/product";
 import { useAppDispatch } from "@/redux/store/hooks";
 import { submitDeleteDiscountAction } from "@/redux/store/discount";
 

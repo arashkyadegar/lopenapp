@@ -1,8 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { apiCallBegan } from "./api";
-//import { AuthToken } from "@/utility/readToken";
-
-//Action types
 
 // Part 1
 export interface PostInitialState {

@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
-//import { AuthToken } from "@/utility/readToken";
 
-//Action types
 
 const REMOVE_POST = "REMOVE_FACTOR";
 
