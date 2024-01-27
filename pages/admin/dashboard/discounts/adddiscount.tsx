@@ -1,4 +1,3 @@
-
 import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
 import validator from "validator";
@@ -19,7 +18,6 @@ export async function getServerSideProps(context: any) {
   const { req } = context;
   const { cookies } = req;
 
-
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
   const response = await fetch(`${baseURL}/api/products`, {
     method: "GET",
@@ -37,10 +35,12 @@ export async function getServerSideProps(context: any) {
 export default function AddDiscount(rslt: any) {
   const dispatch = useAppDispatch();
   const products = JSON.parse(rslt.products);
-  console.log(products);
   const discountFormState = useAppSelector(
     (state) => state.entities.discountForm
   );
+  useEffect(() => {
+    dispatch(discountFormCleard());
+  }, []);
   async function submitAddDiscount(event: any): Promise<void> {
     // event.preventDefault();
 
@@ -266,7 +266,9 @@ export default function AddDiscount(rslt: any) {
                         onChange={fillDiscountProductId}
                       >
                         {products.map((prdct: any) => (
-                          <option key={prdct._id} value={prdct._id}>{prdct.name}</option>
+                          <option key={prdct._id} value={prdct._id}>
+                            {prdct.name}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -281,9 +283,7 @@ export default function AddDiscount(rslt: any) {
                       </button>
                     </div>
                   </div>
-                  <div className=" flex flex-col">
-
-                  </div>
+                  <div className=" flex flex-col"></div>
                 </div>
               </main>
             </div>

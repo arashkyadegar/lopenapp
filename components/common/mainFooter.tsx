@@ -68,7 +68,7 @@ export default function MainFooter({ props }: any) {
           <div className="flex flex-row gap-4 px-4 justify-center">
             <div className="p-2 border border-gray-400">
               <img 
-                src={'icons8-instagram-16.png'}
+                src='icons8-instagram-16.png'
                 width={500}
                 height={500}
                 alt="user avator"
@@ -77,7 +77,7 @@ export default function MainFooter({ props }: any) {
             <div className="p-2 border border-gray-400">
             <img 
 
-                src={'icons8-twitter-16.png'}
+                src='icons8-twitter-16.png'
                 width={500}
                 height={500}
                 alt="user avator"
@@ -87,7 +87,7 @@ export default function MainFooter({ props }: any) {
             <div className="p-1 border border-gray-400">
             <img 
 
-                src={'icons8-whatsapp-48.png'}
+                src='icons8-whatsapp-48.png'
                 width={500}
                 height={500}
                 alt="user avator"
@@ -97,7 +97,7 @@ export default function MainFooter({ props }: any) {
             <div className="p-2 border border-gray-400">
             <img 
 
-                src={'icons8-twitter-16.png'}
+                src='icons8-twitter-16.png'
                 width={500}
                 height={500}
                 alt="user avator"

@@ -34,7 +34,9 @@ export default function Addproduct() {
     (state) => state.entities.productForm
   );
 
-
+  useEffect(() => {
+    dispatch(productFormCleard());
+  },[]);
   async function submitAddProduct(event: any): Promise<void> {
     // event.preventDefault();
 

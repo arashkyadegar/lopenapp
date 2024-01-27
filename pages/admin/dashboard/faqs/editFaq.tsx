@@ -19,7 +19,7 @@ export default function EditFaq(rslt: any) {
 
   useEffect(() => {
     dispatch(faqFormFilled(faq));
-  }, [faq]);
+  }, []);
 
   async function submitEditFaq(event: any): Promise<void> {
 

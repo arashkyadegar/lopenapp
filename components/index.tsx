@@ -6,9 +6,6 @@ import AdsDoubleComponent from "./ads_double";
 export default function IndexComponent({ props }: any) {
   const products = JSON.parse(props.products);
   const siteinfo = JSON.parse(props.siteinfo)[0];
-
-  useEffect(() => {}, []);
-
   return (
     <>
       <div className="sm:grid-cols-4 grid grid-cols-1 p-5 gap-0  sm:gap-6 group">

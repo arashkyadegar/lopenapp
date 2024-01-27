@@ -37,7 +37,7 @@ export default function Editproduct(rslt: any) {
   );
   useEffect(() => {
     dispatch(productFormFilled(product));
-  });
+  },[]);
   function formClear() {
     formdata.delete("files");
     dispatch(productFormCleard());

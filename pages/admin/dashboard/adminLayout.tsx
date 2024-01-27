@@ -15,7 +15,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               لیست محصولات
             </Link>
           </li>
-          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
+          <li className="px-2 py-3 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
             <Link
               href={{
                 pathname: `/admin/dashboard/discounts`,
@@ -44,25 +44,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             </Link>
           </li>
 
-          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400  hover:bg-emerald-600 text-center  ml-4  transition-all duration-300">
-            <Link
-              href={{
-                pathname: `/about`,
-              }}
-            >
-              درباره ما
-            </Link>
-          </li>
 
-          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400  hover:bg-emerald-600 text-center  ml-4  transition-all duration-300">
-            <Link
-              href={{
-                pathname: `/contactus`,
-              }}
-            >
-              ارتباط با ما
-            </Link>
-          </li>
           <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
             <Link
               href={{

@@ -4,13 +4,13 @@ import IndexComponent from "@/components";
 import { ReactElement } from "react";
 import MainLayout from "@/components/common/mainLayout";
 
-const inter = Inter({ subsets: ["latin"] });
+
 
 export default function Home(rslt: any) {
   return <IndexComponent props={rslt} />;
 }
 // This gets called on every request
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
   const res = await fetch(`${baseURL}/api/wbproducts`);
   const repo = await res.json();

@@ -1,7 +1,8 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
+  faqFormCleard,
   setFormAnswer,
   setFormPriority,
   setFormQuestion,
@@ -13,6 +14,9 @@ import { ToastFail } from "@/utility/tostify";
 export default function AddFaq() {
   const dispatch = useAppDispatch();
   const faqFormState = useAppSelector((state) => state.entities.faqForm);
+  useEffect(() => {
+    dispatch(faqFormCleard());
+  },[]);
   function submitAddFaq(event: any): void {
     if (faqFormState.data.formIsValid) {
       const x = {

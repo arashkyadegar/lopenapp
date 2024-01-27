@@ -24,6 +24,7 @@ const api =
       const response = await fetch(baseURL + url, requestOptions);
 
       const result = await response.text();
+
       switch (response.status) {
         case ResponseStatus.OK: {
           const x = JSON.parse(result);
@@ -35,7 +36,6 @@ const api =
         case ResponseStatus.BAD_REQUEST: {
           dispatch({ type: onError });
           ToastFail(result);
-
           break;
         }
         case ResponseStatus.UNAUTHORIZED: {
@@ -50,13 +50,16 @@ const api =
         }
         case ResponseStatus.TRYING_TO_ADD_A_DUPLICATE: {
           ToastFail("خطای ثبت دوباره");
-
+          break;
+        }
+        default : {
+          ToastFail();
           break;
         }
       }
     } catch (error: any) {
-      // General handling
-      dispatch(actions.apiCallFailed(error.message));
+      ToastFail(error);
+     // dispatch(actions.apiCallFailed(error.message));
 
       //specified handling
     }

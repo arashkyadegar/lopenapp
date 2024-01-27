@@ -128,9 +128,8 @@ export default function ProductComponent({ props }: any) {
         count: "1",
       })
     );
-    // }
-    //dispatch(commentsRecieved(comments));
-  });
+
+  }, []);
   return (
     <div className="container px-4">
       <div className="flex flex-col w-full">
@@ -183,14 +182,15 @@ export default function ProductComponent({ props }: any) {
                     // onNavigationNext={() => {}}
                     // onNavigationPrev={() => {}}
                   >
-                    {product.images.map((image: any) => (
+                    {productForm.data.images.map((image: any) => (
                       <SwiperSlide
                         key={image}
-                        onClick={changeProductImage}
                         className="cursor-pointer border hover:border-[#FFB534] transition duration-200"
                       >
                         <img
-                          src={getDefaultImageAvator(productForm.data.image)}
+                          id={image}
+                          onClick={changeProductImage}
+                          src={getDefaultImageAvator(image)}
                           width={500}
                           height={500}
                           alt="user avator"
@@ -300,7 +300,6 @@ export default function ProductComponent({ props }: any) {
                       <div className="col-span-3  border-b border-gray-200">
                         <a>{product.healthId}</a>
                       </div>
-
 
                       <div className="col-span-2 p-1">
                         <a>ترکیبات :</a>
