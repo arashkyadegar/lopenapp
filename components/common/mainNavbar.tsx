@@ -158,7 +158,7 @@ export default function MainNavBar({ props }: any) {
                     صفحه اصلی
                   </Link>
                 </li>
-                {/* <li>
+                <li>
                   <Link
                     href={{
                       pathname: `/checkout`,
@@ -166,7 +166,7 @@ export default function MainNavBar({ props }: any) {
                   >
                     فاکتور
                   </Link>
-                </li> */}
+                </li>
 
                 <li>
                   <Link
