@@ -1,10 +1,14 @@
 import myAppContext from "@/components/context/context";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import React, { useState } from "react";
 import statesJson from "../utility/states.json";
 import citiesJson from "../utility/citys.json";
 import { CityEntity, FactorForm, StateEntity } from "@/models/entities";
 import validator from "validator";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
+import { factorFormFilled } from "@/redux/store/factorForm";
+import { ToastFail } from "@/utility/tostify";
+import { factorsRecieved, submitAddFactorAction } from "@/redux/store/factor";
 
 export default function CheckoutFormComponent({ props }: any) {
   const stateList: Array<StateEntity> = statesJson;
@@ -15,7 +19,13 @@ export default function CheckoutFormComponent({ props }: any) {
   const { statesUlToggle, setStatesUlToggle } = React.useContext(myAppContext);
   const [states, setStates] = React.useState(statesJson);
 
-  const [factorForm, setFactorForm] = useState(new FactorForm());
+  const dispatch = useAppDispatch();
+  const factorFormState = useAppSelector((state) => state.entities.factorForm);
+  const factorState = useAppSelector((state) => state.entities.factor);
+  useEffect(() => {
+    //dispatch(siteinfoFormFilled(siteInfo));
+  }, []);
+
   function stateTextKeyUp(event: any): void {
     const node = event.target as HTMLInputElement;
     const stateName = node.value;
@@ -29,10 +39,12 @@ export default function CheckoutFormComponent({ props }: any) {
     const stateName = node.innerHTML;
     let filtered = cityList.filter((city) => city.stateId == stateId);
 
-    setFactorForm({
-      ...factorForm,
-      state: stateName,
-    });
+    dispatch(
+      factorFormFilled({
+        ...factorFormState.data,
+        state: stateName,
+      })
+    );
     // state
     setCities(filtered);
     stateUlToggle();
@@ -41,10 +53,12 @@ export default function CheckoutFormComponent({ props }: any) {
   function cityChange(event: any): void {
     const node = event.target as HTMLElement;
     const city = node.innerHTML;
-    setFactorForm({
-      ...factorForm,
-      city: city,
-    });
+    dispatch(
+      factorFormFilled({
+        ...factorFormState.data,
+        city: city,
+      })
+    );
     cityUlToggle();
   }
 
@@ -69,110 +83,190 @@ export default function CheckoutFormComponent({ props }: any) {
   }
   // form-validation-start
   function fillFNameText(event: any) {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
-      setFactorForm({
-        ...factorForm,
-        fNameError: "لطفا نام خود را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          fNameError: "لطفا نام خود را وارد کنید",
+          formIsValid: false,
+          fName: text,
+        })
+      );
     } else {
-      setFactorForm({
-        ...factorForm,
-        fNameError: "",
-        fName: text,
-        formIsValid: true,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          fNameError: "",
+          fName: text,
+          formIsValid: true,
+        })
+      );
     }
   }
 
   function fillLNameText(event: any) {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
-      setFactorForm({
-        ...factorForm,
-        lNameError: "لطفا نام خانوادگی خود را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          lNameError: "لطفا نام خانوادگی خود را وارد کنید",
+          formIsValid: false,
+          lName: text,
+        })
+      );
     } else {
-      setFactorForm({
-        ...factorForm,
-        lNameError: "",
-        lName: text,
-        formIsValid: true,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          lNameError: "",
+          lName: text,
+          formIsValid: true,
+        })
+      );
     }
   }
 
   function fillMobileText(event: any) {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setFactorForm({
-        ...factorForm,
-        mobileError: "لطفا موبایل خود را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          mobileError: "لطفا موبایل خود را وارد کنید",
+          formIsValid: false,
+          mobile:text
+        })
+      );
     } else {
-      setFactorForm({
-        ...factorForm,
-        mobileError: "",
-        mobile: text,
-        formIsValid: true,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          mobileError: "",
+          mobile: text,
+          formIsValid: true,
+        })
+      );
     }
   }
 
-  function fillPhoneText(event: any) {
+  function fillTelText(event: any) {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setFactorForm({
-        ...factorForm,
-        phoneError: "لطفا تلفن خود را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          telError: "لطفا تلفن خود را وارد کنید",
+          formIsValid: false,
+          tel:text
+        })
+      );
     } else {
-      setFactorForm({
-        ...factorForm,
-        phoneError: "",
-        phone: text,
-        formIsValid: true,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          telError: "",
+          tel: text,
+          formIsValid: true,
+        })
+      );
     }
   }
-
+  function fillDescText(event: any) {
+    let text: string = validator.escape(event.target.value);
+    dispatch(
+      factorFormFilled({
+        ...factorFormState.data,
+        desc: text,
+      })
+    );
+  }
   function fillAddressText(event: any) {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setFactorForm({
-        ...factorForm,
-        addressError: "لطفا آدرس خود را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          addressError: "لطفا آدرس خود را وارد کنید",
+          formIsValid: false,
+          address: text
+        })
+      );
     } else {
-      setFactorForm({
-        ...factorForm,
-        addressError: "",
-        address: text,
-        formIsValid: true,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          addressError: "",
+          address: text,
+          formIsValid: true,
+        })
+      );
     }
   }
 
   function fillPostCodeText(event: any) {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
-      setFactorForm({
-        ...factorForm,
-        postCodeError: "لطفا کد پستی خود را وارد کنید",
-        formIsValid: false,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          postalCodeError: "لطفا کد پستی خود را وارد کنید",
+          formIsValid: false,
+          postalCode: text,
+        })
+      );
     } else {
-      setFactorForm({
-        ...factorForm,
-        postCodeError: "",
-        postCode: text,
-        formIsValid: true,
-      });
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          postalCodeError: "",
+          postalCode: text,
+          formIsValid: true,
+        })
+      );
+    }
+  }
+
+    async function submitAddFactor(event: any): Promise<void> {
+    event.preventDefault();
+
+    if (factorFormState.data.formIsValid) {
+      let desc = "";
+      if (factorFormState.data.desc.trim() == "") {
+        desc = "توضیحات ندارد";
+      }
+
+      const factor = {
+        _id: "",
+        factorNumber: "",
+        wbuserId: "",
+        refCode: "",
+        factorContent: "",
+        additionalInfo: "",
+        price: 1,
+        statusId: 0,
+        paymentType: 0,
+
+        fName: factorFormState.data.fName,
+        lName: factorFormState.data.lName,
+        tel: factorFormState.data.tel,
+        mobile: factorFormState.data.mobile,
+        state: factorFormState.data.state,
+        city: factorFormState.data.city,
+        postalCode: factorFormState.data.postalCode,
+        address: factorFormState.data.address,
+        desc: desc,
+      };
+      const items = factorState.list;
+      try {
+        dispatch(submitAddFactorAction(factor, items));
+        dispatch(factorsRecieved([]));
+      } catch (err) {
+        console.log("rrrr");
+      }
+    } else {
+      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     }
   }
   return (
@@ -185,72 +279,76 @@ export default function CheckoutFormComponent({ props }: any) {
           <form className="w-full flex  flex-row ">
             <div className=" w-1/2">
               <div className="flex flex-col  gap-2 m-2">
-                <label htmlFor="text_fName" className="w-20 text-sm font-bold">
+                <label htmlFor="fName" className="w-20 text-sm font-bold">
                   نام
                 </label>
                 <input
                   type="text"
-                  name="text_fName"
+                  name="fName"
                   id="fName"
-                  onChange={fillFNameText}
                   className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="نام"
+                  onChange={fillFNameText}
+                  value={factorFormState.data.fName}
                 />
                 <p className="text-red-400 text-xs h-5">
-                  {factorForm.fNameError}
+                  {factorFormState.data.fNameError}
                 </p>
               </div>
               <div className="flex flex-col  gap-2  m-2">
-                <label htmlFor="text_lName" className="w-20 text-sm  font-bold">
+                <label htmlFor="lName" className="w-20 text-sm  font-bold">
                   نام خانوادگی
                 </label>
                 <input
                   type="text"
-                  name="text_lName"
+                  name="lName"
                   id="lName"
-                  onChange={fillLNameText}
                   className="p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="نام خانوادگی"
+                  onChange={fillLNameText}
+                  value={factorFormState.data.lName}
                 />
                 <p className="text-red-400 text-xs h-5">
-                  {factorForm.lNameError}
+                  {factorFormState.data.lNameError}
                 </p>
               </div>
 
               <div className="flex flex-col  gap-2  m-2 ">
                 <label
-                  htmlFor="text_mobile"
+                  htmlFor="mobile"
                   className="w-20 text-sm  font-bold"
                 >
                   موبایل
                 </label>
                 <input
                   type="text"
-                  name="text_mobile"
+                  name="mobile"
                   id="mobile"
-                  onChange={fillMobileText}
                   className="p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="موبایل"
+                  onChange={fillMobileText}
+                  value={factorFormState.data.mobile}
                 />
                 <p className="text-red-400 text-xs h-5">
-                  {factorForm.mobileError}
+                  {factorFormState.data.mobileError}
                 </p>
               </div>
 
               <div className="flex flex-col  gap-2  m-2 ">
-                <label htmlFor="text_phone" className="w-20 text-sm  font-bold">
+                <label htmlFor="tel" className="w-20 text-sm  font-bold">
                   تلفن
                 </label>
                 <input
                   type="text"
-                  name="text_phone"
-                  id="phone"
-                  onChange={fillPhoneText}
+                  name="tel"
+                  id="tel"
                   className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="تلفن"
+                  onChange={fillTelText}
+                  value={factorFormState.data.tel}
                 />
                 <p className="text-red-400 text-xs h-5">
-                  {factorForm.phoneError}
+                  {factorFormState.data.telError}
                 </p>
               </div>
             </div>
@@ -263,7 +361,7 @@ export default function CheckoutFormComponent({ props }: any) {
                   <div className="flex flex-row w-full items-center relative">
                     <div className="h-8 w-full   outline-none   border border-gray-300  bg-[#F9FAFB]">
                       <input
-                        value={factorForm.state}
+                        value={factorFormState.data.state}
                         className="bg-transparent outline-none "
                       />
                       <svg
@@ -317,7 +415,7 @@ export default function CheckoutFormComponent({ props }: any) {
                     </ul>
                   )}
                   <p className="text-red-400 text-xs h-5">
-                    {factorForm.stateError}
+                    {factorFormState.data.stateError}
                   </p>
                 </div>
               </div>
@@ -330,7 +428,7 @@ export default function CheckoutFormComponent({ props }: any) {
                   <div className="flex flex-row items-center relative">
                     <div className="h-8 w-full  outline-none   border border-gray-300  bg-[#F9FAFB]">
                       <input
-                        value={factorForm.city}
+                        value={factorFormState.data.city}
                         className="bg-transparent outline-none "
                       />
                       <svg
@@ -371,63 +469,68 @@ export default function CheckoutFormComponent({ props }: any) {
                     </ul>
                   )}
                   <p className="text-red-400 text-xs h-5">
-                    {factorForm.cityError}
+                    {factorFormState.data.cityError}
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-col  gap-2  m-2 ">
                 <label
-                  htmlFor="text_postalCode"
+                  htmlFor="postalCode"
                   className="w-20 text-sm  font-bold"
                 >
                   کد پستی
                 </label>
                 <input
                   type="text"
-                  name="text_postalCode"
+                  name="postalCode"
                   id="postalCode"
-                  onChange={fillPostCodeText}
                   className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="کد پستی"
+                  onChange={fillPostCodeText}
+                  value={factorFormState.data.postalCode}
                 />
                 <p className="text-red-400 text-xs h-5">
-                  {factorForm.postCodeError}
+                  {factorFormState.data.postalCodeError}
                 </p>
               </div>
               <div className="flex flex-col   gap-2   mx-2 sm:mt-2   ">
                 <label
-                  htmlFor="text_address"
+                  htmlFor="address"
                   className="w-20 text-sm  font-bold"
                 >
                   آدرس
                 </label>
                 <textarea
-                  name="text_address"
+                  name="address"
                   id="address"
-                  onChange={fillAddressText}
                   rows={4}
                   className="grow p-2 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="آدرس"
+                  onChange={fillAddressText}
+                  value={factorFormState.data.address}
                 ></textarea>
                 <p className="text-red-400 text-xs h-5">
-                  {factorForm.addressError}
+                  {factorFormState.data.addressError}
                 </p>
               </div>
               <div className="flex flex-col    gap-2  m-2  ">
-                <label htmlFor="text_info" className="w-20 text-sm  font-bold">
+                <label htmlFor="desc" className="w-20 text-sm  font-bold">
                   توضیحات
                 </label>
                 <textarea
-                  name="text_info"
-                  id="info"
+                  name="desc"
+                  id="desc"
                   className="grow p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="توضیحات"
+                  onChange={fillDescText}
+                  value={factorFormState.data.desc}
                 ></textarea>
               </div>
               <div className="flex justify-end p-2">
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={submitAddFactor}
                   className=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   ارسال

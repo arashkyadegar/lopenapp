@@ -1,9 +1,10 @@
 import myAppContext from "@/components/context/context";
 
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import CheckoutFormComponent from "@/components/checkout_form";
 import CheckoutGridComponent from "@/components/checkout_grid";
 import MainLayout from "@/components/common/mainLayout";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 export default function Checkout() {
 
   return (
@@ -23,7 +24,7 @@ export default function Checkout() {
                     خرید شما
                   </a>
                 </div>
-                <CheckoutGridComponent  />
+                <CheckoutGridComponent />
                 <CheckoutFormComponent />
               </div>
             </div>
@@ -33,7 +34,6 @@ export default function Checkout() {
     </>
   );
 }
-
 
 Checkout.getLayout = function getLayout(page: ReactElement) {
   return <MainLayout>{page}</MainLayout>;

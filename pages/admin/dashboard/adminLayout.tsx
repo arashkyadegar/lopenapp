@@ -43,7 +43,15 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               تنظیمات سایت
             </Link>
           </li>
-
+          <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
+            <Link
+              href={{
+                pathname: `/admin/dashboard/factors`,
+              }}
+            >
+              فاکتورها
+            </Link>
+          </li>
 
           <li className="px-2 py-4 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center  ml-4  transition-all duration-300 ">
             <Link
