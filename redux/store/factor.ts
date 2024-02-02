@@ -35,6 +35,17 @@ export const factorSlice = createSlice({
     },
   },
 });
+export const getFactorAction = (id: any) =>
+  apiCallBegan({
+    url: "/api/factors/" + id,
+    onSuccess: "factorForm/factorsRecieved",
+    onError: "products/productsFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
 export const submitAddFactorAction = (factor: any, items: any) =>
   apiCallBegan({

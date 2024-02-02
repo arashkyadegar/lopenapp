@@ -157,6 +157,7 @@ export default function ProductComponent({ props }: any) {
                         height={800}
                         className=" hover:scale-110 w-fit h-full aspect-auto transition duration-500 cursor-pointer"
                         alt="product image"
+        
                       />
                     </div>
                   </div>
@@ -195,6 +196,7 @@ export default function ProductComponent({ props }: any) {
                           height={500}
                           alt="user avator"
                           className=" mx-auto  h-full"
+                    
                         />
                       </SwiperSlide>
                     ))}

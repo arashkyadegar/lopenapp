@@ -32,6 +32,7 @@ export default function ProductCardComponent({ props }: any) {
                 className=" hover:scale-110 w-fit aspect-auto transition duration-500 cursor-pointer"
                 alt={product.name}
                 title={product.name}
+
               />
             </a>
           </div>

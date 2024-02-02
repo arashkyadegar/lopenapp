@@ -1,4 +1,4 @@
-
+"use client";
 import CheckoutGridComponent from "@/components/checkout_grid";
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
@@ -6,6 +6,7 @@ import CheckoutFormViewComponent from "@/components/checkout_formview";
 import { factorFormFilled } from "@/redux/store/factorForm";
 import { useAppDispatch } from "@/redux/store/hooks";
 import { factorsRecieved } from "@/redux/store/factor";
+import { useSearchParams } from "next/navigation";
 // This gets called on every request
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
@@ -48,10 +49,14 @@ export async function getServerSideProps(context: any) {
   return { props: { factor: factor, factorDetails: factorDetails } };
 }
 export default function EditFactor(rslt: any) {
+  const dispatch = useAppDispatch();
+  const params = useSearchParams();
+  const id = params.get("id");
+
   const factor = JSON.parse(rslt.factor)[0];
   const factorDetails = JSON.parse(rslt.factorDetails);
-  console.log(factorDetails)
-  const dispatch = useAppDispatch();
+
+
   useEffect(() => {
     dispatch(factorFormFilled(factor));
     dispatch(factorsRecieved(factorDetails));

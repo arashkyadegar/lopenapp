@@ -45,14 +45,14 @@ export default function Products() {
     <>
       <div className="container p-4">
         <div className="flex flex-col  w-full  aspect-video gap-4">
-          <div className="flex flex-col justify-between w-4/4  gap-4   mb-4 bg-white shadow-md shadow-gray-500 ">
+          <div className="flex flex-col justify-between w-4/4  gap-4 bg-white shadow-md shadow-gray-500 ">
             <div className="px-2">
               <a className=" flex text-2xl border-b p-1 border-gray-400">
                 محصولات
               </a>
             </div>
             <div>
-              <ul className="flex flex-row gap-4 px-4 mb-4">
+              <ul className="flex flex-row gap-4 px-4">
                 <li className="bg-blue-400 w-10 p-2 rounded-md ">
                   <Link
                     href={{

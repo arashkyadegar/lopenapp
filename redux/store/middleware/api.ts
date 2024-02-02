@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import * as actions from "../api";
 import { ResponseStatus } from "../../../utility/responseStatus";
-import { ToastFail, ToastSuccess } from "@/utility/tostify";
+import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 const api =
   ({ dispatch }: any) =>
   (next: any) =>
@@ -39,7 +39,7 @@ const api =
           break;
         }
         case ResponseStatus.UNAUTHORIZED: {
-          ToastFail("لطفا لاگین کنید");
+          ToastAuthFail("لطفا لاگین کنید");
           dispatch({ type: onError });
           break;
         }

@@ -43,7 +43,7 @@ export default function SliderComponent({ props }: any) {
                     height={500}
                     className="w-full h-full aspect-auto"
                     alt="user avator"
-                  />
+                              />
                 </SwiperSlide>
 
         ))}
