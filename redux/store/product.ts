@@ -30,12 +30,23 @@ export const productSlice = createSlice({
   },
 });
 
-// action creator
+export const getProductAction = (id: any) =>
+  apiCallBegan({
+    url: "/api/products/" + id,
+    onSuccess: "productForm/productFormFetched",
+    onError: "products/productsFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 export const submitDeleteProductAction = (id: any) =>
   apiCallBegan({
     url: "/api/products/" + id,
     onSuccess: "products/productFaild",
     onError: "products/productFaild",
+    credentials:"include",
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

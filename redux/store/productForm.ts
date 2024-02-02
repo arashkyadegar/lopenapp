@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-
 // Part 1
 export interface PostInitialState {
   product: number;
@@ -48,7 +46,7 @@ export const productFormSlice = createSlice({
       imageError: "",
       imagesError: "",
       userIdError: "",
-      count:"1",
+      count: "1",
       formIsValid: false,
     },
     isLoading: false,
@@ -98,9 +96,13 @@ export const productFormSlice = createSlice({
       state.data = action.payload;
       state.lastFetch = Date.now();
     },
+    productFormFetched: (state: any, action: PayloadAction<any>) => {
+      state.data = action.payload[0];
+      state.data.formIsValid = true;
+      state.lastFetch = Date.now();
+    },
     setFormCount: (state: any, action: PayloadAction<any>) => {
       state.data.count = action.payload.count;
-
     },
     setFormName: (state: any, action: PayloadAction<any>) => {
       state.data.name = action.payload.name;

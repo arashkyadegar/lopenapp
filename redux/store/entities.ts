@@ -9,12 +9,18 @@ import faqFormReducer from "./faqForm";
 import factorReducer from "./factor";
 import factorFormReducer from "./factorForm";
 import faqsReducer from "./faqs";
+import productsReducer from "./products";
+import factorsReducer from "./factors";
+import discountsReducer from "./discounts";
 import userReducer from "./user";
 
 export default combineReducers({
   siteInfoForm: siteInfoFormReducer,
   product: productReducer,
   discount: discountReducer,
+  products: productsReducer,
+  factors: factorsReducer,
+  discounts: discountsReducer,
   productForm: productFormReducer,
   discountForm: discountFormReducer,
   factor: factorReducer,

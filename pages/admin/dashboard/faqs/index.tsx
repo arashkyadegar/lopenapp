@@ -1,40 +1,40 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
-import { useAppDispatch } from "@/redux/store/hooks";
-import { submitDeleteFaqAction } from "@/redux/store/faqs";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
+import { getFaqsAction, submitDeleteFaqAction } from "@/redux/store/faqs";
 import Link from "next/link";
 
 // This gets called on every request
-export async function getServerSideProps(context: any) {
-  const { req } = context;
-  const { cookies } = req;
-  console.log("cookies.alonefighterx", cookies.alonefighterx);
+// export async function getServerSideProps(context: any) {
+//   const { req } = context;
+//   const { cookies } = req;
+//   console.log("cookies.alonefighterx", cookies.alonefighterx);
 
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const response = await fetch(`${baseURL}/api/faqs`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      authorization: cookies.alonefighterx,
-    },
-  });
+//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+//   const response = await fetch(`${baseURL}/api/faqs`, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       authorization: cookies.alonefighterx,
+//     },
+//   });
 
-  if (response.status == 401) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
-      },
-    };
-  }
-  //const errorCode = response.ok ? false : response.status;
-  const repo = await response.json();
-  const faqs = JSON.stringify(repo);
-  return { props: { faqs } };
-}
+//   if (response.status == 401) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
+//       },
+//     };
+//   }
+//   //const errorCode = response.ok ? false : response.status;
+//   const repo = await response.json();
+//   const faqs = JSON.stringify(repo);
+//   return { props: { faqs } };
+// }
 
-export default function Faqs(rslt: any) {
-  const faqs = JSON.parse(rslt.faqs);
+export default function Faqs() {
+  const faqsState = useAppSelector((state) => state.entities.faqs);
   const dispatch = useAppDispatch();
 
   function submitDeleteFaq(id: any) {
@@ -42,6 +42,11 @@ export default function Faqs(rslt: any) {
       dispatch(submitDeleteFaqAction(id));
     }
   }
+
+  useEffect(() => {
+    dispatch(getFaqsAction());
+  }, []);
+
   return (
     <>
       <div className="container p-4">
@@ -78,29 +83,29 @@ export default function Faqs(rslt: any) {
                 </li>
               </ul>
             </div>
-            <div className="grid  grid-cols-6 items-center divide divide-gray-200">
-              <div className="flex  items-center justify-center col-span-1  border border-gray-200 text-center">
+            <div className="grid  grid-cols-5 items-center divide divide-gray-200">
+              <div className="flex font-bold  items-center justify-center col-span-1  border border-gray-200 text-center">
                 <a>کد</a>
               </div>
-              <div className="flex  items-center justify-center col-span-2 border text-center">
+              <div className="px-2 font-bold flex  items-center justify-right col-span-1 border text-center">
                 <a>سوال</a>
               </div>
-              <div className="flex  items-center justify-center border  text-center">
+              <div className="px-2 font-bold flex  items-center justify-right border  text-center">
                 <a>پاسخ </a>
               </div>
-              <div className="flex  items-center justify-center border  text-center">
+              <div className="flex font-bold  items-center justify-center border  text-center">
                 <a>الویت نمایش </a>
               </div>
-              <div className="flex  items-center justify-center border  text-center">
+              <div className="flex font-bold  items-center justify-center border  text-center">
                 <a>عملیات </a>
               </div>
 
-              {faqs.map((faq: any) => (
+              {faqsState.list.map((faq: any) => (
                 <>
-                  <div className="border flex col-span-1 p-2 justify-start items-center">
+              <div className="border flex col-span-1 p-2 justify-center items-center">
                     <a className="text-xs">{faq._id}</a>
                   </div>
-                  <div className="border   flex col-span-2 p-1 justify-start items-center">
+                  <div className="border   flex col-span-1 p-1 justify-right items-center">
                     <a className=" line-clamp-1"> {faq.question}</a>
                   </div>
                   <div className="border line-clamp-1 flex col-span-1 p-1  justify-start  items-center">

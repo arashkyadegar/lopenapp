@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 
-
 const REMOVE_POST = "REMOVE_FACTOR";
 
 // Part 1
@@ -21,17 +20,18 @@ export const faqsSlice = createSlice({
     lastFetch: null,
   },
   reducers: {
-    
     faqsRecieved: (state: any, action: PayloadAction<any>) => {
       state.list = action.payload;
       state.lastFetch = Date.now();
     },
     faqsToggled: (state: any, action: PayloadAction<any>) => {
-
-      state.list =action.payload;
+      state.list = action.payload;
       state.lastFetch = Date.now();
     },
-    faqsFaild: (state: any, action: PayloadAction<any>) => {},
+    faqsFaild: (state: any, action: PayloadAction<any>) => {
+      state.list = [];
+      state.lastFetch = Date.now();
+    },
   },
 });
 // export const fetchFaqs = (id: any) =>
@@ -45,11 +45,26 @@ export const faqsSlice = createSlice({
 //     },
 //     //body: JSON.stringify(product),
 //   });
-  export const submitDeleteFaqAction = (id: any) =>
+export const getFaqsAction = () =>
+  apiCallBegan({
+    url: "/api/faqs/",
+    onSuccess: "faqs/faqsRecieved",
+    onError: "faqs/faqsFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
+
+
+export const submitDeleteFaqAction = (id: any) =>
   apiCallBegan({
     url: "/api/faqs/" + id,
     onSuccess: "faqs/faqsFaild",
     onError: "faqs/faqsFaild",
+    credentials: "include",
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -62,7 +77,7 @@ export const submitEditFaqAction = (product: any) =>
     url: "/api/faqs/" + product._id,
     onSuccess: "faqs/faqsFaild",
     onError: "faqs/faqsFaild",
-    credentials:"include",
+    credentials: "include",
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -75,7 +90,7 @@ export const submitAddFaqAction = (product: any) =>
     url: "/api/faqs/",
     onSuccess: "faqForm/faqFormCleard",
     onError: "faqs/faqsFaild",
-    credentials:"include",
+    credentials: "include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",

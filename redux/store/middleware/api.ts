@@ -20,7 +20,7 @@ const api =
     };
 
     try {
-      console.log(baseURL + url)
+
       const response = await fetch(baseURL + url, requestOptions);
 
       const result = await response.text();
@@ -40,7 +40,7 @@ const api =
         }
         case ResponseStatus.UNAUTHORIZED: {
           ToastFail("لطفا لاگین کنید");
-
+          dispatch({ type: onError });
           break;
         }
         case ResponseStatus.NOT_FOUND: {

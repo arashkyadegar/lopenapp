@@ -1,40 +1,44 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import Link from "next/link";
-import { useAppDispatch } from "@/redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { submitDeleteDiscountAction } from "@/redux/store/discount";
+import { getDiscountsAction } from "@/redux/store/discounts";
 
 // This gets called on every request
-export async function getServerSideProps(context: any) {
-  const { req } = context;
-  const { cookies } = req;
+// export async function getServerSideProps(context: any) {
+//   const { req } = context;
+//   const { cookies } = req;
 
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const response = await fetch(`${baseURL}/api/discounts`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      authorization: cookies.alonefighterx,
-    },
-  });
+//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+//   const response = await fetch(`${baseURL}/api/discounts`, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       authorization: cookies.alonefighterx,
+//     },
+//   });
 
-  if (response.status == 401) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
-      }
-    }
-  }
-  const repo = await response.json();
-  const discounts = JSON.stringify(repo);
-  return { props: { discounts } };
-}
+//   if (response.status == 401) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
+//       }
+//     }
+//   }
+//   const repo = await response.json();
+//   const discounts = JSON.stringify(repo);
+//   return { props: { discounts } };
+// }
 
-export default function Discounts(rslt: any) {
-  const discounts = JSON.parse(rslt.discounts);
-  console.log(discounts);
+export default function Discounts() {
+  const discountsState = useAppSelector((state) => state.entities.discounts);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getDiscountsAction());
+  }, []);
 
   function submitDeleteDiscount(id: any) {
     if (confirm("قصد حذف تخفیف را دارید ؟ ")) {
@@ -78,32 +82,32 @@ export default function Discounts(rslt: any) {
               </ul>
             </div>
             <div className="grid  grid-cols-5 items-center divide divide-gray-200">
-              <div className="flex  items-center justify-center col-span-1  border border-gray-200 text-center">
+              <div className="flex font-bold  items-center justify-center col-span-1  border border-gray-200 text-center">
                 <a>کد</a>
               </div>
-              <div className="flex  items-center justify-center col-span-1 border text-center">
+              <div className="px-2 font-bold  flex  items-center justify-right col-span-1 border text-center">
                 <a> عنوان تخفیف</a>
               </div>
-              <div className="flex  items-center justify-center border  text-center">
+              <div className=" px-2  font-bold flex  items-center justify-right  border  text-center">
                 <a>نام محصول </a>
               </div>
-              <div className="flex  items-center justify-center border  text-center">
+              <div className="flex  font-bold items-center justify-center border  text-center">
                 <a>میزان </a>
               </div>
 
-              <div className="flex  items-center justify-center border  text-center">
+              <div className="flex   font-bold items-center justify-center border  text-center">
                 <a>عملیات</a>
               </div>
 
-              {discounts.map((discount: any) => (
+              {discountsState.list.map((discount: any) => (
                 <>
-                  <div className="border flex col-span-1 p-2 justify-center items-center">
+                  <div className="border  flex col-span-1 p-2 justify-center items-center">
                     <a className="text-xs">{discount._id}</a>
                   </div>
-                  <div className="border flex col-span-1 p-1 justify-center items-center">
+                  <div className=" px-2 border flex col-span-1 p-1 justify-right items-center">
                     <a>{discount.title}</a>
                   </div>
-                  <div className="border flex col-span-1 p-1 justify-center items-center">
+                  <div className="px-2 border flex col-span-1 p-1 justify-right items-center">
                     <a>{discount.product.name}</a>
                   </div>
                   <div className="border flex col-span-1 p-1  justify-center items-center">

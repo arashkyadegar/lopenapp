@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import AdminLayout from "../adminLayout";
 import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-
+import { useSearchParams } from "next/navigation";
 import { ToastFail } from "@/utility/tostify";
 import {
   discountFormCleard,
@@ -13,45 +13,55 @@ import {
   setFormValue,
   setFormProductId,
 } from "@/redux/store/discountForm";
-import { submitEditDiscoutAction } from "@/redux/store/discount";
+import { getDiscountAction, submitEditDiscoutAction } from "@/redux/store/discount";
+import { getProductsAction } from "@/redux/store/products";
 // This gets called on every request
-export async function getServerSideProps(context: any) {
-  const { id } = context.query;
-  const { req } = context;
-  const { cookies } = req;
+// export async function getServerSideProps(context: any) {
+//   const { id } = context.query;
+//   const { req } = context;
+//   const { cookies } = req;
 
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const discount_response = await fetch(`${baseURL}/api/discounts/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Authorization: cookies.alonefighterx,
-    },
-  });
-  const discount_repo = await discount_response.json();
-  if (discount_response.status == 401) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
-      },
-    };
-  }
+//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+//   const discount_response = await fetch(`${baseURL}/api/discounts/${id}`, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       Authorization: cookies.alonefighterx,
+//     },
+//   });
+//   const discount_repo = await discount_response.json();
+//   if (discount_response.status == 401) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
+//       },
+//     };
+//   }
 
-  const discount = JSON.stringify(discount_repo);
-  const res = await fetch(`${baseURL}/api/products`);
-  const repo = await res.json();
-  const products = JSON.stringify(repo);
-  return { props: { products: products, discount: discount } };
-}
+//   const discount = JSON.stringify(discount_repo);
+//   const res = await fetch(`${baseURL}/api/products`);
+//   const repo = await res.json();
+//   const products = JSON.stringify(repo);
+//   return { props: { products: products, discount: discount } };
+// }
 export default function EditDiscount(rslt: any) {
-  const formdata = new FormData();
+  const params = useSearchParams();
+  const id = params.get("id");
   const dispatch = useAppDispatch();
-  const products = JSON.parse(rslt.products);
-  const discount = JSON.parse(rslt.discount)[0];
+
+
+
   const discountFormState = useAppSelector(
     (state) => state.entities.discountForm
   );
+  const productsState = useAppSelector((state) => state.entities.products);
+  
+  useEffect(() => {
+    dispatch(getDiscountAction(id));
+    dispatch(getProductsAction());
+  }, []);
+
 
   function formClear() {
     dispatch(discountFormCleard());
@@ -204,9 +214,7 @@ export default function EditDiscount(rslt: any) {
       })
     );
   }
-  useEffect(() => {
-    dispatch(discountFormFilled(discount));
-  }, [discount]);
+
 
   return (
     <>
@@ -307,7 +315,7 @@ export default function EditDiscount(rslt: any) {
                         onChange={fillDiscountProductId}
                         value={discountFormState.data.productId}
                       >
-                        {products.map((prdct: any) =>
+                        {productsState.list.map((prdct: any) =>
                           fillProductsdrpdwn(prdct)
                         )}
                       </select>

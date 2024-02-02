@@ -4,12 +4,13 @@ import { apiCallBegan } from "./api";
 const REMOVE_POST = "REMOVE_FACTOR";
 
 // Part 1
-export interface FactorInitialState {
-  factors: [];
+export interface PostInitialState {
+  product: number;
 }
-export const initialState: FactorInitialState = {
-  factors: [],
+export const initialState: PostInitialState = {
+  product: 0,
 };
+
 
 // Part 2
 export const factorSlice = createSlice({
@@ -40,6 +41,7 @@ export const submitAddFactorAction = (factor: any, items: any) =>
     url: "/api/factors/",
     onSuccess: "factorForm/factorFormCleard",
     onError: "products/productFaild",
+    credentials:"include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -53,6 +55,7 @@ export const submitAddFactorAction = (factor: any, items: any) =>
     url: "/api/factors/" + id,
     onSuccess: "factors/factorFaild",
     onError: "factors/factorFaild",
+    credentials:"include",
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

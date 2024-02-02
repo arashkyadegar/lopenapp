@@ -99,6 +99,11 @@ export const siteinfoFormSlice = createSlice({
       };
       state.lastFetch = Date.now();
     },
+    siteinfoFormFetched: (state: any, action: PayloadAction<any>) => {
+      state.data = action.payload[0];
+      state.data.formIsValid = true;
+      state.lastFetch = Date.now();
+    },
     siteinfoFormFilled: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
@@ -110,6 +115,6 @@ export const siteinfoFormSlice = createSlice({
 });
 
 // action creator
-export const { siteinfoFormFilled, siteinfoFormCleard } =
+export const { siteinfoFormFilled, siteinfoFormCleard,siteinfoFormFetched } =
   siteinfoFormSlice.actions;
 export default siteinfoFormSlice.reducer;

@@ -17,7 +17,7 @@ export const siteinfoFormSlice = createSlice({
     lastFetch: null,
   },
   reducers: {
-     siteinfoAdded: (state: any, action: PayloadAction<any>) => {
+    siteinfoAdded: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
     },
@@ -31,7 +31,7 @@ export const submitEditSiteinfoAction = (siteInfo: any) =>
     url: "/api/siteinfos/",
     onSuccess: "siteinfo/siteinfoAdded",
     onError: "siteinfo/siteinfoFaild",
-    credentials:"include",
+    credentials: "include",
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -39,5 +39,16 @@ export const submitEditSiteinfoAction = (siteInfo: any) =>
     body: JSON.stringify(siteInfo),
   });
 
+export const getSiteinfoAction = () =>
+  apiCallBegan({
+    url: "/api/siteinfos/",
+    onSuccess: "siteinfoForm/siteinfoFormFetched",
+    onError: "products/productsFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 export const { siteinfoAdded } = siteinfoFormSlice.actions;
 export default siteinfoFormSlice.reducer;

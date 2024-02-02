@@ -17,6 +17,7 @@ export default function AddFaq() {
   useEffect(() => {
     dispatch(faqFormCleard());
   },[]);
+  
   function submitAddFaq(event: any): void {
     if (faqFormState.data.formIsValid) {
       const x = {

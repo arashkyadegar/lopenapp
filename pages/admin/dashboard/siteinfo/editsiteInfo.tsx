@@ -7,19 +7,20 @@ import { FileService } from "@/services/fileService";
 import { ResponseStatus } from "@/utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
-import { submitEditSiteinfoAction } from "@/redux/store/siteInfo";
+import { getSiteinfoAction, submitEditSiteinfoAction } from "@/redux/store/siteInfo";
 
 export default function EditSiteInfo(rslt: any) {
   const formdata = new FormData();
   const formdata2 = new FormData();
-
-  let siteInfo = JSON.parse(rslt.siteInfo)[0];
   const dispatch = useAppDispatch();
+  
+
   const siteInfoFormState = useAppSelector(
     (state) => state.entities.siteInfoForm
   );
+  
   useEffect(() => {
-    //dispatch(siteinfoFormFilled(siteInfo));
+    dispatch(getSiteinfoAction());
   }, []);
   async function submitEditSiteinfo(event: any): Promise<void> {
     if (siteInfoFormState.data.formIsValid) {
@@ -841,21 +842,21 @@ export default function EditSiteInfo(rslt: any) {
     </>
   );
 }
-export async function getServerSideProps(context: any) {
-  const { req } = context;
-  const { cookies } = req;
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const response = await fetch(`${baseURL}/api/siteinfos`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Authorization: cookies.alonefighterx,
-    },
-  });
-  const repo = await response.json();
-  const siteInfo = JSON.stringify(repo);
-  return { props: { siteInfo } };
-}
+// export async function getServerSideProps(context: any) {
+//   const { req } = context;
+//   const { cookies } = req;
+//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+//   const response = await fetch(`${baseURL}/api/siteinfos`, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       Authorization: cookies.alonefighterx,
+//     },
+//   });
+//   const repo = await response.json();
+//   const siteInfo = JSON.stringify(repo);
+//   return { props: { siteInfo } };
+// }
 EditSiteInfo.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };

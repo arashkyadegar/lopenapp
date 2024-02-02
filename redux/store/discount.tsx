@@ -28,12 +28,26 @@ export const discountSlice = createSlice({
 });
 
 // action creator
+export const getDiscountAction = (id: any) =>
+  apiCallBegan({
+    url: "/api/discounts/" + id,
+    onSuccess: "discountForm/discountFormFetched",
+    onError: "discount/discountFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+
 export const submitDeleteDiscountAction = (id: any) =>
   apiCallBegan({
     url: "/api/discounts/" + id,
     onSuccess: "discount/discountFaild",
     onError: "discount/discountFaild",
     method: "DELETE",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },

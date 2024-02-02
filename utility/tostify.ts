@@ -4,10 +4,10 @@ import { ResponseStatus } from "./responseStatus";
 export const ToastSuccess = (message = "عملیات با موفقیت انجام شد") => {
   toast.success(`${ResponseStatus.OK} : ${message}`, {
     position: "bottom-right",
-    autoClose: 3000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     progress: undefined,
     theme: "light",
@@ -17,10 +17,10 @@ export const ToastSuccess = (message = "عملیات با موفقیت انجا�
 export const ToastInfo = (message = "عملیات با موفقیت انجام شد") => {
   toast.warning(`${message}`, {
     position: "bottom-right",
-    autoClose: 3000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     progress: undefined,
     theme: "light",
@@ -30,7 +30,7 @@ export const ToastInfo = (message = "عملیات با موفقیت انجام �
 export const ToastFail = (message = "خطا در انجام عملیات!") => {
   toast.error(`${ResponseStatus.BAD_REQUEST} : ${message}`, {
     position: "bottom-right",
-    autoClose: 3000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -40,7 +40,7 @@ export const ToastFail = (message = "خطا در انجام عملیات!") => {
   });
 };
 
-export const ToastAuthFail = (message = " لطفا لاگین کنید!") => {
+export const ToastAuthFail = (message = " لطفا لاگین کنید") => {
   toast.error(`${ResponseStatus.UNAUTHORIZED} : ${message}`, {
     position: "bottom-right",
     autoClose: 3000,

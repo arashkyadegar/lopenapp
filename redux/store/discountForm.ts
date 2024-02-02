@@ -51,6 +51,11 @@ export const discountFormSlice = createSlice({
       };
       state.lastFetch = Date.now();
     },
+    discountFormFetched: (state: any, action: PayloadAction<any>) => {
+      state.data = action.payload[0];
+      state.data.formIsValid = true;
+      state.lastFetch = Date.now();
+    },
     discountFormFilled: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
@@ -87,6 +92,7 @@ export const discountFormSlice = createSlice({
 export const {
   discountFormCleard,
   discountFormFilled,
+  discountFormFetched,
   setFormSDate,
   setFormEDate,
   setFormTitle,

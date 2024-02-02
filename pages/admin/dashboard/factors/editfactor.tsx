@@ -1,6 +1,5 @@
-import CheckoutFormComponent from "@/components/checkout_form";
-import CheckoutGridComponent from "@/components/checkout_grid";
 
+import CheckoutGridComponent from "@/components/checkout_grid";
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import CheckoutFormViewComponent from "@/components/checkout_formview";

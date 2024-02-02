@@ -1,3 +1,5 @@
+"use client";
+
 import myAppContext from "@/components/context/context";
 import { submitSigninAction, userRecieved } from "@/redux/store/user";
 import { useAppDispatch, useAppSelector } from "../../../redux/store/hooks";
@@ -5,6 +7,7 @@ import Link from "next/link";
 import React, { ReactElement } from "react";
 import validator from "validator";
 import AdminLayout from "./adminLayout";
+import { getCookies, setCookie, deleteCookie, getCookie } from "cookies-next";
 export default function Login({ props }: any) {
   const { loginForm, setLoginForm } = React.useContext(myAppContext);
   const dispatch = useAppDispatch();
@@ -16,6 +19,7 @@ export default function Login({ props }: any) {
     const remember = "true";
 
     dispatch(submitSigninAction(email, password, remember));
+    console.log(getCookies());
   }
   function fillLoginPassword(event: any) {
     let text: string = validator.escape(event.target.value);

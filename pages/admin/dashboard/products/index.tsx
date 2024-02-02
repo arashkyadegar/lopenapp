@@ -1,28 +1,33 @@
-import { ReactElement } from "react";
+"use client";
+import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import Link from "next/link";
 import { submitDeleteProductAction } from "@/redux/store/product";
-import { useAppDispatch } from "@/redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
+import {
+  getProductsAction, productsFaild,
+} from "@/redux/store/products";
+
 
 // This gets called on every request
-export async function getServerSideProps(context: any) {
-  const { req } = context;
-  const { cookies } = req;
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const res = await fetch(`${baseURL}/api/products`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      authorization: cookies.alonefighterx,
-    },
-  });
-  const repo = await res.json();
-  const products = JSON.stringify(repo);
-  return { props: { products } };
-}
+// export async function getServerSideProps(context: any) {
+//   const { req } = context;
+//   const { cookies } = req;
+//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+//   const res = await fetch(`${baseURL}/api/products`, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       authorization: cookies.alonefighterx,
+//     },
+//   });
+//   const repo = await res.json();
+//   const products = JSON.stringify(repo);
+//   return { props: { products } };
+// }
 
-export default function Products(rslt: any) {
-  const products = JSON.parse(rslt.products);
+export default function Products() {
+  const productsState = useAppSelector((state) => state.entities.products);
   const dispatch = useAppDispatch();
 
   function submitDeleteProduct(id: any) {
@@ -30,6 +35,12 @@ export default function Products(rslt: any) {
       dispatch(submitDeleteProductAction(id));
     }
   }
+
+  useEffect(() => {
+    dispatch(getProductsAction());
+    //dispatch(productsFaild([]));
+  }, []);
+
   return (
     <>
       <div className="container p-4">
@@ -41,7 +52,7 @@ export default function Products(rslt: any) {
               </a>
             </div>
             <div>
-              <ul className="flex flex-row gap-4 px-4">
+              <ul className="flex flex-row gap-4 px-4 mb-4">
                 <li className="bg-blue-400 w-10 p-2 rounded-md ">
                   <Link
                     href={{
@@ -66,27 +77,27 @@ export default function Products(rslt: any) {
                 </li>
               </ul>
             </div>
-            <div className="grid  grid-cols-6 items-center divide divide-gray-200">
-              <div className="flex  items-center justify-center col-span-2  border border-gray-200 text-center">
+
+            <div className="grid  grid-cols-5 items-center divide divide-gray-200">
+              <div className="flex font-bold  items-center justify-center col-span-1  border border-gray-200 text-center">
                 <a>کد</a>
               </div>
-              <div className="flex  items-center justify-center col-span-2 border text-center">
+              <div className="flex font-bold px-2  items-center justify-right col-span-2 border text-center">
                 <a>نام محصول</a>
               </div>
-              <div className="flex  items-center justify-center border  text-center">
+              <div className="flex font-bold  items-center justify-center border  text-center">
                 <a>قیمت </a>
               </div>
 
-              <div className="flex  items-center justify-center border  text-center">
+              <div className="flex font-bold  items-center justify-center border  text-center">
                 <a>عملیات </a>
               </div>
-
-              {products.map((product: any) => (
+              {productsState.list.map((product: any) => (
                 <>
-                  <div className="border flex col-span-2 p-2 justify-center items-center">
+                  <div className="border flex col-span-1 p-2 justify-center items-center">
                     <a className="text-xs">{product._id}</a>
                   </div>
-                  <div className="border flex col-span-2 p-1 justify-center items-center">
+                  <div className="  px-2  border flex col-span-2 p-1 justify-right items-center">
                     <a>{product.name}</a>
                   </div>
                   <div className="border flex col-span-1 p-1  justify-center items-center">
@@ -94,15 +105,12 @@ export default function Products(rslt: any) {
                   </div>
 
                   <div className="border flex col-span-1 p-1 justify-center items-center">
-
-                    {/* edit button */}
                     <Link
                       href={{
                         pathname: `/admin/dashboard/products/editproduct`,
                         query: { id: product._id },
                       }}
                     >
-
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

@@ -1,15 +1,12 @@
-
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
   productFormCleard,
-  productFormFilled,
   setFormComponents,
   setFormDesc,
   setFormDisplay,
-  setFormFiles,
   setFormHealthId,
   setFormImages,
   setFormIsAvailable,
@@ -20,24 +17,29 @@ import {
   setFormWeight,
 } from "@/redux/store/productForm";
 import validator from "validator";
-import { submitEditProductAction } from "@/redux/store/product";
+import { getProductAction, submitEditProductAction } from "@/redux/store/product";
 import { FileService } from "@/services/fileService";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
-import { ProductEntity } from "@/models/entities";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { ResponseStatus } from "@/utility/responseStatus";
+import { useSearchParams } from "next/navigation";
+
+
 export default function Editproduct(rslt: any) {
-  let product = JSON.parse(rslt.product)[0];
-  const formdata = new FormData();
-  let tags = product.tags.toString();
-  product.tags = tags;
   const dispatch = useAppDispatch();
+  const params = useSearchParams();
+  const id = params.get("id");
+  const formdata = new FormData();
+  // let tags = product.tags.toString();
+  // product.tags = tags;
   const productFormState = useAppSelector(
     (state) => state.entities.productForm
   );
+  
   useEffect(() => {
-    dispatch(productFormFilled(product));
-  },[]);
+    dispatch(getProductAction(id));
+  }, []);
+
   function formClear() {
     formdata.delete("files");
     dispatch(productFormCleard());
@@ -79,7 +81,8 @@ export default function Editproduct(rslt: any) {
         price: productFormState.data.price,
         display: productFormState.data.display,
         isAvailable: productFormState.data.isAvailable,
-        tags: productFormState.data.tags.trim().split(","),
+        tags: productFormState.data.tags,
+   //     tags: productFormState.data.tags.trim().split(","),
         image: productFormState.data.image,
         images: productFormState.data.images,
         files: [],
@@ -362,7 +365,7 @@ export default function Editproduct(rslt: any) {
         setFormTags({
           tagsError: "لطفا برچسبهای محصول را وارد کنید",
           formIsValid: false,
-          tags: text,
+          tags: text.trim().split(","),
         })
       );
 
@@ -376,7 +379,7 @@ export default function Editproduct(rslt: any) {
       dispatch(
         setFormTags({
           tagsError: "",
-          tags: text,
+          tags: text.trim().split(","),
           formIsValid: true,
         })
       );
@@ -401,7 +404,7 @@ export default function Editproduct(rslt: any) {
       const response = await uploader.upload(formdata);
       switch (response.status) {
         case ResponseStatus.OK: {
-          const repo = await response.json()
+          const repo = await response.json();
           dispatch(
             setFormImages({
               imagesError: "",
@@ -454,9 +457,6 @@ export default function Editproduct(rslt: any) {
       // }
     }
   }
-
-
-
 
   // async function fillPrdctFile(event: any): Promise<void> {
   //   let count = event.target.files.length;
@@ -521,11 +521,11 @@ export default function Editproduct(rslt: any) {
                         <div className="flex flex-row gap-2 m-2">
                           {productFormState.data.images.map((image: any) => (
                             <img
-                            key={image}
-                            src={getDefaultImageAvator(image)}
-                            className="w-10 h-10"
-                            alt="product image"
-                          />
+                              key={image}
+                              src={getDefaultImageAvator(image)}
+                              className="w-10 h-10"
+                              alt="product image"
+                            />
                           ))}
                         </div>
                       )}
@@ -741,7 +741,6 @@ export default function Editproduct(rslt: any) {
                       </button>
                     </div>
                   </div>
-
                 </div>
               </main>
             </div>
@@ -753,30 +752,30 @@ export default function Editproduct(rslt: any) {
   );
 }
 // This gets called on every request
-export async function getServerSideProps(context: any) {
-  const { id } = context.query;
-  const { req } = context;
-  const { cookies } = req;
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const response = await fetch(`${baseURL}/api/products/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Authorization: cookies.alonefighterx,
-    },
-  });
-  const repo = await response.json();
-  if (response.status == 401) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
-      }
-    }
-  }
-  const product = JSON.stringify(repo);
-  return { props: { product } };
-}
+// export async function getServerSideProps(context: any) {
+//   const { id } = context.query;
+//   const { req } = context;
+//   const { cookies } = req;
+//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+//   const response = await fetch(`${baseURL}/api/products/${id}`, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       Authorization: cookies.alonefighterx,
+//     },
+//   });
+//   const repo = await response.json();
+//   if (response.status == 401) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
+//       },
+//     };
+//   }
+//   const product = JSON.stringify(repo);
+//   return { props: { product } };
+// }
 Editproduct.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };
