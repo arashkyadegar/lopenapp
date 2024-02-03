@@ -12,6 +12,7 @@ import {
   setFormValue,
   setFormProductId,
 } from "@/redux/store/discountForm";
+import { rgx_date, rgx_insecure } from "@/utility/regex";
 
 // This gets called on every request
 export async function getServerSideProps(context: any) {
@@ -93,11 +94,19 @@ export default function AddDiscount(rslt: any) {
   }
 
   function fillDiscountTitle(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormTitle({
           titleError: "لطفا عنوان تخفیف را وارد کنید",
+          formIsValid: false,
+          title: text,
+        })
+      );
+    }else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormTitle({
+          titleError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           title: text,
         })
@@ -123,6 +132,14 @@ export default function AddDiscount(rslt: any) {
           eDate: text,
         })
       );
+    } else if (!validator.matches(text, rgx_date)) {
+      dispatch(
+        setFormSDate({
+          sDateError: "لطفا تاریخ شروع را بصورت yyyy-mm-dd وارد کنید",
+          formIsValid: false,
+          sDate: text,
+        })
+      );
     } else {
       dispatch(
         setFormSDate({
@@ -140,6 +157,14 @@ export default function AddDiscount(rslt: any) {
       dispatch(
         setFormEDate({
           eDateError: "لطفا تاریخ پایان را وارد کنید",
+          formIsValid: false,
+          eDate: text,
+        })
+      );
+    } else if (!validator.matches(text, rgx_date)) {
+      dispatch(
+        setFormEDate({
+          eDateError: "لطفا تاریخ پایان را بصورت yyyy-mm-dd وارد کنید",
           formIsValid: false,
           eDate: text,
         })
@@ -184,7 +209,7 @@ export default function AddDiscount(rslt: any) {
                   <div className="w-1/2 mx-auto">
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="title" className="w-20 text-sm font-bold">
-                        عنوان
+                        عنوان<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -202,7 +227,7 @@ export default function AddDiscount(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="value" className="w-20 text-sm font-bold">
-                        میزان
+                        میزان<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -219,7 +244,7 @@ export default function AddDiscount(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="sDate" className="w-20 text-sm font-bold">
-                        تاریخ شروع
+                        تاریخ شروع<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -236,7 +261,7 @@ export default function AddDiscount(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="eDate" className="w-20 text-sm font-bold">
-                        تاریخ پایان
+                        تاریخ پایان<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -256,7 +281,7 @@ export default function AddDiscount(rslt: any) {
                         htmlFor="productId"
                         className="w-40 text-sm font-bold"
                       >
-                        محصول
+                        محصول<span className="text-red-600">*</span>
                       </label>
                       <select
                         typeof="text"

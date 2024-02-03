@@ -501,7 +501,7 @@ export default function Editproduct(rslt: any) {
               <main className="p-4">
                 <div className="px-2 ">
                   <a className=" flex text-2xl border-b p-4 border-gray-400">
-                    ثبت اطلاعات محصول
+                    ویرایش اطلاعات محصول
                   </a>
                 </div>
 
@@ -525,6 +525,7 @@ export default function Editproduct(rslt: any) {
                               src={getDefaultImageAvator(image)}
                               className="w-10 h-10"
                               alt="product image"
+                              crossOrigin = "anonymous"
                             />
                           ))}
                         </div>
@@ -551,7 +552,7 @@ export default function Editproduct(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="name" className="w-20 text-sm font-bold">
-                        نام
+                        نام<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -572,7 +573,7 @@ export default function Editproduct(rslt: any) {
                         htmlFor="weight"
                         className="w-20 text-sm font-bold"
                       >
-                        وزن
+                        وزن<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -589,7 +590,7 @@ export default function Editproduct(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="size" className="w-20 text-sm font-bold">
-                        سایز
+                        سایز<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -609,7 +610,7 @@ export default function Editproduct(rslt: any) {
                         htmlFor="healthId"
                         className="w-40 text-sm font-bold"
                       >
-                        شماره سلامت
+                        شماره سلامت<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -626,7 +627,7 @@ export default function Editproduct(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="price" className="w-20 text-sm font-bold">
-                        قیمت
+                        قیمت<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -646,7 +647,7 @@ export default function Editproduct(rslt: any) {
                         htmlFor="display"
                         className="w-40 text-sm font-bold"
                       >
-                        وضعیت نمایش
+                        وضعیت نمایش<span className="text-red-600">*</span>
                       </label>
                       <select
                         typeof="text"
@@ -665,7 +666,7 @@ export default function Editproduct(rslt: any) {
                         htmlFor="isAvailable"
                         className="w-20 text-sm font-bold"
                       >
-                        موجودی
+                        موجودی<span className="text-red-600">*</span>
                       </label>
 
                       <select
@@ -683,7 +684,7 @@ export default function Editproduct(rslt: any) {
                         htmlFor="components"
                         className="w-20 text-sm font-bold"
                       >
-                        ترکیبات
+                        ترکیبات<span className="text-red-600">*</span>
                       </label>
                       <textarea
                         name="components"
@@ -700,7 +701,7 @@ export default function Editproduct(rslt: any) {
 
                     <div className="flex flex-col gap-2 mx-2">
                       <label htmlFor="desc" className="w-20 text-sm font-bold">
-                        توضیحات
+                        توضیحات<span className="text-red-600">*</span>
                       </label>
                       <textarea
                         name="desc"
@@ -717,7 +718,7 @@ export default function Editproduct(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="tags" className="w-20 text-sm font-bold">
-                        برچسب ها
+                        برچسب ها<span className="text-red-600">*</span>
                       </label>
                       <textarea
                         name="tags"

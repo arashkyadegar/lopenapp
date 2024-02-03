@@ -7,18 +7,21 @@ import { FileService } from "@/services/fileService";
 import { ResponseStatus } from "@/utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
-import { getSiteinfoAction, submitEditSiteinfoAction } from "@/redux/store/siteInfo";
+import {
+  getSiteinfoAction,
+  submitEditSiteinfoAction,
+} from "@/redux/store/siteInfo";
+import { rgx_insecure } from "@/utility/regex";
 
 export default function EditSiteInfo(rslt: any) {
   const formdata = new FormData();
   const formdata2 = new FormData();
   const dispatch = useAppDispatch();
-  
 
   const siteInfoFormState = useAppSelector(
     (state) => state.entities.siteInfoForm
   );
-  
+
   useEffect(() => {
     dispatch(getSiteinfoAction());
   }, []);
@@ -56,12 +59,20 @@ export default function EditSiteInfo(rslt: any) {
     }
   }
   function fillAddress1(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          address1Error: "لطفا  آدرس اول را وارد کنید",
+          address1Error: "لطفا  آدرس ۱ را وارد کنید",
+          formIsValid: false,
+          address1: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          address1Error: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           address1: text,
         })
@@ -79,12 +90,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillWhatsapp(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
           whatsappError: "لطفا واتزاپ را وارد کنید",
+          formIsValid: false,
+          whatsapp: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          whatsappError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           whatsapp: text,
         })
@@ -102,12 +121,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillLinkedin(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
           linkedinError: "لطفا لینکدین را وارد کنید",
+          formIsValid: false,
+          linkedin: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          linkedinError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           linkedin: text,
         })
@@ -125,12 +152,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillTwitter(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string =event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
           twitterError: "لطفا تویتر را وارد کنید",
+          formIsValid: false,
+          twitter: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          twitterError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           twitter: text,
         })
@@ -148,12 +183,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillInstagram(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
           instagramError: "لطفا اینستاگرام را وارد کنید",
+          formIsValid: false,
+          instagram: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          instagramError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           instagram: text,
         })
@@ -171,12 +214,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillheaderTitle(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
           headerTitleError: "لطفا عنوان بالای صفحه را وارد کنید",
+          formIsValid: false,
+          headerTitle: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          headerTitleError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           headerTitle: text,
         })
@@ -195,7 +246,16 @@ export default function EditSiteInfo(rslt: any) {
 
   function fillEmail2(event: any): void {
     let text: string = event.target.value;
-    if (!validator.isEmail(text)) {
+    if (validator.isEmpty(text)) {
+      dispatch(
+        siteinfoFormFilled({
+          ...siteInfoFormState.data,
+          email2Error: "",
+          email2: text,
+          formIsValid: true,
+        })
+      );
+    } else if (!validator.isEmail(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
@@ -218,7 +278,16 @@ export default function EditSiteInfo(rslt: any) {
 
   function fillEmail1(event: any): void {
     let text: string = event.target.value;
-    if (!validator.isEmail(text)) {
+    if (validator.isEmpty(text)) {
+      dispatch(
+        siteinfoFormFilled({
+          ...siteInfoFormState.data,
+          email1Error: "",
+          email1: text,
+          formIsValid: true,
+        })
+      );
+    } else if (!validator.isEmail(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
@@ -240,12 +309,21 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillMobile2(event: any): void {
-    let text: string = validator.escape(event.target.value);
-    if (!validator.isNumeric(text)) {
+    let text: string = event.target.value;
+    if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          mobile2Error: "لطفا موبایل ۲ را وارد کنید",
+          mobile2Error: "",
+          mobile2: text,
+          formIsValid: true,
+        })
+      );
+    } else if (!validator.isNumeric(text)) {
+      dispatch(
+        siteinfoFormFilled({
+          ...siteInfoFormState.data,
+          mobile2Error: "لطفا موبایل ۲ را صحیح کنید",
           formIsValid: false,
           mobile2: text,
         })
@@ -263,12 +341,21 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillMobile1(event: any): void {
-    let text: string = validator.escape(event.target.value);
-    if (!validator.isNumeric(text)) {
+    let text: string = event.target.value;
+    if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          mobile1Error: "لطفا موبایل ۱ را وارد کنید",
+          mobile1Error: "",
+          mobile1: text,
+          formIsValid: true,
+        })
+      );
+    } else if (!validator.isNumeric(text)) {
+      dispatch(
+        siteinfoFormFilled({
+          ...siteInfoFormState.data,
+          mobile1Error: "لطفا موبایل ۱ را صحیح کنید",
           formIsValid: false,
           mobile1: text,
         })
@@ -286,12 +373,21 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillTel2(event: any): void {
-    let text: string = validator.escape(event.target.value);
-    if (!validator.isNumeric(text)) {
+    let text: string = event.target.value;
+    if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          tel2Error: "لطفا تلفن ۲ را  وارد کنید",
+          tel2Error: "",
+          tel2: text,
+          formIsValid: true,
+        })
+      );
+    } else if (!validator.isNumeric(text)) {
+      dispatch(
+        siteinfoFormFilled({
+          ...siteInfoFormState.data,
+          tel2Error: "لطفا تلفن ۲ را صحیح کنید",
           formIsValid: false,
           tel2: text,
         })
@@ -310,11 +406,20 @@ export default function EditSiteInfo(rslt: any) {
 
   function fillTel1(event: any): void {
     let text: string = event.target.value;
-    if (!validator.isNumeric(text)) {
+    if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          tel1Error: "لطفا تلفن ۱ را  وارد کنید",
+          tel1Error: "",
+          tel1: text,
+          formIsValid: true,
+        })
+      );
+    } else if (!validator.isNumeric(text)) {
+      dispatch(
+        siteinfoFormFilled({
+          ...siteInfoFormState.data,
+          tel1Error: "لطفا تلفن ۱ را صحیح کنید",
           formIsValid: false,
           tel1: text,
         })
@@ -332,12 +437,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillCopyRightYear(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
           copyRightYearError: "لطفا سال کپی رایت را  وارد کنید",
+          formIsValid: false,
+          copyRightYear: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          copyRightYearError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           copyRightYear: text,
         })
@@ -355,12 +468,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillCopyRightText(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
           copyRightTextError: "لطفا متن کپی رایت را  وارد کنید",
+          formIsValid: false,
+          copyRightText: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          copyRightTextError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           copyRightText: text,
         })
@@ -378,12 +499,20 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillAddress2(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
           ...siteInfoFormState.data,
-          address2Error: "لطفا  آدرس دوم را وارد کنید",
+          address2Error: "لطفا  آدرس ۱ را وارد کنید",
+          formIsValid: false,
+          address2: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        siteinfoFormFilled({
+          address2Error: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           address2: text,
         })
@@ -473,7 +602,7 @@ export default function EditSiteInfo(rslt: any) {
           <main className="flex flex-col justify-between w-4/4  gap-4   mb-4 bg-white shadow-md shadow-gray-500 ">
             <div className="px-2">
               <a className=" flex text-2xl border-b p-1 border-gray-400">
-                  تنظیمات سایت
+                تنظیمات سایت
               </a>
             </div>
             <div>
@@ -500,6 +629,7 @@ export default function EditSiteInfo(rslt: any) {
                               height={800}
                               className="w-10 h-10"
                               alt="headers images"
+                              crossOrigin = "anonymous"
                             />
                           )
                         )}
@@ -529,6 +659,7 @@ export default function EditSiteInfo(rslt: any) {
                           height={800}
                           className="w-10 h-10"
                           alt="main logo"
+                          crossOrigin = "anonymous"
                         />
                       </div>
                     )}
@@ -542,7 +673,7 @@ export default function EditSiteInfo(rslt: any) {
                       htmlFor="address1"
                       className="w-20 text-sm font-bold"
                     >
-                      آدرس اول
+                      آدرس اول<span className="text-red-600">*</span>
                     </label>
                     <textarea
                       name="address1"
@@ -563,6 +694,7 @@ export default function EditSiteInfo(rslt: any) {
                       className="w-20 text-sm font-bold"
                     >
                       آدرس دوم
+                      <span className="text-red-600">*</span>
                     </label>
                     <textarea
                       name="address2"
@@ -583,6 +715,7 @@ export default function EditSiteInfo(rslt: any) {
                       className="w-40 text-sm font-bold"
                     >
                       متن کپی رایت
+                      <span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"
@@ -604,6 +737,7 @@ export default function EditSiteInfo(rslt: any) {
                       className="w-40 text-sm font-bold"
                     >
                       سال کپی رایت
+                      <span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"
@@ -730,7 +864,7 @@ export default function EditSiteInfo(rslt: any) {
                       htmlFor="headerTitle"
                       className="w-40 text-sm font-bold"
                     >
-                      عنوان بالای صفحه
+                      عنوان بالای صفحه<span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"
@@ -750,7 +884,7 @@ export default function EditSiteInfo(rslt: any) {
                       htmlFor="instagram"
                       className="w-40 text-sm font-bold"
                     >
-                      صفحه اینستاگرام
+                      صفحه اینستاگرام<span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"
@@ -767,7 +901,7 @@ export default function EditSiteInfo(rslt: any) {
 
                   <div className="flex flex-col gap-2 m-2">
                     <label htmlFor="twitter" className="w-20 text-sm font-bold">
-                      صفحه تویتر
+                      صفحه تویتر<span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"
@@ -786,7 +920,7 @@ export default function EditSiteInfo(rslt: any) {
                       htmlFor="linkedin"
                       className="w-40 text-sm font-bold"
                     >
-                      صفحه لینکدین
+                      صفحه لینکدین<span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"
@@ -806,7 +940,7 @@ export default function EditSiteInfo(rslt: any) {
                       htmlFor="whatsapp"
                       className="w-40 text-sm font-bold"
                     >
-                      صفحه واتز اپ
+                      صفحه واتز اپ<span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"

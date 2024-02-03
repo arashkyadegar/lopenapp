@@ -10,21 +10,22 @@ import {
 import validator from "validator";
 import { submitAddFaqAction } from "@/redux/store/faqs";
 import { ToastFail } from "@/utility/tostify";
+import { rgx_insecure } from "@/utility/regex";
 
 export default function AddFaq() {
   const dispatch = useAppDispatch();
   const faqFormState = useAppSelector((state) => state.entities.faqForm);
   useEffect(() => {
     dispatch(faqFormCleard());
-  },[]);
-  
+  }, []);
+
   function submitAddFaq(event: any): void {
     if (faqFormState.data.formIsValid) {
       const x = {
         _id: "",
         groupId: 0,
-        question: validator.escape(faqFormState.data.question),
-        answer: validator.escape(faqFormState.data.answer),
+        question: faqFormState.data.question,
+        answer: faqFormState.data.answer,
         display: false,
         priority: faqFormState.data.priority,
         date: "",
@@ -50,6 +51,14 @@ export default function AddFaq() {
           question: text,
         })
       );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormQuestion({
+          questionError: "لطفا کارکترهای غیرمجاز وارد نکنید",
+          formIsValid: false,
+          question: text,
+        })
+      );
     } else {
       dispatch(
         setFormQuestion({
@@ -63,10 +72,19 @@ export default function AddFaq() {
 
   function fillFaqAnswer(event: any): void {
     let text: string = event.target.value;
+    console.log(validator.matches(text, rgx_insecure))
     if (validator.isEmpty(text)) {
       dispatch(
         setFormAnswer({
           answerError: "لطفا  متن پاسخ را وارد کنید",
+          formIsValid: false,
+          answer: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormAnswer({
+          answerError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           answer: text,
         })
@@ -111,7 +129,7 @@ export default function AddFaq() {
                         htmlFor="question"
                         className="w-20 text-sm font-bold"
                       >
-                        متن سوال
+                        متن سوال<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -131,7 +149,7 @@ export default function AddFaq() {
                         htmlFor="answer"
                         className="w-20 text-sm font-bold"
                       >
-                        متن پاسخ
+                        متن پاسخ<span className="text-red-600">*</span>
                       </label>
                       <textarea
                         name="answer"

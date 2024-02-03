@@ -1,28 +1,30 @@
+"use client";
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
-  faqFormFilled,
   setFormAnswer,
   setFormPriority,
   setFormQuestion,
 } from "@/redux/store/faqForm";
 import validator from "validator";
-import { submitEditFaqAction } from "@/redux/store/faqs";
+import { getFaqAction, submitEditFaqAction } from "@/redux/store/faqs";
 import { ToastFail } from "@/utility/tostify";
+import { useSearchParams } from "next/navigation";
+import { rgx_insecure } from "@/utility/regex";
 
-
-export default function EditFaq(rslt: any) {
+export default function EditFaq() {
   const dispatch = useAppDispatch();
-  let faq = JSON.parse(rslt.faq)[0];
-  const faqFormState = useAppSelector((state) => state.entities.faqForm);
+  //const params = useSearchParams();
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get("id");
 
+  const faqFormState = useAppSelector((state) => state.entities.faqForm);
   useEffect(() => {
-    dispatch(faqFormFilled(faq));
+    dispatch(getFaqAction(id));
   }, []);
 
   async function submitEditFaq(event: any): Promise<void> {
-
     if (faqFormState.data.formIsValid) {
       const x = {
         _id: faqFormState.data._id,
@@ -43,11 +45,19 @@ export default function EditFaq(rslt: any) {
     }
   }
   function fillFaqQuestion(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string =event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormQuestion({
           questionError: "لطفا  متن سوال را وارد کنید",
+          formIsValid: false,
+          question: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormQuestion({
+          questionError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           question: text,
         })
@@ -64,11 +74,19 @@ export default function EditFaq(rslt: any) {
   }
 
   function fillFaqAnswer(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormAnswer({
           answerError: "لطفا  متن پاسخ را وارد کنید",
+          formIsValid: false,
+          answer: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormAnswer({
+          answerError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           answer: text,
         })
@@ -84,7 +102,7 @@ export default function EditFaq(rslt: any) {
     }
   }
   function fillFaqpPriority(event: any): void {
-    let value = validator.escape(event.target.value);
+    let value = event.target.value;
     dispatch(
       setFormPriority({
         priorityError: "",
@@ -127,7 +145,7 @@ export default function EditFaq(rslt: any) {
                         htmlFor="question"
                         className="w-20 text-sm font-bold"
                       >
-                        متن سوال
+                        متن سوال<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -147,7 +165,7 @@ export default function EditFaq(rslt: any) {
                         htmlFor="answer"
                         className="w-20 text-sm font-bold"
                       >
-                        متن پاسخ
+                        متن پاسخ<span className="text-red-600">*</span>
                       </label>
                       <textarea
                         name="answer"
@@ -182,7 +200,7 @@ export default function EditFaq(rslt: any) {
                       </p>
                     </div>
 
-                    <div className="flex justify-end p-2">
+                    <div className="flex justify-end p-2 gap-3">
                       <button
                         type="button"
                         onClick={submitEditFaq}
@@ -192,7 +210,6 @@ export default function EditFaq(rslt: any) {
                       </button>
                     </div>
                   </div>
-
                 </div>
               </main>
             </div>
@@ -204,30 +221,30 @@ export default function EditFaq(rslt: any) {
   );
 }
 
-export async function getServerSideProps(context: any) {
-  const { id } = context.query;
-  const { req } = context;
-  const { cookies } = req;
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const response = await fetch(`${baseURL}/api/faqs/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Authorization: cookies.alonefighterx,
-    },
-  });
-  const repo = await response.json();
-  if (response.status == 401) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
-      }
-    }
-  }
-  const faq = JSON.stringify(repo);
-   return { props: { faq } };
-}
+// export async function getServerSideProps(context: any) {
+//   const { id } = context.query;
+//   const { req } = context;
+//   const { cookies } = req;
+//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+//   const response = await fetch(`${baseURL}/api/faqs/${id}`, {
+//     method: "GET",
+//     credentials: "include",
+//     headers: {
+//       Authorization: cookies.alonefighterx,
+//     },
+//   });
+//   const repo = await response.json();
+//   if (response.status == 401) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
+//       }
+//     }
+//   }
+//   const faq = JSON.stringify(repo);
+//    return { props: { faq } };
+// }
 EditFaq.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };

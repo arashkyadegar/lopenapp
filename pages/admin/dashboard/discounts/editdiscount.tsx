@@ -13,8 +13,12 @@ import {
   setFormValue,
   setFormProductId,
 } from "@/redux/store/discountForm";
-import { getDiscountAction, submitEditDiscoutAction } from "@/redux/store/discount";
+import {
+  getDiscountAction,
+  submitEditDiscoutAction,
+} from "@/redux/store/discount";
 import { getProductsAction } from "@/redux/store/products";
+import { rgx_date, rgx_insecure } from "@/utility/regex";
 // This gets called on every request
 // export async function getServerSideProps(context: any) {
 //   const { id } = context.query;
@@ -50,18 +54,15 @@ export default function EditDiscount(rslt: any) {
   const id = params.get("id");
   const dispatch = useAppDispatch();
 
-
-
   const discountFormState = useAppSelector(
     (state) => state.entities.discountForm
   );
   const productsState = useAppSelector((state) => state.entities.products);
-  
+
   useEffect(() => {
     dispatch(getDiscountAction(id));
     dispatch(getProductsAction());
   }, []);
-
 
   function formClear() {
     dispatch(discountFormCleard());
@@ -75,7 +76,11 @@ export default function EditDiscount(rslt: any) {
           {prdct.name}
         </option>
       );
-    return <option key={prdct._id} value={prdct._id}>{prdct.name}</option>;
+    return (
+      <option key={prdct._id} value={prdct._id}>
+        {prdct.name}
+      </option>
+    );
   }
   async function submitEditDiscount(event: any): Promise<void> {
     // event.preventDefault();
@@ -128,11 +133,19 @@ export default function EditDiscount(rslt: any) {
   }
 
   function fillDiscountTitle(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormTitle({
           titleError: "لطفا عنوان تخفیف را وارد کنید",
+          formIsValid: false,
+          title: text,
+        })
+      );
+    }else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormTitle({
+          titleError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           title: text,
         })
@@ -158,12 +171,7 @@ export default function EditDiscount(rslt: any) {
           sDate: text,
         })
       );
-    } else if (
-      !validator.matches(
-        text,
-        /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/
-      )
-    ) {
+    } else if (!validator.matches(text, rgx_date)) {
       dispatch(
         setFormSDate({
           sDateError: "لطفا تاریخ شروع را بصورت yyyy-mm-dd وارد کنید",
@@ -183,11 +191,19 @@ export default function EditDiscount(rslt: any) {
   }
 
   function fillDiscountEDate(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormEDate({
           eDateError: "لطفا تاریخ پایان را وارد کنید",
+          formIsValid: false,
+          eDate: text,
+        })
+      );
+    } else if (!validator.matches(text, rgx_date)) {
+      dispatch(
+        setFormEDate({
+          eDateError: "لطفا تاریخ پایان را بصورت yyyy-mm-dd وارد کنید",
           formIsValid: false,
           eDate: text,
         })
@@ -215,7 +231,6 @@ export default function EditDiscount(rslt: any) {
     );
   }
 
-
   return (
     <>
       <div className="container p-4">
@@ -233,7 +248,7 @@ export default function EditDiscount(rslt: any) {
                   <div className="w-1/2 mx-auto">
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="title" className="w-20 text-sm font-bold">
-                        عنوان
+                        عنوان<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -251,7 +266,7 @@ export default function EditDiscount(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="value" className="w-20 text-sm font-bold">
-                        میزان
+                        میزان<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -268,7 +283,7 @@ export default function EditDiscount(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="sDate" className="w-20 text-sm font-bold">
-                        تاریخ شروع
+                        تاریخ شروع<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -285,7 +300,7 @@ export default function EditDiscount(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="eDate" className="w-20 text-sm font-bold">
-                        تاریخ پایان
+                        تاریخ پایان<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -305,7 +320,7 @@ export default function EditDiscount(rslt: any) {
                         htmlFor="productId"
                         className="w-40 text-sm font-bold"
                       >
-                        محصول
+                        محصول<span className="text-red-600">*</span>
                       </label>
                       <select
                         typeof="text"
@@ -331,9 +346,7 @@ export default function EditDiscount(rslt: any) {
                       </button>
                     </div>
                   </div>
-                  <div className=" flex flex-col">
- 
-                  </div>
+                  <div className=" flex flex-col"></div>
                 </div>
               </main>
             </div>

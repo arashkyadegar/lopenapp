@@ -42,6 +42,11 @@ export const faqFormSlice = createSlice({
       };
       state.lastFetch = Date.now();
     },
+    faqFormFetched: (state: any, action: PayloadAction<any>) => {
+      state.data = action.payload[0];
+      state.data.formIsValid = true;
+      state.lastFetch = Date.now();
+    },
     faqFormFilled: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
@@ -66,9 +71,9 @@ export const faqFormSlice = createSlice({
 
 // action creator
 export const {
+  setFormQuestion,
   faqFormCleard,
   faqFormFilled,
-  setFormQuestion,
   setFormAnswer,
   setFormPriority,
 } = faqFormSlice.actions;

@@ -29,8 +29,8 @@ export const faqsSlice = createSlice({
       state.lastFetch = Date.now();
     },
     faqsFaild: (state: any, action: PayloadAction<any>) => {
-      state.list = [];
-      state.lastFetch = Date.now();
+      // state.list = [];
+      // state.lastFetch = Date.now();
     },
   },
 });
@@ -58,6 +58,18 @@ export const getFaqsAction = () =>
     //body: JSON.stringify(product),
   });
 
+  export const getFaqAction = (id: any) =>
+  apiCallBegan({
+    url: "/api/faqs/" + id,
+    onSuccess: "faqForm/faqFormFetched",
+    onError: "faqs/faqsFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
 
 export const submitDeleteFaqAction = (id: any) =>
   apiCallBegan({

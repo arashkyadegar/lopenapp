@@ -19,7 +19,6 @@ export default function Login({ props }: any) {
     const remember = "true";
 
     dispatch(submitSigninAction(email, password, remember));
-    console.log(getCookies());
   }
   function fillLoginPassword(event: any) {
     let text: string = validator.escape(event.target.value);
