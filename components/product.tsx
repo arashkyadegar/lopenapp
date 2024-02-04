@@ -17,7 +17,7 @@ import CommentComponent from "@/components/comment";
 import CommentAddComponent from "@/components/comment_add";
 import { getNewPrice } from "@/utility/discount";
 import ScoreComponent from "./score";
-import { factorAdded, factorReAdded } from "@/redux/store/factor";
+import { factorItemAdded, factorItemReAdded, factorItemRecieved } from "@/redux/store/factorItems";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { produce } from "immer";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
@@ -30,7 +30,7 @@ import {
 export default function ProductComponent({ props }: any) {
   const dispatch = useAppDispatch();
   const productForm = useAppSelector((state) => state.entities.productForm);
-  const factorState = useAppSelector((state) => state.entities.factor);
+  const factorItemsState = useAppSelector((state) => state.entities.factorItems);
   const product = JSON.parse(props.product)[0];
 
   let discount = 0;
@@ -63,9 +63,9 @@ export default function ProductComponent({ props }: any) {
     }
 
     //if item is reselected we should update the count
-    let obj = factorState.list.find((x: any) => x.productId == product._id);
+    let obj = factorItemsState.list.find((x: any) => x.productId == product._id);
     if (obj) {
-      const nextState = produce(factorState, (draftState) => {
+      const nextState = produce(factorItemsState, (draftState) => {
         const item = draftState.list.map((i: any) => {
           if (i.productId == product._id) {
             let old_count = productForm.data.count;
@@ -80,9 +80,9 @@ export default function ProductComponent({ props }: any) {
           }
         });
       });
-      dispatch(factorReAdded(nextState.list));
+      dispatch(factorItemReAdded(nextState.list));
     } else {
-      dispatch(factorAdded(factorItem));
+      dispatch(factorItemAdded(factorItem));
     }
   }
 
@@ -106,6 +106,7 @@ export default function ProductComponent({ props }: any) {
     );
   }
   useEffect(() => {
+    // dispatch(factorItemRecieved([]));
     dispatch(
       productFormFilled({
         _id: product._id,
@@ -157,7 +158,7 @@ export default function ProductComponent({ props }: any) {
                         height={800}
                         className=" hover:scale-110 w-fit h-full aspect-auto transition duration-500 cursor-pointer"
                         alt="product image"
-        
+                        crossOrigin = "anonymous"
                       />
                     </div>
                   </div>
@@ -196,7 +197,7 @@ export default function ProductComponent({ props }: any) {
                           height={500}
                           alt="user avator"
                           className=" mx-auto  h-full"
-                    
+                          crossOrigin = "anonymous"
                         />
                       </SwiperSlide>
                     ))}

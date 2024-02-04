@@ -72,6 +72,7 @@ export default function MainFooter({ props }: any) {
                 width={500}
                 height={500}
                 alt="user avator"
+     
               />
             </div>
             <div className="p-2 border border-gray-400">
@@ -81,6 +82,7 @@ export default function MainFooter({ props }: any) {
                 width={500}
                 height={500}
                 alt="user avator"
+           
               />
      
             </div>
@@ -91,6 +93,7 @@ export default function MainFooter({ props }: any) {
                 width={500}
                 height={500}
                 alt="user avator"
+        
               />
               {/* <img src="icons8-whatsapp-48.png" alt="" className="w-6 h-6" /> */}
             </div>
@@ -101,6 +104,7 @@ export default function MainFooter({ props }: any) {
                 width={500}
                 height={500}
                 alt="user avator"
+
               />
               {/* <img src="icons8-twitter-16.png" alt="" /> */}
             </div>

@@ -39,7 +39,6 @@ export const factorsSlice = createSlice({
     },
   },
 });
-
 export const getFactorsAction = () =>
   apiCallBegan({
     url: "/api/factors/",
@@ -52,6 +51,7 @@ export const getFactorsAction = () =>
     },
     //body: JSON.stringify(product),
   });
+
 
 export const { factorsRecieved,factorsFaild } = factorsSlice.actions;
 export default factorsSlice.reducer;

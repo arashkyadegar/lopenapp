@@ -22,16 +22,15 @@ import { FileService } from "@/services/fileService";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { ResponseStatus } from "@/utility/responseStatus";
-import { useSearchParams } from "next/navigation";
+
 
 
 export default function Editproduct(rslt: any) {
   const dispatch = useAppDispatch();
-  const params = useSearchParams();
-  const id = params.get("id");
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get("id");
   const formdata = new FormData();
-  // let tags = product.tags.toString();
-  // product.tags = tags;
+
   const productFormState = useAppSelector(
     (state) => state.entities.productForm
   );
@@ -752,31 +751,7 @@ export default function Editproduct(rslt: any) {
     </>
   );
 }
-// This gets called on every request
-// export async function getServerSideProps(context: any) {
-//   const { id } = context.query;
-//   const { req } = context;
-//   const { cookies } = req;
-//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-//   const response = await fetch(`${baseURL}/api/products/${id}`, {
-//     method: "GET",
-//     credentials: "include",
-//     headers: {
-//       Authorization: cookies.alonefighterx,
-//     },
-//   });
-//   const repo = await response.json();
-//   if (response.status == 401) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
-//       },
-//     };
-//   }
-//   const product = JSON.stringify(repo);
-//   return { props: { product } };
-// }
+
 Editproduct.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };

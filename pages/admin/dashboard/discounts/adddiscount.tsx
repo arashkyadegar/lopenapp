@@ -13,34 +13,17 @@ import {
   setFormProductId,
 } from "@/redux/store/discountForm";
 import { rgx_date, rgx_insecure } from "@/utility/regex";
+import { getProductsAction } from "@/redux/store/products";
 
-// This gets called on every request
-export async function getServerSideProps(context: any) {
-  const { req } = context;
-  const { cookies } = req;
-
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const response = await fetch(`${baseURL}/api/products`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Authorization: cookies.alonefighterx,
-    },
-  });
-
-  const repo = await response.json();
-  const products = JSON.stringify(repo);
-  return { props: { products } };
-}
-
-export default function AddDiscount(rslt: any) {
+export default function AddDiscount() {
   const dispatch = useAppDispatch();
-  const products = JSON.parse(rslt.products);
+  const productsState = useAppSelector((state) => state.entities.products);
   const discountFormState = useAppSelector(
     (state) => state.entities.discountForm
   );
   useEffect(() => {
     dispatch(discountFormCleard());
+    dispatch(getProductsAction());
   }, []);
   async function submitAddDiscount(event: any): Promise<void> {
     // event.preventDefault();
@@ -226,8 +209,8 @@ export default function AddDiscount(rslt: any) {
                     </div>
 
                     <div className="flex flex-col gap-2 m-2">
-                      <label htmlFor="value" className="w-20 text-sm font-bold">
-                        میزان<span className="text-red-600">*</span>
+                      <label htmlFor="value" className="w-30 text-sm font-bold">
+                        میزان (٪)<span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -290,7 +273,7 @@ export default function AddDiscount(rslt: any) {
                         className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
                         onChange={fillDiscountProductId}
                       >
-                        {products.map((prdct: any) => (
+                        {productsState.list.map((prdct: any) => (
                           <option key={prdct._id} value={prdct._id}>
                             {prdct.name}
                           </option>

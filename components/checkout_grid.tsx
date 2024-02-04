@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { produce } from "immer";
-import { factorReAdded, factorsRecieved } from "@/redux/store/factor";
+import { factorItemReAdded, factorItemRecieved } from "@/redux/store/factorItems";
 import { getNewPrice } from "@/utility/discount";
 export default function CheckoutGridComponent({ props }: any) {
   const dispatch = useAppDispatch();
-  const factorState = useAppSelector((state) => state.entities.factor);
-
+  const factorItemsState = useAppSelector((state) => state.entities.factorItems);
+  useEffect(() => {
+    //dispatch(factorItemRecieved([]));
+  },[])
   function fillFactorGridCount(event: any): void {
     const value = event.target.value;
     const productId = event.target.getAttribute("x-productId");
-    let obj = factorState.list.find((x: any) => x.productId == productId);
+    let obj = factorItemsState.list.find((x: any) => x.productId == productId);
     if (obj != undefined) {
       let price = obj["unitPrice"];
       let newPrice = 0;
       let discount = 0;
-      const nextState = produce(factorState, (draftState) => {
+      const nextState = produce(factorItemsState, (draftState) => {
         const item = draftState.list.map((i: any) => {
           if (i.productId == productId) {
             if (i.discount != undefined) {
@@ -32,18 +34,17 @@ export default function CheckoutGridComponent({ props }: any) {
           }
         });
       });
-      dispatch(factorReAdded(nextState.list));
+      dispatch(factorItemReAdded(nextState.list));
     }
   }
   function submitDeleteFactorItem(productId: any): void {
     if (confirm("قصد حذف محصول را دارید ؟ ")) {
-      const nextState = produce(factorState, (draftState) => {
+      const nextState = produce(factorItemsState, (draftState) => {
         draftState.list = draftState.list.filter(
           (el: any) => el.productId != productId
         );
-        console.log(draftState.list);
       });
-      dispatch(factorsRecieved(nextState.list));
+      dispatch(factorItemRecieved(nextState.list));
     }
   }
   return (
@@ -70,7 +71,7 @@ export default function CheckoutGridComponent({ props }: any) {
         <div className="flex font-bold   items-center justify-center border h-16 text-center">
           <a> عملیات </a>
         </div>
-        {factorState.list.map((item: any) => (
+        {factorItemsState.list.map((item: any) => (
           <>
             <div className="border flex col-span-1 h-16 justify-center items-center">
               <a className="text-xs">{item.productId}</a>

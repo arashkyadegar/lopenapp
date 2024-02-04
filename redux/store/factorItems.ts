@@ -13,32 +13,32 @@ export const initialState: PostInitialState = {
 
 
 // Part 2
-export const factorSlice = createSlice({
-  name: "factor",
+export const factorItemsSlice = createSlice({
+  name: "factorItems",
   initialState: {
     list: [],
     isLoading: false,
     lastFetch: null,
   },
   reducers: {
-    factorsRecieved: (state: any, action: PayloadAction<any>) => {
+    factorItemRecieved: (state: any, action: PayloadAction<any>) => {
       state.list = action.payload;
       state.lastFetch = Date.now();
     },
-    factorAdded: (state: any, action: PayloadAction<any>) => {
+    factorItemAdded: (state: any, action: PayloadAction<any>) => {
       // state.list =[];
       state.list.push(action.payload);
     },
-    factorReAdded: (state: any, action: PayloadAction<any>) => {
+    factorItemReAdded: (state: any, action: PayloadAction<any>) => {
       // state.list =[];
       state.list = action.payload;
     },
   },
 });
-export const getFactorAction = (id: any) =>
+export const getFactorItemsAction = (id: any) =>
   apiCallBegan({
-    url: "/api/factors/" + id,
-    onSuccess: "factorForm/factorsRecieved",
+    url: "/api/wbfactordetails/" + id,
+    onSuccess: "factorItems/factorItemRecieved",
     onError: "products/productsFaild",
     method: "GET",
     credentials: "include",
@@ -46,6 +46,8 @@ export const getFactorAction = (id: any) =>
       "Content-Type": "application/json",
     },
   });
+
+
 
 export const submitAddFactorAction = (factor: any, items: any) =>
   apiCallBegan({
@@ -87,6 +89,6 @@ export const submitEditFactorAction = (factor: any) =>
     body: JSON.stringify(factor),
   });
 
-export const { factorAdded, factorReAdded, factorsRecieved } =
-  factorSlice.actions;
-export default factorSlice.reducer;
+export const { factorItemAdded, factorItemReAdded, factorItemRecieved } =
+factorItemsSlice.actions;
+export default factorItemsSlice.reducer;

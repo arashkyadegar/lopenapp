@@ -2,25 +2,8 @@ import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { submitDeleteFactorAction } from "@/redux/store/factor";
+import { submitDeleteFactorAction } from "@/redux/store/factorItems";
 import { getFactorsAction } from "@/redux/store/factors";
-
-// This gets called on every request
-// export async function getServerSideProps(context: any) {
-//   const { req } = context;
-//   const { cookies } = req;
-//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-//   const res = await fetch(`${baseURL}/api/factors`, {
-//     method: "GET",
-//     credentials: "include",
-//     headers: {
-//       authorization: cookies.alonefighterx,
-//     },
-//   });
-//   const repo = await res.json();
-//   const factors = JSON.stringify(repo);
-//   return { props: { factors } };
-// }
 
 export default function Factors() {
   const factorsState = useAppSelector((state) => state.entities.factors);

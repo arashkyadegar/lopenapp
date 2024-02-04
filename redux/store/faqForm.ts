@@ -70,6 +70,19 @@ export const faqFormSlice = createSlice({
 });
 
 // action creator
+
+export const getFactorAction = (id: any) =>
+  apiCallBegan({
+    url: "/api/factors/" + id,
+    onSuccess: "factorForm/factorsRecieved",
+    onError: "products/productsFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  
 export const {
   setFormQuestion,
   faqFormCleard,

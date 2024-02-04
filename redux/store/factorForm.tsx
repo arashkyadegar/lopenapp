@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { apiCallBegan } from "./api";
 
 export interface PostInitialState {
   factor: number;
@@ -74,6 +75,10 @@ export const factorFormSlice = createSlice({
       };
       state.lastFetch = Date.now();
     },
+    factorFormFetched: (state: any, action: PayloadAction<any>) => {
+      state.data = action.payload[0];
+      state.lastFetch = Date.now();
+    },
     factorFormFilled: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
@@ -82,5 +87,20 @@ export const factorFormSlice = createSlice({
 });
 
 // action creator
-export const { factorFormFilled, factorFormCleard } = factorFormSlice.actions;
+
+export const getFactorAction = (id: any) =>
+  apiCallBegan({
+    url: "/api/factors/" + id,
+    onSuccess: "factorForm/factorFormFetched",
+    onError: "factors/factorsFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
+
+export const { factorFormFilled, factorFormCleard, factorFormFetched } =
+  factorFormSlice.actions;
 export default factorFormSlice.reducer;

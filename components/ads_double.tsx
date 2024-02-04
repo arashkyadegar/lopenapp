@@ -8,6 +8,7 @@ export default function AdsDoubleComponent({ props }: any) {
         height={500}
         className="h-fit w-1/3 aspect-auto rounded-md "
         alt="adv image"
+        crossOrigin = "anonymous"
       />
     </>
   );

@@ -221,30 +221,7 @@ export default function EditFaq() {
   );
 }
 
-// export async function getServerSideProps(context: any) {
-//   const { id } = context.query;
-//   const { req } = context;
-//   const { cookies } = req;
-//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-//   const response = await fetch(`${baseURL}/api/faqs/${id}`, {
-//     method: "GET",
-//     credentials: "include",
-//     headers: {
-//       Authorization: cookies.alonefighterx,
-//     },
-//   });
-//   const repo = await response.json();
-//   if (response.status == 401) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
-//       }
-//     }
-//   }
-//   const faq = JSON.stringify(repo);
-//    return { props: { faq } };
-// }
+
 EditFaq.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };

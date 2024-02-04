@@ -3,64 +3,20 @@ import CheckoutGridComponent from "@/components/checkout_grid";
 import { ReactElement, useEffect } from "react";
 import AdminLayout from "../adminLayout";
 import CheckoutFormViewComponent from "@/components/checkout_formview";
-import { factorFormFilled } from "@/redux/store/factorForm";
+import {getFactorAction } from "@/redux/store/factorForm";
 import { useAppDispatch } from "@/redux/store/hooks";
-import { factorsRecieved } from "@/redux/store/factor";
-import { useSearchParams } from "next/navigation";
-// This gets called on every request
-export async function getServerSideProps(context: any) {
-  const { id } = context.query;
-  const { req } = context;
-  const { cookies } = req;
+import { getFactorItemsAction } from "@/redux/store/factorItems";
 
-  const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-  const response_factor = await fetch(`${baseURL}/api/factors/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Authorization: cookies.alonefighterx,
-    },
-  });
-  const repo_factor = await response_factor.json();
 
-  const response_factorDetails = await fetch(
-    `${baseURL}/api/wbfactordetails/${id}`,
-    {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Authorization: cookies.alonefighterx,
-      },
-    }
-  );
-  const repo_factorDetails = await response_factorDetails.json();
-
-  if (response_factor.status == 401) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
-      },
-    };
-  }
-
-  const factor = JSON.stringify(repo_factor);
-  const factorDetails = JSON.stringify(repo_factorDetails);
-  return { props: { factor: factor, factorDetails: factorDetails } };
-}
-export default function EditFactor(rslt: any) {
+export default function EditFactor() {
   const dispatch = useAppDispatch();
-  const params = useSearchParams();
-  const id = params.get("id");
-
-  const factor = JSON.parse(rslt.factor)[0];
-  const factorDetails = JSON.parse(rslt.factorDetails);
-
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get("id");
 
   useEffect(() => {
-    dispatch(factorFormFilled(factor));
-    dispatch(factorsRecieved(factorDetails));
-  }, [factor]);
+    dispatch(getFactorAction(id));
+    dispatch(getFactorItemsAction(id));
+  },[]);
   return (
     <>
       <div className="container p-4">
@@ -72,8 +28,8 @@ export default function EditFactor(rslt: any) {
               </a>
             </div>
             <div className="flex flex-col ">
-              <CheckoutGridComponent props={factorDetails} />
-              <CheckoutFormViewComponent props={factor} />
+              <CheckoutGridComponent />
+              <CheckoutFormViewComponent  />
             </div>
           </div>
         </div>

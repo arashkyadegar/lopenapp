@@ -1,25 +1,27 @@
 import { useEffect } from "react";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { ToastFail } from "@/utility/tostify";
-
+import { ToastFail, ToastSuccess } from "@/utility/tostify";
 
 export default function CheckoutFormViewComponent({ props }: any) {
   const factorFormState = useAppSelector((state) => state.entities.factorForm);
-  console.log(factorFormState)
-  const factorState = useAppSelector((state) => state.entities.factor);
+  const factorItemsState = useAppSelector(
+    (state) => state.entities.factorItems
+  );
   useEffect(() => {
     //dispatch(siteinfoFormFilled(siteInfo));
   }, []);
-
+  async function submitCancelFactor(event: any): Promise<void> {
+    alert("فاکتور کنسل شد");
+  }
   async function submitAddFactor(event: any): Promise<void> {
     event.preventDefault();
 
-    if (factorFormState.data.formIsValid) {
-      let desc = "";
-      if (factorFormState.data.desc.trim() == "") {
-        desc = "توضیحات ندارد";
-      }
+    // if (factorFormState.data.formIsValid) {
+    //   let desc = "";
+    //   if (factorFormState.data.desc.trim() == "") {
+    //     desc = "توضیحات ندارد";
+    //   }
 
       const factor = {
         _id: "",
@@ -40,18 +42,17 @@ export default function CheckoutFormViewComponent({ props }: any) {
         city: factorFormState.data.city,
         postalCode: factorFormState.data.postalCode,
         address: factorFormState.data.address,
-        desc: desc,
+        desc: factorFormState.data.desc,
       };
-      const items = factorState.list;
+      const items = factorItemsState.list;
       try {
-     //    dispatch(submitAddFactorAction(factor, items));
-     //    dispatch(factorsRecieved([]));
+        ToastSuccess();
       } catch (err) {
         console.log("rrrr");
       }
-    } else {
-      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
-    }
+    // } else {
+    //   ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
+    // }
   }
   return (
     <>
@@ -89,7 +90,6 @@ export default function CheckoutFormViewComponent({ props }: any) {
                   placeholder="نام خانوادگی"
                   value={factorFormState.data.lName}
                 />
-
               </div>
 
               <div className="flex flex-col  gap-2  m-2 ">
@@ -195,13 +195,21 @@ export default function CheckoutFormViewComponent({ props }: any) {
                   value={factorFormState.data.desc}
                 ></textarea>
               </div>
-              <div className="flex justify-end p-2">
+              <div className="flex justify-center p-2 gap-3">
                 <button
                   type="button"
                   onClick={submitAddFactor}
-                  className=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className=" text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   تایید
+                </button>
+
+                <button
+                  type="button"
+                  onClick={submitCancelFactor}
+                  className=" text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  cancel
                 </button>
               </div>
             </div>

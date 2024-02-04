@@ -6,9 +6,12 @@ import citiesJson from "../utility/citys.json";
 import { CityEntity, FactorForm, StateEntity } from "@/models/entities";
 import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
-import { factorFormFilled } from "@/redux/store/factorForm";
+import { factorFormCleard, factorFormFilled } from "@/redux/store/factorForm";
 import { ToastFail } from "@/utility/tostify";
-import { factorsRecieved, submitAddFactorAction } from "@/redux/store/factor";
+import {
+  factorItemRecieved,
+  submitAddFactorAction,
+} from "@/redux/store/factorItems";
 
 export default function CheckoutFormComponent({ props }: any) {
   const stateList: Array<StateEntity> = statesJson;
@@ -21,9 +24,11 @@ export default function CheckoutFormComponent({ props }: any) {
 
   const dispatch = useAppDispatch();
   const factorFormState = useAppSelector((state) => state.entities.factorForm);
-  const factorState = useAppSelector((state) => state.entities.factor);
+  const factorItemsState = useAppSelector(
+    (state) => state.entities.factorItems
+  );
   useEffect(() => {
-    //dispatch(siteinfoFormFilled(siteInfo));
+    dispatch(factorFormCleard());
   }, []);
 
   function stateTextKeyUp(event: any): void {
@@ -136,7 +141,7 @@ export default function CheckoutFormComponent({ props }: any) {
           ...factorFormState.data,
           mobileError: "لطفا موبایل خود را وارد کنید",
           formIsValid: false,
-          mobile:text
+          mobile: text,
         })
       );
     } else {
@@ -159,7 +164,7 @@ export default function CheckoutFormComponent({ props }: any) {
           ...factorFormState.data,
           telError: "لطفا تلفن خود را وارد کنید",
           formIsValid: false,
-          tel:text
+          tel: text,
         })
       );
     } else {
@@ -174,7 +179,7 @@ export default function CheckoutFormComponent({ props }: any) {
     }
   }
   function fillDescText(event: any) {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     dispatch(
       factorFormFilled({
         ...factorFormState.data,
@@ -190,7 +195,7 @@ export default function CheckoutFormComponent({ props }: any) {
           ...factorFormState.data,
           addressError: "لطفا آدرس خود را وارد کنید",
           formIsValid: false,
-          address: text
+          address: text,
         })
       );
     } else {
@@ -228,15 +233,10 @@ export default function CheckoutFormComponent({ props }: any) {
     }
   }
 
-    async function submitAddFactor(event: any): Promise<void> {
+  async function submitAddFactor(event: any): Promise<void> {
     event.preventDefault();
 
     if (factorFormState.data.formIsValid) {
-      let desc = "";
-      if (factorFormState.data.desc.trim() == "") {
-        desc = "توضیحات ندارد";
-      }
-
       const factor = {
         _id: "",
         factorNumber: "",
@@ -256,12 +256,12 @@ export default function CheckoutFormComponent({ props }: any) {
         city: factorFormState.data.city,
         postalCode: factorFormState.data.postalCode,
         address: factorFormState.data.address,
-        desc: desc,
+        desc: factorFormState.data.desc,
       };
-      const items = factorState.list;
+      const items = factorItemsState.list;
       try {
         dispatch(submitAddFactorAction(factor, items));
-        dispatch(factorsRecieved([]));
+        dispatch(factorItemRecieved([]));
       } catch (err) {
         console.log("rrrr");
       }
@@ -314,10 +314,7 @@ export default function CheckoutFormComponent({ props }: any) {
               </div>
 
               <div className="flex flex-col  gap-2  m-2 ">
-                <label
-                  htmlFor="mobile"
-                  className="w-20 text-sm  font-bold"
-                >
+                <label htmlFor="mobile" className="w-20 text-sm  font-bold">
                   موبایل
                 </label>
                 <input
@@ -400,18 +397,6 @@ export default function CheckoutFormComponent({ props }: any) {
                           {element.name}
                         </li>
                       ))}
-                      {/* <li
-          onClick={stateChanged}
-          className="hover:bg-[#80BB01]  hover:text-white cursor-pointer"
-        >
-          خراسان رضوی
-        </li>
-        <li className="hover:bg-[#80BB01]  hover:text-white  cursor-pointer">
-          خراسان شمالی
-        </li>
-        <li className="hover:bg-[#80BB01]  hover:text-white  cursor-pointer">
-          خراسان جنوبی
-        </li> */}
                     </ul>
                   )}
                   <p className="text-red-400 text-xs h-5">
@@ -475,10 +460,7 @@ export default function CheckoutFormComponent({ props }: any) {
               </div>
 
               <div className="flex flex-col  gap-2  m-2 ">
-                <label
-                  htmlFor="postalCode"
-                  className="w-20 text-sm  font-bold"
-                >
+                <label htmlFor="postalCode" className="w-20 text-sm  font-bold">
                   کد پستی
                 </label>
                 <input
@@ -495,10 +477,7 @@ export default function CheckoutFormComponent({ props }: any) {
                 </p>
               </div>
               <div className="flex flex-col   gap-2   mx-2 sm:mt-2   ">
-                <label
-                  htmlFor="address"
-                  className="w-20 text-sm  font-bold"
-                >
+                <label htmlFor="address" className="w-20 text-sm  font-bold">
                   آدرس
                 </label>
                 <textarea

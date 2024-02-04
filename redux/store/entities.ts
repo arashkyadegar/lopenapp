@@ -6,7 +6,7 @@ import productFormReducer from "./productForm";
 import discountFormReducer from "./discountForm";
 import siteInfoFormReducer from "./siteInfoForm";
 import faqFormReducer from "./faqForm";
-import factorReducer from "./factor";
+import factorItemsReducer from "./factorItems";
 import factorFormReducer from "./factorForm";
 import faqsReducer from "./faqs";
 import productsReducer from "./products";
@@ -23,7 +23,7 @@ export default combineReducers({
   discounts: discountsReducer,
   productForm: productFormReducer,
   discountForm: discountFormReducer,
-  factor: factorReducer,
+  factorItems: factorItemsReducer,
   factorForm: factorFormReducer,
   faqs: faqsReducer,
   faqForm: faqFormReducer,

@@ -19,39 +19,10 @@ import {
 } from "@/redux/store/discount";
 import { getProductsAction } from "@/redux/store/products";
 import { rgx_date, rgx_insecure } from "@/utility/regex";
-// This gets called on every request
-// export async function getServerSideProps(context: any) {
-//   const { id } = context.query;
-//   const { req } = context;
-//   const { cookies } = req;
 
-//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-//   const discount_response = await fetch(`${baseURL}/api/discounts/${id}`, {
-//     method: "GET",
-//     credentials: "include",
-//     headers: {
-//       Authorization: cookies.alonefighterx,
-//     },
-//   });
-//   const discount_repo = await discount_response.json();
-//   if (discount_response.status == 401) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT,
-//       },
-//     };
-//   }
-
-//   const discount = JSON.stringify(discount_repo);
-//   const res = await fetch(`${baseURL}/api/products`);
-//   const repo = await res.json();
-//   const products = JSON.stringify(repo);
-//   return { props: { products: products, discount: discount } };
-// }
 export default function EditDiscount(rslt: any) {
-  const params = useSearchParams();
-  const id = params.get("id");
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get("id");
   const dispatch = useAppDispatch();
 
   const discountFormState = useAppSelector(
@@ -266,8 +237,7 @@ export default function EditDiscount(rslt: any) {
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="value" className="w-20 text-sm font-bold">
-                        میزان<span className="text-red-600">*</span>
-                      </label>
+                      میزان (٪)<span className="text-red-600">*</span>                      </label>
                       <input
                         type="text"
                         name="value"

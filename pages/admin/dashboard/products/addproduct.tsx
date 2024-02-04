@@ -7,7 +7,6 @@ import { FileService } from "@/services/fileService";
 import {
   ToastAuthFail,
   ToastFail,
-  ToastInfo,
   ToastSuccess,
 } from "@/utility/tostify";
 
@@ -379,18 +378,7 @@ export default function Addproduct() {
                         {productFormState.data.imagesError}
                       </p>
                     </div>
-                    {/* <div className="flex flex-col gap-2 m-2">
-                      <label htmlFor="_id" className="w-20 text-sm font-bold">
-                        کد محصول
-                      </label>
-                      <input
-                        type="text"
-                        name="_id"
-                        id="_id"
-                        className="p-1 border
-            border-gray-300 bg-[#F9FAFB]"
-                      />
-                    </div> */}
+
 
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="name" className="w-20 text-sm font-bold">

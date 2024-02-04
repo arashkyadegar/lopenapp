@@ -1,11 +1,11 @@
 import React from "react";
 import { produce } from "immer";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
-import { factorReAdded, factorsRecieved } from "@/redux/store/factor";
+import { factorItemReAdded, factorItemRecieved } from "@/redux/store/factorItems";
 import { getNewPrice } from "@/utility/discount";
 export default function BasketSmallComponent({ props }: any) {
   const dispatch = useAppDispatch();
-  const factorState = useAppSelector((state) => state.entities.factor);
+  const factorState = useAppSelector((state) => state.entities.factorItems);
   console.log(factorState.list.length);
   function fillFactorGridCount(event: any): void {
     const value = event.target.value;
@@ -34,7 +34,7 @@ export default function BasketSmallComponent({ props }: any) {
           }
         });
       });
-      dispatch(factorReAdded(nextState.list));
+      dispatch(factorItemReAdded(nextState));
     }
   }
 
@@ -46,7 +46,7 @@ export default function BasketSmallComponent({ props }: any) {
         );
         console.log(draftState.list);
       });
-      dispatch(factorsRecieved(nextState.list));
+      dispatch(factorItemRecieved(nextState.list));
     }
   }
 

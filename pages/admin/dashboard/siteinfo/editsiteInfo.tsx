@@ -976,21 +976,7 @@ export default function EditSiteInfo(rslt: any) {
     </>
   );
 }
-// export async function getServerSideProps(context: any) {
-//   const { req } = context;
-//   const { cookies } = req;
-//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-//   const response = await fetch(`${baseURL}/api/siteinfos`, {
-//     method: "GET",
-//     credentials: "include",
-//     headers: {
-//       Authorization: cookies.alonefighterx,
-//     },
-//   });
-//   const repo = await response.json();
-//   const siteInfo = JSON.stringify(repo);
-//   return { props: { siteInfo } };
-// }
+
 EditSiteInfo.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
 };
