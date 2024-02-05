@@ -55,16 +55,16 @@ export default function Login({ props }: any) {
   }
 
   return (
-    <div className="container p-4">
-      <div className="flex flex-col items-center justify-center w-full mx-auto gap-4">
-        <div className="flex flex-col justify-between   gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
+    <div className="">
+      <div className="flex flex-col items-center justify-center w-full gap-4">
+        <div className="flex flex-col justify-between bg-white shadow-md shadow-gray-500 ">
           <div className="px-2 ">
             <a className="w-full flex text-center text-2xl border-b p-4 border-gray-400">
               Login
             </a>
           </div>
           <form onSubmit={submitLoginApi}>
-            <div className="w-full mx-auto">
+            <div className="w-full">
               <div className="flex flex-col gap-2 m-2">
                 <label htmlFor="email" className="w-20 text-sm font-bold">
                   نام کاربری

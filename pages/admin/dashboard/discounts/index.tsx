@@ -5,32 +5,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { submitDeleteDiscountAction } from "@/redux/store/discount";
 import { getDiscountsAction } from "@/redux/store/discounts";
 
-// This gets called on every request
-// export async function getServerSideProps(context: any) {
-//   const { req } = context;
-//   const { cookies } = req;
-
-//   const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-//   const response = await fetch(`${baseURL}/api/discounts`, {
-//     method: "GET",
-//     credentials: "include",
-//     headers: {
-//       authorization: cookies.alonefighterx,
-//     },
-//   });
-
-//   if (response.status == 401) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: process.env.NEXT_PUBLIC_LOGINREDIRECT
-//       }
-//     }
-//   }
-//   const repo = await response.json();
-//   const discounts = JSON.stringify(repo);
-//   return { props: { discounts } };
-// }
 
 export default function Discounts() {
   const discountsState = useAppSelector((state) => state.entities.discounts);
@@ -47,16 +21,16 @@ export default function Discounts() {
   }
   return (
     <>
-      <div className="container p-4">
-        <div className="flex flex-col  w-full  aspect-video gap-4">
-          <div className="flex flex-col justify-between w-4/4  gap-4   mb-4 bg-white shadow-md shadow-gray-500 ">
-            <div className="px-2">
-              <a className=" flex text-2xl border-b p-1 border-gray-400">
+      <div className="flex">
+        <div className="flex flex-col  w-full">
+          <div className="flex flex-col justify-between w-4/4   mb-4 bg-white shadow-md shadow-gray-500 ">
+            <div className="">
+              <a className=" flex text-xl border-b p-1 border-gray-400">
                  تخفیف ها
               </a>
             </div>
             <div>
-              <ul className="flex flex-row gap-4 px-4">
+              <ul className="flex flex-row">
                 <li className="bg-blue-400 w-10 p-2 rounded-md ">
                   <Link
                     href={{
@@ -81,40 +55,40 @@ export default function Discounts() {
                 </li>
               </ul>
             </div>
-            <div className="grid  grid-cols-5 items-center divide divide-gray-200">
-              <div className="flex font-bold  items-center justify-center col-span-1  border border-gray-200 text-center">
+            <div className="grid  md:grid-cols-5 grid-cols-3 items-center divide divide-gray-200">
+              <div className="p-1 hidden md:flex font-bold  items-center justify-center col-span-1  border border-gray-200 text-center">
                 <a>کد</a>
               </div>
-              <div className="px-2 font-bold  flex  items-center justify-right col-span-1 border text-center">
+              <div className="p-1 px-2 font-bold  flex  items-center justify-right col-span-1 border text-center">
                 <a> عنوان تخفیف</a>
               </div>
-              <div className=" px-2  font-bold flex  items-center justify-right  border  text-center">
+              <div className="p-1  px-2  font-bold flex  items-center justify-right  border  text-center">
                 <a>نام محصول </a>
               </div>
-              <div className="flex  font-bold items-center justify-center border  text-center">
+              <div className="p-1 hidden md:flex   font-bold items-center justify-center border  text-center">
                 <a>میزان </a>
               </div>
 
-              <div className="flex   font-bold items-center justify-center border  text-center">
+              <div className="p-1 flex   font-bold items-center justify-center border  text-center">
                 <a>عملیات</a>
               </div>
 
               {discountsState.list.map((discount: any) => (
                 <>
-                  <div className="border  flex col-span-1 p-2 justify-center items-center">
-                    <a className="text-xs">{discount._id}</a>
+                  <div className="p-1 border  hidden md:flex col-span-1  justify-center items-center">
+                    <a>{discount._id}</a>
                   </div>
-                  <div className=" px-2 border flex col-span-1 p-1 justify-right items-center">
+                  <div className="p-1  px-2 border flex col-span-1  justify-right items-center">
                     <a>{discount.title}</a>
                   </div>
-                  <div className="px-2 border flex col-span-1 p-1 justify-right items-center">
+                  <div className="p-1 px-2 border flex col-span-1  justify-right items-center">
                     <a>{discount.product.name}</a>
                   </div>
-                  <div className="border flex col-span-1 p-1  justify-center items-center">
+                  <div className="p-1 border hidden md:flex col-span-1   justify-center items-center">
                     <a>{discount.value}</a>
                   </div>
 
-                  <div className="border flex col-span-1 p-1 justify-center items-center">
+                  <div className="p-1 border flex col-span-1  justify-center items-center">
 
                     {/* edit button */}
                     <Link
@@ -149,7 +123,7 @@ export default function Discounts() {
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="w-6 h-6"
+                        className="w-6 h-6 "
                       >
                         <path
                           strokeLinecap="round"

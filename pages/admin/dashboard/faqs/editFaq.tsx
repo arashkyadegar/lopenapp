@@ -113,19 +113,19 @@ export default function EditFaq() {
   }
   return (
     <>
-      <div className="container p-4">
-        <div className="flex flex-col  w-full mx-auto aspect-video gap-4">
-          <div className="flex flex-col justify-between w-4/4  gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
-            <div className="px-2">
-              <main className="p-4">
-                <div className="px-2 ">
-                  <a className=" flex text-2xl border-b p-4 border-gray-400">
+
+        <div className="flex flex-col  w-full gap-4">
+          <div className="flex flex-col justify-between w-full  gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
+            <div className="">
+              <main className="">
+                <div className=" ">
+                  <a className=" flex text-xl border-b px-1 border-gray-400">
                     تغییر اطلاعات سوالات متداول
                   </a>
                 </div>
 
                 <div>
-                  <div className="w-1/2 mx-auto">
+                  <div className="w-full  md:w-1/2  mx-auto">
                     <div className="flex flex-col gap-2 m-2">
                       <label htmlFor="_id" className="w-20 text-sm font-bold">
                         کد سوال
@@ -204,7 +204,7 @@ export default function EditFaq() {
                       <button
                         type="button"
                         onClick={submitEditFaq}
-                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         ثبت تغییرات
                       </button>
@@ -216,7 +216,7 @@ export default function EditFaq() {
           </div>
           <div></div>
         </div>
-      </div>
+
     </>
   );
 }

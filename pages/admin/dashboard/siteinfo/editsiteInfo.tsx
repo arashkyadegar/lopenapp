@@ -152,7 +152,7 @@ export default function EditSiteInfo(rslt: any) {
   }
 
   function fillTwitter(event: any): void {
-    let text: string =event.target.value;
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         siteinfoFormFilled({
@@ -597,378 +597,395 @@ export default function EditSiteInfo(rslt: any) {
   }
   return (
     <>
-      <div className="container p-4">
-        <div className="flex flex-col  w-full  aspect-video gap-4">
-          <main className="flex flex-col justify-between w-4/4  gap-4   mb-4 bg-white shadow-md shadow-gray-500 ">
-            <div className="px-2">
-              <a className=" flex text-2xl border-b p-1 border-gray-400">
-                تنظیمات سایت
-              </a>
-            </div>
-            <div>
-              <div>
-                <div className="w-1/2 mx-auto">
-                  <div className="flex flex-col gap-2 m-2">
-                    <input
-                      id="files"
-                      name="files"
-                      type="file"
-                      accept=".png,.jpg"
-                      multiple
-                      onChange={fillheaderImagesFile}
-                    />
-
-                    {siteInfoFormState.data.headerImages !== undefined && (
-                      <div className="flex flex-row gap-2 m-2">
-                        {siteInfoFormState.data.headerImages.map(
-                          (image: any) => (
-                            <img
-                              key={image}
-                              src={getDefaultImageAvator(image)}
-                              width={800}
-                              height={800}
-                              className="w-10 h-10"
-                              alt="headers images"
-                              crossOrigin = "anonymous"
-                            />
-                          )
-                        )}
-                      </div>
-                    )}
-
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.headerImagesError}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 m-2">
-                    <input
-                      id="files2"
-                      name="files2"
-                      type="file"
-                      accept=".png,.jpg"
-                      onChange={fillLogo1File}
-                    />
-
-                    {siteInfoFormState.data.logo1 !== undefined && (
-                      <div className="flex flex-row gap-2 m-2">
-                        <img
-                          src={getDefaultImageAvator(
-                            siteInfoFormState.data.logo1
-                          )}
-                          width={800}
-                          height={800}
-                          className="w-10 h-10"
-                          alt="main logo"
-                          crossOrigin = "anonymous"
-                        />
-                      </div>
-                    )}
-
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.headerImagesError}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 mx-2 sm:mt-2">
-                    <label
-                      htmlFor="address1"
-                      className="w-20 text-sm font-bold"
-                    >
-                      آدرس اول<span className="text-red-600">*</span>
-                    </label>
-                    <textarea
-                      name="address1"
-                      id="address1"
-                      rows={2}
-                      className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillAddress1}
-                      value={siteInfoFormState.data.address1}
-                    ></textarea>
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.address1Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 mx-2">
-                    <label
-                      htmlFor="address2"
-                      className="w-20 text-sm font-bold"
-                    >
-                      آدرس دوم
-                      <span className="text-red-600">*</span>
-                    </label>
-                    <textarea
-                      name="address2"
-                      id="address2"
-                      rows={2}
-                      className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillAddress2}
-                      value={siteInfoFormState.data.address2}
-                    ></textarea>
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.address2Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label
-                      htmlFor="copyRightText"
-                      className="w-40 text-sm font-bold"
-                    >
-                      متن کپی رایت
-                      <span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="copyRightText"
-                      id="copyRightText"
-                      className="p-1 border
-                  border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillCopyRightText}
-                      value={siteInfoFormState.data.copyRightText}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.copyRightTextError}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label
-                      htmlFor="copyRightYear"
-                      className="w-40 text-sm font-bold"
-                    >
-                      سال کپی رایت
-                      <span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="copyRightYear"
-                      id="copyRightYear"
-                      className="p-1 border
-                  border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillCopyRightYear}
-                      value={siteInfoFormState.data.copyRightYear}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.copyRightYearError}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label htmlFor="tel1" className="w-40 text-sm font-bold">
-                      تلفن ۱
-                    </label>
-                    <input
-                      type="text"
-                      name="tel1"
-                      id="tel1"
-                      className="p-1 border
-                  border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillTel1}
-                      value={siteInfoFormState.data.tel1}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.tel1Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label htmlFor="tel2" className="w-40 text-sm font-bold">
-                      تلفن ۲
-                    </label>
-                    <input
-                      type="text"
-                      name="tel2"
-                      id="tel2"
-                      className="p-1 border
-                  border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillTel2}
-                      value={siteInfoFormState.data.tel2}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.tel2Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label htmlFor="mobile1" className="w-40 text-sm font-bold">
-                      موبایل ۱
-                    </label>
-                    <input
-                      type="text"
-                      name="mobile1"
-                      id="mobile1"
-                      className="p-1 border
-                  border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillMobile1}
-                      value={siteInfoFormState.data.mobile1}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.mobile1Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label htmlFor="mobile2" className="w-40 text-sm font-bold">
-                      موبایل ۲
-                    </label>
-                    <input
-                      type="text"
-                      name="mobile2"
-                      id="mobile2"
-                      className="p-1 border
-                  border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillMobile2}
-                      value={siteInfoFormState.data.mobile2}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.mobile2Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label htmlFor="email1" className="w-20 text-sm font-bold">
-                      ایمیل ۱
-                    </label>
-                    <input
-                      type="text"
-                      name="email1"
-                      id="email1"
-                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillEmail1}
-                      value={siteInfoFormState.data.email1}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.email1Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label htmlFor="email2" className="w-20 text-sm font-bold">
-                      ایمیل ۲
-                    </label>
-                    <input
-                      type="text"
-                      name="email2"
-                      id="email2"
-                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillEmail2}
-                      value={siteInfoFormState.data.email2}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.email2Error}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label
-                      htmlFor="headerTitle"
-                      className="w-40 text-sm font-bold"
-                    >
-                      عنوان بالای صفحه<span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="headerTitle"
-                      id="headerTitle"
-                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillheaderTitle}
-                      value={siteInfoFormState.data.headerTitle}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.headerTitleError}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label
-                      htmlFor="instagram"
-                      className="w-40 text-sm font-bold"
-                    >
-                      صفحه اینستاگرام<span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="instagram"
-                      id="instagram"
-                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillInstagram}
-                      value={siteInfoFormState.data.instagram}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.instagramError}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label htmlFor="twitter" className="w-20 text-sm font-bold">
-                      صفحه تویتر<span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="twitter"
-                      id="twitter"
-                      className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillTwitter}
-                      value={siteInfoFormState.data.twitter}
-                    />
-                    <p className=" text-red-400 text-xs ">
-                      {siteInfoFormState.data.twitterError}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 m-2">
-                    <label
-                      htmlFor="linkedin"
-                      className="w-40 text-sm font-bold"
-                    >
-                      صفحه لینکدین<span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="linkedin"
-                      id="linkedin"
-                      className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillLinkedin}
-                      value={siteInfoFormState.data.linkedin}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.linkedinError}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-2 m-2">
-                    <label
-                      htmlFor="whatsapp"
-                      className="w-40 text-sm font-bold"
-                    >
-                      صفحه واتز اپ<span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="whatsapp"
-                      id="whatsapp"
-                      className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                      onChange={fillWhatsapp}
-                      value={siteInfoFormState.data.whatsapp}
-                    />
-                    <p className="text-red-400 text-xs">
-                      {siteInfoFormState.data.whatsappError}
-                    </p>
-                  </div>
-
-                  <div className="flex justify-end p-2">
-                    <button
-                      type="button"
-                      onClick={submitEditSiteinfo}
-                      className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      ثبت تغییرات
-                    </button>
-                  </div>
-                </div>
-                <div className=" flex flex-col"></div>
+      <div className="flex flex-col  w-full gap-4">
+        <div className="flex flex-col justify-between w-full  mb-4 bg-white shadow-md shadow-gray-500 ">
+          <div>
+            <main>
+              <div >
+                <a className=" flex text-xl border-b px-1 border-gray-400">
+                  تنظیمات سایت
+                </a>
               </div>
-            </div>
-          </main>
+              <div>
+                <div>
+                  <div className="w-full md:w-1/2 mx-auto">
+                    <div className="flex flex-col gap-2 m-2">
+                      <input
+                        id="files"
+                        name="files"
+                        type="file"
+                        accept=".png,.jpg"
+                        multiple
+                        onChange={fillheaderImagesFile}
+                      />
+
+                      {siteInfoFormState.data.headerImages !== undefined && (
+                        <div className="flex flex-row gap-2 m-2">
+                          {siteInfoFormState.data.headerImages.map(
+                            (image: any) => (
+                              <img
+                                key={image}
+                                src={getDefaultImageAvator(image)}
+                                width={800}
+                                height={800}
+                                className="w-10 h-10"
+                                alt="headers images"
+                                crossOrigin="anonymous"
+                              />
+                            )
+                          )}
+                        </div>
+                      )}
+
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.headerImagesError}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-2 m-2">
+                      <input
+                        id="files2"
+                        name="files2"
+                        type="file"
+                        accept=".png,.jpg"
+                        onChange={fillLogo1File}
+                      />
+
+                      {siteInfoFormState.data.logo1 !== undefined && (
+                        <div className="flex flex-row gap-2 m-2">
+                          <img
+                            src={getDefaultImageAvator(
+                              siteInfoFormState.data.logo1
+                            )}
+                            width={800}
+                            height={800}
+                            className="w-10 h-10"
+                            alt="main logo"
+                            crossOrigin="anonymous"
+                          />
+                        </div>
+                      )}
+
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.headerImagesError}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-2 mx-2 sm:mt-2">
+                      <label
+                        htmlFor="address1"
+                        className="w-20 text-sm font-bold"
+                      >
+                        آدرس اول<span className="text-red-600">*</span>
+                      </label>
+                      <textarea
+                        name="address1"
+                        id="address1"
+                        rows={2}
+                        className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillAddress1}
+                        value={siteInfoFormState.data.address1}
+                      ></textarea>
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.address1Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 mx-2">
+                      <label
+                        htmlFor="address2"
+                        className="w-20 text-sm font-bold"
+                      >
+                        آدرس دوم
+                        <span className="text-red-600">*</span>
+                      </label>
+                      <textarea
+                        name="address2"
+                        id="address2"
+                        rows={2}
+                        className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillAddress2}
+                        value={siteInfoFormState.data.address2}
+                      ></textarea>
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.address2Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="copyRightText"
+                        className="w-40 text-sm font-bold"
+                      >
+                        متن کپی رایت
+                        <span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="copyRightText"
+                        id="copyRightText"
+                        className="p-1 border
+                  border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillCopyRightText}
+                        value={siteInfoFormState.data.copyRightText}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.copyRightTextError}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="copyRightYear"
+                        className="w-40 text-sm font-bold"
+                      >
+                        سال کپی رایت
+                        <span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="copyRightYear"
+                        id="copyRightYear"
+                        className="p-1 border
+                  border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillCopyRightYear}
+                        value={siteInfoFormState.data.copyRightYear}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.copyRightYearError}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label htmlFor="tel1" className="w-40 text-sm font-bold">
+                        تلفن ۱
+                      </label>
+                      <input
+                        type="text"
+                        name="tel1"
+                        id="tel1"
+                        className="p-1 border
+                  border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillTel1}
+                        value={siteInfoFormState.data.tel1}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.tel1Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label htmlFor="tel2" className="w-40 text-sm font-bold">
+                        تلفن ۲
+                      </label>
+                      <input
+                        type="text"
+                        name="tel2"
+                        id="tel2"
+                        className="p-1 border
+                  border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillTel2}
+                        value={siteInfoFormState.data.tel2}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.tel2Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="mobile1"
+                        className="w-40 text-sm font-bold"
+                      >
+                        موبایل ۱
+                      </label>
+                      <input
+                        type="text"
+                        name="mobile1"
+                        id="mobile1"
+                        className="p-1 border
+                  border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillMobile1}
+                        value={siteInfoFormState.data.mobile1}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.mobile1Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="mobile2"
+                        className="w-40 text-sm font-bold"
+                      >
+                        موبایل ۲
+                      </label>
+                      <input
+                        type="text"
+                        name="mobile2"
+                        id="mobile2"
+                        className="p-1 border
+                  border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillMobile2}
+                        value={siteInfoFormState.data.mobile2}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.mobile2Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="email1"
+                        className="w-20 text-sm font-bold"
+                      >
+                        ایمیل ۱
+                      </label>
+                      <input
+                        type="text"
+                        name="email1"
+                        id="email1"
+                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillEmail1}
+                        value={siteInfoFormState.data.email1}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.email1Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="email2"
+                        className="w-20 text-sm font-bold"
+                      >
+                        ایمیل ۲
+                      </label>
+                      <input
+                        type="text"
+                        name="email2"
+                        id="email2"
+                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillEmail2}
+                        value={siteInfoFormState.data.email2}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.email2Error}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="headerTitle"
+                        className="w-40 text-sm font-bold"
+                      >
+                        عنوان بالای صفحه<span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="headerTitle"
+                        id="headerTitle"
+                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillheaderTitle}
+                        value={siteInfoFormState.data.headerTitle}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.headerTitleError}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="instagram"
+                        className="w-40 text-sm font-bold"
+                      >
+                        صفحه اینستاگرام<span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="instagram"
+                        id="instagram"
+                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillInstagram}
+                        value={siteInfoFormState.data.instagram}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.instagramError}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="twitter"
+                        className="w-20 text-sm font-bold"
+                      >
+                        صفحه تویتر<span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="twitter"
+                        id="twitter"
+                        className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillTwitter}
+                        value={siteInfoFormState.data.twitter}
+                      />
+                      <p className=" text-red-400 text-xs ">
+                        {siteInfoFormState.data.twitterError}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="linkedin"
+                        className="w-40 text-sm font-bold"
+                      >
+                        صفحه لینکدین<span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="linkedin"
+                        id="linkedin"
+                        className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillLinkedin}
+                        value={siteInfoFormState.data.linkedin}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.linkedinError}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 m-2">
+                      <label
+                        htmlFor="whatsapp"
+                        className="w-40 text-sm font-bold"
+                      >
+                        صفحه واتز اپ<span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="whatsapp"
+                        id="whatsapp"
+                        className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
+                        onChange={fillWhatsapp}
+                        value={siteInfoFormState.data.whatsapp}
+                      />
+                      <p className="text-red-400 text-xs">
+                        {siteInfoFormState.data.whatsappError}
+                      </p>
+                    </div>
+
+                    <div className="flex justify-end p-2">
+                      <button
+                        type="button"
+                        onClick={submitEditSiteinfo}
+                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        ثبت تغییرات
+                      </button>
+                    </div>
+                  </div>
+                  <div className=" flex flex-col"></div>
+                </div>
+              </div>
+            </main>
+          </div>
         </div>
       </div>
 

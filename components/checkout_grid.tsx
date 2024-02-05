@@ -49,8 +49,8 @@ export default function CheckoutGridComponent({ props }: any) {
   }
   return (
     <>
-      <div className="grid mx-2 grid-cols-7 items-center divide divide-gray-200">
-        <div className="flex  font-bold   items-center justify-center col-span-1 h-16 border border-gray-200 text-center">
+      <div className="grid mx-2 text-xs md:text-sm grid-cols-6 md:grid-cols-7 items-center divide divide-gray-200">
+        <div className="  hidden md:flex   font-bold   items-center justify-center col-span-1 h-16 border border-gray-200 text-center">
           <a>#</a>
         </div>
         <div className="flex font-bold items-center justify-center col-span-1 h-16 border text-center">
@@ -73,7 +73,7 @@ export default function CheckoutGridComponent({ props }: any) {
         </div>
         {factorItemsState.list.map((item: any) => (
           <>
-            <div className="border flex col-span-1 h-16 justify-center items-center">
+            <div className="border   hidden md:flex  col-span-1 h-16 justify-center items-center">
               <a className="text-xs">{item.productId}</a>
             </div>
             <div className="border flex col-span-1 h-16 justify-center items-center">

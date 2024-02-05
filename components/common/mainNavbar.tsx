@@ -134,6 +134,7 @@ export default function MainNavBar({ props }: any) {
               height={500}
               className="h-8 w-10"
               alt="lopen Logo"
+              crossOrigin = "anonymous"
             />
             <span className="self-center text-2xl text-gray-600 font-semibold whitespace-nowrap dark: ">
               آبنبات لپن

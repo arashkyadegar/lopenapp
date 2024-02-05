@@ -4,11 +4,7 @@ import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { submitAddProductAction } from "@/redux/store/product";
 import { FileService } from "@/services/fileService";
-import {
-  ToastAuthFail,
-  ToastFail,
-  ToastSuccess,
-} from "@/utility/tostify";
+import { ToastAuthFail, ToastFail, ToastSuccess } from "@/utility/tostify";
 
 import {
   productFormCleard,
@@ -26,6 +22,7 @@ import {
 } from "@/redux/store/productForm";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { ResponseStatus } from "@/utility/responseStatus";
+import { rgx_insecure } from "@/utility/regex";
 export default function Addproduct() {
   const formdata = new FormData();
   const dispatch = useAppDispatch();
@@ -35,7 +32,7 @@ export default function Addproduct() {
 
   useEffect(() => {
     dispatch(productFormCleard());
-  },[]);
+  }, []);
   async function submitAddProduct(event: any): Promise<void> {
     // event.preventDefault();
 
@@ -68,7 +65,7 @@ export default function Addproduct() {
     }
   }
   function fillPrdctName(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormName({
@@ -77,7 +74,15 @@ export default function Addproduct() {
           name: text,
         })
       );
-    } else {
+    }else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormName({
+          nameError: "لطفا کارکترهای غیرمجاز وارد نکنید",
+          formIsValid: false,
+          name: text,
+        })
+      );
+    }  else {
       dispatch(
         setFormName({
           nameError: "",
@@ -89,7 +94,7 @@ export default function Addproduct() {
   }
 
   function fillPrdctWeight(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormWeight({
@@ -118,11 +123,19 @@ export default function Addproduct() {
   }
 
   function fillPrdctSize(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormSize({
           sizeError: "لطفا سایز محصول را وارد کنید",
+          formIsValid: false,
+          size: text,
+        })
+      );
+    } else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormSize({
+          sizeError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           size: text,
         })
@@ -139,7 +152,7 @@ export default function Addproduct() {
   }
 
   function fillPrdctHealthId(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormHealthId({
@@ -148,7 +161,15 @@ export default function Addproduct() {
           healthId: text,
         })
       );
-    } else {
+    }else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormHealthId({
+          healthIdError: "لطفا کارکترهای غیرمجاز وارد نکنید",
+          formIsValid: false,
+          healthId: text,
+        })
+      );
+    }  else {
       dispatch(
         setFormHealthId({
           healthIdError: "",
@@ -160,7 +181,7 @@ export default function Addproduct() {
   }
 
   function fillPrdctPrice(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormPrice({
@@ -213,11 +234,19 @@ export default function Addproduct() {
   }
 
   function fillPrdctComponents(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormComponents({
           componentsError: "لطفا ترکیبات محصول را وارد کنید",
+          formIsValid: false,
+          components: text,
+        })
+      );
+    }else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormComponents({
+          componentsError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           components: text,
         })
@@ -234,11 +263,19 @@ export default function Addproduct() {
   }
 
   function fillPrdctDesc(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string =event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormDesc({
           descError: "لطفا توضیحات محصول را وارد کنید",
+          formIsValid: false,
+          desc: text,
+        })
+      );
+    }else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormDesc({
+          descError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           desc: text,
         })
@@ -255,11 +292,19 @@ export default function Addproduct() {
   }
 
   function fillPrdctTags(event: any): void {
-    let text: string = validator.escape(event.target.value);
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormTags({
           tagsError: "لطفا برچسبهای محصول را وارد کنید",
+          formIsValid: false,
+          tags: text,
+        })
+      );
+    }else if (validator.matches(text, rgx_insecure)) {
+      dispatch(
+        setFormTags({
+          tagsError: "لطفا کارکترهای غیرمجاز وارد نکنید",
           formIsValid: false,
           tags: text,
         })
@@ -339,247 +384,235 @@ export default function Addproduct() {
     }
   }
   return (
-    <>
-      <div className="container p-4">
-        <div className="flex flex-col  w-full mx-auto aspect-video gap-4">
-          <div className="flex flex-col justify-between w-4/4  gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
-            <div className="px-2">
-              <main className="p-4">
-                <div className="px-2 ">
-                  <a className=" flex text-2xl border-b p-4 border-gray-400">
-                    ثبت اطلاعات محصول
-                  </a>
-                </div>
-                <div>
-                  <div className="w-1/2 mx-auto">
-                    <div className="flex flex-col gap-2 m-2">
-                      <input
-                        id="files"
-                        name="files"
-                        type="file"
-                        accept=".png,.jpg"
-                        multiple
-                        onChange={fillPrdctFile}
-                      />
-                      {productFormState.data.images !== undefined && (
-                        <div className="flex flex-row gap-2 m-2">
-                          {productFormState.data.images.map((image: any) => (
-                            <img
-                              key={image}
-                              src={getDefaultImageAvator(image)}
-                              className="w-10 h-10"
-                              alt="product image"
-                              crossOrigin = "anonymous"
-                            />
-                          ))}
-                        </div>
-                      )}
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.imagesError}
-                      </p>
-                    </div>
+      <div className="flex flex-col  w-full gap-4">
+        <div className="flex flex-col justify-between w-full mb-4 bg-white shadow-md shadow-gray-500 ">
+          <div className="">
+            <main className="">
+              <div className="">
+                <a className=" flex text-xl border-b px-1 border-gray-400">
+                  ثبت اطلاعات محصول
+                </a>
+              </div>
+              <div>
+                <div className="w-full md:w-1/2 mx-auto">
+                  <div className="flex flex-col gap-2 m-2">
+                    <input
+                      id="files"
+                      name="files"
+                      type="file"
+                      accept=".png,.jpg"
+                      multiple
+                      onChange={fillPrdctFile}
+                    />
+                    {productFormState.data.images !== undefined && (
+                      <div className="flex flex-row gap-2 m-2">
+                        {productFormState.data.images.map((image: any) => (
+                          <img
+                            key={image}
+                            src={getDefaultImageAvator(image)}
+                            className="w-10 h-10"
+                            alt="product image"
+                            crossOrigin="anonymous"
+                          />
+                        ))}
+                      </div>
+                    )}
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.imagesError}
+                    </p>
+                  </div>
 
-
-                    <div className="flex flex-col gap-2 m-2">
-                      <label htmlFor="name" className="w-20 text-sm font-bold">
-                        نام<span className="text-red-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        className="p-1 border
+                  <div className="flex flex-col gap-2 m-2">
+                    <label htmlFor="name" className="w-20 text-sm font-bold">
+                      نام<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      className="p-1 border
             border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctName}
-                        value={productFormState.data.name}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.nameError}
-                      </p>
-                    </div>
+                      onChange={fillPrdctName}
+                      value={productFormState.data.name}
+                    />
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.nameError}
+                    </p>
+                  </div>
 
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="weight"
-                        className="w-20 text-sm font-bold"
-                      >
-                        وزن (گرم)<span className="text-red-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="weight"
-                        id="weight"
-                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctWeight}
-                        value={productFormState.data.weight}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.weightError}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label htmlFor="weight" className="w-20 text-sm font-bold">
+                      وزن (گرم)<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="weight"
+                      id="weight"
+                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctWeight}
+                      value={productFormState.data.weight}
+                    />
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.weightError}
+                    </p>
+                  </div>
 
-                    <div className="flex flex-col gap-2 m-2">
-                      <label htmlFor="size" className="w-20 text-sm font-bold">
-                        سایز<span className="text-red-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="size"
-                        id="size"
-                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctSize}
-                        value={productFormState.data.size}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.sizeError}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label htmlFor="size" className="w-20 text-sm font-bold">
+                      سایز<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="size"
+                      id="size"
+                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctSize}
+                      value={productFormState.data.size}
+                    />
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.sizeError}
+                    </p>
+                  </div>
 
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="healthId"
-                        className="w-40 text-sm font-bold"
-                      >
-                        شماره سلامت<span className="text-red-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="healthId"
-                        id="healthId"
-                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctHealthId}
-                        value={productFormState.data.healthId}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.healthIdError}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label
+                      htmlFor="healthId"
+                      className="w-40 text-sm font-bold"
+                    >
+                      شماره سلامت<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="healthId"
+                      id="healthId"
+                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctHealthId}
+                      value={productFormState.data.healthId}
+                    />
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.healthIdError}
+                    </p>
+                  </div>
 
-                    <div className="flex flex-col gap-2 m-2">
-                      <label htmlFor="price" className="w-20 text-sm font-bold">
-                        قیمت<span className="text-red-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="price"
-                        id="price"
-                        className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctPrice}
-                        value={productFormState.data.price}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.priceError}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label htmlFor="price" className="w-20 text-sm font-bold">
+                      قیمت<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="price"
+                      id="price"
+                      className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctPrice}
+                      value={productFormState.data.price}
+                    />
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.priceError}
+                    </p>
+                  </div>
 
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="display"
-                        className="w-40 text-sm font-bold"
-                      >
-                        وضعیت نمایش<span className="text-red-600">*</span>
-                      </label>
-                      <select
-                        typeof="text"
-                        name="display"
-                        id="display"
-                        className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctDisplay}
-                      >
-                        <option value="true">نمایش</option>
-                        <option value="false">پنهان</option>
-                      </select>
-                    </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label htmlFor="display" className="w-40 text-sm font-bold">
+                      وضعیت نمایش<span className="text-red-600">*</span>
+                    </label>
+                    <select
+                      typeof="text"
+                      name="display"
+                      id="display"
+                      className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctDisplay}
+                    >
+                      <option value="true">نمایش</option>
+                      <option value="false">پنهان</option>
+                    </select>
+                  </div>
 
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="isAvailable"
-                        className="w-20 text-sm font-bold"
-                      >
-                        موجودی<span className="text-red-600">*</span>
-                      </label>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label
+                      htmlFor="isAvailable"
+                      className="w-20 text-sm font-bold"
+                    >
+                      موجودی<span className="text-red-600">*</span>
+                    </label>
 
-                      <select
-                        name="isAvailable"
-                        id="isAvailable"
-                        onSelect={fillPrdctIsAvailable}
-                        className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                      >
-                        <option value="true">موجود</option>
-                        <option value="false">اتمام</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col gap-2 mx-2 sm:mt-2">
-                      <label
-                        htmlFor="components"
-                        className="w-20 text-sm font-bold"
-                      >
-                        ترکیبات<span className="text-red-600">*</span>
-                      </label>
-                      <textarea
-                        name="components"
-                        id="components"
-                        rows={4}
-                        className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctComponents}
-                        value={productFormState.data.components}
-                      ></textarea>
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.componentsError}
-                      </p>
-                    </div>
+                    <select
+                      name="isAvailable"
+                      id="isAvailable"
+                      onSelect={fillPrdctIsAvailable}
+                      className="p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
+                    >
+                      <option value="true">موجود</option>
+                      <option value="false">اتمام</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-2 mx-2 sm:mt-2">
+                    <label
+                      htmlFor="components"
+                      className="w-20 text-sm font-bold"
+                    >
+                      ترکیبات<span className="text-red-600">*</span>
+                    </label>
+                    <textarea
+                      name="components"
+                      id="components"
+                      rows={4}
+                      className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctComponents}
+                      value={productFormState.data.components}
+                    ></textarea>
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.componentsError}
+                    </p>
+                  </div>
 
-                    <div className="flex flex-col gap-2 mx-2">
-                      <label htmlFor="desc" className="w-20 text-sm font-bold">
-                        توضیحات<span className="text-red-600">*</span>
-                      </label>
-                      <textarea
-                        name="desc"
-                        id="desc"
-                        rows={4}
-                        className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctDesc}
-                        value={productFormState.data.desc}
-                      ></textarea>
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.descError}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-2 mx-2">
+                    <label htmlFor="desc" className="w-20 text-sm font-bold">
+                      توضیحات<span className="text-red-600">*</span>
+                    </label>
+                    <textarea
+                      name="desc"
+                      id="desc"
+                      rows={4}
+                      className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctDesc}
+                      value={productFormState.data.desc}
+                    ></textarea>
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.descError}
+                    </p>
+                  </div>
 
-                    <div className="flex flex-col gap-2 m-2">
-                      <label htmlFor="tags" className="w-20 text-sm font-bold">
-                        برچسب ها<span className="text-red-600">*</span>
-                      </label>
-                      <textarea
-                        name="tags"
-                        id="tags"
-                        className="grow p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillPrdctTags}
-                        value={productFormState.data.tags}
-                      ></textarea>
-                      <p className="text-red-400 text-xs">
-                        {productFormState.data.tagsError}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label htmlFor="tags" className="w-20 text-sm font-bold">
+                      برچسب ها<span className="text-red-600">*</span>
+                    </label>
+                    <textarea
+                      name="tags"
+                      id="tags"
+                      className="grow p-1 outline-none border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillPrdctTags}
+                      value={productFormState.data.tags}
+                    ></textarea>
+                    <p className="text-red-400 text-xs">
+                      {productFormState.data.tagsError}
+                    </p>
+                  </div>
 
-                    <div className="flex justify-end p-2">
-                      <button
-                        type="button"
-                        onClick={submitAddProduct}
-                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      >
-                        ثبت محصول
-                      </button>
-                    </div>
+                  <div className="flex justify-end p-2">
+                    <button
+                      type="button"
+                      onClick={submitAddProduct}
+                      className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      ثبت محصول
+                    </button>
                   </div>
                 </div>
-              </main>
-            </div>
+              </div>
+            </main>
           </div>
-          <div></div>
         </div>
       </div>
-    </>
   );
 }
 

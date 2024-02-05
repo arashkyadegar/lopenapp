@@ -23,46 +23,46 @@ export default function CheckoutFormViewComponent({ props }: any) {
     //     desc = "توضیحات ندارد";
     //   }
 
-      const factor = {
-        _id: "",
-        factorNumber: "",
-        wbuserId: "",
-        refCode: "",
-        factorContent: "",
-        additionalInfo: "",
-        price: 1,
-        statusId: 0,
-        paymentType: 0,
+    const factor = {
+      _id: "",
+      factorNumber: "",
+      wbuserId: "",
+      refCode: "",
+      factorContent: "",
+      additionalInfo: "",
+      price: 1,
+      statusId: 0,
+      paymentType: 0,
 
-        fName: factorFormState.data.fName,
-        lName: factorFormState.data.lName,
-        tel: factorFormState.data.tel,
-        mobile: factorFormState.data.mobile,
-        state: factorFormState.data.state,
-        city: factorFormState.data.city,
-        postalCode: factorFormState.data.postalCode,
-        address: factorFormState.data.address,
-        desc: factorFormState.data.desc,
-      };
-      const items = factorItemsState.list;
-      try {
-        ToastSuccess();
-      } catch (err) {
-        console.log("rrrr");
-      }
+      fName: factorFormState.data.fName,
+      lName: factorFormState.data.lName,
+      tel: factorFormState.data.tel,
+      mobile: factorFormState.data.mobile,
+      state: factorFormState.data.state,
+      city: factorFormState.data.city,
+      postalCode: factorFormState.data.postalCode,
+      address: factorFormState.data.address,
+      desc: factorFormState.data.desc,
+    };
+    const items = factorItemsState.list;
+    try {
+      ToastSuccess();
+    } catch (err) {
+      console.log("rrrr");
+    }
     // } else {
     //   ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     // }
   }
   return (
     <>
-      <div className="flex flex-col mx-1 w-full">
+        <div className="flex flex-col  w-full gap-4">
         <div className="px-2 mb-4">
           <a className=" flex text-2xl border-b p-4 border-gray-400">مشخصات</a>
         </div>
         <div className="flex flex-col  w-full">
-          <form className="w-full flex  flex-row ">
-            <div className=" w-1/2">
+          <form className="w-full flex  flex-col md:flex-row ">
+            <div className="w-full md:w-1/2">
               <div className="flex flex-col  gap-2 m-2">
                 <label htmlFor="fName" className="w-20 text-sm font-bold">
                   نام
@@ -122,7 +122,7 @@ export default function CheckoutFormViewComponent({ props }: any) {
                 />
               </div>
             </div>
-            <div className=" w-1/2">
+            <div className="w-full md:w-1/2">
               <div className="flex flex-col   gap-2  mx-2 sm:mt-2 ">
                 <label htmlFor="state" className="w-20 text-sm  font-bold">
                   استان
@@ -195,11 +195,11 @@ export default function CheckoutFormViewComponent({ props }: any) {
                   value={factorFormState.data.desc}
                 ></textarea>
               </div>
-              <div className="flex justify-center p-2 gap-3">
+              <div className="flex justify-end p-2 gap-3">
                 <button
                   type="button"
                   onClick={submitAddFactor}
-                  className=" text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className=" text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   تایید
                 </button>
@@ -207,7 +207,7 @@ export default function CheckoutFormViewComponent({ props }: any) {
                 <button
                   type="button"
                   onClick={submitCancelFactor}
-                  className=" text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className=" text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   cancel
                 </button>
