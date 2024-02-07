@@ -23,7 +23,7 @@ export default function SliderComponent({ props }: any) {
   return (
     <div className="w-full order-1  sm:order-2 col-span-3 relative ">
       <Swiper
-        className=" shadow-md shadow-gray-500 w-full h-80"
+        className="rounded-lg w-full h-80"
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={20}
         slidesPerView={1}
@@ -41,7 +41,7 @@ export default function SliderComponent({ props }: any) {
                     src={getDefaultImageAvator(image)} 
                     width={500}
                     height={500}
-                    className="w-full h-full aspect-auto"
+                    className="w-full h-full aspect-video rounded-lg "
                     alt="user avator"
                     crossOrigin = "anonymous"
                               />

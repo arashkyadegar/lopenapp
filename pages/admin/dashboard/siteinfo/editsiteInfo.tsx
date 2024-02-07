@@ -43,7 +43,7 @@ export default function EditSiteInfo(rslt: any) {
         whatsapp: siteInfoFormState.data.whatsapp,
         headerImages: siteInfoFormState.data.headerImages,
         logo1: siteInfoFormState.data.logo1,
-        logo2: siteInfoFormState.data.logo2,
+        logo2: siteInfoFormState.data.logo1,
         headerTitle: siteInfoFormState.data.headerTitle,
         copyRightText: siteInfoFormState.data.copyRightText,
         copyRightYear: siteInfoFormState.data.copyRightYear,
@@ -614,7 +614,7 @@ export default function EditSiteInfo(rslt: any) {
                         id="files"
                         name="files"
                         type="file"
-                        accept=".png,.jpg"
+                        accept=".png,.jpg,.jpeg"
                         multiple
                         onChange={fillheaderImagesFile}
                       />

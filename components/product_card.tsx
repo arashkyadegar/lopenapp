@@ -16,7 +16,7 @@ export default function ProductCardComponent({ props }: any) {
   return (
     <>
       {/* single product card */}
-      <div className="text-right relative text-sm w-full max-w-sm bg-white    border border-[#FBF6EE] hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="text-right relative rounded-xl text-sm w-full max-w-sm bg-white    border border-[#FBF6EE] hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
         {discount > 0 && (
           <span className="flex left-0 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
             <a>{discount} %</a>
@@ -37,7 +37,11 @@ export default function ProductCardComponent({ props }: any) {
             </a>
           </div>
         </div>
-
+        <a href="#">
+            <h5 className="text-base mb-4 text-center font-semibold tracking-tight dark:text-white">
+              {product.name}
+            </h5>
+          </a>
         <div className="px-5 pb-5 ">
           <div className="flex flex-row gap-4 mb-2  justify-center">
             {discount > 0 && (
@@ -54,21 +58,15 @@ export default function ProductCardComponent({ props }: any) {
                 </a>
               </>
             )}
-
-            {discount === 0 && (
+          </div>
+          {discount === 0 && (
               <a href="#">
                 <h1 className="text-left text-[#80BB01]  line-clamp-1  font-semibold tracking-tight dark:text-white">
                   {product.price} تومان
                 </h1>
               </a>
             )}
-          </div>
 
-          <a href="#">
-            <h5 className="text-base mb-4 text-center font-semibold tracking-tight dark:text-white">
-              {product.name}
-            </h5>
-          </a>
           <div className="flex flex-col gap-4 sm:flex-row-reverse w-full justify-between  items-center  mt-2.5 ">
             <ScoreComponent props={product.score} />
             <div className=" bg-slate-300 px-2 py-1">
