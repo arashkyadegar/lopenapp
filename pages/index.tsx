@@ -4,8 +4,6 @@ import IndexComponent from "@/components";
 import { ReactElement } from "react";
 import MainLayout from "@/components/common/mainLayout";
 
-
-
 export default function Home(rslt: any) {
   return <IndexComponent props={rslt} />;
 }

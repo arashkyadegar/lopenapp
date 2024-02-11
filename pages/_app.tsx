@@ -1,11 +1,8 @@
-import MainLayout from "@/components/common/mainLayout";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import myAppContext from "@/components/context/context";
-import { ReactElement, ReactNode, useContext, useState } from "react";
-
+import { ReactElement, ReactNode, useState } from "react";
 import {
-  AddProductForm,
   CityEntity,
   FactorForm,
   FaqEntity,
@@ -13,7 +10,7 @@ import {
   StateEntity,
 } from "@/models/entities";
 import { initialState } from "@/redux/store/product";
-import { wrapperForPersistStore, wrapperForStore } from "@/redux/store/store";
+import { wrapperForPersistStore } from "@/redux/store/store";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
@@ -29,7 +26,6 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-
   // Use the layout defined at the page level, if available
   const [states, setStates] = useState(Array<StateEntity>());
   const [cities, setCities] = useState(Array<CityEntity>());

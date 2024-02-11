@@ -61,7 +61,7 @@ export default function MainNavBar({ props }: any) {
                 className="flex items-center space-x-3 "
               >
                 <img
-                  src="/logo.png"
+                  src="logo.png"
                   width={500}
                   height={500}
                   className="h-8 w-10"

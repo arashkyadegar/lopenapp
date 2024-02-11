@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import ScoreComponent from "./score";
 import { getNewPrice } from "@/utility/discount";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
-export default function ProductCardComponent({ props }: any) {
+export default function ProductCard1Component({ props }: any) {
   const product = props;
   let discount = 0;
   let newPrice = 0;
@@ -15,30 +14,23 @@ export default function ProductCardComponent({ props }: any) {
 
   return (
     <>
-      {/* single product card min-h-62 min-w-62 max-h-62 max-w-62 */}
-      <div className="text-right border  h-64 relative rounded-xl overflow-hidden text-sm   bg-white     border-[#FBF6EE] hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
+      {/* single product card */}
+      <div className="text-right h-80 min-h-80 relative rounded-xl overflow-hidden text-sm   bg-white  border   border-slate-200 hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
         {discount > 0 && (
-          <span className="flex left-0 z-10 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
+          <span className="flex left-0 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
             <a>{discount} %</a>
           </span>
         )}
-        <div className="    overflow-hidden m-1 justify-center">
+        <div className="flex    overflow-hidden mt-6 justify-center">
           <div className=" w-full justify-center">
             <div className="flex justify-center">
-            <Link
-                href={{
-                  pathname: `/product`,
-                  query: { id: product._id },
-                }}
-              >
               <img
                 src={getDefaultImageAvator(product.images[0])}
-                className="z-0  min-h-40  min-w-40 max-h-40 max-w-40 hover:scale-x-105 rounded-xl w-fit aspect-square  transition duration-500 cursor-pointer"
+                className="min-h-52 min-w-52 max-h-52 max-w-52 rounded-xl hover:scale-110 w-fit aspect-square  transition duration-500 cursor-pointer"
                 alt={product.name}
                 title={product.name}
                 crossOrigin="anonymous"
               />
-              </Link>
             </div>
           </div>
         </div>
@@ -57,7 +49,7 @@ export default function ProductCardComponent({ props }: any) {
               </div>
             )}
             {discount > 0 && (
-              <div className="flex flex-col  md:mt-2 gap-1 lg:flex-row">
+              <div className="flex flex-row  md:mt-2 gap-1 lg:flex-row">
                 <a href="#">
                   <h1 className="text-center  line-through  text-xs  font-semibold tracking-tight  dark:text-white">
                     {product.price} ت
@@ -101,7 +93,12 @@ export default function ProductCardComponent({ props }: any) {
             </div>
 
             <div className="hover:border-pink-400 hover:scale-110 hover:text-pink-600 bg-opacity-10 bg-pink-300 cursor-pointer  border  bg-transparent transition-all duration-200 delay-75 px-2 py-1">
-   
+              <Link
+                href={{
+                  pathname: `/product`,
+                  query: { id: product._id },
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -109,7 +106,6 @@ export default function ProductCardComponent({ props }: any) {
                   strokeWidth="1.5"
                   stroke="currentColor"
                   className="w-5 h-5"
-                
                 >
                   <path
                     strokeLinecap="round"
@@ -117,7 +113,7 @@ export default function ProductCardComponent({ props }: any) {
                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                   />
                 </svg>
-     
+              </Link>
             </div>
 
             <div className="hover:border-indigo-400 hover:scale-110 hover:text-indigo-600 bg-opacity-10  bg-indigo-300  cursor-pointer  border  rounded-l-xl bg-transparent transition-all duration-200 delay-75 px-2 py-1">

@@ -134,37 +134,38 @@ export default function ProductComponent({ props }: any) {
   return (
     <div className="container px-4">
       <div className="flex flex-col w-full">
-        <div className="flex flex-col justify-between w-4/4  gap-4 py-4  my-4 bg-white shadow-md shadow-gray-500 ">
+        <div className="flex flex-col justify-between w-4/4 rounded-xl  gap-4 py-4  my-4 bg-white">
           <div className="px-2">
             <a className=" flex text-2xl border-b p-4 border-gray-400">
               جزیات محصول
             </a>
           </div>
           <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2">
               <div className="">
                 {/* single product image */}
-                <div className="text-right relative text-sm  mx-auto  max-w-sm bg-white    border border-[#FBF6EE]           hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
+                <div className="text-right relative text-sm  mx-auto  max-w-sm bg-white    border border-[#FBF6EE] rounded-xl transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
                   {discount > 0 && (
                     <span className="flex left-0 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
                       <a>{discount} %</a>
                     </span>
                   )}
-                  <div className="flex mb-2 h-72  overflow-hidden mt-6 justify-center">
+                  <div className="flex h-72  overflow-hidden mt-6 justify-center">
                     <div>
                       <img
                         src={getDefaultImageAvator(productForm.data.image)}
                         width={800}
                         height={800}
-                        className=" hover:scale-110 w-fit h-full aspect-auto transition duration-500 cursor-pointer"
-                        alt="product image"
+                        className="rounded-xl w-fit h-full aspect-auto transition duration-500 cursor-pointer"
+                        alt={product.name}
+                        title={product.name}
                         crossOrigin = "anonymous"
                       />
                     </div>
                   </div>
                 </div>
                 {/* swiper-top */}
-                <div className="  w-52 aspect-auto  my-4 mx-auto flex justify-center ">
+                <div className="  w-52 aspect-auto my-4 mx-auto flex justify-center ">
                   <Swiper
                     className=""
                     modules={[
@@ -178,7 +179,7 @@ export default function ProductComponent({ props }: any) {
                     slidesPerView={3}
                     autoplay={false}
                     loop={true}
-                    //    navigation={true}
+                      //  navigation={true}
                     onSlideChange={() => {}}
                     onSwiper={(swiper) => {}}
                     // onNavigationNext={() => {}}
@@ -187,16 +188,15 @@ export default function ProductComponent({ props }: any) {
                     {productForm.data.images.map((image: any) => (
                       <SwiperSlide
                         key={image}
-                        className="cursor-pointer border hover:border-[#FFB534] transition duration-200"
+                        className="cursor-pointer  transition duration-200"
                       >
                         <img
                           id={image}
                           onClick={changeProductImage}
                           src={getDefaultImageAvator(image)}
-                          width={500}
-                          height={500}
-                          alt="user avator"
-                          className=" mx-auto  h-full"
+                          alt={product.name}
+                          title={product.name}
+                          className=" rounded-xl  aspect-auto h-full"
                           crossOrigin = "anonymous"
                         />
                       </SwiperSlide>
@@ -260,7 +260,7 @@ export default function ProductComponent({ props }: any) {
                         </div>
                         <div
                           onClick={addProductToFactor}
-                          className=" flex flex-row w-1/2 items-center justify-right bg-slate-300 px-3 py-2  cursor-pointer hover:text-white  hover:bg-[#80BB01] transition-all duration-300"
+                          className="rounded-md flex flex-row w-1/2 items-center justify-right bg-slate-300 px-3 py-2  cursor-pointer hover:text-white  hover:bg-[#80BB01] transition-all duration-300"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -328,7 +328,7 @@ export default function ProductComponent({ props }: any) {
           </div>
           {/* users comments  */}
 
-          <div className="p-4 mx-4 bg-white    shadow-md shadow-gray-300 mb-4 ">
+          {/* <div className="p-4 mx-4 bg-white mb-4 ">
             <div className="flex flex-row border-b-4 mb-4 px-2 py-1 border-[#EF5621] text-right font-bold">
               <div className="">
                 <a> نظرات کاربران</a>
@@ -342,7 +342,7 @@ export default function ProductComponent({ props }: any) {
               <CommentComponent />
               <CommentComponent />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

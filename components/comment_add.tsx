@@ -7,7 +7,7 @@ export default function CommentAddComponent({ props }: any) {
           <a>متن </a>
         </div>
         <textarea
-          className="w-9/12 border p-2 border-gray-300 outline-none"
+          className="w-9/12 border p-2 border-gray-300 outline-none  rounded-xl"
           name=""
           id=""
           cols={35}

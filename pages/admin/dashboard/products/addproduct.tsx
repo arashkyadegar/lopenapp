@@ -22,7 +22,7 @@ import {
 } from "@/redux/store/productForm";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { ResponseStatus } from "@/utility/responseStatus";
-import { rgx_insecure } from "@/utility/regex";
+import { rgx_frNo, rgx_insecure } from "@/utility/regex";
 export default function Addproduct() {
   const formdata = new FormData();
   const dispatch = useAppDispatch();
@@ -46,7 +46,7 @@ export default function Addproduct() {
         type: "1",
         components: productFormState.data.components,
         desc: productFormState.data.desc,
-        score: 0,
+        score: "۰",
         price: productFormState.data.price,
         display: productFormState.data.display,
         isAvailable: productFormState.data.isAvailable,
@@ -103,7 +103,7 @@ export default function Addproduct() {
           weight: text,
         })
       );
-    } else if (!validator.matches(text, /^[0-9]+$/)) {
+    } else if (!validator.matches(text,rgx_frNo)) {
       dispatch(
         setFormWeight({
           weightError: "لطفا وزن محصول را به عدد وارد کنید",
@@ -190,7 +190,7 @@ export default function Addproduct() {
           price: text,
         })
       );
-    } else if (!validator.matches(text, /^[0-9]+$/)) {
+    } else if (!validator.matches(text,rgx_frNo)) {
       dispatch(
         setFormPrice({
           priceError: "لطفا قیمت محصول را به عدد وارد کنید",

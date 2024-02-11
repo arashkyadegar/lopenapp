@@ -6,7 +6,27 @@ import { getDefaultImageAvator } from "@/utility/imageUtility";
 export default function MainFooter({ props }: any) {
   return (
     <>
-      <div className="flex flex-row text-[#B4B8C6] bg-[#303033] ">
+      <div className="flex flex-col sm:flex-row text-[#B4B8C6] bg-[#303033] ">
+        <div className="flex flex-col w-full  p-4 ">
+          <p className="font-bold"> آبنبات لپن</p>
+          <div className="flex flex-row flex-wrap gap-3 p-2">
+            <a href="#" className="text-xs">
+              صفحه اصلی
+            </a>
+            <a href="#" className="text-xs">
+              تماس با ما
+            </a>
+            <a href="#" className="text-xs">
+              چرا لپن
+            </a>
+            <a href="#" className="text-xs">
+              ارتباط با ما
+            </a>
+            <a href="#" className="text-xs">
+              راهنمای خرید
+            </a>
+          </div>
+        </div>
         <div className="flex flex-col gap-2 w-3/4  p-4">
           <p className="font-bold">اطلاعات تماس</p>
           <div className="flex flex-row gap-4 px-4">
@@ -66,71 +86,43 @@ export default function MainFooter({ props }: any) {
           </div>
 
           <div className="flex flex-row gap-4 px-4 justify-center">
-            <div className="p-2 border border-gray-400">
-              <img 
-                src='icons8-instagram-16.png'
-                width={500}
-                height={500}
+            <div className="p-2">
+              <img
+                src="icons8-instagram-16.png"
+                width={300}
+                height={300}
+
                 alt="user avator"
-     
               />
             </div>
-            <div className="p-2 border border-gray-400">
-            <img 
-
-                src='icons8-twitter-16.png'
-                width={500}
-                height={500}
+            <div className="p-2">
+              <img
+                src="icons8-twitter-16.png"
+                width={300}
+                height={300}
                 alt="user avator"
-           
               />
-     
             </div>
-            <div className="p-1 border border-gray-400">
-            <img 
-
-                src='icons8-whatsapp-48.png'
-                width={500}
-                height={500}
+            <div className="p-1">
+              <img
+                src="icons8-whatsapp-48.png"
+                width={300}
+                height={300}
                 alt="user avator"
-        
               />
               {/* <img src="icons8-whatsapp-48.png" alt="" className="w-6 h-6" /> */}
             </div>
-            <div className="p-2 border border-gray-400">
-            <img 
-
-                src='icons8-twitter-16.png'
-                width={500}
-                height={500}
+            <div className="p-2">
+              <img
+                src="icons8-twitter-16.png"
+                width={300}
+                height={300}
                 alt="user avator"
-
               />
               {/* <img src="icons8-twitter-16.png" alt="" /> */}
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full  p-4 ">
-          <p className="font-bold"> آبنبات لپن</p>
-          <div className="flex flex-row flex-wrap gap-3 p-2">
-            <a href="#" className="text-xs">
-              صفحه اصلی
-            </a>
-            <a href="#" className="text-xs">
-              تماس با ما
-            </a>
-            <a href="#" className="text-xs">
-              چرا لپن
-            </a>
-            <a href="#" className="text-xs">
-              ارتباط با ما
-            </a>
-            <a href="#" className="text-xs">
-              راهنمای خرید
-            </a>
-          </div>
-        </div>
-        <div className="flex flex-col w-full  p-4">3</div>
       </div>
     </>
   );

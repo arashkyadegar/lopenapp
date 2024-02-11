@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: iransSans;
+  src: url("../fonts/woff/IRANSansX-Regular.woff") format("truetype");
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -15,8 +20,10 @@ body {
   background-color: #EEEEEE;
   color:#515151;
   direction: rtl;
-
+font-family: iransSans;
 }
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -25,21 +32,29 @@ body {
   }
 }
 
-
-
-/* .swiper-button-prev {
-width: 50px !important;
-height:60px !important;
-margin-left: 10px;
-background-color: gray;
-filter: blur(1px);
--webkit-filter: blur(1px);
+.swiper-slide1 {
+  width:140px !important;
+  /* background-color: blue !important; */
 }
-*/
-/* .swiper-button-next{
-  width: 50px !important;
-height:60px !important;
-  background-color: gray;
-  text-color:red;
+/* .swiper-button-next {
+  width: 40px;
+  background-image: url('../public/icons8-back-arrow-50.png') !important;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.swiper-button-prev {
+  width: 40px;
+  background-image: url('../public/icons8-next-arrow-50.png') !important;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: "" !important;
+} */
 
-}  */
+/* .swiper-pagination-bullet{
+  width: 40px;
+  height: 40px;
+  background-color: red;
+} */
