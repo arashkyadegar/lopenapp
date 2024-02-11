@@ -1,20 +1,17 @@
 // components/common/MainNavBar.tsx
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 
 import Link from "next/link";
 import BasketSmallComponent from "../basket_smal";
 import myAppContext from "@/components/context/context";
 import { useMediaQuery } from "react-responsive";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
+import { useOutsideClick } from "./hooks";
 export default function MainNavBar({ props }: any) {
   const isBigScreen = useMediaQuery({ query: "(min-width: 640px)" });
   const { smallBasketToggle, setSmallBasketToggle } =
     React.useContext(myAppContext);
   const { navbarToggle, setNavbarToggle } = React.useContext(myAppContext);
-
-  // if (isBigScreen) {
-  //   setNavbarToggle(true);
-  // }
 
   function toggleSmallBasket() {
     setSmallBasketToggle(!smallBasketToggle);
@@ -24,14 +21,25 @@ export default function MainNavBar({ props }: any) {
     setNavbarToggle(!navbarToggle);
   };
 
+  const ref = useOutsideClick(() => {
+    // setNavbarToggle(false);
+
+  });
+
+  const ref2 = useOutsideClick(() => {
+    setSmallBasketToggle(false);
+    // console.log('Clicked outside of MyComponent');
+  });
+
   return (
     <>
       <div className="flex  bg-[#EEEEEE] relative px-4 items-center ">
         <nav className="bg-[#EEEEEE]  dark:bg-gray-900  w-full z-20 top-0 start-0 ">
-          <div className="max-w-screen-xl flex flex-wrap items-center justify-start mx-auto p-4">
+          <div  className="max-w-screen-xl flex flex-wrap items-center justify-start mx-auto p-4">
             {/* hambergur-button */}
-            <div className="flex w-full space-x-3 md:space-x-0">
-              <button
+            <div  className="flex w-full space-x-3 md:space-x-0">
+              <div  ref={ref}>
+              <button 
                 onClick={() => toggleNavbar()}
                 data-collapse-toggle="navbar-sticky"
                 type="button"
@@ -56,12 +64,15 @@ export default function MainNavBar({ props }: any) {
                   />
                 </svg>
               </button>
+              </div>
+    
               <a
                 href="https://flowbite.com/"
                 className="flex items-center space-x-3 "
               >
                 <img
-                  src="logo.png"
+                  src="/logo.png"
+
                   width={500}
                   height={500}
                   className="h-8 w-10"
@@ -99,7 +110,7 @@ export default function MainNavBar({ props }: any) {
             </svg>
           </div>
           {/* basket */}
-          <div className=" cursor-pointer flex flex-row-reverse  relative  pt-1">
+          <div ref={ref2} className=" cursor-pointer flex flex-row-reverse  relative  pt-1">
             <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute  ">
               <a>12</a>
             </div>
@@ -122,20 +133,20 @@ export default function MainNavBar({ props }: any) {
               />
             </svg>
           </div>
-          {smallBasketToggle && <BasketSmallComponent />}
+          {smallBasketToggle && <BasketSmallComponent  />}
         </div>
       </div>
       {/* navbar-menu */}
       {navbarToggle && (
-        <div
-          className="justify-start  transition-all duration-300   order-3  w-full"
+        <div 
+          className="justify-start border  z-30 absolute right-3 bg-[#EEEEEE] w-1/2 sm:w-1/3 transition-all duration-300 rounded-b-lg  order-3"
           id="navbar-sticky"
         >
-          <ul
-            className="text-base gap-2  flex flex-col text-right  text-gray-600  p-4 mt-4 font-medium border border-gray-100 rounded-lg   
+          <ul 
+            className="text-base gap-2  flex flex-col text-right  text-gray-600  p-4  font-medium  rounded-lg   
               dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
           >
-            <li className="border-[#FEEBB4] ml-4 hover:border-[#FEEBB4] transition-all duration-300 ">
+            <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
               <Link
                 href={{
                   pathname: `/`,
@@ -144,7 +155,7 @@ export default function MainNavBar({ props }: any) {
                 صفحه اصلی
               </Link>
             </li>
-            <li>
+            <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
               <Link
                 href={{
                   pathname: `/checkout`,
@@ -154,7 +165,7 @@ export default function MainNavBar({ props }: any) {
               </Link>
             </li>
 
-            <li>
+            <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
               <Link
                 href={{
                   pathname: `/faqs`,
@@ -163,7 +174,7 @@ export default function MainNavBar({ props }: any) {
                 سوالات متداول
               </Link>
             </li>
-            <li>
+            <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
               <Link
                 href={{
                   pathname: `/about`,
@@ -181,7 +192,7 @@ export default function MainNavBar({ props }: any) {
                      admin
                   </Link>
                 </li> */}
-            <li>
+            <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
               <Link
                 href={{
                   pathname: `/contactus`,

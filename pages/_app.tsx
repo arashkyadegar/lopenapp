@@ -17,6 +17,7 @@ import { Provider } from "react-redux";
 import { NextPage } from "next";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import NextNProgress from "nextjs-progressbar";
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -39,7 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [faqItemToggle, setFaqItemToggle] = useState(false);
   const [factorForm, setFactorForm] = useState(new FactorForm());
   const [loginForm, setLoginForm] = useState(new LoginForm());
- // const [addProductForm, setAddProductForm] = useState(new AddProductForm());
+  // const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   const { store } = wrapperForPersistStore.useWrappedStore(initialState);
   let persistor = persistStore(store);
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -70,7 +71,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {getLayout(<Component {...pageProps}  />)}
+          <NextNProgress />
+          {getLayout(<Component {...pageProps} />)}
           <ToastContainer />
         </PersistGate>
       </Provider>

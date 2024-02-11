@@ -33,12 +33,14 @@ export default function FaqsComponent({ props }: any) {
   }, []);
   return (
     <>
-      <div className="container p-4 ">
-        <div className="bg-white px-4 py-4 shadow-md shadow-gray-500">
-          <a className="flex text-2xl border-b p-4 border-gray-400">
-            سوالات متداول
-          </a>
-
+    <div className="container px-4">
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col justify-between w-4/4 rounded-xl  gap-4 py-4  my-4 bg-white">
+          <div className="px-2">
+            <a className=" flex text-2xl border-b p-4 border-gray-400">
+               سوالات متداول
+            </a>
+          </div>
           <div className="flex flex-col sm:flex-row  p-2">
             <div className="flex flex-col bg-white">
               <div className="mb-4">
@@ -52,11 +54,11 @@ export default function FaqsComponent({ props }: any) {
                 </p>
               </div>
               {faqsState.list.map((item: any) => (
-                <ul className=" border my-1 border-[#80BB01]" key={item._id}>
+                <ul className=" border my-1 border-[#80BB01] rounded-xl overflow-hidden" key={item._id}>
                   <li
                     onClick={toggleFaqsList}
                     x-id={item._id}
-                    className="bg-[#80BB01] cursor-pointer p-2 text-white flex flex-row justify-between"
+                    className="bg-[#80BB01] cursor-pointer p-2 text-white flex flex-row justify-between "
                   >
                     <a>{item.question}</a>
                     <svg
@@ -88,6 +90,7 @@ export default function FaqsComponent({ props }: any) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

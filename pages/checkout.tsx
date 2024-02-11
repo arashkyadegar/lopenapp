@@ -9,14 +9,14 @@ export default function Checkout() {
 
   return (
     <>
-      <div className="container p-4">
-        <div className="flex flex-col  gap-4">
-          <div className="flex flex-col justify-between   gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
-            <div className="px-2">
-              <a className=" flex text-2xl border-b p-4 border-gray-400">
-                جزییات پرداخت
-              </a>
-            </div>
+    <div className="container px-4">
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col justify-between w-4/4 rounded-xl  gap-4 py-4  my-4 bg-white">
+          <div className="px-2">
+            <a className=" flex text-2xl border-b p-4 border-gray-400">
+              جزیات محصول
+            </a>
+          </div>
             <div className="flex flex-col ">
               <div className="flex flex-col  gap-2">
                 <div className="px-2 mb-4">

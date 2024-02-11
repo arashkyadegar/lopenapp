@@ -34,11 +34,11 @@ export default function IndexComponent({ props }: any) {
   }
   return (
     <>
-      <div className=" p-5 gap-0  sm:gap-6 group">
+      <div className=" px-5 gap-0  sm:gap-6 group">
         <SliderComponent props={siteinfo.headerImages} />
       </div>
       {/* most new products */}
-      <div className="mx-4 p-4  h-[300px] rounded-xl mb-4 aspect-auto bg-[#EF3A4F] ">
+      <div className="mx-4 p-4  h-[300px] rounded-xl mb-4 mt-4 aspect-auto bg-[#EF3A4F] ">
         <div className="flex flex-row h-fit  overflow-hidden rounded-xl  z-10">
           <div className=" flex flex-col w-1/4 font-bold text-white text-center">
              <div className="flex flex-col  pt-20 rounded-xl  gap-1    justify-center items-center">
@@ -103,7 +103,7 @@ export default function IndexComponent({ props }: any) {
 
 
             {/* most new products */}
-            <div className="mx-4 p-4  h-[300px] rounded-xl mb-4 aspect-auto bg-[#C1D97A] ">
+       <div className="mx-4  p-4  h-[300px] rounded-xl mb-4 aspect-auto bg-[#C1D97A] ">
         <div className="flex flex-row h-fit  overflow-hidden rounded-xl  z-10">
           <div className=" flex flex-col w-1/4 font-bold text-white text-center">
              <div className="flex flex-col  pt-20 rounded-xl  gap-1    justify-center items-center">
