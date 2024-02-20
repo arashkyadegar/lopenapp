@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { getNewPrice } from "@/utility/discount";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
+import { turnToFa } from "@/utility/regex";
 export default function ProductCard1Component({ props }: any) {
   const product = props;
   let discount = 0;
@@ -18,7 +19,7 @@ export default function ProductCard1Component({ props }: any) {
       <div className="text-right h-80 min-h-80 relative rounded-xl overflow-hidden text-sm   bg-white  border   border-slate-200 hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
         {discount > 0 && (
           <span className="flex left-0 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
-            <a>{discount} %</a>
+            <a>{turnToFa(discount.toString())} %</a>
           </span>
         )}
         <div className="flex    overflow-hidden mt-6 justify-center">
@@ -44,7 +45,7 @@ export default function ProductCard1Component({ props }: any) {
             {discount === 0 && (
               <div className="flex flex-row mt-2 justify-center items-center">
                 <h1 className="text-center text-xs text-[#80BB01]  line-clamp-1  font-semibold tracking-tight dark:text-white">
-                  {product.price} ت
+                  {turnToFa(product.price)} ت
                 </h1>
               </div>
             )}
@@ -52,12 +53,12 @@ export default function ProductCard1Component({ props }: any) {
               <div className="flex flex-row  md:mt-2 gap-1 lg:flex-row">
                 <a href="#">
                   <h1 className="text-center  line-through  text-xs  font-semibold tracking-tight  dark:text-white">
-                    {product.price} ت
+                    {turnToFa(product.price)} ت
                   </h1>
                 </a>
                 <a href="#">
                   <h1 className="text-center text-xs text-[#80BB01]  dark:text-white">
-                    {newPrice} <span className="text-xs">ت</span>
+                    {turnToFa(newPrice.toString())} <span className="text-xs">ت</span>
                   </h1>
                 </a>
               </div>

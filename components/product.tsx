@@ -26,6 +26,7 @@ import {
   setFormCount,
   setFormImage,
 } from "@/redux/store/productForm";
+import { turnToFa } from "@/utility/regex";
 
 export default function ProductComponent({ props }: any) {
   const dispatch = useAppDispatch();
@@ -147,7 +148,7 @@ export default function ProductComponent({ props }: any) {
                 <div className="text-right relative text-sm  mx-auto  max-w-sm bg-white    border border-[#FBF6EE] rounded-xl transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
                   {discount > 0 && (
                     <span className="flex left-0 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
-                      <a>{discount} %</a>
+                      <a>{turnToFa(discount.toString())} %</a>
                     </span>
                   )}
                   <div className="flex h-72  overflow-hidden mt-6 justify-center">
@@ -223,12 +224,12 @@ export default function ProductComponent({ props }: any) {
                           <>
                             <a href="#">
                               <h1 className="text-left text-[#80BB01]  line-clamp-1  font-semibold tracking-tight dark:text-white">
-                                {newPrice} تومان
+                                {turnToFa(newPrice.toString())} تومان
                               </h1>
                             </a>
                             <a href="#">
                               <h1 className="line-through  line-clamp-1 font-semibold tracking-tight  dark:text-white">
-                                {product.price} تومان
+                                {turnToFa(product.price)} تومان
                               </h1>
                             </a>
                           </>
@@ -237,7 +238,7 @@ export default function ProductComponent({ props }: any) {
                         {discount === 0 && (
                           <a href="#">
                             <h1 className="text-left text-[#80BB01]  line-clamp-1  font-semibold tracking-tight dark:text-white">
-                              {product.price} تومان
+                              {turnToFa(product.price)} تومان
                             </h1>
                           </a>
                         )}
@@ -288,19 +289,20 @@ export default function ProductComponent({ props }: any) {
                         <a>ابعاد :</a>
                       </div>
                       <div className="col-span-3 border-b border-gray-200">
-                        <a>{product.size} </a>
+                         <a>{turnToFa(product.size)} </a> 
                       </div>
                       <div className="col-span-2  p-1">
                         <a>وزن :</a>
                       </div>
                       <div className="col-span-3 border-b border-gray-200">
-                        <a>{product.weight}</a>
+                        <a>{turnToFa(product.weight)}</a>
                       </div>
 
                       <div className="col-span-2  p-1">
                         <a>ش بهداشت :</a>
                       </div>
                       <div className="col-span-3  border-b border-gray-200">
+                   
                         <a>{product.healthId}</a>
                       </div>
 

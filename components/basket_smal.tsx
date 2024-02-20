@@ -7,6 +7,8 @@ import {
   factorItemsRemoved,
 } from "@/redux/store/factorItems";
 import { getNewPrice } from "@/utility/discount";
+import { turnToFa } from "@/utility/regex";
+import Link from "next/link";
 export default function BasketSmallComponent({ props }: any) {
   const dispatch = useAppDispatch();
   const factorState = useAppSelector((state) => state.entities.factorItems);
@@ -64,7 +66,10 @@ export default function BasketSmallComponent({ props }: any) {
     <div className="absolute border border-gray-300 hover:border-[#80BB01] transition-all duration-200 z-40 bg-white top-16 left-5   rounded-lg overflow-hidden">
       <div className="flex flex-col w-52 text-xs   items-center ">
         {factorState.list.map((item: any) => (
-          <div key={item.productId} className="flex flex-col  w-full border-b border-gray-300">
+          <div
+            key={item.productId}
+            className="flex flex-col  w-full border-b border-gray-300"
+          >
             <div className="flex flex-row justify-end  border-gray-300">
               <a onClick={() => submitDeleteFactorItem(item.productId)}>
                 <svg
@@ -96,7 +101,7 @@ export default function BasketSmallComponent({ props }: any) {
                 <a>قیمت </a>
               </div>
               <div className="w-2/3  flex col-span-1 h-6 justify-right items-center px-1">
-                <a>{item.unitPrice}</a>
+                <a>{turnToFa(item.unitPrice)}</a>
               </div>
             </div>
             <div className="flex flex-row w-full border-b border-gray-300 px-1">
@@ -122,7 +127,7 @@ export default function BasketSmallComponent({ props }: any) {
                 <a>تخفیف </a>
               </div>
               <div className="w-2/3 text-red-600 flex col-span-1 h-6 justify-right items-center px-1">
-                <a>{item.discount}</a>
+                <a>{turnToFa(item.discount)}</a>
               </div>
             </div>
             <div className="flex flex-row w-full  px-1">
@@ -130,11 +135,21 @@ export default function BasketSmallComponent({ props }: any) {
                 <a>قیمت کل </a>
               </div>
               <div className="w-2/3 font-bold text-green-600 flex col-span-1 h-6 justify-right items-center px-1">
-                <a>{item.prices}</a>
+                <a>{turnToFa(item.prices)}</a>
               </div>
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <Link
+        className="text-xs "
+          href={{
+            pathname: `/checkout`,
+          }}
+        >
+         مشاهده سبد خرید
+        </Link>
       </div>
     </div>
   );

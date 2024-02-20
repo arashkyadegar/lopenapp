@@ -1,4 +1,5 @@
 import MainLayout from "@/components/common/mainLayout";
+import { turnToFa } from "@/utility/regex";
 import { ReactElement } from "react";
 
 export default function Contactus(rslt: any) {
@@ -63,14 +64,14 @@ export default function Contactus(rslt: any) {
                     <a>آدرس ما</a>
                   </div>
                   <div>
-                    <p> موبایل : {siteinfo.mobile1}</p>
+                    <p> موبایل : {turnToFa(siteinfo.mobile1)}</p>
                   </div>
                   <div>
-                    <p> موبایل : {siteinfo.mobile2}</p>
+                    <p> موبایل : {turnToFa(siteinfo.mobile2)}</p>
                   </div>
                   <div>
-                    <p> تلفن : {siteinfo.tel1}</p>
-                    <p> تلفن : {siteinfo.tel2}</p>
+                    <p> تلفن : {turnToFa(siteinfo.tel1)}</p>
+                    <p> تلفن : {turnToFa(siteinfo.tel2)}</p>
                   </div>
                 </div>
 

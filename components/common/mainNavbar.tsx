@@ -7,7 +7,13 @@ import myAppContext from "@/components/context/context";
 import { useMediaQuery } from "react-responsive";
 import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { useOutsideClick } from "./hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
+import { turnToFa } from "@/utility/regex";
 export default function MainNavBar({ props }: any) {
+  const dispatch = useAppDispatch();
+  const factorItemsState = useAppSelector(
+    (state) => state.entities.factorItems
+  );
   const isBigScreen = useMediaQuery({ query: "(min-width: 640px)" });
   const { smallBasketToggle, setSmallBasketToggle } =
     React.useContext(myAppContext);
@@ -89,7 +95,7 @@ export default function MainNavBar({ props }: any) {
         </nav>
         <div className="flex flex-row gap-2">
           {/* user */}
-          <div className="cursor-pointer flex flex-row relative pt-1">
+          {/* <div className="cursor-pointer flex flex-row relative pt-1">
             <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute  ">
               <a>1</a>
             </div>
@@ -108,11 +114,11 @@ export default function MainNavBar({ props }: any) {
                 d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
               />
             </svg>
-          </div>
+          </div> */}
           {/* basket */}
-          <div ref={ref2} className=" cursor-pointer flex flex-row-reverse  relative  pt-1">
-            <div className=" bg-[#80BB01] w-5 h-5 items-center justify-center text-center text-xs rounded-full absolute  ">
-              <a>12</a>
+          <div className=" cursor-pointer flex flex-row-reverse  relative  pt-1">
+            <div className="p-1 text-white bg-red-600 w-6 h-6 items-center justify-center text-center text-xs rounded-full absolute  top-0 left-0">
+              <a>{turnToFa(factorItemsState.list.length.toString())}</a>
             </div>
             <svg
               onClick={() => {
@@ -133,7 +139,7 @@ export default function MainNavBar({ props }: any) {
               />
             </svg>
           </div>
-          {smallBasketToggle && <BasketSmallComponent  />}
+          {smallBasketToggle && <BasketSmallComponent ref={ref2}  />}
         </div>
       </div>
       {/* navbar-menu */}
@@ -155,7 +161,7 @@ export default function MainNavBar({ props }: any) {
                 صفحه اصلی
               </Link>
             </li>
-            <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
+            {/* <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
               <Link
                 href={{
                   pathname: `/checkout`,
@@ -163,7 +169,7 @@ export default function MainNavBar({ props }: any) {
               >
                 فاکتور
               </Link>
-            </li>
+            </li> */}
 
             <li className=" ml-4 border  border-[#EEEEEE] p-1 rounded-lg   hover:border-[#80BB01] transition-all duration-300 ">
               <Link

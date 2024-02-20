@@ -18,20 +18,17 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
+import { isPlainObject } from "redux";
 
 export default function IndexComponent({ props }: any) {
   const products = JSON.parse(props.products);
+  const products_inoff = products.filter((x: any) =>
+    isPlainObject(x.discounts)
+  );
+  const products_normal = products.filter((x: any) => x.discounts.length == 0);
   const siteinfo = JSON.parse(props.siteinfo)[0];
-  gather();
-  function gather() {
-    for (let index = 0; index < products.length; index++) {
-      if (index / 3 != 0) {
-        console.log(index);
-      } else {
-        console.log(`row[${index}]`);
-      }
-    }
-  }
+
+
   return (
     <>
       <div className=" px-5 gap-0  sm:gap-6 group">
@@ -41,57 +38,48 @@ export default function IndexComponent({ props }: any) {
       <div className="mx-4 p-4  h-[300px] rounded-xl mb-4 mt-4 aspect-auto bg-[#EF3A4F] ">
         <div className="flex flex-row h-fit  overflow-hidden rounded-xl  z-10">
           <div className=" flex flex-col w-1/4 font-bold text-white text-center">
-             <div className="flex flex-col  pt-20 rounded-xl  gap-1    justify-center items-center">
-               <h2 className="sm:text-2xl">تازه ترین</h2>
-              <h2 className="sm:text-2xl">محصولات</h2>
-              <h2 className="sm:text-2xl">لپن</h2> 
-          
-
-            </div> 
+            <div className="flex flex-col  pt-20 rounded-xl  gap-1    justify-center items-center">
+              <h2 className="sm:text-2xl">شگفت </h2>
+              <h2 className="sm:text-2xl">انگیزهای</h2>
+              <h2 className="sm:text-2xl">لپن</h2>
+            </div>
           </div>
           <div className="overflow-hidden w-full pr-2 gap-4">
             <Swiper
               className="rounded-lg h-full w-full"
-              breakpoints={{
-                0: {
-                  slidesPerView: 2,
-                },
-                400: {
-                  slidesPerView: 3,
-                },
-                639: {
-                  slidesPerView: 3,
-                },
-                865: {
-                  slidesPerView: 5,
-                },
-              }}
               modules={[
                 Navigation,
                 Pagination,
                 Scrollbar,
                 A11y,
                 Autoplay,
-                FreeMode
+                FreeMode,
               ]}
+              navigation={true}
               spaceBetween={20}
-              // slidesPerView={4}
-              // navigation={true}
-              // freeMode={true}
-              //  centeredSlides={true}
-              // autoplay={true}
-               loop={true}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                400: {
+                  slidesPerView: 2,
+                },
+                639: {
+                  slidesPerView: 3,
+                },
+                865: {
+                  slidesPerView: 3,
+                },
+              }}
+              loop={true}
               onSlideChange={() => {}}
               onSwiper={(swiper) => {}}
               onNavigationNext={() => {}}
               onNavigationPrev={() => {}}
             >
-              {products.map((product: any) => (
-                <SwiperSlide 
-                  key={product._id}
-               className="swiper-slide1 "
-                >
-                  <ProductCardComponent props={product} />
+              {products_inoff.map((product: any) => (
+                <SwiperSlide key={product._id} className="swiper-slide1 ">
+                  <ProductCardComponent props={product}  />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -99,20 +87,15 @@ export default function IndexComponent({ props }: any) {
         </div>
       </div>
 
-
-
-
-            {/* most new products */}
-       <div className="mx-4  p-4  h-[300px] rounded-xl mb-4 aspect-auto bg-[#C1D97A] ">
+      {/* most new products */}
+      <div className="mx-4  p-4  h-[300px] rounded-xl mb-4 aspect-auto bg-[#C1D97A] ">
         <div className="flex flex-row h-fit  overflow-hidden rounded-xl  z-10">
           <div className=" flex flex-col w-1/4 font-bold text-white text-center">
-             <div className="flex flex-col  pt-20 rounded-xl  gap-1    justify-center items-center">
-               <h2 className="sm:text-2xl">تازه ترین</h2>
+            <div className="flex flex-col  pt-20 rounded-xl  gap-1    justify-center items-center">
+              <h2 className="sm:text-2xl">تازه ترین</h2>
               <h2 className="sm:text-2xl">محصولات</h2>
-              <h2 className="sm:text-2xl">لپن</h2> 
-          
-
-            </div> 
+              <h2 className="sm:text-2xl">لپن</h2>
+            </div>
           </div>
           <div className="overflow-hidden w-full pr-2 gap-4">
             <Swiper
@@ -137,7 +120,7 @@ export default function IndexComponent({ props }: any) {
                 Scrollbar,
                 A11y,
                 Autoplay,
-                FreeMode
+                FreeMode,
               ]}
               spaceBetween={20}
               // slidesPerView={4}
@@ -145,17 +128,14 @@ export default function IndexComponent({ props }: any) {
               // freeMode={true}
               //  centeredSlides={true}
               // autoplay={true}
-               loop={true}
+              loop={true}
               onSlideChange={() => {}}
               onSwiper={(swiper) => {}}
               onNavigationNext={() => {}}
               onNavigationPrev={() => {}}
             >
-              {products.map((product: any) => (
-                <SwiperSlide 
-                  key={product._id}
-               className="swiper-slide1 "
-                >
+              {products_normal.map((product: any) => (
+                <SwiperSlide key={product._id} className="swiper-slide1 ">
                   <ProductCardComponent props={product} />
                 </SwiperSlide>
               ))}
