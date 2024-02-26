@@ -5,7 +5,6 @@ import Link from "next/link";
 import BasketSmallComponent from "../basket_smal";
 import myAppContext from "@/components/context/context";
 import { useMediaQuery } from "react-responsive";
-import { getDefaultImageAvator } from "@/utility/imageUtility";
 import { useOutsideClick } from "./hooks";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { turnToFa } from "@/utility/regex";
@@ -73,17 +72,14 @@ export default function MainNavBar({ props }: any) {
               </div>
     
               <a
-                href="https://flowbite.com/"
                 className="flex items-center space-x-3 "
               >
                 <img
-                  src="/logo.png"
-
+                  src="lopenlogo.jpg"
                   width={500}
                   height={500}
                   className="h-8 w-10"
                   alt="lopen Logo"
-                  crossOrigin="anonymous"
                 />
                 <span className="self-center text-2xl text-gray-600 font-semibold dark: ">
                   آبنبات لپن
@@ -130,7 +126,7 @@ export default function MainNavBar({ props }: any) {
               strokeWidth="1.5"
               stroke="currentColor"
               data-slot="icon"
-              className="w-6 h-6  m-2 hover:text-[#80BB01] transition-all duration-300"
+              className="w-6 h-6  m-2  transition-all duration-300"
             >
               <path
                 strokeLinecap="round"
