@@ -35,16 +35,17 @@ export const turnToFa = (number: string) => {
   //     8: "۸",
   //     9: "۹",
   //   };
-  const tmp_number = number.toString().split("");
   let rslt = "";
-  console.log(tmp_number);
-  for (let i = 0; i < tmp_number.length; i++) {
-    let x: any;
-    if (tmp_number[i] != ".") {
-      x = parseInt(tmp_number[i]);
-      rslt = rslt + persian[x]._fa;
-    } else {
-      rslt = rslt + ".";
+  if (number != undefined) {
+  const tmp_number = number.toString().split("");
+    for (let i = 0; i < tmp_number.length; i++) {
+      let x: any;
+      if (tmp_number[i] != ".") {
+        x = parseInt(tmp_number[i]);
+        rslt = rslt + persian[x]._fa;
+      } else {
+        rslt = rslt + ".";
+      }
     }
   }
   //   for (let i = 0; i < number.length; i++) {

@@ -9,7 +9,7 @@ import NeshanMapComponent from "@/components/neshanmap";
 import React from "react";
 
 export default function About() {
-  return <NeshanMapComponent></NeshanMapComponent>;
+  return 
 }
 
 About.getLayout = function getLayout(page: ReactElement) {

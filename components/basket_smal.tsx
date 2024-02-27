@@ -16,7 +16,11 @@ export default function BasketSmallComponent({ props }: any) {
     // dispatch(factorItemsRemoved([]));
   }, []);
   function fillFactorGridCount(event: any): void {
-    const value = event.target.value;
+    let value = event.target.value.trim();
+    if (value === "") {
+      value = 1;
+    }
+
     const productId = event.target.getAttribute("x-productId");
     let obj = factorState.list.find((x: any) => x.productId == productId);
     if (obj != undefined) {
@@ -112,6 +116,7 @@ export default function BasketSmallComponent({ props }: any) {
                 <input
                   type="number"
                   min="1"
+                  defaultValue={0}
                   name="floating_email"
                   id="floating_email"
                   className="p-1 w-10 h-5 outline-none border border-gray-400"
@@ -143,12 +148,12 @@ export default function BasketSmallComponent({ props }: any) {
       </div>
       <div>
         <Link
-        className="text-xs "
+          className="text-xs "
           href={{
             pathname: `/checkout`,
           }}
         >
-         مشاهده سبد خرید
+          مشاهده سبد خرید
         </Link>
       </div>
     </div>

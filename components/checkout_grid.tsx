@@ -9,40 +9,16 @@ import { getNewPrice } from "@/utility/discount";
 import { turnToFa } from "@/utility/regex";
 export default function CheckoutGridComponent({ props }: any) {
   const dispatch = useAppDispatch();
+  let totalSum = 0;
   const factorItemsState = useAppSelector(
     (state) => state.entities.factorItems
   );
-  useEffect(() => {
-    //dispatch(factorItemRecieved([]));
-  }, []);
-  function fillFactorGridCount(event: any): void {
-    const value = event.target.value;
-    const productId = event.target.getAttribute("x-productId");
-    let obj = factorItemsState.list.find((x: any) => x.productId == productId);
-    if (obj != undefined) {
-      let price = obj["unitPrice"];
-      let newPrice = 0;
-      let discount = 0;
-      const nextState = produce(factorItemsState, (draftState) => {
-        const item = draftState.list.map((i: any) => {
-          if (i.productId == productId) {
-            if (i.discount != undefined) {
-              discount = i.discount;
-              newPrice = getNewPrice(price, discount);
-              //newPrice = product.price - (discount / 100) * product.price;
-            }
-            i.count = parseInt(value);
-            if (i.discount != 0) {
-              i.prices = newPrice * parseInt(i.count);
-            } else {
-              i.prices = i.unitPrice * parseInt(i.count);
-            }
-          }
-        });
-      });
-      dispatch(factorItemReAdded(nextState.list));
-    }
-  }
+  useEffect(() => {}, []);
+
+  factorItemsState.list.forEach((item: any) => {
+    totalSum += item.prices;
+  });
+
   function submitDeleteFactorItem(productId: any): void {
     if (confirm("قصد حذف محصول را دارید ؟ ")) {
       const nextState = produce(factorItemsState, (draftState) => {
@@ -79,7 +55,7 @@ export default function CheckoutGridComponent({ props }: any) {
       {factorItemsState.list.map((item: any) => (
         <>
           <div className="border  flex-wrap  hidden md:flex  col-span-1 h-16 justify-center items-center">
-            <a className="text-xs">{item.productId.substring(0,9)}</a>
+            <a className="text-xs">{item.productId.substring(0, 9)}</a>
           </div>
           <div className="border flex col-span-1 h-16 justify-center items-center">
             <a>{item.productName}</a>
@@ -148,6 +124,10 @@ export default function CheckoutGridComponent({ props }: any) {
           </div>
         </>
       ))}
+      <div className="border flex col-span-1 col-start-6 col-end-8 h-16 justify-center items-center">
+       <a>جمع کل</a> : <a> {turnToFa(totalSum.toString())} </a>
+      </div>
+
     </div>
   );
 }

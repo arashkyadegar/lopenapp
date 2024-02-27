@@ -200,7 +200,7 @@ export default function MainNavBar({ props }: any) {
                   pathname: `/contactus`,
                 }}
               >
-                ارتباط با ما
+                تماس با ما
               </Link>
             </li>
             {/* <li>

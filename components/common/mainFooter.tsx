@@ -20,7 +20,7 @@ export default function MainFooter({ props }: any) {
               چرا لپن
             </a>
             <a href="#" className="text-xs">
-              ارتباط با ما
+              تماس با ما
             </a>
             <a href="#" className="text-xs">
               راهنمای خرید
@@ -44,10 +44,10 @@ export default function MainFooter({ props }: any) {
                 d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
               />
             </svg>
-            <a className="text-xs">۰۵۸۲۳۳</a>
+            <a className="text-xs">۳۲۷۳۵۴۹۲ (۰۵۸) </a>
           </div>
 
-          <div className="flex flex-row gap-4 px-4">
+          {/* <div className="flex flex-row gap-4 px-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -64,7 +64,7 @@ export default function MainFooter({ props }: any) {
             </svg>
 
             <a className="text-xs">۰۹۱۵</a>
-          </div>
+          </div> */}
 
           <div className="flex flex-row gap-4 px-4">
             <svg
@@ -82,7 +82,7 @@ export default function MainFooter({ props }: any) {
               />
             </svg>
 
-            <a className="text-xs">خراسان شمالی - بجنورد</a>
+            <a className="text-xs ">خراسان شمالی - بجنورد  <br/> خیابان شهید بهشتی شمالی - روبه روی مسجد جامع</a>
           </div>
 
           <div className="flex w-full h-10 sm:w-1/2  flex-row gap-4 px-4 justify-right">
@@ -90,21 +90,21 @@ export default function MainFooter({ props }: any) {
               <img
                 className="max-w-xs w-6 h-6"
                 src="icons8-instagram-16.png"
-                alt="user avator"
+                alt="lopencandy's instagram link"
               />
             </div>
             <div className="p-2 w-30 h-full border border-gray-600 hover:border-gray-500 transition-all duration-300 cursor-pointer rounded-md">
               <img
                 className="max-w-xs w-6 h-6"
                 src="icons8-twitter-16.png"
-                alt="user avator"
+                alt="lopencandy's twitter link"
               />
             </div>
             <div className="p-2 w-30 h-full border border-gray-600 hover:border-gray-500 transition-all duration-300 cursor-pointer rounded-md">
               <img
                 className="max-w-xs w-6 h-6"
                 src="icons8-whatsapp-48.png"
-                alt="user avator"
+                alt="lopencandy's whatsapp link"
               />
               {/* <img src="icons8-whatsapp-48.png" alt="" className="w-6 h-6" /> */}
             </div>
@@ -112,7 +112,7 @@ export default function MainFooter({ props }: any) {
               <img
                 className="max-w-xs w-6 h-6"
                 src="icons8-twitter-16.png"
-                alt="user avator"
+                alt="lopencandy's twitter link"
               />
               {/* <img src="icons8-twitter-16.png" alt="" /> */}
             </div>

@@ -53,7 +53,7 @@ export default function ProductCardComponent({ props }: any) {
             {discount === 0 && (
               <div className="flex flex-row mt-2 justify-center items-center">
                 <h1 className="text-center text-xs text-[#80BB01]  line-clamp-1  font-semibold tracking-tight dark:text-white">
-                  {turnToFa(product.price)} ت
+                  {turnToFa(product.price.toString())} ت
                 </h1>
               </div>
             )}
@@ -61,7 +61,7 @@ export default function ProductCardComponent({ props }: any) {
               <div className="flex flex-col  md:mt-2 gap-1 lg:flex-row">
                 <a href="#">
                   <h1 className="text-center  line-through  text-xs  font-semibold tracking-tight  dark:text-white">
-                    {turnToFa(product.price)} ت
+                    {turnToFa(product.price.toString())} ت
                   </h1>
                 </a>
                 <a href="#">
