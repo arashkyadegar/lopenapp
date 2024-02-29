@@ -78,7 +78,7 @@ export default function Contactus(rslt: any) {
                       <a className="w-20">تلفن :</a>
                     </div>
                     <div>
-                      <p>{siteinfo.email1}</p>
+                      <p>۳۲۷۳۵۴۹۲ (۰۵۸)</p>
                     </div>
                   </div>
 
@@ -102,7 +102,7 @@ export default function Contactus(rslt: any) {
                       <a className="w-20">موبایل :</a>
                     </div>
                     <div>
-                      <p>{siteinfo.email1}</p>
+                      <p>info@lopencandy.ir</p>
                     </div>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export default function Contactus(rslt: any) {
                     <a className="w-20">ایمیل :</a>
                   </div>
                   <div>
-                    <article>{siteinfo.email1}</article>
+                    <article>info@lopencandy.ir</article>
                   </div>
                 </div>
 

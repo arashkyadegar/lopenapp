@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { ToastFail, ToastSuccess } from "@/utility/tostify";
+import { MessageService } from "@/services/messageService";
 
 export default function CheckoutFormViewComponent({ props }: any) {
   const factorFormState = useAppSelector((state) => state.entities.factorForm);
@@ -13,6 +14,16 @@ export default function CheckoutFormViewComponent({ props }: any) {
   }, []);
   async function submitCancelFactor(event: any): Promise<void> {
     alert("فاکتور کنسل شد");
+  }
+  async function submitAddFactorViaMail(event: any): Promise<void> {
+    const m = new MessageService();
+    const message = {
+      reciever: "yadegar.arashk@gmail.com",
+      subject: "test 1 subject",
+      text: "test 1 text",
+    };
+    const result =await m.sendEmail(message);
+    console.log(result);
   }
   async function submitAddFactor(event: any): Promise<void> {
     event.preventDefault();
@@ -56,7 +67,7 @@ export default function CheckoutFormViewComponent({ props }: any) {
   }
   return (
     <>
-        <div className="flex flex-col  w-full gap-4">
+      <div className="flex flex-col  w-full gap-4">
         <div className="px-2 mb-4">
           <a className=" flex text-2xl border-b p-4 border-gray-400">مشخصات</a>
         </div>
@@ -196,6 +207,14 @@ export default function CheckoutFormViewComponent({ props }: any) {
                 ></textarea>
               </div>
               <div className="flex justify-end p-2 gap-3">
+                <button
+                  type="button"
+                  onClick={submitAddFactorViaMail}
+                  className=" text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  ارسال ایمیل
+                </button>
+
                 <button
                   type="button"
                   onClick={submitAddFactor}

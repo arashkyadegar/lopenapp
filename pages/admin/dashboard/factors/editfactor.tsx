@@ -33,6 +33,9 @@ export default function EditFactor() {
           </div>
         </div>
       </div>
+      <div className="z-30 border border-red-400 flex flex-col items-center justify-center  bg-black-rgba fixed inset-0">
+        1
+      </div>
     </div>
   );
 }

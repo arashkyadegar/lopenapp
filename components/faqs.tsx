@@ -44,14 +44,15 @@ export default function FaqsComponent({ props }: any) {
           <div className="flex flex-col sm:flex-row  p-2">
             <div className="flex flex-col bg-white">
               <div className="mb-4">
-                <a className="font-bold text-right">
+                {/* <a className="font-bold text-right">
+                
                   لورم ایپسوم متن ساختگی با
                 </a>
                 <p className="text-justify text-sm mt-2">
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
                   استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و
                   مجله در ستون و سطرآنچنان که لازم است
-                </p>
+                </p> */}
               </div>
               {faqsState.list.map((item: any) => (
                 <ul className=" border my-1 border-[#80BB01] rounded-xl overflow-hidden" key={item._id}>
