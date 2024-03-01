@@ -27,6 +27,7 @@ export const factorFormSlice = createSlice({
       lName: "",
       mobile: "",
       tel: "",
+      email: "",
       state: "",
       city: "",
       postalCode: "",
@@ -35,7 +36,7 @@ export const factorFormSlice = createSlice({
 
       fNameError: "",
       lNameError: "",
-
+      emailError: "",
       telError: "",
       mobileError: "",
       stateError: "",
@@ -64,6 +65,7 @@ export const factorFormSlice = createSlice({
 
         fName: "",
         lName: "",
+        email: "",
         mobile: "",
         tel: "",
         state: "",

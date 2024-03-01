@@ -39,6 +39,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [navbarToggle, setNavbarToggle] = useState(false);
   const [faqItemToggle, setFaqItemToggle] = useState(false);
   const [factorForm, setFactorForm] = useState(new FactorForm());
+  const [msgModal, setMsgModal] = useState(false);
+  const [msgType, setMsgType] = useState("email");
   const [loginForm, setLoginForm] = useState(new LoginForm());
   // const [addProductForm, setAddProductForm] = useState(new AddProductForm());
   const { store } = wrapperForPersistStore.useWrappedStore(initialState);
@@ -47,6 +49,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <myAppContext.Provider
       value={{
+        msgType,
+        setMsgType,
+        msgModal,
+        setMsgModal,
         loginForm,
         setLoginForm,
         faqItemToggle,

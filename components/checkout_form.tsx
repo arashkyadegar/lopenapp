@@ -1,9 +1,9 @@
 import myAppContext from "@/components/context/context";
-import { PropsWithChildren, useEffect } from "react";
+import { useEffect } from "react";
 import React, { useState } from "react";
 import statesJson from "../utility/states.json";
 import citiesJson from "../utility/citys.json";
-import { CityEntity, FactorForm, StateEntity } from "@/models/entities";
+import { CityEntity, StateEntity } from "@/models/entities";
 import validator from "validator";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { factorFormCleard, factorFormFilled } from "@/redux/store/factorForm";
@@ -155,7 +155,37 @@ export default function CheckoutFormComponent({ props }: any) {
       );
     }
   }
-
+  function fillEmailText(event: any) {
+    let text: string = event.target.value;
+    if (validator.isEmpty(text)) {
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          emailError: "لطفا ایمیل خود را وارد کنید",
+          formIsValid: false,
+          email: text,
+        })
+      );
+    } else if (!validator.isEmail(text)) {
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          emailError: "لطفا ایمیل خود را بصورت صحیح وارد کنید",
+          formIsValid: false,
+          email: text,
+        })
+      );
+    } else {
+      dispatch(
+        factorFormFilled({
+          ...factorFormState.data,
+          emailError: "",
+          email: text,
+          formIsValid: true,
+        })
+      );
+    }
+  }
   function fillTelText(event: any) {
     let text: string = validator.escape(event.target.value);
     if (validator.isEmpty(text)) {
@@ -250,6 +280,7 @@ export default function CheckoutFormComponent({ props }: any) {
 
         fName: factorFormState.data.fName,
         lName: factorFormState.data.lName,
+        email:factorFormState.data.email,
         tel: factorFormState.data.tel,
         mobile: factorFormState.data.mobile,
         state: factorFormState.data.state,
@@ -278,13 +309,13 @@ export default function CheckoutFormComponent({ props }: any) {
         <div className="flex flex-col  sm:w-1/2">
           <div className="flex flex-col  gap-2 m-2">
             <label htmlFor="fName" className="w-20 text-sm font-bold">
-              نام
+              نام<span className="text-red-600">*</span>
             </label>
             <input
               type="text"
               name="fName"
               id="fName"
-              className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+              className=" p-1 outline-none h-8  border border-gray-300  bg-[#F9FAFB]"
               placeholder="نام"
               onChange={fillFNameText}
               value={factorFormState.data.fName}
@@ -293,15 +324,15 @@ export default function CheckoutFormComponent({ props }: any) {
               {factorFormState.data.fNameError}
             </p>
           </div>
-          <div className="flex flex-col  gap-2  m-2">
+          <div className="flex flex-col  gap-2  m-1">
             <label htmlFor="lName" className="w-20 text-sm  font-bold">
-              نام خانوادگی
+              نام خانوادگی<span className="text-red-600">*</span>
             </label>
             <input
               type="text"
               name="lName"
               id="lName"
-              className="p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+              className="p-1 outline-none h-8   border border-gray-300  bg-[#F9FAFB]"
               placeholder="نام خانوادگی"
               onChange={fillLNameText}
               value={factorFormState.data.lName}
@@ -313,7 +344,7 @@ export default function CheckoutFormComponent({ props }: any) {
 
           <div className="flex flex-col  gap-2  m-2 ">
             <label htmlFor="mobile" className="w-20 text-sm  font-bold">
-              موبایل
+              موبایل<span className="text-red-600">*</span>
             </label>
             <input
               type="text"
@@ -331,7 +362,7 @@ export default function CheckoutFormComponent({ props }: any) {
 
           <div className="flex flex-col  gap-2  m-2 ">
             <label htmlFor="tel" className="w-20 text-sm  font-bold">
-              تلفن
+              تلفن<span className="text-red-600">*</span>
             </label>
             <input
               type="text"
@@ -346,11 +377,29 @@ export default function CheckoutFormComponent({ props }: any) {
               {factorFormState.data.telError}
             </p>
           </div>
+
+          <div className="flex flex-col   gap-2   mx-2 sm:mt-2   ">
+            <label htmlFor="address" className="w-20 text-sm  font-bold">
+              آدرس<span className="text-red-600">*</span>
+            </label>
+            <textarea
+              name="address"
+              id="address"
+              rows={4}
+              className="grow p-2 outline-none   border border-gray-300  bg-[#F9FAFB]"
+              placeholder="آدرس"
+              onChange={fillAddressText}
+              value={factorFormState.data.address}
+            ></textarea>
+            <p className="text-red-400 text-xs h-5">
+              {factorFormState.data.addressError}
+            </p>
+          </div>
         </div>
         <div className="flex flex-col  sm:w-1/2">
           <div className="flex flex-col   gap-2  mx-2 sm:mt-2 ">
             <label htmlFor="text_state" className="w-20 text-sm  font-bold">
-              استان
+              استان<span className="text-red-600">*</span>
             </label>
             <div className="flex flex-col mb-3">
               <div className="flex flex-row w-full items-center relative">
@@ -404,7 +453,7 @@ export default function CheckoutFormComponent({ props }: any) {
           </div>
           <div className="flex flex-col  gap-2  mx-2 sm:mt-2  ">
             <label htmlFor="text_city" className="w-20 text-sm  font-bold">
-              شهر
+              شهر<span className="text-red-600">*</span>
             </label>
 
             <div className="flex flex-col  mb-3 ">
@@ -459,8 +508,9 @@ export default function CheckoutFormComponent({ props }: any) {
 
           <div className="flex flex-col  gap-2  m-2 ">
             <label htmlFor="postalCode" className="w-20 text-sm  font-bold">
-              کد پستی
+              کد پستی<span className="text-red-600">*</span>
             </label>
+                   
             <input
               type="text"
               name="postalCode"
@@ -474,21 +524,22 @@ export default function CheckoutFormComponent({ props }: any) {
               {factorFormState.data.postalCodeError}
             </p>
           </div>
-          <div className="flex flex-col   gap-2   mx-2 sm:mt-2   ">
-            <label htmlFor="address" className="w-20 text-sm  font-bold">
-              آدرس
+
+          <div className="flex flex-col  gap-2  m-2 ">
+            <label htmlFor="email" className="w-20 text-sm  font-bold">
+              ایمیل<span className="text-red-600">*</span>
             </label>
-            <textarea
-              name="address"
-              id="address"
-              rows={4}
-              className="grow p-2 outline-none   border border-gray-300  bg-[#F9FAFB]"
-              placeholder="آدرس"
-              onChange={fillAddressText}
-              value={factorFormState.data.address}
-            ></textarea>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+              placeholder="ایمیل"
+              onChange={fillEmailText}
+              value={factorFormState.data.email}
+            />
             <p className="text-red-400 text-xs h-5">
-              {factorFormState.data.addressError}
+              {factorFormState.data.emailError}
             </p>
           </div>
           <div className="flex flex-col    gap-2  m-2  ">
@@ -498,7 +549,8 @@ export default function CheckoutFormComponent({ props }: any) {
             <textarea
               name="desc"
               id="desc"
-              className="grow p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+              rows={4}
+              className="grow p-2 outline-none   border border-gray-300  bg-[#F9FAFB]"
               placeholder="توضیحات"
               onChange={fillDescText}
               value={factorFormState.data.desc}

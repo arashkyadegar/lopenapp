@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { ToastFail, ToastSuccess } from "@/utility/tostify";
-import { MessageService } from "@/services/messageService";
+import myAppContext from "./context/context";
 
 export default function CheckoutFormViewComponent({ props }: any) {
   const factorFormState = useAppSelector((state) => state.entities.factorForm);
+  const { msgModal, setMsgModal } = React.useContext(myAppContext);
   const factorItemsState = useAppSelector(
     (state) => state.entities.factorItems
   );
@@ -15,15 +16,8 @@ export default function CheckoutFormViewComponent({ props }: any) {
   async function submitCancelFactor(event: any): Promise<void> {
     alert("فاکتور کنسل شد");
   }
-  async function submitAddFactorViaMail(event: any): Promise<void> {
-    const m = new MessageService();
-    const message = {
-      reciever: "yadegar.arashk@gmail.com",
-      subject: "test 1 subject",
-      text: "test 1 text",
-    };
-    const result =await m.sendEmail(message);
-    console.log(result);
+  function toggleMsgModal() {
+    setMsgModal(!msgModal);
   }
   async function submitAddFactor(event: any): Promise<void> {
     event.preventDefault();
@@ -132,7 +126,25 @@ export default function CheckoutFormViewComponent({ props }: any) {
                   value={factorFormState.data.tel}
                 />
               </div>
+              <div className="flex flex-col   gap-2   mx-2 sm:mt-2   ">
+                <label htmlFor="address" className="w-20 text-sm  font-bold">
+                  آدرس
+                </label>
+                <textarea
+                  disabled
+                  name="address"
+                  id="address"
+                  rows={4}
+                  className="grow p-2 outline-none   border border-gray-300  bg-[#F9FAFB]"
+                  placeholder="آدرس"
+                  value={factorFormState.data.address}
+                ></textarea>
+                <p className="text-red-400 text-xs h-5">
+                  {factorFormState.data.addressError}
+                </p>
+              </div>
             </div>
+
             <div className="w-full md:w-1/2">
               <div className="flex flex-col   gap-2  mx-2 sm:mt-2 ">
                 <label htmlFor="state" className="w-20 text-sm  font-bold">
@@ -176,23 +188,23 @@ export default function CheckoutFormViewComponent({ props }: any) {
                   value={factorFormState.data.postalCode}
                 />
               </div>
-              <div className="flex flex-col   gap-2   mx-2 sm:mt-2   ">
-                <label htmlFor="address" className="w-20 text-sm  font-bold">
-                  آدرس
-                </label>
-                <textarea
-                  disabled
-                  name="address"
-                  id="address"
-                  rows={4}
-                  className="grow p-2 outline-none   border border-gray-300  bg-[#F9FAFB]"
-                  placeholder="آدرس"
-                  value={factorFormState.data.address}
-                ></textarea>
-                <p className="text-red-400 text-xs h-5">
-                  {factorFormState.data.addressError}
-                </p>
-              </div>
+
+              <div className="flex flex-col  gap-2  m-2 ">
+              <label htmlFor="email" className="w-20 text-sm  font-bold">
+                ایمیل
+              </label>
+              <input
+               disabled
+                type="text"
+                name="email"
+                id="email"
+                className=" p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+                placeholder="ایمیل"
+           
+                value={factorFormState.data.email}
+              />
+
+            </div>
               <div className="flex flex-col    gap-2  m-2  ">
                 <label htmlFor="desc" className="w-20 text-sm  font-bold">
                   توضیحات
@@ -201,7 +213,8 @@ export default function CheckoutFormViewComponent({ props }: any) {
                   disabled
                   name="desc"
                   id="desc"
-                  className="grow p-1 outline-none   border border-gray-300  bg-[#F9FAFB]"
+                  rows={4}
+                  className="grow p-2 outline-none   border border-gray-300  bg-[#F9FAFB]"
                   placeholder="توضیحات"
                   value={factorFormState.data.desc}
                 ></textarea>
@@ -209,10 +222,10 @@ export default function CheckoutFormViewComponent({ props }: any) {
               <div className="flex justify-end p-2 gap-3">
                 <button
                   type="button"
-                  onClick={submitAddFactorViaMail}
+                  onClick={toggleMsgModal}
                   className=" text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                  ارسال ایمیل
+                  ارسال پیام
                 </button>
 
                 <button

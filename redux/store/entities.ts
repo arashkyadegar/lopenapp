@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-
 import productReducer from "./product";
 import discountReducer from "./discount";
 import productFormReducer from "./productForm";
@@ -8,6 +7,7 @@ import siteInfoFormReducer from "./siteInfoForm";
 import faqFormReducer from "./faqForm";
 import factorItemsReducer from "./factorItems";
 import factorFormReducer from "./factorForm";
+import messageFormReducer from "./messageForm";
 import faqsReducer from "./faqs";
 import productsReducer from "./products";
 import factorsReducer from "./factors";
@@ -16,6 +16,7 @@ import userReducer from "./user";
 
 export default combineReducers({
   siteInfoForm: siteInfoFormReducer,
+  messageForm:messageFormReducer,
   product: productReducer,
   discount: discountReducer,
   products: productsReducer,

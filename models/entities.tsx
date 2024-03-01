@@ -1,3 +1,9 @@
+
+export class MessageEntity {
+  text: string = "";
+  title: string = "";
+  id: string = "";
+}
 export class StateEntity {
   name: string = "";
   id: string = "";
@@ -69,6 +75,7 @@ export class FactorEntity {
   id: string = "";
   fName: string = "";
   lName: string = "";
+  email:string="";
   mobile: string = "";
   phone: string = "";
   address: string = "";
@@ -81,6 +88,7 @@ export class FactorForm extends FactorEntity {
   formIsValid: boolean = false;
   fNameError: string = "";
   lNameError: string = "";
+  emailError:string ="";
   mobileError: string = "";
   phoneError: string = "";
   addressError: string = "";
