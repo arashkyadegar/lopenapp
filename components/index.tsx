@@ -55,29 +55,26 @@ export default function IndexComponent({ props }: any) {
                 Autoplay,
                 FreeMode,
               ]}
-              // navigation={true}
+              freeMode={true}
               spaceBetween={20}
               breakpoints={{
                 0: {
                   slidesPerView: 1,
                 },
                 400: {
-                  slidesPerView: 2,
+                  slidesPerView: 3,
                 },
                 639: {
                   slidesPerView: 3,
                 },
                 865: {
-                  slidesPerView: 3,
+                  slidesPerView: 5,
                 },
               }}
               loop={true}
-              onSlideChange={() => {}}
-              onSwiper={(swiper) => {}}
-              onNavigationNext={() => {}}
-              onNavigationPrev={() => {}}
+
             >
-              {products_inoff.map((product: any) => (
+              {products_normal.map((product: any) => (
                 <SwiperSlide key={product._id} className="swiper-slide1 ">
                   <ProductCardComponent props={product}  />
                 </SwiperSlide>
@@ -100,20 +97,20 @@ export default function IndexComponent({ props }: any) {
           <div className="overflow-hidden w-full pr-2 gap-4">
             <Swiper
               className="rounded-lg h-full w-full"
-              breakpoints={{
-                0: {
-                  slidesPerView: 2,
-                },
-                400: {
-                  slidesPerView: 3,
-                },
-                639: {
-                  slidesPerView: 3,
-                },
-                865: {
-                  slidesPerView: 5,
-                },
-              }}
+              // breakpoints={{
+              //   0: {
+              //     slidesPerView: 1,
+              //   },
+              //   400: {
+              //     slidesPerView: 3,
+              //   },
+              //   639: {
+              //     slidesPerView: 3,
+              //   },
+              //   865: {
+              //     slidesPerView: 5,
+              //   },
+              // }}
               modules={[
                 Navigation,
                 Pagination,
@@ -123,9 +120,9 @@ export default function IndexComponent({ props }: any) {
                 FreeMode,
               ]}
               spaceBetween={20}
-              // slidesPerView={4}
-              // navigation={true}
-              // freeMode={true}
+               slidesPerView={5}
+              //  navigation={true}
+              freeMode={true}
               //  centeredSlides={true}
               // autoplay={true}
               loop={true}
@@ -134,11 +131,13 @@ export default function IndexComponent({ props }: any) {
               onNavigationNext={() => {}}
               onNavigationPrev={() => {}}
             >
-              {products_normal.map((product: any) => (
+              {products.map((product: any) => (
                 <SwiperSlide key={product._id} className="swiper-slide1 ">
                   <ProductCardComponent props={product} />
                 </SwiperSlide>
               ))}
+
+
             </Swiper>
           </div>
         </div>
