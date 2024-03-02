@@ -10,21 +10,46 @@ export default function MainFooter({ props }: any) {
         <div className="flex flex-col w-full  p-4 ">
           <p className="font-bold"> آبنبات لپن</p>
           <div className="flex flex-row flex-wrap gap-3 p-2">
+            <a className="text-xs">
+              <Link
+                href={{
+                  pathname: `/`,
+                }}
+              >
+                صفحه اصلی
+              </Link>
+            </a>
+
             <a href="#" className="text-xs">
-              صفحه اصلی
+              <Link
+                href={{
+                  pathname: `/contactus`,
+                }}
+              >
+                تماس با ما
+              </Link>
             </a>
             <a href="#" className="text-xs">
-              تماس با ما
+              <Link
+                href={{
+                  pathname: `/faqs`,
+                }}
+              >
+                سوالات متداول
+              </Link>
             </a>
             <a href="#" className="text-xs">
-              چرا لپن
+              <Link
+                href={{
+                  pathname: `/about`,
+                }}
+              >
+                درباره ما
+              </Link>
             </a>
-            <a href="#" className="text-xs">
-              تماس با ما
-            </a>
-            <a href="#" className="text-xs">
+            {/* <a href="#" className="text-xs">
               راهنمای خرید
-            </a>
+            </a> */}
           </div>
         </div>
         <div className="flex flex-col gap-2 w-3/4  p-4">
@@ -82,11 +107,14 @@ export default function MainFooter({ props }: any) {
               />
             </svg>
 
-            <a className="text-xs ">خراسان شمالی - بجنورد  <br/> خیابان شهید بهشتی شمالی - روبه روی مسجد جامع</a>
+            <a className="text-xs ">
+              خراسان شمالی - بجنورد <br /> خیابان شهید بهشتی شمالی - روبه روی
+              مسجد جامع
+            </a>
           </div>
 
           <div className="flex w-full h-10 sm:w-1/2  flex-row gap-4 px-4 justify-right">
-          <div className="p-2 w-30 h-full border border-gray-600 hover:border-gray-500 transition-all duration-300 cursor-pointer rounded-md">
+            <div className="p-2 w-30 h-full border border-gray-600 hover:border-gray-500 transition-all duration-300 cursor-pointer rounded-md">
               <img
                 className="max-w-xs w-6 h-6"
                 src="icons8-instagram-16.png"

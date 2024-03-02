@@ -74,13 +74,13 @@ export default function MainNavBar({ props }: any) {
               <a
                 className="flex items-center space-x-3 "
               >
-                <img
+                {/* <img
                   src="lopenlogo.jpg"
                   width={500}
                   height={500}
                   className="h-8 w-10"
                   alt="lopen Logo"
-                />
+                /> */}
                 <span className="self-center text-2xl text-gray-600 font-semibold dark: ">
                   آبنبات لپن
                 </span>

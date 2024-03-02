@@ -55,7 +55,7 @@ export default function IndexComponent({ props }: any) {
                 Autoplay,
                 FreeMode,
               ]}
-              navigation={true}
+              // navigation={true}
               spaceBetween={20}
               breakpoints={{
                 0: {

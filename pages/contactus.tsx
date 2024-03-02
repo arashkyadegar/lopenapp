@@ -52,8 +52,8 @@ export default function Contactus(rslt: any) {
                   </div>
                   <div>
                     <a>
-                      خراسان شمالی - بجنورد خیابان شهید بهشتی شمالی - روبه روی
-                      مسجد جامع
+                        خراسان شمالی - بجنورد - خیابان شهید بهشتی شمالی  رو به روی مسجد جامع - آبنبات سازی لوپن  
+                  
                     </a>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ export default function Contactus(rslt: any) {
                     </div>
                   </div>
 
-                  <div className="flex  flex-row p-3 gap-1  ">
+                  {/* <div className="flex  flex-row p-3 gap-1  ">
                     <div className="flex flex-row text-base gap-2 font-bold">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ export default function Contactus(rslt: any) {
                     <div>
                       <p>info@lopencandy.ir</p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex  flex-row p-3 gap-1  w-1/2 ">
                   <div className="flex flex-row text-base gap-2 font-bold">

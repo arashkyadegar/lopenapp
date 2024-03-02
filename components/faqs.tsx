@@ -41,8 +41,8 @@ export default function FaqsComponent({ props }: any) {
                سوالات متداول
             </a>
           </div>
-          <div className="flex flex-col sm:flex-row  p-2">
-            <div className="flex flex-col bg-white">
+          <div className="flex flex-col sm:flex-row w-full  p-2">
+            <div className="flex flex-col w-full bg-white">
               <div className="mb-4">
                 {/* <a className="font-bold text-right">
                 
@@ -55,13 +55,13 @@ export default function FaqsComponent({ props }: any) {
                 </p> */}
               </div>
               {faqsState.list.map((item: any) => (
-                <ul className=" border my-1 border-[#80BB01] rounded-xl overflow-hidden" key={item._id}>
+                <ul className=" border  my-1 border-[#80BB01] rounded-xl overflow-hidden" key={item._id}>
                   <li
                     onClick={toggleFaqsList}
                     x-id={item._id}
                     className="bg-[#80BB01] cursor-pointer p-2 text-white flex flex-row justify-between "
                   >
-                    <a>{item.question}</a>
+                    <a className=" line-clamp-1">{item.question}</a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -79,7 +79,7 @@ export default function FaqsComponent({ props }: any) {
                   </li>
                   {item.display ? (
                     <ul className="h-20  overflow-hidden  transition-all duration-300">
-                      <li className="p-2 ">{item.answer}</li>
+                      <li className="p-2">{item.answer}</li>
                     </ul>
                   ) : (
                     <ul className="h-0 overflow-hidden transition-all duration-300">

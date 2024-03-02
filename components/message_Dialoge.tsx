@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import messagesJson from "../utility/messages.json";
 import { MessageEntity } from "@/models/entities";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
+
+
 import validator from "validator";
 import {
   msgFormCleard,
@@ -10,10 +12,11 @@ import {
 } from "@/redux/store/messageForm";
 import { rgx_insecure } from "@/utility/regex";
 import myAppContext from "./context/context";
-import { MessageService } from "@/services/messageService";
 import { ToastFail } from "@/utility/tostify";
 
+
 export default function MessageDialogeComponent({ props }: any) {
+
   const { msgModal, setMsgModal } = React.useContext(myAppContext);
   const { msgType, setMsgType } = React.useContext(myAppContext);
   const messageList: Array<MessageEntity> = messagesJson;
@@ -113,6 +116,7 @@ export default function MessageDialogeComponent({ props }: any) {
       " " +
       factorFormState.data.lName +
       "\n";
+      
     dispatch(
       msgFormFilled({
         ...msgFormState.data,
@@ -122,6 +126,7 @@ export default function MessageDialogeComponent({ props }: any) {
         text: greeting + filtered[0].text,
       })
     );
+    
   }
   function changeMsgType(event: any) {
     const text = event.target.value;
@@ -131,6 +136,7 @@ export default function MessageDialogeComponent({ props }: any) {
   function toggleMsgModal() {
     setMsgModal(!msgModal);
   }
+
   return (
     <>
       <div className="absolute shadow-lg shadow-black bg-white w-6/12 text-black  rounded-lg  overflow-hidden">
@@ -191,6 +197,7 @@ export default function MessageDialogeComponent({ props }: any) {
                 onChange={fillMsgText}
                 value={msgFormState.data.text}
               ></textarea>
+   
               <p className="text-red-400 text-xs">
                 {msgFormState.data.textError}
               </p>
