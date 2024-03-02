@@ -19,6 +19,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import { isPlainObject } from "redux";
+import Head from "next/head";
 
 export default function IndexComponent({ props }: any) {
   const products = JSON.parse(props.products);
@@ -28,9 +29,9 @@ export default function IndexComponent({ props }: any) {
   const products_normal = products.filter((x: any) => x.discounts.length == 0);
   const siteinfo = JSON.parse(props.siteinfo)[0];
 
-
   return (
     <>
+
       <div className=" px-5 gap-0  sm:gap-6 group">
         <SliderComponent props={siteinfo.headerImages} />
       </div>
@@ -72,11 +73,10 @@ export default function IndexComponent({ props }: any) {
                 },
               }}
               loop={true}
-
             >
               {products_normal.map((product: any) => (
                 <SwiperSlide key={product._id} className="swiper-slide1 ">
-                  <ProductCardComponent props={product}  />
+                  <ProductCardComponent props={product} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -120,7 +120,7 @@ export default function IndexComponent({ props }: any) {
                 FreeMode,
               ]}
               spaceBetween={20}
-               slidesPerView={5}
+              slidesPerView={5}
               //  navigation={true}
               freeMode={true}
               //  centeredSlides={true}
@@ -136,8 +136,6 @@ export default function IndexComponent({ props }: any) {
                   <ProductCardComponent props={product} />
                 </SwiperSlide>
               ))}
-
-
             </Swiper>
           </div>
         </div>

@@ -8,7 +8,7 @@ export default function NeshanMapComponent({ props }: any) {
   return (
     <>
       {/* user single comment */}
-      <div className=" flex justify-center flex-row border-b even:bg-[#F3F4F8] border-gray-400 p-4 my-2">
+      <div className=" flex justify-center flex-row   p-4 my-2">
         <iframe
           height="400 "
           className="w-full rounded-lg overflow-hidden "

@@ -26,7 +26,7 @@ export default function Contactus(rslt: any) {
               </div>
 
               <div className="  ">
-                <div className="flex flex-row p-3 gap-1   border-gray-400">
+                <div className="flex flex-row p-3 gap-1 ">
                   <div className="flex flex-row text-base gap-2 font-bold">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
