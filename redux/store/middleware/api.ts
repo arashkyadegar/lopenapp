@@ -24,13 +24,12 @@ const api =
       const response = await fetch(baseURL + url, requestOptions);
 
       const result = await response.text();
-
+      console.log(result);
       switch (response.status) {
         case ResponseStatus.OK: {
           const x = JSON.parse(result);
           dispatch({ type: onSuccess, payload: x });
           ToastSuccess();
-
           break;
         }
         case ResponseStatus.BAD_REQUEST: {

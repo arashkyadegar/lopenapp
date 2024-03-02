@@ -78,6 +78,18 @@ export const getFactorAction = (id: any) =>
       "Content-Type": "application/json",
     },
   });
+  export const submitPostMessageAction = (message: any) =>
+  apiCallBegan({
+    url: "/api/emails/",
+    onSuccess: "products/productFaild",
+    onError: "products/productFaild",
+    credentials:"include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(message),
+  });
 
 export const {
   //   setFormQuestion,

@@ -72,7 +72,6 @@ export default function AddFaq() {
 
   function fillFaqAnswer(event: any): void {
     let text: string = event.target.value;
-    console.log(validator.matches(text, rgx_insecure))
     if (validator.isEmpty(text)) {
       dispatch(
         setFormAnswer({

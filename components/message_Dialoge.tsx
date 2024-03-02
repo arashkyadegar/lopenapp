@@ -3,7 +3,11 @@ import messagesJson from "../utility/messages.json";
 import { MessageEntity } from "@/models/entities";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import validator from "validator";
-import { msgFormCleard, msgFormFilled } from "@/redux/store/messageForm";
+import {
+  msgFormCleard,
+  msgFormFilled,
+  submitPostMessageAction,
+} from "@/redux/store/messageForm";
 import { rgx_insecure } from "@/utility/regex";
 import myAppContext from "./context/context";
 import { MessageService } from "@/services/messageService";
@@ -63,13 +67,18 @@ export default function MessageDialogeComponent({ props }: any) {
       if (validator.isEmpty(factorFormState.data.email)) {
         ToastFail("ایمیل مشتری خالی میباشد");
       } else {
-        const m = new MessageService();
+        // const m = new MessageService();
         const message = {
           reciever: factorFormState.data.email,
           subject: msgFormState.data.subject,
           text: msgFormState.data.text,
         };
-        const result = await m.sendEmail(message);
+        // const result = await m.sendEmail(message);
+        try {
+          dispatch(submitPostMessageAction(message));
+        } catch (err) {
+          console.log("rrrr");
+        }
       }
     } else {
       ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
