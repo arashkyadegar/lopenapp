@@ -33,65 +33,71 @@ export default function FaqsComponent({ props }: any) {
   }, []);
   return (
     <>
-    <div className="container px-4">
-      <div className="flex flex-col w-full">
-        <div className="flex flex-col justify-between w-4/4 rounded-xl  gap-4 py-4  my-4 bg-white">
-          <div className="px-2">
-            <a className=" flex text-2xl border-b p-4 border-gray-400">
-               سوالات متداول
-            </a>
-          </div>
-          <div className="flex flex-col sm:flex-row w-full  p-2">
-            <div className="flex flex-col w-full bg-white">
-              <div className="mb-4">
-                {/* <a className="font-bold text-right">
-                
-                  لورم ایپسوم متن ساختگی با
-                </a>
-                <p className="text-justify text-sm mt-2">
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                  استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و
-                  مجله در ستون و سطرآنچنان که لازم است
-                </p> */}
-              </div>
-              {faqsState.list.map((item: any) => (
-                <ul className=" border  my-1 border-[#80BB01] rounded-xl overflow-hidden" key={item._id}>
-                  <li
-                    onClick={toggleFaqsList}
-                    x-id={item._id}
-                    className="bg-[#80BB01] cursor-pointer p-2 text-white flex flex-row justify-between "
+      <div className="container px-4">
+        <div className="flex flex-col w-full">
+          <div className="flex flex-col justify-between w-4/4 rounded-xl  gap-4 py-4  my-4 bg-white">
+            <div className="px-2">
+              <a className=" flex text-2xl border-b p-4 border-gray-400">
+                سوالات متداول
+              </a>
+            </div>
+            <div className="flex flex-col sm:flex-row w-full  p-2">
+              <div className="flex flex-col w-full bg-white">
+                {faqsState.list.map((item: any) => (
+                  <ul
+                    className=" border  my-1 border-[#80BB01] rounded-xl overflow-hidden"
+                    key={item._id}
                   >
-                    <a className=" line-clamp-1">{item.question}</a>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6 bg-white text-[#80BB01] rounded-full"
+                    <li
+                      onClick={toggleFaqsList}
+                      x-id={item._id}
+                      className="bg-[#80BB01] cursor-pointer p-2 text-white flex flex-row justify-between "
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      />
-                    </svg>
-                  </li>
-                  {item.display ? (
-                    <ul className="h-20  overflow-hidden  transition-all duration-300">
-                      <li className="p-2">{item.answer}</li>
-                    </ul>
-                  ) : (
-                    <ul className="h-0 overflow-hidden transition-all duration-300">
-                      <li className="p-2">{item.answer}</li>
-                    </ul>
-                  )}
-                </ul>
-              ))}
+                      <a
+                        x-id={item._id}
+                        onClick={toggleFaqsList}
+                        className=" line-clamp-1"
+                      >
+                        {item.question}
+                      </a>
+                      <div className="w-6">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6 bg-white text-[#80BB01] rounded-full"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                          />
+                        </svg>
+                      </div>
+                    </li>
+                    {item.display ? (
+                      <ul className="h-auto text-sm transition-all duration-300">
+                        <li className="p-2 ">
+                          <p className="font-bold text-base mb-2"> {item.question}</p>
+                          <p >{item.answer}</p>
+                        </li>
+                      </ul>
+                    ) : (
+                      <ul className="h-0  text-sm transition-all duration-300">
+                        <li className="p-2 ">
+                          <p className="font-bold text-base mb-2"> {item.question}</p>
+                          <p>{item.answer}</p>
+                        </li>
+                      </ul>
+                    )}
+                  </ul>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </>
   );
