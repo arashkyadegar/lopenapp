@@ -1,10 +1,14 @@
+import Head from "next/head";
 import Link from "next/link";
 import React, { PropsWithChildren } from "react";
 
 export default function AdminLayout({ children }: PropsWithChildren) {
   return (
     <>
-
+      <Head>
+        <title>آبنبات لوپن</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
         <ul className="text-base gap-1 flex flex-row flex-wrap text-right">
           <li className="px-1 text-white  rounded-md bg-emerald-400 hover:bg-emerald-600 text-center   transition-all duration-300 ">
             <Link
