@@ -19,7 +19,7 @@ export default function ProductCardComponent({ props }: any) {
       {/* single product card min-h-62 min-w-62 max-h-62 max-w-62 */}
       <div className="text-right border  h-64 relative rounded-xl overflow-hidden text-sm   bg-white     border-[#FBF6EE] hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
         {discount > 0 && (
-          <span className="flex left-0 z-10 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
+          <span className="rounded-tl-lg rounded-br-lg flex left-0 z-10 font-bold bg-red-600  items-center w-12 h-6 justify-center text-center text-xs absolute text-white">
             <a>{turnToFa(discount.toString())} %</a>
           </span>
         )}
@@ -73,10 +73,10 @@ export default function ProductCardComponent({ props }: any) {
             )}
           </div>
 
-          <div className="absolute bg-transparent  bottom-1 flex flex-row justify-center gap-1 w-full   items-center  mt-2.5 ">
+          <div className="absolute   bg-transparent  bottom-1 flex flex-row justify-center gap-1 w-full   items-center  mt-2.5 ">
             {/* <ScoreComponent props={product.score} /> */}
 
-            <div className="hover:border-lime-400 hover:scale-110 hover:text-lime-600 bg-opacity-10 bg-lime-300  cursor-pointer  border  rounded-r-xl bg-transparent transition-all delay-75 duration-200 px-2 py-1">
+            <div className="hover:border-lime-400 hover:scale-110 hover:text-lime-600 bg-opacity-10 bg-lime-300  cursor-pointer  border  rounded-r-xl bg-transparent transition-all delay-75 duration-200 px-1 py-1">
               <Link
                 href={{
                   pathname: `/product`,
@@ -101,7 +101,7 @@ export default function ProductCardComponent({ props }: any) {
               </Link>
             </div>
 
-            <div className="hover:border-pink-400 hover:scale-110 hover:text-pink-600 bg-opacity-10 bg-pink-300 cursor-pointer  border  bg-transparent transition-all duration-200 delay-75 px-2 py-1">
+            <div className="hover:border-pink-400 hover:scale-110 hover:text-pink-600 bg-opacity-10 bg-pink-300 cursor-pointer  border  bg-transparent transition-all duration-200 delay-75 px-1 py-1">
    
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +121,7 @@ export default function ProductCardComponent({ props }: any) {
      
             </div>
 
-            <div className="hover:border-indigo-400 hover:scale-110 hover:text-indigo-600 bg-opacity-10  bg-indigo-300  cursor-pointer  border  rounded-l-xl bg-transparent transition-all duration-200 delay-75 px-2 py-1">
+            <div className="hover:border-indigo-400 hover:scale-110 hover:text-indigo-600 bg-opacity-10  bg-indigo-300  cursor-pointer  border  rounded-l-xl bg-transparent transition-all duration-200 delay-75 px-1 py-1">
               <Link
                 href={{
                   pathname: `/product`,

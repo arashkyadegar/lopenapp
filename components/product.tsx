@@ -147,7 +147,7 @@ export default function ProductComponent({ props }: any) {
                 {/* single product image */}
                 <div className="text-right relative text-sm  mx-auto  max-w-sm bg-white    border border-[#FBF6EE] rounded-xl transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
                   {discount > 0 && (
-                    <span className="flex left-0 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
+                    <span className="rounded-tl-lg rounded-br-lg flex left-0 font-bold bg-red-600  items-center w-12 h-6 justify-center text-center text-xs absolute text-white">
                       <a>{turnToFa(discount.toString())} %</a>
                     </span>
                   )}

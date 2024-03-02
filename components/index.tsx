@@ -136,6 +136,7 @@ export default function IndexComponent({ props }: any) {
                   <ProductCardComponent props={product} />
                 </SwiperSlide>
               ))}
+
             </Swiper>
           </div>
         </div>

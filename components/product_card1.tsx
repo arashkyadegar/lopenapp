@@ -18,7 +18,7 @@ export default function ProductCard1Component({ props }: any) {
       {/* single product card */}
       <div className="text-right h-80 min-h-80 relative rounded-xl overflow-hidden text-sm   bg-white  border   border-slate-200 hover:border-[#FFB534] transition duration-200 shadow dark:bg-gray-800 dark:border-gray-700">
         {discount > 0 && (
-          <span className="flex left-0 font-bold bg-red-600  items-center w-16 h-6 justify-center text-center text-xs absolute text-white">
+          <span className="rounded-tl-lg rounded-br-lg flex left-0 font-bold bg-red-600  items-center w-12 h-6 justify-center text-center text-xs absolute text-white">
             <a>{turnToFa(discount.toString())} %</a>
           </span>
         )}
