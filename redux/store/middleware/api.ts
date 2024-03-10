@@ -9,8 +9,16 @@ const api =
     if (action.type !== actions.apiCallBegan.type) return next(action);
     next(action);
     const baseURL = process.env.NEXT_PUBLIC_BASEURL;
-    const { url, method, onSuccess, onError, body, headers, credentials } =
-      action.payload;
+    const {
+      url,
+      method,
+      onSuccess,
+      onError,
+      onStart,
+      body,
+      headers,
+      credentials,
+    } = action.payload;
 
     const requestOptions = {
       method: method,
@@ -18,9 +26,8 @@ const api =
       body: body,
       credentials: credentials,
     };
-
+    if (onStart) dispatch({ type: onStart });
     try {
-
       const response = await fetch(baseURL + url, requestOptions);
 
       const result = await response.text();
@@ -51,14 +58,15 @@ const api =
           ToastFail("خطای ثبت دوباره");
           break;
         }
-        default : {
+        default: {
           ToastFail();
           break;
         }
       }
     } catch (error: any) {
       ToastFail(error);
-     // dispatch(actions.apiCallFailed(error.message));
+      if(onError) dispatch({ type: onError });
+      // dispatch(actions.apiCallFailed(error.message));
 
       //specified handling
     }

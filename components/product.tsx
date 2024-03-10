@@ -289,13 +289,13 @@ export default function ProductComponent({ props }: any) {
                         <a>ابعاد :</a>
                       </div>
                       <div className="col-span-3 border-b border-gray-200">
-                         <a>{turnToFa(product.size)} </a> 
+                         <a>{product.size} </a> 
                       </div>
                       <div className="col-span-2  p-1">
                         <a>وزن :</a>
                       </div>
                       <div className="col-span-3 border-b border-gray-200">
-                        <a>{turnToFa(product.weight)}</a>
+                        <a>{turnToFa(product.weight)}</a> <a>گرم</a>
                       </div>
 
                       <div className="col-span-2  p-1">

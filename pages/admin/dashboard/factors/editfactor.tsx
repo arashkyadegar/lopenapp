@@ -31,7 +31,7 @@ export default function EditFactor() {
               </a>
             </div>
             <div className="flex flex-col ">
-              <CheckoutGridComponent />
+              <CheckoutGridComponent  props={false} />
               <CheckoutFormViewComponent />
             </div>
           </div>

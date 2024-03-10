@@ -57,7 +57,7 @@ export default function AddDiscount() {
           value: text,
         })
       );
-    } else if (!validator.matches(text, /^[0-9]+$/)) {
+    } else if (!validator.isNumeric(text)) {
       dispatch(
         setFormValue({
           valueError: "لطفا  میزان تخفیف را به عدد وارد کنید",

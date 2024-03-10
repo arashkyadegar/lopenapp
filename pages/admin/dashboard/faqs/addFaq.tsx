@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import {
   faqFormCleard,
   setFormAnswer,
+
   setFormPriority,
   setFormQuestion,
 } from "@/redux/store/faqForm";
@@ -37,6 +38,7 @@ export default function AddFaq() {
         console.log("rrrr");
       }
     } else {
+
       ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
     }
   }
@@ -109,92 +111,93 @@ export default function AddFaq() {
     );
   }
   return (
-
-        <div className="flex flex-col  w-full gap-4">
-          <div className="flex flex-col justify-between w-full  mb-4 bg-white shadow-md shadow-gray-500 ">
-            <div >
-              <main >
-                <div >
-                  <a className=" flex text-xl border-b px-1 border-gray-400">
-                    ثبت اطلاعات سوالات متداول
-                  </a>
-                </div>
-
-                <div>
-                  <div className="w-full md:w-1/2 mx-auto">
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="question"
-                        className="w-20 text-sm font-bold"
-                      >
-                        متن سوال<span className="text-red-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="question"
-                        id="question"
-                        className="p-1 border
-            border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillFaqQuestion}
-                        value={faqFormState.data.question}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {faqFormState.data.questionError}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-2 mx-2 sm:mt-2">
-                      <label
-                        htmlFor="answer"
-                        className="w-20 text-sm font-bold"
-                      >
-                        متن پاسخ<span className="text-red-600">*</span>
-                      </label>
-                      <textarea
-                        name="answer"
-                        id="answer"
-                        rows={4}
-                        className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillFaqAnswer}
-                        value={faqFormState.data.answer}
-                      ></textarea>
-                      <p className="text-red-400 text-xs">
-                        {faqFormState.data.answerError}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="priority"
-                        className="w-40 text-sm font-bold"
-                      >
-                        اولویت نمایش
-                      </label>
-                      <input
-                        type="number"
-                        min="1"
-                        name="priority"
-                        id="priority"
-                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillFaqpPriority}
-                        defaultValue={0}
-                      />
-                    </div>
-
-                    <div className="flex justify-end p-2">
-                      <button
-                        type="button"
-                        onClick={submitAddFaq}
-                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      >
-                        ثبت سوال
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </main>
+    <div className="flex flex-col  w-full gap-4">
+      <div className="flex flex-col justify-between w-full  mb-4 bg-white shadow-md shadow-gray-500 ">
+        <div>
+          <main>
+            <div>
+              <a className=" flex text-xl border-b px-1 border-gray-400">
+                ثبت اطلاعات سوالات متداول
+              </a>
             </div>
-          </div>
-          <div></div>
+
+            <div>
+              <div className="w-full md:w-1/2 mx-auto">
+                <div className="flex flex-col gap-2 m-2">
+                  <label htmlFor="question" className="w-20 text-sm font-bold">
+                    متن سوال<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="question"
+                    id="question"
+                    className="p-1 border
+            border-gray-300 bg-[#F9FAFB]"
+                    onChange={fillFaqQuestion}
+                    value={faqFormState.data.question}
+                  />
+                  <p className="text-red-400 text-xs">
+                    {faqFormState.data.questionError}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 mx-2 sm:mt-2">
+                  <label htmlFor="answer" className="w-20 text-sm font-bold">
+                    متن پاسخ<span className="text-red-600">*</span>
+                  </label>
+                  <textarea
+                    name="answer"
+                    id="answer"
+                    rows={4}
+                    className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
+                    onChange={fillFaqAnswer}
+                    value={faqFormState.data.answer}
+                  ></textarea>
+                  <p className="text-red-400 text-xs">
+                    {faqFormState.data.answerError}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 m-2">
+                  <label htmlFor="priority" className="w-40 text-sm font-bold">
+                    اولویت نمایش
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    name="priority"
+                    id="priority"
+                    className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                    onChange={fillFaqpPriority}
+                    defaultValue={0}
+                  />
+                </div>
+
+                <div className="flex justify-end p-2 relative ">
+                  <button
+                    // style={{
+                    //   backgroundColor: faqFormState.isLoading
+                    //     ? "gray"
+                    //     : "#4ADE80",
+                    // }}
+                    disabled={faqFormState.isLoading}
+                    type="button"
+                    onClick={submitAddFaq}
+                    className="text-white flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    {faqFormState.isLoading && (
+                      <span className=" w-6 h-6 z-40 absolute">
+                        <img src="/facebook.gif" />
+                      </span>
+                    )}
+                    ثبت سوال
+                  </button>
+                </div>
+              </div>
+            </div>
+          </main>
         </div>
+      </div>
+      <div></div>
+    </div>
   );
 }
 AddFaq.getLayout = function getLayout(page: ReactElement) {

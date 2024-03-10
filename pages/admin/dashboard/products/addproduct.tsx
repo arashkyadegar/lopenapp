@@ -46,7 +46,7 @@ export default function Addproduct() {
         type: "1",
         components: productFormState.data.components,
         desc: productFormState.data.desc,
-        score: "۰",
+        score: "0",
         price: productFormState.data.price,
         display: productFormState.data.display,
         isAvailable: productFormState.data.isAvailable,
@@ -103,7 +103,7 @@ export default function Addproduct() {
           weight: text,
         })
       );
-    } else if (!validator.matches(text,rgx_frNo)) {
+    } else if (!validator.isNumeric(text)) {
       dispatch(
         setFormWeight({
           weightError: "لطفا وزن محصول را به عدد وارد کنید",
@@ -190,7 +190,7 @@ export default function Addproduct() {
           price: text,
         })
       );
-    } else if (!validator.matches(text,rgx_frNo)) {
+    } else if (!validator.isNumeric(text)) {
       dispatch(
         setFormPrice({
           priceError: "لطفا قیمت محصول را به عدد وارد کنید",

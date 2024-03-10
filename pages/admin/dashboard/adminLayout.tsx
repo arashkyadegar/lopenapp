@@ -6,7 +6,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Head>
-        <title>آبنبات لوپن</title>
+        <title>379841</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
         <ul className="text-base gap-1 flex flex-row flex-wrap text-right">

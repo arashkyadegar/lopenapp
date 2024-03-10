@@ -1,11 +1,15 @@
-
 import { Inter } from "next/font/google";
 import IndexComponent from "@/components";
 import { ReactElement } from "react";
 import MainLayout from "@/components/common/mainLayout";
+import Head from "next/head";
 
 export default function Home(rslt: any) {
-  return <IndexComponent props={rslt} />;
+  return (
+    <>
+      <IndexComponent props={rslt} />
+    </>
+  );
 }
 // This gets called on every request
 export async function getServerSideProps() {

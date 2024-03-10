@@ -18,6 +18,7 @@ import { NextPage } from "next";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import NextNProgress from "nextjs-progressbar";
+import Head from "next/head";
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -77,6 +78,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          <Head>
+            <title>آبنبات لوپن</title>
+
+          </Head>
           <NextNProgress />
           {getLayout(<Component {...pageProps} />)}
           <ToastContainer />

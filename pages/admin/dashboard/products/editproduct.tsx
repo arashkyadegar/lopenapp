@@ -137,7 +137,7 @@ export default function Editproduct(rslt: any) {
           weight: text,
         })
       );
-    } else if (!validator.matches(text, /^[0-9]+$/)) {
+    } else if (!validator.isNumeric(text)) {
       dispatch(
         setFormWeight({
           weightError: "لطفا وزن محصول را به عدد وارد کنید",
@@ -230,7 +230,7 @@ export default function Editproduct(rslt: any) {
           price: text,
         })
       );
-    } else if (!validator.matches(text, /^[0-9]+$/)) {
+    } else if (!validator.isNumeric(text)) {
       dispatch(
         setFormPrice({
           priceError: "لطفا قیمت محصول را به عدد وارد کنید",

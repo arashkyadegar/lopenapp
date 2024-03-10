@@ -30,6 +30,13 @@ export const faqFormSlice = createSlice({
     lastFetch: null,
   },
   reducers: {
+    faqFormRequested: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = true;
+    },
+
+    faqFormLoadingStoped: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = false;
+    },
     faqFormCleard: (state: any) => {
       state.data = {
         _id: "",
@@ -40,6 +47,7 @@ export const faqFormSlice = createSlice({
         priority: 0,
         date: {},
       };
+      state.isLoading = false;
       state.lastFetch = Date.now();
     },
     faqFormFetched: (state: any, action: PayloadAction<any>) => {
@@ -65,7 +73,7 @@ export const faqFormSlice = createSlice({
       state.data.priority = action.payload.priority;
       state.data.priorityError = action.payload.priorityError;
       state.data.formIsValid = action.payload.formIsValid;
-    },
+    }
   },
 });
 
@@ -82,12 +90,15 @@ export const getFactorAction = (id: any) =>
       "Content-Type": "application/json",
     },
   });
-  
+
 export const {
   setFormQuestion,
   faqFormCleard,
   faqFormFilled,
   setFormAnswer,
   setFormPriority,
+
+  faqFormRequested,
+  faqFormLoadingStoped,
 } = faqFormSlice.actions;
 export default faqFormSlice.reducer;

@@ -45,7 +45,7 @@ export default function EditFaq() {
     }
   }
   function fillFaqQuestion(event: any): void {
-    let text: string =event.target.value;
+    let text: string = event.target.value;
     if (validator.isEmpty(text)) {
       dispatch(
         setFormQuestion({
@@ -113,114 +113,133 @@ export default function EditFaq() {
   }
   return (
     <>
+      <div className="flex flex-col  w-full gap-4">
+        <div className="flex flex-col justify-between w-full  gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
+          <div className="">
+            <main className="">
+              <div className=" ">
+                <a className=" flex text-xl border-b px-1 border-gray-400">
+                  تغییر اطلاعات سوالات متداول
+                </a>
+              </div>
 
-        <div className="flex flex-col  w-full gap-4">
-          <div className="flex flex-col justify-between w-full  gap-4 py-4  mb-4 bg-white shadow-md shadow-gray-500 ">
-            <div className="">
-              <main className="">
-                <div className=" ">
-                  <a className=" flex text-xl border-b px-1 border-gray-400">
-                    تغییر اطلاعات سوالات متداول
-                  </a>
-                </div>
-
-                <div>
-                  <div className="w-full  md:w-1/2  mx-auto">
-                    <div className="flex flex-col gap-2 m-2">
-                      <label htmlFor="_id" className="w-20 text-sm font-bold">
-                        کد سوال
-                      </label>
-                      <input
-                        type="text"
-                        name="_id"
-                        id="_id"
-                        className="p-1 border
+              <div>
+                <div className="w-full  md:w-1/2  mx-auto">
+                  <div className="flex flex-col gap-2 m-2">
+                    <label htmlFor="_id" className="w-20 text-sm font-bold">
+                      کد سوال
+                    </label>
+                    <input
+                      type="text"
+                      name="_id"
+                      id="_id"
+                      className="p-1 border
             border-gray-300 bg-[#F9FAFB]"
-                        disabled
-                        value={faqFormState.data._id}
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="question"
-                        className="w-20 text-sm font-bold"
-                      >
-                        متن سوال<span className="text-red-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="question"
-                        id="question"
-                        className="p-1 border
-            border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillFaqQuestion}
-                        value={faqFormState.data.question}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {faqFormState.data.questionError}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-2 mx-2 sm:mt-2">
-                      <label
-                        htmlFor="answer"
-                        className="w-20 text-sm font-bold"
-                      >
-                        متن پاسخ<span className="text-red-600">*</span>
-                      </label>
-                      <textarea
-                        name="answer"
-                        id="answer"
-                        rows={4}
-                        className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillFaqAnswer}
-                        value={faqFormState.data.answer}
-                      ></textarea>
-                      <p className="text-red-400 text-xs">
-                        {faqFormState.data.answerError}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-2 m-2">
-                      <label
-                        htmlFor="priority"
-                        className="w-25 text-sm font-bold"
-                      >
-                        اولویت نمایش
-                      </label>
-                      <input
-                        type="number"
-                        min="1"
-                        name="priority"
-                        id="priority"
-                        className="p-1 border border-gray-300 bg-[#F9FAFB]"
-                        onChange={fillFaqpPriority}
-                        value={faqFormState.data.priority}
-                      />
-                      <p className="text-red-400 text-xs">
-                        {faqFormState.data.priorityError}
-                      </p>
-                    </div>
-
-                    <div className="flex justify-end p-2 gap-3">
-                      <button
-                        type="button"
-                        onClick={submitEditFaq}
-                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      >
-                        ثبت تغییرات
-                      </button>
-                    </div>
+                      disabled
+                      value={faqFormState.data._id}
+                    />
                   </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label
+                      htmlFor="question"
+                      className="w-20 text-sm font-bold"
+                    >
+                      متن سوال<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="question"
+                      id="question"
+                      className="p-1 border
+            border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillFaqQuestion}
+                      value={faqFormState.data.question}
+                    />
+                    <p className="text-red-400 text-xs">
+                      {faqFormState.data.questionError}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2 mx-2 sm:mt-2">
+                    <label htmlFor="answer" className="w-20 text-sm font-bold">
+                      متن پاسخ<span className="text-red-600">*</span>
+                    </label>
+                    <textarea
+                      name="answer"
+                      id="answer"
+                      rows={4}
+                      className="grow p-2 outline-none border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillFaqAnswer}
+                      value={faqFormState.data.answer}
+                    ></textarea>
+                    <p className="text-red-400 text-xs">
+                      {faqFormState.data.answerError}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2 m-2">
+                    <label
+                      htmlFor="priority"
+                      className="w-25 text-sm font-bold"
+                    >
+                      اولویت نمایش
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      name="priority"
+                      id="priority"
+                      className="p-1 border border-gray-300 bg-[#F9FAFB]"
+                      onChange={fillFaqpPriority}
+                      value={faqFormState.data.priority}
+                    />
+                    <p className="text-red-400 text-xs">
+                      {faqFormState.data.priorityError}
+                    </p>
+                  </div>
+                  <div className="flex justify-end p-2 relative ">
+                  <button
+                    // style={{
+                    //   backgroundColor: faqFormState.isLoading
+                    //     ? "gray"
+                    //     : "#4ADE80",
+                    // }}
+                    disabled={faqFormState.isLoading}
+                    type="button"
+                    onClick={submitEditFaq}
+                    className="text-white flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    {faqFormState.isLoading && (
+                      <span className=" w-6 h-6 z-40 absolute">
+                        <img src="/facebook.gif" />
+                      </span>
+                    )}
+                       ثبت تغییرات
+                  </button>
                 </div>
-              </main>
-            </div>
+                  {/* <div className="flex justify-end p-2 relative">
+                    <button
+                      disabled={faqFormState.isLoading}
+                      type="button"
+                      onClick={submitEditFaq}
+                      className="text-white flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      {faqFormState.isLoading && (
+                        <span className=" w-6 h-6 z-40 absolute">
+                          <img src="/facebook.gif" />
+                        </span>
+                      )}
+                      ثبت تغییرات
+                    </button>
+                  </div> */}
+                </div>
+              </div>
+            </main>
           </div>
-          <div></div>
         </div>
-
+        <div></div>
+      </div>
     </>
   );
 }
-
 
 EditFaq.getLayout = function getLayout(page: ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;

@@ -1,22 +1,25 @@
 import MainLayout from "@/components/common/mainLayout";
+import EnamadComponent from "@/components/enamad";
 import NeshanMapComponent from "@/components/neshanmap";
-import { turnToFa } from "@/utility/regex";
+import Link from "next/link";
 import { ReactElement } from "react";
 
 export default function Contactus(rslt: any) {
   const siteinfo = JSON.parse(rslt.siteinfos)[0];
+  const enamadData =
+    "<a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=471443&Code=tuSmoH6awM3T0d3jIkG6qpd3nFLV33lQ'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=471443&Code=tuSmoH6awM3T0d3jIkG6qpd3nFLV33lQ' alt='' style='cursor:pointer' Code='tuSmoH6awM3T0d3jIkG6qpd3nFLV33lQ'></a>";
   return (
     <>
       <div className="container px-4">
-        <div className="flex flex-col w-full">
-          <div className="flex flex-col  w-4/4 rounded-xl  bg-white">
+        <div className="flex flex-col sm:flex-row w-full">
+          <div className="flex flex-col  rounded-xl  bg-white">
             <div className="p-2 ">
               <a className=" flex text-2xl border-b  border-gray-400">
                 تماس با ما
               </a>
             </div>
 
-            <div className="flex  max-w-max  flex-col sm:flex-row items-center justify-center mx-auto">
+            <div className="flex   flex-col sm:flex-row items-center justify-center mx-auto">
               <div className="">
                 <img
                   src="/icons8-contact-60.png"
@@ -52,8 +55,8 @@ export default function Contactus(rslt: any) {
                   </div>
                   <div>
                     <a>
-                        خراسان شمالی - بجنورد - خیابان شهید بهشتی شمالی  رو به روی مسجد جامع - آبنبات سازی لوپن  
-                  
+                      خراسان شمالی - بجنورد - خیابان شهید بهشتی شمالی رو به روی
+                      مسجد جامع - آبنبات سازی لوپن
                     </a>
                   </div>
                 </div>

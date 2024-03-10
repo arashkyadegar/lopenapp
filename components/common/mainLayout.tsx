@@ -3,6 +3,7 @@ import MainNavBar from "./mainNavbar";
 import MainFooter from "./mainFooter";
 import Head from "next/head";
 
+
 export default function MainLayout({ children }: PropsWithChildren) {
   // let siteinfo;
   // console.log(children);
@@ -14,10 +15,6 @@ export default function MainLayout({ children }: PropsWithChildren) {
 
   return (
     <>
-      <Head>
-        <title>آبنبات لوپن</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
       <MainNavBar></MainNavBar>
       <div>{children}</div>
       <MainFooter></MainFooter>

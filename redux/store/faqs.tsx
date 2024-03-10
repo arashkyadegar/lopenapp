@@ -58,11 +58,11 @@ export const getFaqsAction = () =>
     //body: JSON.stringify(product),
   });
 
-  export const getFaqAction = (id: any) =>
+export const getFaqAction = (id: any) =>
   apiCallBegan({
     url: "/api/faqs/" + id,
     onSuccess: "faqForm/faqFormFetched",
-    onError: "faqs/faqsFaild",
+    onError: "faqForm/faqFormLoadingStoped",
     method: "GET",
     credentials: "include",
     headers: {
@@ -88,7 +88,8 @@ export const submitEditFaqAction = (product: any) =>
   apiCallBegan({
     url: "/api/faqs/" + product._id,
     onSuccess: "faqs/faqsFaild",
-    onError: "faqs/faqsFaild",
+    onError: "faqForm/faqFormLoadingStoped",
+    onStart: "faqForm/faqFormRequested",
     credentials: "include",
     method: "PUT",
     headers: {
@@ -101,7 +102,8 @@ export const submitAddFaqAction = (product: any) =>
   apiCallBegan({
     url: "/api/faqs/",
     onSuccess: "faqForm/faqFormCleard",
-    onError: "faqs/faqsFaild",
+    onError: "faqForm/faqFormLoadingStoped",
+    onStart: "faqForm/faqFormRequested",
     credentials: "include",
     method: "POST",
     headers: {
