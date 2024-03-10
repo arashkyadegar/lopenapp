@@ -174,14 +174,14 @@ export default function AddFaq() {
                 <div className="flex justify-end p-2 relative ">
                   <button
                     // style={{
-                    //   backgroundColor: faqFormState.isLoading
-                    //     ? "gray"
-                    //     : "#4ADE80",
+                    //   cursor: faqFormState.isLoading
+                    //     ? "progress"
+                    //     : "pointer",
                     // }}
                     disabled={faqFormState.isLoading}
                     type="button"
                     onClick={submitAddFaq}
-                    className="text-white flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white cursor-pointer flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     {faqFormState.isLoading && (
                       <span className=" w-6 h-6 z-40 absolute">

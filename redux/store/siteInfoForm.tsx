@@ -99,6 +99,9 @@ export const siteinfoFormSlice = createSlice({
       };
       state.lastFetch = Date.now();
     },
+    siteinfoLoadingStoped: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = false;
+    },
     siteinfoFormFetched: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload[0];
       state.data.formIsValid = true;
@@ -108,13 +111,13 @@ export const siteinfoFormSlice = createSlice({
       state.data = action.payload;
       state.lastFetch = Date.now();
     },
-    // siteinfoFormUpdated: (state: any, action: PayloadAction<any>) => {
-    //   state.data = action.payload;
-    // },
+    siteinfoFormRequested: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = true;
+    },
   },
 });
 
 // action creator
-export const { siteinfoFormFilled, siteinfoFormCleard,siteinfoFormFetched } =
+export const { siteinfoFormRequested,siteinfoLoadingStoped,siteinfoFormFilled, siteinfoFormCleard,siteinfoFormFetched } =
   siteinfoFormSlice.actions;
 export default siteinfoFormSlice.reducer;

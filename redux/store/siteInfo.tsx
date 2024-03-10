@@ -30,7 +30,8 @@ export const submitEditSiteinfoAction = (siteInfo: any) =>
   apiCallBegan({
     url: "/api/siteinfos/",
     onSuccess: "siteinfo/siteinfoAdded",
-    onError: "siteinfo/siteinfoFaild",
+    onError: "siteinfoForm/siteinfoLoadingStoped",
+    onStart: "siteinfoForm/siteinfoFormRequested",
     credentials: "include",
     method: "PUT",
     headers: {

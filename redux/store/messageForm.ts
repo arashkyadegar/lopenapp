@@ -36,6 +36,7 @@ export const messageFormSlice = createSlice({
         reciver: "",
         date: {},
       };
+      state.isLoading = false;
       state.lastFetch = Date.now();
     },
     msgFormFetched: (state: any, action: PayloadAction<any>) => {
@@ -43,9 +44,15 @@ export const messageFormSlice = createSlice({
       state.data.formIsValid = true;
       state.lastFetch = Date.now();
     },
+    msgFormRequested: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = true;
+    },
     msgFormFilled: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = Date.now();
+    },
+    msgFormLoadingStoped: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = false;
     },
     //     setFormQuestion: (state: any, action: PayloadAction<any>) => {
     //       state.data.question = action.payload.question;
@@ -82,7 +89,8 @@ export const getFactorAction = (id: any) =>
   apiCallBegan({
     url: "/api/emails/",
     onSuccess: "products/productFaild",
-    onError: "products/productFaild",
+    onError: "messageForm/msgFormLoadingStoped",
+    onStart: "messageForm/msgFormRequested",
     credentials:"include",
     method: "POST",
     headers: {
@@ -92,7 +100,8 @@ export const getFactorAction = (id: any) =>
   });
 
 export const {
-  //   setFormQuestion,
+  msgFormRequested,
+  msgFormLoadingStoped,
   msgFormCleard,
   msgFormFilled,
   //   setFormAnswer,

@@ -601,7 +601,7 @@ export default function EditSiteInfo(rslt: any) {
         <div className="flex flex-col justify-between w-full  mb-4 bg-white shadow-md shadow-gray-500 ">
           <div>
             <main>
-              <div >
+              <div>
                 <a className=" flex text-xl border-b px-1 border-gray-400">
                   تنظیمات سایت
                 </a>
@@ -971,12 +971,18 @@ export default function EditSiteInfo(rslt: any) {
                       </p>
                     </div>
 
-                    <div className="flex justify-end p-2">
+                    <div className="flex justify-end p-2  relative">
                       <button
+                        disabled={siteInfoFormState.isLoading}
                         type="button"
                         onClick={submitEditSiteinfo}
-                        className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="text-white cursor-pointer flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
+                        {siteInfoFormState.isLoading && (
+                          <span className=" w-6 h-6 z-40 absolute">
+                            <img src="/facebook.gif" />
+                          </span>
+                        )}
                         ثبت تغییرات
                       </button>
                     </div>

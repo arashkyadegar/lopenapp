@@ -58,7 +58,8 @@ export const submitEditProductAction = (product: any) =>
   apiCallBegan({
     url: "/api/products/" + product._id,
     onSuccess: "products/productFaild",
-    onError: "products/productFaild",
+    onError: "productForm/productFormLoadingStoped",
+    onStart: "productForm/productFormRequested",
     credentials:"include",
     method: "PUT",
     headers: {
@@ -71,7 +72,8 @@ export const submitAddProductAction = (product: any) =>
   apiCallBegan({
     url: "/api/products/",
     onSuccess: "productForm/productFormCleard",
-    onError: "products/productFaild",
+    onError: "productForm/productFormLoadingStoped",
+    onStart: "productForm/productFormRequested",
     method: "POST",
     headers: {
       "Content-Type": "application/json",

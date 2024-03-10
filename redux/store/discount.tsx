@@ -45,7 +45,8 @@ export const submitDeleteDiscountAction = (id: any) =>
   apiCallBegan({
     url: "/api/discounts/" + id,
     onSuccess: "discount/discountFaild",
-    onError: "discount/discountFaild",
+    onError: "discountForm/discountFormLoadingStoped",
+    onStart: "discountForm/discountFormRequested",
     method: "DELETE",
     credentials: "include",
     headers: {
@@ -58,7 +59,8 @@ export const submitEditDiscoutAction = (product: any) =>
   apiCallBegan({
     url: "/api/discounts/" + product._id,
     onSuccess: "discount/discountFaild",
-    onError: "discount/discountFaild",
+    onError: "discountForm/discountFormLoadingStoped",
+    onStart: "discountForm/discountFormRequested",
     credentials:"include",
     method: "PUT",
     headers: {
@@ -71,7 +73,8 @@ export const submitAddDiscountAction = (product: any) =>
   apiCallBegan({
     url: "/api/discounts/",
     onSuccess: "discountForm/discountFormCleard",
-    onError: "discount/discountFaild",
+    onError: "discountForm/discountFormLoadingStoped",
+    onStart: "discountForm/discountFormRequested",
     credentials:"include",
     method: "POST",
     headers: {

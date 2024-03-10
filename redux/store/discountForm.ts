@@ -48,8 +48,16 @@ export const discountFormSlice = createSlice({
         valueError: "",
         productIdError: "",
         formIsValid: false,
-      };
+      },
+      state.isLoading= false,
       state.lastFetch = Date.now();
+    },
+    discountFormRequested: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = true;
+    },
+
+    discountFormLoadingStoped: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = false;
     },
     discountFormFetched: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload[0];
@@ -90,6 +98,8 @@ export const discountFormSlice = createSlice({
 
 // action creator
 export const {
+  discountFormRequested,
+  discountFormLoadingStoped,
   discountFormCleard,
   discountFormFilled,
   discountFormFetched,

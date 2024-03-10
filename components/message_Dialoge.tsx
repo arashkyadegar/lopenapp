@@ -3,7 +3,6 @@ import messagesJson from "../utility/messages.json";
 import { MessageEntity } from "@/models/entities";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 
-
 import validator from "validator";
 import {
   msgFormCleard,
@@ -14,9 +13,7 @@ import { rgx_insecure } from "@/utility/regex";
 import myAppContext from "./context/context";
 import { ToastFail } from "@/utility/tostify";
 
-
 export default function MessageDialogeComponent({ props }: any) {
-
   const { msgModal, setMsgModal } = React.useContext(myAppContext);
   const { msgType, setMsgType } = React.useContext(myAppContext);
   const messageList: Array<MessageEntity> = messagesJson;
@@ -116,7 +113,7 @@ export default function MessageDialogeComponent({ props }: any) {
       " " +
       factorFormState.data.lName +
       "\n";
-      
+
     dispatch(
       msgFormFilled({
         ...msgFormState.data,
@@ -126,7 +123,6 @@ export default function MessageDialogeComponent({ props }: any) {
         text: greeting + filtered[0].text,
       })
     );
-    
   }
   function changeMsgType(event: any) {
     const text = event.target.value;
@@ -197,27 +193,35 @@ export default function MessageDialogeComponent({ props }: any) {
                 onChange={fillMsgText}
                 value={msgFormState.data.text}
               ></textarea>
-   
+
               <p className="text-red-400 text-xs">
                 {msgFormState.data.textError}
               </p>
             </div>
           </div>
-          <div className="flex justify-end flex-wrap p-2 gap-2">
-            <button
-              type="button"
-              onClick={submitSendMsg}
-              className=" text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              ارسال
-            </button>
-            <button
+          <div className="flex justify-end flex-wrap p-2 gap-2 relative">
+      
+              <button
+                disabled={msgFormState.isLoading}
+                type="button"
+                onClick={submitSendMsg}
+                className="text-white cursor-pointer flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                {msgFormState.isLoading && (
+                  <span className=" w-6 h-6 z-40 absolute">
+                    <img src="/facebook.gif" />
+                  </span>
+                )}
+                ارسال
+              </button>
+              <button
               type="button"
               onClick={toggleMsgModal}
-              className=" text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
+              className="text-white cursor-pointer flex justify-center bg-red-500   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
               انصراف
             </button>
+  
           </div>
         </div>
       </div>

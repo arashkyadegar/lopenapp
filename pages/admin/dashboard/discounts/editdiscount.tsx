@@ -214,7 +214,7 @@ export default function EditDiscount(rslt: any) {
             </div>
 
             <div>
-            <div className="w-full md:w-1/2 mx-auto">
+              <div className="w-full md:w-1/2 mx-auto">
                 <div className="flex flex-col gap-2 m-2">
                   <label htmlFor="title" className="w-20 text-sm font-bold">
                     عنوان<span className="text-red-600">*</span>
@@ -302,12 +302,18 @@ export default function EditDiscount(rslt: any) {
                   </select>
                 </div>
 
-                <div className="flex justify-end p-2">
+                <div className="flex justify-end p-2 relative">
                   <button
+                    disabled={discountFormState.isLoading}
                     type="button"
                     onClick={submitEditDiscount}
-                    className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white cursor-pointer flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
+                    {discountFormState.isLoading && (
+                      <span className=" w-6 h-6 z-40 absolute">
+                        <img src="/facebook.gif" />
+                      </span>
+                    )}
                     ثبت تغییرات
                   </button>
                 </div>

@@ -169,11 +169,20 @@ export const productFormSlice = createSlice({
       state.data.filesError = action.payload.filesError;
       state.data.formIsValid = action.payload.formIsValid;
     },
+    productFormRequested: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = true;
+    },
+
+    productFormLoadingStoped: (state: any, action: PayloadAction<any>) => {
+      state.isLoading = false;
+    },
   },
 });
 
 // action creator
 export const {
+  productFormRequested,
+  productFormLoadingStoped,
   productFormFilled,
   productFormCleard,
   setFormName,

@@ -691,12 +691,18 @@ export default function Editproduct(rslt: any) {
                     </p>
                   </div>
 
-                  <div className="flex justify-end p-2">
+                  <div className="flex justify-end p-2  relative ">
                     <button
+                      disabled={productFormState.isLoading}
                       type="button"
                       onClick={submitEditProduct}
-                      className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      className="text-white cursor-pointer flex justify-center bg-green-400   font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
+                      {productFormState.isLoading && (
+                        <span className=" w-6 h-6 z-40 absolute">
+                          <img src="/facebook.gif" />
+                        </span>
+                      )}
                       ثبت تغییرات
                     </button>
                   </div>
