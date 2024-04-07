@@ -28,7 +28,6 @@ export default function MainNavBar({ props }: any) {
 
   const ref = useOutsideClick(() => {
     // setNavbarToggle(false);
-
   });
 
   const ref2 = useOutsideClick(() => {

@@ -9,6 +9,9 @@ export async function getServerSideProps(context: any) {
   const res = await fetch(`${baseURL}/api/wbfaqs/`);
   const repo = await res.json();
   const faqs = JSON.stringify(repo);
+
+
+  
   return { props: { faqs } };
 }
 

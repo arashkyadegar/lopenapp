@@ -80,7 +80,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <PersistGate loading={null} persistor={persistor}>
           <Head>
             <title>آبنبات لوپن</title>
-
           </Head>
           <NextNProgress />
           {getLayout(<Component {...pageProps} />)}

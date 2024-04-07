@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { produce } from "immer";
 import {
-  factorItemReAdded,
   factorItemRecieved,
 } from "@/redux/store/factorItems";
-import { converEnDateToFaDate, getNewPrice } from "@/utility/discount";
+import { converEnDateToFaDate } from "@/utility/discount";
 import { turnToFa } from "@/utility/regex";
 export default function CheckoutGridComponent({ props }: any) {
   const btn_display = props;
@@ -31,7 +30,7 @@ export default function CheckoutGridComponent({ props }: any) {
     }
   }
   return (
-    <div className="grid text-xs grid-cols-8 md:text-sm  items-center divide divide-gray-200">
+    <div className="grid text-xs grid-cols-7 md:text-sm  items-center divide divide-gray-200">
       <div className="  flex   font-bold   items-center justify-center col-span-1 h-16 border border-gray-200 text-center">
         <a>#</a>
       </div>
@@ -54,9 +53,9 @@ export default function CheckoutGridComponent({ props }: any) {
         <a> تاریخ </a>
       </div>
 
-      <div className="flex font-bold   items-center justify-center border h-16 text-center">
+      {/* <div className="flex font-bold   items-center justify-center border h-16 text-center">
         <a> عملیات </a>
-      </div>
+      </div> */}
 
       {factorItemsState.list.map((item: any) => (
         <>
@@ -93,7 +92,7 @@ export default function CheckoutGridComponent({ props }: any) {
             <a> {converEnDateToFaDate(item.date)} </a>
           </div>
 
-          <div className="border flex col-span-1 h-16 justify-center items-center">
+          {/* <div className="border flex col-span-1 h-16 justify-center items-center">
             {btn_display && (
               <>
                 <a>
@@ -135,12 +134,12 @@ export default function CheckoutGridComponent({ props }: any) {
                 </a>
               </>
             )}
-          </div>
+          </div> */}
         </>
       ))}
-      {/* <div className="border flex col-span-1 col-start-6 col-end-8 h-16 justify-center items-center">
+      <div className="border flex col-span-1 col-start-6 col-end-8 h-16 justify-start items-center pr-6">
        <a>جمع کل</a> : <a> {turnToFa(totalSum.toString())} </a>
-      </div> */}
+      </div>
     </div>
   );
 }

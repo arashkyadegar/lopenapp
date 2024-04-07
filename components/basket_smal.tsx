@@ -14,6 +14,13 @@ export default function BasketSmallComponent({ props }: any) {
   const { smallBasketToggle, setSmallBasketToggle } =
     React.useContext(myAppContext);
   const dispatch = useAppDispatch();
+  let totalSum = 0;
+  const factorItemsState = useAppSelector(
+    (state) => state.entities.factorItems
+  );
+  factorItemsState.list.forEach((item: any) => {
+    totalSum += item.prices;
+  });
   const factorState = useAppSelector((state) => state.entities.factorItems);
   useEffect(() => {
     // dispatch(factorItemsRemoved([]));
@@ -187,6 +194,7 @@ export default function BasketSmallComponent({ props }: any) {
             className="text-xs "
             href={{
               pathname: `/checkout`,
+              query: { ts: totalSum },
             }}
           >
             مشاهده سبد خرید
