@@ -5,10 +5,9 @@ import MainLayout from "@/components/common/mainLayout";
 import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { ToastFail } from "@/utility/tostify";
 import { factorItemRecieved, submitAddFactorAction } from "@/redux/store/factorItems";
-import { getRandomString } from "@/utility/randomStr";
 
 export async function getServerSideProps(context: any) {
-
+  let invoice: any;
   const { id, terminalid, invoiceid, amount, cardnumber, hash, rrn, tracenumber, digitalreceipt, datepaid, respcode, respmsg, issuerbank } = context.query;
   let result = {};
   let token = {};
@@ -20,6 +19,7 @@ export async function getServerSideProps(context: any) {
   }
 
   if (ts != undefined) {
+    invoice = Date.now();
     const requestOptions = {
       method: 'post',
       headers: {
@@ -28,27 +28,29 @@ export async function getServerSideProps(context: any) {
       body: new URLSearchParams({
         Amount: ts.toString(),
         callbackURL: 'https://lopencandy.ir/checkout',
-        // invoiceID: '12345',
+        invoiceID: invoice,
         terminalID: '98651197'
       })
     };
     const response = await fetch(`https://sepehr.shaparak.ir:8081/V1/PeymentApi/GetToken`, requestOptions);
     token = await response.text();
   }
-  return { props: { token, result, ts } };
+  return { props: { token, result, ts, invoice } };
 }
 
 export default function Checkout(props: any) {
+  let totalSum = "0";
+  let token;
+  let sepehrToken: any;
   const dispatch = useAppDispatch();
   const factorFormState = useAppSelector((state) => state.entities.factorForm);
   const factorItemsState = useAppSelector(
     (state) => state.entities.factorItems
   );
-  const token = JSON.parse(props.token);
-  const totalSum = JSON.parse(props.ts);
+
   if (props.result.terminalid != undefined) {
-    const rslt = props.result;
-    if(rslt.respcode ==="0") {
+    if (props.result.respcode === "0") {
+
       const factor = {
         _id: "",
         wbuserId: "",
@@ -58,13 +60,18 @@ export default function Checkout(props: any) {
         price: 1,
         statusId: 0,
         paymentType: 0,
-        factorNumber : getRandomString(),
-        // cardnumber:cardnumber,
-        // digitalreceipt:
-        // respcode
+        factorNumber: props.result.invoiceid,
+        cardnumber: props.result.cardnumber,
+        digitalreceipt: props.result.digitalreceipt,
+        respcode: props.result.respcode,
+        invoiceid: props.result.invoiceid,
+        tracenumber: props.result.tracenumber,
+        rrn: props.result.rrn,
+        datePaid: props.result.datePaid,
+        issuerbank: props.result.issuerbank,
         fName: factorFormState.data.fName,
         lName: factorFormState.data.lName,
-        email:factorFormState.data.email,
+        email: factorFormState.data.email,
         tel: factorFormState.data.tel,
         mobile: factorFormState.data.mobile,
         state: factorFormState.data.state,
@@ -78,18 +85,17 @@ export default function Checkout(props: any) {
         dispatch(submitAddFactorAction(factor, items));
         dispatch(factorItemRecieved([]));
       } catch (err) {
-        console.log("rrrr");
+        // console.log("rrrr");
       }
     }
+  } else {
+    token = JSON.parse(props.token);
+    sepehrToken = token.Accesstoken;
+    totalSum = JSON.parse(props.ts);
   }
-
-  const sepehrToken = token.Accesstoken;
-  useEffect(() => { }, []);
 
   function formValidation(event: any) {
     if (factorFormState.data.formIsValid) {
-      alert(factorFormState.data.email)
-
     } else {
       event.preventDefault();
       ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
@@ -119,11 +125,8 @@ export default function Checkout(props: any) {
               <input type="text" name="Amount" value={totalSum} hidden />
               <input name="getMethod" type="hidden" required={true} value="1" hidden />
               <div className="flex flex-row justify-end p-4">
-                <input type="submit" value=" پرداخت " className="inline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-
-                />
+                <input type="submit" value=" پرداخت " className="inline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"/>
               </div>
-
             </form>
           </div>
         </div>
