@@ -53,7 +53,7 @@ export const getFactorItemsAction = (id: any) =>
 export const submitAddFactorAction = (factor: any, items: any) =>
   apiCallBegan({
     url: "/api/factors/",
-    onSuccess: "factorForm/factorFormCleard",
+    onSuccess: "factors/factorFaild",
     onError: "products/productFaild",
     credentials: "include",
     method: "POST",

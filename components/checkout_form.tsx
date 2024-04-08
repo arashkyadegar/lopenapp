@@ -28,7 +28,7 @@ export default function CheckoutFormComponent({ props }: any) {
     (state) => state.entities.factorItems
   );
   useEffect(() => {
-    dispatch(factorFormCleard());
+    // dispatch(factorFormCleard());
   }, []);
 
   function stateTextKeyUp(event: any): void {
@@ -266,39 +266,39 @@ export default function CheckoutFormComponent({ props }: any) {
   async function submitAddFactor(event: any): Promise<void> {
     event.preventDefault();
 
-    if (factorFormState.data.formIsValid) {
-      const factor = {
-        _id: "",
-        factorNumber: "",
-        wbuserId: "",
-        refCode: "",
-        factorContent: "",
-        additionalInfo: "",
-        price: 1,
-        statusId: 0,
-        paymentType: 0,
+    // if (factorFormState.data.formIsValid) {
+    //   const factor = {
+    //     _id: "",
+    //     factorNumber: "",
+    //     wbuserId: "",
+    //     refCode: "",
+    //     factorContent: "",
+    //     additionalInfo: "",
+    //     price: 1,
+    //     statusId: 0,
+    //     paymentType: 0,
 
-        fName: factorFormState.data.fName,
-        lName: factorFormState.data.lName,
-        email:factorFormState.data.email,
-        tel: factorFormState.data.tel,
-        mobile: factorFormState.data.mobile,
-        state: factorFormState.data.state,
-        city: factorFormState.data.city,
-        postalCode: factorFormState.data.postalCode,
-        address: factorFormState.data.address,
-        desc: factorFormState.data.desc,
-      };
-      const items = factorItemsState.list;
-      try {
-        dispatch(submitAddFactorAction(factor, items));
-        dispatch(factorItemRecieved([]));
-      } catch (err) {
-        console.log("rrrr");
-      }
-    } else {
-      ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
-    }
+    //     fName: factorFormState.data.fName,
+    //     lName: factorFormState.data.lName,
+    //     email:factorFormState.data.email,
+    //     tel: factorFormState.data.tel,
+    //     mobile: factorFormState.data.mobile,
+    //     state: factorFormState.data.state,
+    //     city: factorFormState.data.city,
+    //     postalCode: factorFormState.data.postalCode,
+    //     address: factorFormState.data.address,
+    //     desc: factorFormState.data.desc,
+    //   };
+    //   const items = factorItemsState.list;
+    //   try {
+    //     dispatch(submitAddFactorAction(factor, items));
+    //     dispatch(factorItemRecieved([]));
+    //   } catch (err) {
+    //     console.log("rrrr");
+    //   }
+    // } else {
+    //   ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
+    // }
   }
   return (
     <>
