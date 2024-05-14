@@ -12,13 +12,27 @@ export async function getServerSideProps(context: any) {
   const { id, terminalid, invoiceid, amount, cardnumber, hash, rrn, tracenumber, digitalreceipt, datePaid, respcode, respmsg, issuerbank } = context.query;
   let result = {};
   let token = {};
+  let adviceResponse = {};
   const { ts } = context.query;
 
 
   if (respcode != undefined && respcode == "0") {
     result = { terminalid, invoiceid, amount, cardnumber, hash, rrn, tracenumber, digitalreceipt, datePaid, respcode, respmsg, issuerbank };
+    // advice
+    const requestOptions = {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        digitalreceipt: digitalreceipt,
+        Tid: '98651197',
+      })
+    };
+    const adviceRequest = await fetch(`https://sepehr.shaparak.ir:8081/V1/PeymentApi/Advice `, requestOptions);
+    adviceResponse = await adviceRequest.text();
   }
-  console.log(ts);
+
   if (ts != undefined) {
 
     try {
@@ -42,7 +56,7 @@ export async function getServerSideProps(context: any) {
     }
 
   }
-  return { props: { token, result, ts, invoice } };
+  return { props: { token, result, ts, invoice, adviceResponse } };
 }
 
 export default function Checkout(props: any) {
@@ -50,22 +64,25 @@ export default function Checkout(props: any) {
   let token: any;
   let sepehrToken: any;
   let invoice: any;
+  let adviceResponse: any;
   const dispatch = useAppDispatch();
   const factorFormState = useAppSelector((state) => state.entities.factorForm);
   const factorItemsState = useAppSelector(
     (state) => state.entities.factorItems
   );
-  
+
   if (props.result.terminalid === undefined) {
     console.log(token);
     invoice = JSON.parse(props.invoice);
     token = JSON.parse(props.token);
     sepehrToken = token.Accesstoken;
     totalSum = JSON.parse(props.ts);
+
   }
 
   useEffect(() => {
     if (props.result.respcode === "0") {
+      adviceResponse = JSON.parse(props.adviceResponse);
       const factor = {
         _id: "",
         wbuserId: "",
@@ -94,12 +111,12 @@ export default function Checkout(props: any) {
         postalCode: factorFormState.data.postalCode,
         address: factorFormState.data.address,
         desc: factorFormState.data.desc,
+
+        adStatus: adviceResponse.Status,
+        adReturnId: adviceResponse.adReturnId,
+        adMessage:  adviceResponse.adMessage,
       };
       const items = factorItemsState.list;
-      console.log('logged here')
-      console.log(factor);
-      console.log(items);
-
       try {
         dispatch(submitAddFactorAction(factor, items));
         dispatch(factorItemRecieved([]));
