@@ -33,6 +33,7 @@ export default function Addproduct() {
   useEffect(() => {
     dispatch(productFormCleard());
   }, []);
+  
   async function submitAddProduct(event: any): Promise<void> {
     // event.preventDefault();
 
